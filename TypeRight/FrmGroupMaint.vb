@@ -1,16 +1,13 @@
 ﻿Public Class FrmGroupMaint
-    Private oBgTa As New TypeRightDataSetTableAdapters.buttongroupsTableAdapter
+    Private ReadOnly oBgTa As New TypeRightDataSetTableAdapters.buttongroupsTableAdapter
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Dim iActGrp As Integer
-
         iActGrp = iCurrGrp * -1
         If iGrpAction = GRP_ADD Then
             DeleteButtonGroup(iActGrp)
         End If
         TidyAndClose()
     End Sub
-
-
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnUpdate.Click
         Dim iBtCt As Integer
         Dim sSql As String
@@ -22,17 +19,16 @@
 
         Select Case iGrpAction
             Case GRP_TRANS
-                If cmbGroups.ListIndex = -1 Then
-                    MsgBox "Select group to transfer to", vbExclamation
-            Exit Sub
+                If cmbGroups.SelectedIndex = -1 Then
+                    MsgBox("Select group to transfer to", vbExclamation)
+                    Exit Sub
                 End If
-                If cmbGroups.ItemData(cmbGroups.ListIndex) = iCurrGrp * -1 Then
-                    MsgBox "Cannot transfer to same group", vbExclamation
-            Exit Sub
+                If cmbGroups.SelectedValue = iCurrGrp * -1 Then
+                    MsgBox("Cannot transfer to same group", vbExclamation)
+                    Exit Sub
                 End If
 
-                Dim btnRow As TypeRightDataSet.buttonsRow = GetButtonByGroupAndSeq(iActGrp, iCurrBtn)
-
+                Dim btnRow As TypeRightDataSet.buttonRow = GetButtonByGroupAndSeq(iActGrp, iCurrBtn)
 
                 If btnRow Is Nothing Then
                     MsgBox("Button to transfer not found!", vbCritical)
@@ -53,28 +49,28 @@
                     If Not .EOF Then
                         !GroupName = txtGrpName.Text
                         .Update
-                        frmButtonList.cboNames.AddItem "** " & !GroupName & " **"
-                frmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
+                        frmButtonList.cboNames.AddItem("** " & !GroupName & " **")
+                        frmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
                         frmButtonList.cboNames.ListIndex = frmButtonList.cboNames.NewIndex
                     End If
                 End With
             Case GRP_CHG
                 With rsBtnGroups
                     If Not .EOF Then
-                        !GroupName = txtNewGroup.Text
+                        !GroupName = TxtNewGroup.Text
                         .Update
-                        frmButtonList.cboNames.RemoveItem frmButtonList.cboNames.ListIndex
-                frmButtonList.cboNames.AddItem "** " & !GroupName & " **"
-                frmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
+                        frmButtonList.cboNames.RemoveItem(frmButtonList.cboNames.ListIndex)
+                        frmButtonList.cboNames.AddItem("** " & !GroupName & " **")
+                        frmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
                         frmButtonList.cboNames.ListIndex = frmButtonList.cboNames.NewIndex
                     End If
                 End With
             Case GRP_RMV
                 With rsBtnGroups
                     If Not .EOF Then
-                        .Delete adAffectCurrent
-                frmButtonList.cboNames.RemoveItem frmButtonList.cboNames.ListIndex
-            End If
+                        .Delete(adAffectCurrent)
+                        frmButtonList.cboNames.RemoveItem(frmButtonList.cboNames.ListIndex)
+                    End If
                 End With
                 If frmButtonList.cboNames.ListCount > 0 Then
                     frmButtonList.cboNames.ListIndex = 0
@@ -95,52 +91,52 @@
         iActGrp = iCurrGrp * -1
 
         rsBtnGroups.MoveFirst
-        rsBtnGroups.Find "GroupNo = " & iActGrp, 0, adSearchForward
+        rsBtnGroups.Find("GroupNo = " & iActGrp, 0, adSearchForward)
 
-    Select Case iGrpAction
+        Select Case iGrpAction
             Case GRP_TRANS
-                If cmbGroups.ListIndex = -1 Then
-                    MsgBox "Select group to transfer to", vbExclamation
-            Exit Sub
+                If cmbGroups.SelectedIndex = -1 Then
+                    MsgBox("Select group to transfer to", vbExclamation)
+                    Exit Sub
                 End If
-                If cmbGroups.ItemData(cmbGroups.ListIndex) = iCurrGrp * -1 Then
-                    MsgBox "Cannot transfer to same group", vbExclamation
-            Exit Sub
+                If cmbGroups.SelectedValue = iCurrGrp * -1 Then
+                    MsgBox("Cannot transfer to same group", vbExclamation)
+                    Exit Sub
                 End If
 
-        Set rsTemp = New ADODB.Recordset
-        sSql = "SELECT * From " & sButtons & " WHERE BtnSeq = " & iCurrBtn & " AND BtnGrp = " & iActGrp
+                Dim rsTemp As New ADODB.Recordset
+                sSql = "SELECT * From " & sButtons & " WHERE BtnSeq = " & iCurrBtn & " AND BtnGrp = " & iActGrp
 
                 With rsTemp
                     .CursorType = adOpenKeyset
                     .LockType = adLockOptimistic
-                    .Open sSql, db, , , adCmdText
-            .MoveFirst
+                    .Open(sSql, Db, , , adCmdText)
+                    .MoveFirst
                     If .EOF Then
-                        MsgBox "Button to transfer not found!", vbCritical
-                rsTemp.Close
-                Set rsTemp = Nothing
-                Exit Sub
+                        MsgBox("Button to transfer not found!", vbCritical)
+                        rsTemp.Close
+                        rsTemp = Nothing
+                        Exit Sub
                     End If
-                    !BtnGrp = cmbGroups.ItemData(cmbGroups.ListIndex)
+                    !BtnGrp = cmbGroups.SelectedValue
                     .Update
                 End With
-        Set rsTemp = Nothing
-        For iBtCt = iButtonCt To 1 Step -1
-                    Unload frmButtonList.cmdText(iBtCt)
-        Next iBtCt
+                rsTemp = Nothing
+                For iBtCt = iButtonCt To 1 Step -1
+                    Unload(frmButtonList.cmdText(iBtCt))
+                Next iBtCt
 
                 ReSeqButtons
                 iButtonCt = 0
-                frmButtonList.LoadButtons frmButtonList.cboNames.ItemData(frmButtonList.cboNames.ListIndex)
-        frmButtonList.DrawButtons
+                frmButtonList.LoadButtons(frmButtonList.cboNames.ItemData(frmButtonList.cboNames.ListIndex))
+                frmButtonList.DrawButtons
             Case GRP_ADD
                 With rsBtnGroups
                     If Not .EOF Then
                         !GroupName = txtGrpName.Text
                         .Update
-                        frmButtonList.cboNames.AddItem "** " & !GroupName & " **"
-                frmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
+                        frmButtonList.cboNames.AddItem("** " & !GroupName & " **")
+                        frmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
                         frmButtonList.cboNames.ListIndex = frmButtonList.cboNames.NewIndex
                     End If
                 End With
@@ -149,18 +145,18 @@
                     If Not .EOF Then
                         !GroupName = txtNewGroup.Text
                         .Update
-                        frmButtonList.cboNames.RemoveItem frmButtonList.cboNames.ListIndex
-                frmButtonList.cboNames.AddItem "** " & !GroupName & " **"
-                frmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
+                        frmButtonList.cboNames.RemoveItem(frmButtonList.cboNames.ListIndex)
+                        frmButtonList.cboNames.AddItem("** " & !GroupName & " **")
+                        frmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
                         frmButtonList.cboNames.ListIndex = frmButtonList.cboNames.NewIndex
                     End If
                 End With
             Case GRP_RMV
                 With rsBtnGroups
                     If Not .EOF Then
-                        .Delete adAffectCurrent
-                frmButtonList.cboNames.RemoveItem frmButtonList.cboNames.ListIndex
-            End If
+                        .Delete(adAffectCurrent)
+                        frmButtonList.cboNames.RemoveItem(frmButtonList.cboNames.ListIndex)
+                    End If
                 End With
                 If frmButtonList.cboNames.ListCount > 0 Then
                     frmButtonList.cboNames.ListIndex = 0
@@ -210,8 +206,8 @@
                     txtGrpName.Enabled = False
                     ' Put current value in text boxes
                     .MoveFirst
-                    .Find "GroupNo = " & iActGrp, , adSearchForward
-            If Not .EOF Then
+                    .Find("GroupNo = " & iActGrp, , adSearchForward)
+                    If Not .EOF Then
                         txtGrpNumber.Text = iActGrp
                         txtGrpName.Text = !GroupName
                     End If
@@ -251,18 +247,18 @@
                     txtGrpName.Enabled = False
                     ' Put current value in text boxes
                     .MoveFirst
-                    .Find "GroupNo = " & iActGrp, , adSearchForward
-            If Not .EOF Then
+                    .Find("GroupNo = " & iActGrp, , adSearchForward)
+                    If Not .EOF Then
                         txtGrpNumber.Text = iActGrp
                         txtGrpName.Text = !GroupName
                     End If
-            Set rsTemp = New ADODB.Recordset
-            sSql = "SELECT * From " & sButtons & " WHERE  BtnGrp = " & iActGrp
+                    rsTemp = New ADODB.Recordset
+                    sSql = "SELECT * From " & sButtons & " WHERE  BtnGrp = " & iActGrp
                     With rsTemp
                         .CursorType = adOpenForwardOnly
                         .LockType = adLockReadOnly
-                        .Open sSql, db, , , adCmdText
-                If .EOF Then
+                        .Open(sSql, Db, , , adCmdText)
+                        If .EOF Then
                             LblConfirm.Text = "** Click Update to confirm delete **"
                         Else
                             LblConfirm.Text = "** Group still has buttons **"
@@ -285,7 +281,4 @@
         Me.Close()
     End Sub
 
-    Private Sub Nbutton2_Load(sender As Object, e As EventArgs)
-
-    End Sub
 End Class

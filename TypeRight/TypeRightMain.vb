@@ -1,4 +1,6 @@
-﻿Module TypeRightMain
+﻿Imports System.Drawing
+
+Module TypeRightMain
     Public nSize As Long
     Public lpAppName As String
     Public lpFileName As String
@@ -200,4 +202,10 @@
         ' Set window width based on number of columns and button width
         '     frmButtonList.Width = (iColCt * iButtonWidth) + 120
     End Sub
+
+    Public Function MakeFont(p_FontName As String, p_FontSize As Integer, isFontBold As Boolean, isFontItalic As Boolean) As Font
+        Dim newStyle As FontStyle = If(isFontBold, FontStyle.Bold, FontStyle.Regular) Or If(isFontItalic, FontStyle.Italic, FontStyle.Regular)
+        Dim newFont As Font = New Font(p_FontName, p_FontSize, newStyle)
+        Return newFont
+    End Function
 End Module

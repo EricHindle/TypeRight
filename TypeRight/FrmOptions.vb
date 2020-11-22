@@ -109,10 +109,6 @@ Public Class FrmOptions
         MakeTransparent(lBtnListHandle, Slider1.Value)
     End Sub
 
-    Private Function MakeFont(sDfltFontName As String, iDfltFontSize As Integer, isFontBold As Boolean, isFontItalic As Boolean) As Font
-        Dim newStyle As FontStyle = If(isFontBold, FontStyle.Bold, FontStyle.Regular) Or If(isFontItalic, FontStyle.Italic, FontStyle.Regular)
-        Dim newFont As Font = New Font(sDfltFontName, iDfltFontSize, newStyle)
-        Return newFont
-    End Function
+
 
 End Class

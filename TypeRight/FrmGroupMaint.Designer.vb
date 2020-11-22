@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmGroupMaint
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmGroupMaint
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.BtnUpdate = New System.Windows.Forms.Button()
@@ -30,7 +30,6 @@ Partial Class FrmGroupMaint
         Me.LblTrans = New System.Windows.Forms.Label()
         Me.LblConfirm = New System.Windows.Forms.Label()
         Me.LblThisBtn = New System.Windows.Forms.Label()
-        Me.Nbutton2 = New NbuttonControlLibrary.Nbutton()
         Me.SuspendLayout()
         '
         'BtnCancel
@@ -104,26 +103,11 @@ Partial Class FrmGroupMaint
         Me.LblThisBtn.TabIndex = 7
         Me.LblThisBtn.Text = "This Button"
         '
-        'Nbutton2
-        '
-        Me.Nbutton2.Bold = False
-        Me.Nbutton2.Group = 0
-        Me.Nbutton2.Hint = ""
-        Me.Nbutton2.Location = New System.Drawing.Point(47, 334)
-        Me.Nbutton2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Nbutton2.Name = "Nbutton2"
-        Me.Nbutton2.Sequence = 0
-        Me.Nbutton2.Size = New System.Drawing.Size(94, 41)
-        Me.Nbutton2.TabIndex = 9
-        Me.Nbutton2.Typeface = "Tahoma"
-        Me.Nbutton2.Value = "?"
-        '
         'FrmGroupMaint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(933, 554)
-        Me.Controls.Add(Me.Nbutton2)
         Me.Controls.Add(Me.LblThisBtn)
         Me.Controls.Add(Me.LblConfirm)
         Me.Controls.Add(Me.LblTrans)
@@ -149,5 +133,4 @@ Partial Class FrmGroupMaint
     Friend WithEvents LblTrans As Windows.Forms.Label
     Friend WithEvents LblConfirm As Windows.Forms.Label
     Friend WithEvents LblThisBtn As Windows.Forms.Label
-    Friend WithEvents Nbutton2 As NbuttonControlLibrary.Nbutton
 End Class

@@ -109,6 +109,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Db.vb" />
+    <Compile Include="FrmButtonList.Designer.vb">
+      <DependentUpon>FrmButtonList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmButtonList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmGroupMaint.Designer.vb">
       <DependentUpon>FrmGroupMaint.vb</DependentUpon>
     </Compile>
@@ -133,6 +139,11 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -159,6 +170,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmButtonList.resx">
+      <DependentUpon>FrmButtonList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGroupMaint.resx">
       <DependentUpon>FrmGroupMaint.vb</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +181,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSplash.resx">
       <DependentUpon>FrmSplash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +199,21 @@
       <Project>{B2B5BD26-7D3F-4F0A-9597-268B401C1812}</Project>
       <Name>NbuttonControlLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\cancel.bmp" />
+    <Content Include="images\check.bmp" />
+    <Content Include="images\CLOCK01.ICO" />
+    <Content Include="images\CLOCK02.ICO" />
+    <Content Include="images\CLOCK03.ICO" />
+    <Content Include="images\kbd.bmp" />
+    <Content Include="images\KEYS03.ICO" />
+    <Content Include="images\options.bmp" />
+    <Content Include="images\tackdown.bmp" />
+    <Content Include="images\tackdown2.bmp" />
+    <Content Include="images\tackup.bmp" />
+    <Content Include="images\TypeRight1.gif" />
+    <Content Include="images\TypeRight2.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
