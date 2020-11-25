@@ -92,6 +92,7 @@
     <Compile Include="Nbutton.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="NButtonBuilder.vb" />
     <Compile Include="TypeRightDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

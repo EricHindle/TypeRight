@@ -1,6 +1,10 @@
 ﻿Imports System.Drawing
+Imports System.Windows.Forms
 
 Module TypeRightMain
+    Public myCultureInfo As CultureInfo = CultureInfo.CurrentUICulture
+    Public myStringFormatProvider As IFormatProvider = myCultureInfo.GetFormat(GetType(String))
+
     Public nSize As Long
     Public lpAppName As String
     Public lpFileName As String
@@ -21,7 +25,7 @@ Module TypeRightMain
     Public iLeft As Integer
     Public iDelay As Integer
     Public IconData As NOTIFYICONDATA
-    Public bPro As Boolean
+    Public isPro As Boolean
     Public sLicName As String
     Public sLicCode As String
     Public oRegister As NRegisterApp
@@ -128,7 +132,7 @@ Module TypeRightMain
 
         sLicName = ""
         sLicCode = ""
-        bPro = False
+        isPro = False
         strApplication = "TypeRight"
         ' Set an encryption object
         Dim oNCrypter As New NCrypt
@@ -140,11 +144,11 @@ Module TypeRightMain
         ' Check for a valid registration
         If oRegister.IsValidKey(sLicCode, sLicName, APP_STRING) Then
             ' Running pro version
-            bPro = True
+            isPro = True
             iSplashDelay = 2
         Else
             ' Running free version
-            bPro = False
+            isPro = False
             iSplashDelay = 5
         End If
 
@@ -193,7 +197,7 @@ Module TypeRightMain
         bDfltFontBold = My.Settings.FontBold
         bDfltFontItalic = My.Settings.FontItalic
 
-        If Not bPro Then
+        If Not isPro Then
             bSplash = True
             bToolBar = False
         End If
@@ -202,7 +206,11 @@ Module TypeRightMain
         ' Set window width based on number of columns and button width
         '     frmButtonList.Width = (iColCt * iButtonWidth) + 120
     End Sub
-
+    Public Function GetSourceControl(ByRef menuItem As Object) As Object
+        Dim _menuItem As ToolStripMenuItem = CType(menuItem, ToolStripMenuItem)
+        Dim menuStrip As ContextMenuStrip = CType(_menuItem.Owner, ContextMenuStrip)
+        Return menuStrip.SourceControl
+    End Function
     Public Function MakeFont(p_FontName As String, p_FontSize As Integer, isFontBold As Boolean, isFontItalic As Boolean) As Font
         Dim newStyle As FontStyle = If(isFontBold, FontStyle.Bold, FontStyle.Regular) Or If(isFontItalic, FontStyle.Italic, FontStyle.Regular)
         Dim newFont As Font = New Font(p_FontName, p_FontSize, newStyle)

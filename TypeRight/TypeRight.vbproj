@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <Deterministic>false</Deterministic>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -115,6 +115,12 @@
     <Compile Include="FrmButtonList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmEditButton.Designer.vb">
+      <DependentUpon>FrmEditButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEditButton.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmGroupMaint.Designer.vb">
       <DependentUpon>FrmGroupMaint.vb</DependentUpon>
     </Compile>
@@ -152,6 +158,7 @@
     <Compile Include="NCode.vb" />
     <Compile Include="NCrypt.vb" />
     <Compile Include="NRegisterApp.vb" />
+    <Compile Include="NTextUtil.vb" />
     <Compile Include="Transparent.vb" />
     <Compile Include="TypeRightDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -172,6 +179,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FrmButtonList.resx">
       <DependentUpon>FrmButtonList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEditButton.resx">
+      <DependentUpon>FrmEditButton.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGroupMaint.resx">
       <DependentUpon>FrmGroupMaint.vb</DependentUpon>
@@ -206,9 +216,13 @@
     <Content Include="images\CLOCK01.ICO" />
     <Content Include="images\CLOCK02.ICO" />
     <Content Include="images\CLOCK03.ICO" />
+    <None Include="images\whiteclock.bmp" />
+    <None Include="images\greenclock.bmp" />
     <Content Include="images\kbd.bmp" />
     <Content Include="images\KEYS03.ICO" />
+    <None Include="images\lock.bmp" />
     <Content Include="images\options.bmp" />
+    <None Include="images\redclock.bmp" />
     <Content Include="images\tackdown.bmp" />
     <Content Include="images\tackdown2.bmp" />
     <Content Include="images\tackup.bmp" />

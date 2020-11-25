@@ -91,7 +91,7 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("1000")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("100")>  _
     Public Property Transparency() As Integer
         Get
             Return CType(Me("Transparency"),Integer)

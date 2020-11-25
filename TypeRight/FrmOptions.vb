@@ -4,30 +4,27 @@ Public Class FrmOptions
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Me.Close()
     End Sub
-
     Private Sub BtnDfltFont_Click(sender As Object, e As EventArgs) Handles BtnDfltFont.Click
         With FontDialog1
             .FontMustExist = True
             .Font = MakeFont(sDfltFontName, iDfltFontSize, bDfltFontBold, bDfltFontItalic)
             .ShowDialog()
         End With
-
         With BtnDfltFont
             .Text = FontDialog1.Font.Name & " " & Format(FontDialog1.Font.Size)
             .Font = MakeFont(FontDialog1.Font.Name, FontDialog1.Font.Size, FontDialog1.Font.Bold, FontDialog1.Font.Italic)
         End With
     End Sub
-
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles BtnOK.Click
         iDelay = nudDelay.Value
-        If bPro = False Then
+        If isPro = False Then
             sLicName = TxtLicName.Text
             sLicCode = ""
             sLicCode = sLicCode & TxtLic1.Text & TxtLic2.Text & TxtLic3.Text & TxtLic4.Text
             If oRegister.IsValidKey(sLicCode, sLicName, APP_STRING) Then
                 My.Settings.RegName = sLicName
                 My.Settings.RegCode = sLicCode
-                bPro = True
+                isPro = True
             Else
                 If Len(sLicCode) > 0 Then
                     MsgBox("Invalid licence code", vbExclamation)
@@ -39,7 +36,7 @@ Public Class FrmOptions
         My.Settings.ButtonWidth = HScroll1.Value
         My.Settings.Transparency = Slider1.Value
         My.Settings.Delay = iDelay
-        If bPro Then
+        If isPro Then
             My.Settings.ToolBar = CbToolBar.Checked
             My.Settings.Splash = cbSplash.Checked
             My.Settings.Minimise = cbMinimise.Checked
@@ -51,18 +48,16 @@ Public Class FrmOptions
         iDfltFontSize = BtnDfltFont.Font.Size
         My.Settings.FontName = sDfltFontName
         My.Settings.FontSize = iDfltFontSize
-            My.Settings.FontBold = bDfltFontBold
+        My.Settings.FontBold = bDfltFontBold
         My.Settings.FontItalic = bDfltFontItalic
         My.Settings.Save()
         Me.Close()
     End Sub
-
     Private Sub FrmOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         CbToolBar.Checked = bToolBar
         cbSplash.Checked = bSplash
         cbMinimise.Checked = bMinimise
-        If bPro Then
+        If isPro Then
             'Image2.Visible = True
             'Image1.Visible = False
             GrpLicence.Enabled = False
@@ -77,13 +72,10 @@ Public Class FrmOptions
             GrpLicence.Enabled = True
         End If
         TxtLicName.Text = sLicName
-
         TxtLic1.Text = Mid(sLicCode, 1, 4)
         TxtLic2.Text = Mid(sLicCode, 5, 4)
         TxtLic3.Text = Mid(sLicCode, 9, 4)
         TxtLic4.Text = Mid(sLicCode, 13, 4)
-
-
         '   lOrigWidth = frmButtonList.cmdText(0).Width
         'BtnSample.Caption = Format(frmButtonList.cmdText(0).Width)
         'BtnSample.Width = frmButtonList.cmdText(0).Width
@@ -92,23 +84,14 @@ Public Class FrmOptions
         cbOnTop.Checked = bOnTop
         nudDelay.Text = Format(iDelay)
         BtnDfltFont.Text = sDfltFontName & " " & Format(iDfltFontSize)
-
-
-
         BtnDfltFont.Font = MakeFont(sDfltFontName, iDfltFontSize, bDfltFontBold, bDfltFontItalic)
     End Sub
-
     Private Sub HScroll1_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles HScroll1.Scroll
         BtnSample.Text = Format(HScroll1.Value)
-
         BtnSample.Width = HScroll1.Value
         iButtonWidth = HScroll1.Value
     End Sub
-
     Private Sub Slider1_Scroll(sender As Object, e As EventArgs) Handles Slider1.Scroll
         MakeTransparent(lBtnListHandle, Slider1.Value)
     End Sub
-
-
-
 End Class
