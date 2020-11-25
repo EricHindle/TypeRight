@@ -84,41 +84,41 @@ Public Class NTextUtil
         Clipboard.Clear()
 
         If TypeOf ActiveControl Is TextBox Then
-            Clipboard.SetText ActiveControl.SelText
-    ElseIf TypeOf ActiveControl Is RichTextBox Then
-            Clipboard.SetText ActiveControl.SelText
-    ElseIf TypeOf ActiveControl Is ComboBox Then
-            Clipboard.SetText ActiveControl.Text
-    ElseIf TypeOf ActiveControl Is PictureBox Then
-            Clipboard.SetData ActiveControl.Picture
-    ElseIf TypeOf ActiveControl Is ListBox Then
-            Clipboard.SetText ActiveControl.Text
-    Else
+            Clipboard.SetText(ActiveControl.SelText)
+        ElseIf TypeOf ActiveControl Is RichTextBox Then
+            Clipboard.SetText(ActiveControl.SelText)
+        ElseIf TypeOf ActiveControl Is ComboBox Then
+            Clipboard.SetText(ActiveControl.Text)
+        ElseIf TypeOf ActiveControl Is PictureBox Then
+            Clipboard.SetData(DataFormats.Bitmap, ActiveControl.Picture)
+        ElseIf TypeOf ActiveControl Is ListBox Then
+            Clipboard.SetText(ActiveControl.Text)
+        Else
             ' No action makes sense for the other controls.
         End If
     End Sub
 
-    Public Sub CutToClipboard(ByRef ActiveControl As Object)
-        ' Copy and clear contents of active control.
-        If TypeOf ActiveControl Is TextBox Then
-            Clipboard.SetText ActiveControl.SelText
-        ActiveControl.SelText = ""
-        ElseIf TypeOf ActiveControl Is RichTextBox Then
-            Clipboard.SetText ActiveControl.SelText
-        ActiveControl.SelText = ""
-        ElseIf TypeOf ActiveControl Is ComboBox Then
-            Clipboard.SetText ActiveControl.Text
-        ActiveControl.Text = ""
-        ElseIf TypeOf ActiveControl Is PictureBox Then
-            Clipboard.SetData ActiveControl.Picture
-        ActiveControl.Picture = LoadPicture()
-        ElseIf TypeOf Screen.ActiveControl Is ListBox Then
-            Clipboard.SetText ActiveControl.Text
-        ActiveControl.RemoveItem Screen.ActiveControl.ListIndex
-    Else
-            ' No action makes sense for the other controls.
-        End If
-    End Sub
+    'Public Sub CutToClipboard(ByRef ActiveControl As Object)
+    '    ' Copy and clear contents of active control.
+    '    If TypeOf ActiveControl Is TextBox Then
+    '        Clipboard.SetText(ActiveControl.SelText)
+    '        ActiveControl.SelText = ""
+    '    ElseIf TypeOf ActiveControl Is RichTextBox Then
+    '        Clipboard.SetText(ActiveControl.SelText)
+    '        ActiveControl.SelText = ""
+    '    ElseIf TypeOf ActiveControl Is ComboBox Then
+    '        Clipboard.SetText(ActiveControl.Text)
+    '        ActiveControl.Text = ""
+    '    ElseIf TypeOf ActiveControl Is PictureBox Then
+    '        Clipboard.SetData(ActiveControl.Picture)
+    '        ActiveControl.Picture = LoadPicture()
+    '    ElseIf TypeOf Screen.ActiveControl Is ListBox Then
+    '        Clipboard.SetText(ActiveControl.Text)
+    '        ActiveControl.RemoveItem(Screen.ActiveControl.ListIndex)
+    '    Else
+    '        ' No action makes sense for the other controls.
+    '    End If
+    'End Sub
 
     Public Sub PasteFromClipboard(ByRef ActiveControl As Object)
         If TypeOf ActiveControl Is TextBox Then
@@ -128,10 +128,10 @@ Public Class NTextUtil
         ElseIf TypeOf ActiveControl Is ComboBox Then
             ActiveControl.Text = Clipboard.GetText()
         ElseIf TypeOf ActiveControl Is PictureBox Then
-            ActiveControl.Picture = Clipboard.GetData()
-        ElseIf TypeOf Screen.ActiveControl Is ListBox Then
-            ActiveControl.AddItem Clipboard.GetText()
-    Else
+            ActiveControl.Picture = Clipboard.GetData(DataFormats.Bitmap)
+        ElseIf TypeOf ActiveControl Is ListBox Then
+            ActiveControl.AddItem(Clipboard.GetText())
+        Else
             ' No action makes sense for the other controls.
         End If
     End Sub

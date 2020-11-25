@@ -43,7 +43,7 @@ Partial Class Nbutton
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Button1)
         Me.Name = "Nbutton"
-        Me.Size = New System.Drawing.Size(93, 39)
+        Me.Size = New System.Drawing.Size(87, 34)
         Me.ResumeLayout(False)
 
     End Sub

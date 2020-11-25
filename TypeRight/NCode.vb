@@ -6,6 +6,11 @@
     Private m_lOnBits(0 To 30) As Long
     Private m_l2Power(0 To 30) As Long
 
+    Public Sub New()
+        Class_Initialize()
+    End Sub
+
+
     '*******************************************************************************
     ' Class_Initialize (SUB)
     '
@@ -498,8 +503,12 @@
 
             ' The bytes are put in the word from the right most edge
             lBytePosition = (lByteCount Mod BYTES_TO_A_WORD) * BITS_TO_A_BYTE
+            Dim pstr As String = Mid(sMessage, lByteCount + 1, 1)
+            Dim pByte As Byte = System.Text.ASCIIEncoding.ASCII.GetBytes(pstr)(0)
+
+
             lWordArray(lWordCount) = lWordArray(lWordCount) Or
-                                 LShift(AscB(Mid(sMessage, lByteCount + 1, 1)), lBytePosition)
+                                 LShift(pByte, lBytePosition)
             lByteCount = lByteCount + 1
         Loop
 

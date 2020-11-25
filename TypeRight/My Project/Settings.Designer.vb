@@ -199,22 +199,10 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property DBLocation() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+    Public Property Top() As Integer
         Get
-            Return CType(Me("DBLocation"),String)
-        End Get
-        Set
-            Me("DBLocation") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property Top() As String
-        Get
-            Return CType(Me("Top"),String)
+            Return CType(Me("Top"),Integer)
         End Get
         Set
             Me("Top") = value
@@ -223,10 +211,10 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property Left() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+    Public Property Left() As Integer
         Get
-            Return CType(Me("Left"),String)
+            Return CType(Me("Left"),Integer)
         End Get
         Set
             Me("Left") = value
@@ -235,10 +223,10 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property OnTop() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+    Public Property OnTop() As Boolean
         Get
-            Return CType(Me("OnTop"),String)
+            Return CType(Me("OnTop"),Boolean)
         End Get
         Set
             Me("OnTop") = value
@@ -247,10 +235,10 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property Group() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+    Public Property Group() As Integer
         Get
-            Return CType(Me("Group"),String)
+            Return CType(Me("Group"),Integer)
         End Get
         Set
             Me("Group") = value
@@ -259,10 +247,10 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property Columns() As String
+     Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+    Public Property Columns() As Integer
         Get
-            Return CType(Me("Columns"),String)
+            Return CType(Me("Columns"),Integer)
         End Get
         Set
             Me("Columns") = value
@@ -278,6 +266,18 @@ Partial Friend NotInheritable Class Settings
         Get
             Return CType(Me("TypeRightConnectionString"),String)
         End Get
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+    Public Property Sender() As Integer
+        Get
+            Return CType(Me("Sender"),Integer)
+        End Get
+        Set
+            Me("Sender") = value
+        End Set
     End Property
 End Class
 

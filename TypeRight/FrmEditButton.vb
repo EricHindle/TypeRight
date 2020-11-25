@@ -84,13 +84,13 @@ Public Class FrmEditButton
             isEncrypted = False
             strNewText = TxtString.Text
         End If
-        'If bUserDefinedGroup Then
-        '    iBtnGrp = FrmButtonList.cbNames.ItemData(iListidx) * -1
-        '    iOffset = 0
-        'Else
-        '    iBtnGrp = 0
-        '    iOffset = iDbBtnCt
-        'End If
+        If bUserDefinedGroup Then
+            '    iBtnGrp = FrmButtonList.cbNames.ItemData(iListidx) * -1
+            '    iOffset = 0
+        Else
+            '    iBtnGrp = 0
+            '    iOffset = iDbBtnCt
+        End If
 
 
         With _button

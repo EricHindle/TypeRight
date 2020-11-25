@@ -38,23 +38,20 @@
     <Setting Name="FontItalic" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="DBLocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Top" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Top" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Left" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Left" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="OnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="OnTop" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Group" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="Group" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="Columns" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Columns" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="TypeRightConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -63,6 +60,9 @@
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=NETWYRKS_6-PC\SQLEXPRESS;Initial Catalog=TypeRight;Persist Security Info=True;User ID=sa;Password=dkk.sql</Value>
+    </Setting>
+    <Setting Name="Sender" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

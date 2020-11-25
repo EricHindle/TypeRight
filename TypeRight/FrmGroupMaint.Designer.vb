@@ -169,6 +169,7 @@ Partial Class FrmGroupMaint
         'Nbutton1
         '
         Me.Nbutton1.Caption = Nothing
+        Me.Nbutton1.DataType = NbuttonControlLibrary.Nbutton.DataSource.Undefined
         Me.Nbutton1.Encrypt = False
         Me.Nbutton1.FontBold = False
         Me.Nbutton1.FontItalic = False
@@ -177,11 +178,11 @@ Partial Class FrmGroupMaint
         Me.Nbutton1.Group = 1
         Me.Nbutton1.Hint = ""
         Me.Nbutton1.Id = -1
-        Me.Nbutton1.Location = New System.Drawing.Point(470, 24)
+        Me.Nbutton1.Location = New System.Drawing.Point(467, 24)
         Me.Nbutton1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Nbutton1.Name = "Nbutton1"
         Me.Nbutton1.Sequence = 999
-        Me.Nbutton1.Size = New System.Drawing.Size(108, 48)
+        Me.Nbutton1.Size = New System.Drawing.Size(87, 34)
         Me.Nbutton1.TabIndex = 14
         Me.Nbutton1.Value = "?"
         '

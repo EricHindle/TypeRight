@@ -7,6 +7,11 @@ Imports System.Windows.Forms
 Imports System.Windows.Forms.Design
 
 Public Class Nbutton
+    Public Enum DataSource
+        Undefined
+        Group
+        Sender
+    End Enum
     Private Structure Typeface
         Dim fontName As String
         Dim fontSize As Single
@@ -37,6 +42,15 @@ Public Class Nbutton
     Private m_Seq As Integer
     Private m_Group As Integer
     Private m_Encrypt As Boolean
+    Private m_dataType As DataSource
+    Public Property DataType() As DataSource
+        Get
+            Return m_dataType
+        End Get
+        Set(ByVal value As DataSource)
+            m_dataType = value
+        End Set
+    End Property
     Public Property Id() As Integer
         Get
             Return m_Id
@@ -143,8 +157,9 @@ Public Class Nbutton
         Group = m_def_Grp
         Sequence = m_def_Seq
         Encrypt = m_def_Encrypt
+        DataType = DataSource.Undefined
     End Sub
-    Public Sub New(pId As Integer, pGroup As Integer, pSeq As Integer, pCaption As String, pHint As String, pValue As String, pFontName As String, pFontSize As Single, pBold As Boolean, pItalic As Boolean, pEncrypt As Boolean)
+    Public Sub New(pId As Integer, pGroup As Integer, pSeq As Integer, pCaption As String, pHint As String, pValue As String, pFontName As String, pFontSize As Single, pBold As Boolean, pItalic As Boolean, pEncrypt As Boolean, pSource As DataSource)
         Me.InitializeComponent()
         m_Id = pId
         m_Fontname = pFontName
@@ -159,6 +174,7 @@ Public Class Nbutton
         Group = pGroup
         Sequence = pSeq
         Encrypt = pEncrypt
+        DataType = pSource
     End Sub
     Private Function MakeFont(p_Typeface As Typeface) As Font
         Dim newStyle As FontStyle = If(p_Typeface.isBold, FontStyle.Bold, FontStyle.Regular) Or If(p_Typeface.isItalic, FontStyle.Italic, FontStyle.Regular)
@@ -186,10 +202,8 @@ Public Class Nbutton
     Private Sub Button1_SizeChanged(sender As Object, e As EventArgs) Handles Button1.SizeChanged
         Me.Size = Button1.Size
     End Sub
-
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
         MyBase.OnPaint(e)
-
         'Add your custom paint code here
     End Sub
 End Class

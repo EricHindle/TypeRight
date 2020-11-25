@@ -72,6 +72,9 @@
   <PropertyGroup>
     <StartupObject>TypeRight.My.MyApplication</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>images\KEYS03.ICO</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />

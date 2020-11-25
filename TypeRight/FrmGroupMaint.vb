@@ -1,8 +1,17 @@
 ﻿Public Class FrmGroupMaint
+    Private _action As GroupAction
+    Public Property Action() As Integer
+        Get
+            Return _action
+        End Get
+        Set(ByVal value As Integer)
+            _action = value
+        End Set
+    End Property
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         Dim iActGrp As Integer
         iActGrp = iCurrGrp * -1
-        If iGrpAction = GRP_ADD Then
+        If iGrpAction = GroupAction.GRP_ADD Then
             DeleteButtonGroup(iActGrp)
         End If
         TidyAndClose()
@@ -12,7 +21,7 @@
         iActGrp = iCurrGrp * -1
         Dim btnGrpRow As TypeRightDataSet.buttongroupsRow = GetButtonGroup(iActGrp)
         Select Case iGrpAction
-            Case GRP_TRANS
+            Case GroupAction.GRP_TRANS
                 If cmbGroups.SelectedIndex = -1 Then
                     MsgBox("Select group to transfer to", vbExclamation)
                     Exit Sub
@@ -33,18 +42,18 @@
                 iButtonCt = 0
         '        frmButtonList.LoadButtons frmButtonList.cboNames.ItemData(frmButtonList.cboNames.ListIndex)
         'frmButtonList.DrawButtons
-            Case GRP_ADD
+            Case GroupAction.GRP_ADD
                 UpdateButtonGroupName(TxtGrpName.Text, iActGrp)
                                 'FrmButtonList.cboNames.AddItem("** " & TxtGrpName.Text & " **")
                 'FrmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
                 '        frmButtonList.cboNames.ListIndex = frmButtonList.cboNames.NewIndex
-            Case GRP_CHG
+            Case GroupAction.GRP_CHG
                 UpdateButtonGroupName(TxtGrpName.Text, iActGrp)
                                 'FrmButtonList.cboNames.RemoveItem(frmButtonList.cboNames.ListIndex)
                 'FrmButtonList.cboNames.AddItem("** " & TxtGrpName.Text & " **")
                 'FrmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
                 '        frmButtonList.cboNames.ListIndex = frmButtonList.cboNames.NewIndex
-            Case GRP_RMV
+            Case GroupAction.GRP_RMV
                 DeleteButtonGroup(iActGrp)
                 'If frmButtonList.cboNames.ListCount > 0 Then
                 '    frmButtonList.cboNames.ListIndex = 0
@@ -57,7 +66,7 @@
         Dim iActGrp As Integer
         iActGrp = iCurrGrp * -1
         Select Case iGrpAction
-            Case GRP_ADD
+            Case GroupAction.GRP_ADD
                 LblThisBtn.Visible = False
                 Nbutton1.Visible = False
                 LblConfirm.Text = ""
@@ -71,7 +80,7 @@
                 iActGrp = InsertButtonGroup("New")
                 iCurrGrp = iActGrp * -1
                 TxtGrpNumber.Text = CStr(iActGrp)
-            Case GRP_CHG
+            Case GroupAction.GRP_CHG
                 LblThisBtn.Visible = False
                 Nbutton1.Visible = False
                 LblConfirm.Text = ""
@@ -88,7 +97,7 @@
                     TxtGrpNumber.Text = iActGrp
                     TxtGrpName.Text = bgRow.groupname
                 End If
-            Case GRP_TRANS
+            Case GroupAction.GRP_TRANS
                 '               NButton1.Text = frmButtonList.cmdText(iCurrBtn).Text
                 LblThisBtn.Visible = True
                 Nbutton1.Visible = True
@@ -100,7 +109,7 @@
                 TxtNewGroup.Enabled = False
                 cmbGroups.Enabled = True
                 TxtGrpName.Enabled = False
-            Case GRP_RMV
+            Case GroupAction.GRP_RMV
                 LblThisBtn.Visible = False
                 Nbutton1.Visible = False
                 LblNewGroup.Visible = False
@@ -128,7 +137,7 @@
     End Sub
 
     Private Sub TidyAndClose()
-        iGrpAction = GRP_TRANS
+        iGrpAction = GroupAction.GRP_TRANS
         LblNewGroup.Visible = False
         TxtNewGroup.Visible = False
         cmbGroups.Visible = False
@@ -140,7 +149,7 @@
         Me.ButtongroupsTableAdapter.Fill(Me.TypeRightDataSet.buttongroups)
     End Sub
 
-    Private Sub Nbutton1_Load(sender As Object, e As EventArgs) Handles Nbutton1.Load
+    Private Sub Nbutton1_Load(sender As Object, e As EventArgs)
 
     End Sub
 End Class
