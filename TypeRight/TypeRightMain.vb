@@ -122,7 +122,7 @@ Module TypeRightMain
         isPro = False
         strApplication = "TypeRight"
         ' Set an encryption object
-        Dim oNCrypter As New NCrypt
+        oNCrypter = New NCrypt(APP_STRING)
         ' Get the registered name and licence code
         sLicName = My.Settings.RegName
         sLicCode = My.Settings.RegCode

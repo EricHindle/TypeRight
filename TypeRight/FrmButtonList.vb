@@ -15,6 +15,7 @@ Public Class FrmButtonList
     Private Const strShiftList As String = "!" + Chr(34) + "£$%^&*(){}@:~<>?_+"
     Private Const strNoShiftList As String = "1234567890"
     Private Const strPunctuationList As String = "[]:@~;'#<>?,./|\_+-= "
+    Private FRAME_WIDTH = 18
 #End Region
 #Region "dll"
     <DllImport("user32.dll")>
@@ -51,8 +52,10 @@ Public Class FrmButtonList
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
         InitialiseApplication()
+        Me.Top = iTop
+        Me.Left = iLeft
         ' Set window width based on number of columns and button width
-        Me.Width = (iColCt * iButtonWidth) + 12
+        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
         FillNamesList()
         For Each cmbItem As KeyValuePair(Of Integer, String) In cbNames.Items
             Dim key As Integer = cmbItem.Key
@@ -104,19 +107,18 @@ Public Class FrmButtonList
     End Sub
     Private Sub BtnReDraw_Click(sender As Object, e As EventArgs) Handles BtnReDraw.Click
         If cbNames.SelectedIndex > -1 Then
-            GroupButtonPanel.Controls.Clear()
             iButtonCt = 0
             Dim btnVal As Integer = cbNames.SelectedValue
             If btnVal < 0 Then
                 LoadGroupButtons(btnVal * -1)
-                DrawButtons()
+                DrawGroupButtons()
                 iCurrGrp = btnVal * -1
             Else
                 LoadSenderButtons(btnVal)
-                DrawButtons()
+                DrawSenderButtons()
                 iCurrSender = btnVal
             End If
-            Me.Text = cbNames.SelectedText
+            Me.Text = cbNames.SelectedItem.value
         End If
     End Sub
     Private Sub ImgTack_Click(sender As Object, e As EventArgs) Handles ImgTack.Click
@@ -151,7 +153,7 @@ Public Class FrmButtonList
     Private Sub MnuNew_Click(sender As Object, e As EventArgs) Handles mnuNew.Click
         If iCurrGrp <> 0 Then
             Dim lastSeq As Integer = groupButtonList(groupButtonList.Count - 1).Sequence
-            Dim newBtn As Nbutton = NButtonBuilder.NewButton.WithGroup(iCurrGrp * -1).WithSeq(lastSeq + 1).Build
+            Dim newBtn As Nbutton = NButtonBuilder.NewButton.StartingWithNothing.WithGroup(iCurrGrp).WithSeq(lastSeq + 1).Build
             Dim newId As Integer = InsertButton(newBtn)
             newBtn.Id = newId
             EditButton(newBtn)
@@ -194,8 +196,13 @@ Public Class FrmButtonList
 #Region "subroutines"
     Private Sub EditButton(_btn As Nbutton)
         Using _editForm As New FrmEditButton
-            _editForm.Button = _btn
-            _editForm.ShowDialog()
+            Dim buttonbuilder = New NButtonBuilder
+            Dim _editButton As Nbutton = buttonbuilder.StartingWith(_btn).Build
+            _editForm.Button = _editButton
+            Dim rtnValue As DialogResult = _editForm.ShowDialog
+            If rtnValue = DialogResult.OK Then
+                _btn = _editButton
+            End If
         End Using
     End Sub
     Private Sub FillNamesList()
@@ -509,8 +516,8 @@ Public Class FrmButtonList
         fulladdr = addBuilder.ToString
         strAge = Format(calc_age(dtDob))
 
-        AddButton(1, "Full Name", fullname, strButtonFont, 9.0, fullname, False, False)
-        AddButton(2, "Full Addr", fulladdr, strButtonFont, 9.0, fulladdr.Substring(0, 15), False, False)
+        AddButton(1, "Full Name", fullname, strButtonFont, 9.0, fullname.Substring(0, Math.Min(fullname.Length, 50)), False, False)
+        AddButton(2, "Full Addr", fulladdr, strButtonFont, 9.0, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)), False, False)
 
         iBct = 2
         'B = 1
@@ -518,15 +525,13 @@ Public Class FrmButtonList
         For Each _col As DataColumn In oTable.Columns
             strButtonValue = oRow(_col.ColumnName)
             strButtonTxt = _col.ColumnName
-            strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 8))
-            strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 15))
+            strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 10))
+            strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
 
             AddButton(B + iBct, strButtonCaption, strButtonValue, strButtonFont, 9.0, strButtonHint, False, False)
 
             B += 1
         Next
-
-
 
         AddButton(B + iBct, "Age", strAge, strButtonFont, 9.0, strAge, False, False)
 
@@ -556,6 +561,7 @@ Public Class FrmButtonList
         For Each btnRow As TypeRightDataSet.buttonRow In btnTable.Rows
             If Not btnRow.IsbuttonValueNull AndAlso Not String.IsNullOrEmpty(btnRow.buttonValue) Then
                 Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(btnRow.buttonId).Build()
+
                 groupButtonList.Add(_nbutton)
             End If
         Next
@@ -573,7 +579,6 @@ Public Class FrmButtonList
     Private Sub DrawSenderButtons()
         lResizeActive = False
         RemoveSenderButtons()
-        SenderButtonPanel.Controls.Clear()
         FillButtonPanel(SenderButtonPanel, senderButtonList)
         Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 36
         GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height
@@ -687,7 +692,7 @@ Public Class FrmButtonList
     Friend Sub DrawButtons()
         lResizeActive = False
         ' Size of window
-        Me.Width = (iColCt * iButtonWidth) + 12
+        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
         DrawGroupButtons()
         DrawSenderButtons()
         lResizeActive = True
@@ -695,7 +700,7 @@ Public Class FrmButtonList
 
     Private Sub FillButtonPanel(ByRef oPanel As Panel, ByRef oList As List(Of Nbutton))
         iButtonCt = oList.Count
-        oPanel.Width = Me.Width - 12
+        oPanel.Width = Me.Width - FRAME_WIDTH
         Dim iRowCt As Integer = CInt(iButtonCt / iColCt)
         ' Any left over ? Then add a row
         Dim iMod As Integer = (iButtonCt) Mod iColCt
@@ -705,18 +710,15 @@ Public Class FrmButtonList
         oPanel.Height = iRowCt * 27
         Dim iBtnRow As Integer = 0
         Dim iBtnCol As Integer = 0
-        Debug.Print("iMod:" & iMod)
-        Debug.Print("iRowCt:" & iRowCt)
         For Each oBtn In oList
-            Debug.Print("iBtnrow: " & iBtnRow & " " & "iBtncol: " & iBtnCol & " " & oBtn.Caption)
             oPanel.Controls.Add(oBtn)
             oBtn.Top = 1 + (iBtnRow * 27)
             oBtn.Left = 1 + (iBtnCol * iButtonWidth)
             oBtn.Size = New Drawing.Size(iButtonWidth, 27)
             oBtn.Visible = True
+            oBtn.ContextMenuStrip = mnuButtons
             iBtnRow += 1
             If iBtnRow > iRowCt - 2 Then
-                Debug.Print("is " & iBtnRow & " after last row?")
                 If iBtnCol > iMod - 1 And iMod > 0 Then
                     Debug.Print("yes")
                     iBtnCol += 1
@@ -725,13 +727,11 @@ Public Class FrmButtonList
                 Else
                     Debug.Print("no")
                     If iBtnRow > iRowCt - 1 Then
-                        Debug.Print(iBtnRow & " is after last row")
                         iBtnCol += 1
                         iBtnRow = 0
                     End If
                 End If
-                End If
-
+            End If
         Next
     End Sub
 
@@ -775,11 +775,15 @@ Public Class FrmButtonList
     End Function
 
     Private Sub imgExit_Click(sender As Object, e As EventArgs) Handles imgExit.Click
+        SavePosition
         Me.Close()
     End Sub
 
-    Private Sub GrpTop_Enter(sender As Object, e As EventArgs) Handles GrpTop.Enter
-
+    Private Sub SavePosition()
+        My.Settings.Top = Me.Top
+        My.Settings.Left = Me.Left
+        My.Settings.Minimise = Me.WindowState = FormWindowState.Minimized
+        My.Settings.Save()
     End Sub
 
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles ImgLock.Click
@@ -835,17 +839,12 @@ Public Class FrmButtonList
             ImgLock.Visible = True
         End If
     End Sub
-
-    Private Sub FrmButtonList_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-
-    End Sub
-
     Private Sub BtnRmvCol_Click(sender As Object, e As EventArgs) Handles BtnRmvCol.Click
         If iColCt > 1 Then
             iColCt -= 1
             DrawButtons()
         End If
-        Me.Width = (iColCt * iButtonWidth) + 12
+        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
     End Sub
 
     Private Sub BtnAddCol_Click(sender As Object, e As EventArgs) Handles BtnAddCol.Click
@@ -853,7 +852,11 @@ Public Class FrmButtonList
             iColCt += 1
             DrawButtons()
         End If
-        Me.Width = (iColCt * iButtonWidth) + 12
+        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
+    End Sub
+
+    Private Sub mnuButtons_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles mnuButtons.Opening
+
     End Sub
 
 

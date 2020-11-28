@@ -19,7 +19,6 @@ Public Class FrmEditButton
     End Property
     Private Sub FrmEditButton_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.SendersTableAdapter.Fill(Me.TypeRightDataSet.senders)
-
         grpOpts.Visible = isPro
         chkEncrypt.Checked = False
         If _button IsNot Nothing Then
@@ -27,14 +26,14 @@ Public Class FrmEditButton
             iGrp = _button.Group
             iId = _button.Id
             Dim btnGrpRow As TypeRightDataSet.buttongroupsRow = GetButtonGroup(iGrp)
-            BtnFont.Text = _button.FontName
+            BtnFont.Text = _button.FontName & "(" & CStr(_button.FontSize) & ")"
             If isPro Then
                 chkEncrypt.Checked = _button.Encrypt
             End If
             LblBtnSeq.Text = CStr(iSeq)
             LblBtnGrp.Text = btnGrpRow.groupname
             TxtHint.Text = _button.Hint
-            TxtString.Text = If(chkEncrypt.Checked, oNCrypter.Decrypt(TxtString.Text, APP_STRING, False, NCrypt.frezCryptoEncryptionType.frezBlockEncryption), _button.Value)
+            TxtString.Text = If(chkEncrypt.Checked, oNCrypter.DecryptData(_button.Value), _button.Value)
             txtCaption.Text = _button.Caption
             BtnFont.Font = _button.Font
         Else
@@ -67,6 +66,7 @@ Public Class FrmEditButton
         End With
         With BtnFont
             .Font = FontDialog1.Font
+            .Text = .Font.Name & "(" & CStr(.Font.Size) & ")"
         End With
     End Sub
     Private Sub BtnCancel_Click() Handles BtnCancel.Click
@@ -79,7 +79,7 @@ Public Class FrmEditButton
 
         If isPro And chkEncrypt.Checked Then
             isEncrypted = True
-            strNewText = oNCrypter.Encrypt(TxtString.Text, APP_STRING, False, NCrypt.frezCryptoEncryptionType.frezBlockEncryption)
+            strNewText = oNCrypter.EncryptData(TxtString.Text)
         Else
             isEncrypted = False
             strNewText = TxtString.Text

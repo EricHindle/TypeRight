@@ -77,6 +77,8 @@ Partial Class FrmEditButton
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtCaption = New System.Windows.Forms.TextBox()
         Me.SendersTableAdapter = New TypeRight.TypeRightDataSetTableAdapters.sendersTableAdapter()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.grpOpts.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.SendersBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -87,19 +89,22 @@ Partial Class FrmEditButton
         'grpOpts
         '
         Me.grpOpts.Controls.Add(Me.chkEncrypt)
-        Me.grpOpts.Location = New System.Drawing.Point(492, 96)
+        Me.grpOpts.Location = New System.Drawing.Point(495, 74)
+        Me.grpOpts.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.grpOpts.Name = "grpOpts"
-        Me.grpOpts.Size = New System.Drawing.Size(373, 49)
-        Me.grpOpts.TabIndex = 0
+        Me.grpOpts.Padding = New System.Windows.Forms.Padding(2, 4, 2, 4)
+        Me.grpOpts.Size = New System.Drawing.Size(369, 60)
+        Me.grpOpts.TabIndex = 3
         Me.grpOpts.TabStop = False
         Me.grpOpts.Text = "Options"
         '
         'chkEncrypt
         '
         Me.chkEncrypt.AutoSize = True
-        Me.chkEncrypt.Location = New System.Drawing.Point(28, 19)
+        Me.chkEncrypt.Location = New System.Drawing.Point(33, 23)
+        Me.chkEncrypt.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.chkEncrypt.Name = "chkEncrypt"
-        Me.chkEncrypt.Size = New System.Drawing.Size(62, 17)
+        Me.chkEncrypt.Size = New System.Drawing.Size(76, 21)
         Me.chkEncrypt.TabIndex = 0
         Me.chkEncrypt.Text = "Encrypt"
         Me.chkEncrypt.UseVisualStyleBackColor = True
@@ -126,28 +131,32 @@ Partial Class FrmEditButton
         Me.GroupBox1.Controls.Add(Me.BtnCloseCurlyBracket)
         Me.GroupBox1.Controls.Add(Me.BtnOpenCurlyBracket)
         Me.GroupBox1.Controls.Add(Me.CbDbValue)
-        Me.GroupBox1.Location = New System.Drawing.Point(492, 144)
+        Me.GroupBox1.Location = New System.Drawing.Point(495, 142)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(373, 451)
-        Me.GroupBox1.TabIndex = 1
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 4, 2, 4)
+        Me.GroupBox1.Size = New System.Drawing.Size(369, 397)
+        Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         '
         'LblDbField
         '
         Me.LblDbField.AutoSize = True
         Me.LblDbField.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblDbField.Location = New System.Drawing.Point(81, 30)
+        Me.LblDbField.Location = New System.Drawing.Point(80, 22)
+        Me.LblDbField.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblDbField.Name = "LblDbField"
         Me.LblDbField.Size = New System.Drawing.Size(103, 17)
-        Me.LblDbField.TabIndex = 19
+        Me.LblDbField.TabIndex = 0
         Me.LblDbField.Text = "Database Field"
         '
         'BtnAlt
         '
         Me.BtnAlt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnAlt.Location = New System.Drawing.Point(300, 384)
+        Me.BtnAlt.Location = New System.Drawing.Point(298, 332)
+        Me.BtnAlt.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnAlt.Name = "BtnAlt"
-        Me.BtnAlt.Size = New System.Drawing.Size(61, 49)
+        Me.BtnAlt.Size = New System.Drawing.Size(55, 46)
         Me.BtnAlt.TabIndex = 18
         Me.BtnAlt.Text = "Alt"
         Me.BtnAlt.UseVisualStyleBackColor = True
@@ -155,39 +164,43 @@ Partial Class FrmEditButton
         'BtnCtrl
         '
         Me.BtnCtrl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnCtrl.Location = New System.Drawing.Point(12, 384)
+        Me.BtnCtrl.Location = New System.Drawing.Point(15, 332)
+        Me.BtnCtrl.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnCtrl.Name = "BtnCtrl"
-        Me.BtnCtrl.Size = New System.Drawing.Size(61, 49)
-        Me.BtnCtrl.TabIndex = 17
+        Me.BtnCtrl.Size = New System.Drawing.Size(55, 46)
+        Me.BtnCtrl.TabIndex = 16
         Me.BtnCtrl.Text = "Ctrl"
         Me.BtnCtrl.UseVisualStyleBackColor = True
         '
         'BtnRightArrow
         '
         Me.BtnRightArrow.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnRightArrow.Location = New System.Drawing.Point(228, 384)
+        Me.BtnRightArrow.Location = New System.Drawing.Point(225, 282)
+        Me.BtnRightArrow.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnRightArrow.Name = "BtnRightArrow"
-        Me.BtnRightArrow.Size = New System.Drawing.Size(61, 49)
-        Me.BtnRightArrow.TabIndex = 16
+        Me.BtnRightArrow.Size = New System.Drawing.Size(55, 46)
+        Me.BtnRightArrow.TabIndex = 15
         Me.BtnRightArrow.Text = "g"
         Me.BtnRightArrow.UseVisualStyleBackColor = True
         '
         'BtnDownArrow
         '
         Me.BtnDownArrow.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnDownArrow.Location = New System.Drawing.Point(156, 384)
+        Me.BtnDownArrow.Location = New System.Drawing.Point(151, 332)
+        Me.BtnDownArrow.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnDownArrow.Name = "BtnDownArrow"
-        Me.BtnDownArrow.Size = New System.Drawing.Size(61, 49)
-        Me.BtnDownArrow.TabIndex = 15
+        Me.BtnDownArrow.Size = New System.Drawing.Size(55, 46)
+        Me.BtnDownArrow.TabIndex = 17
         Me.BtnDownArrow.Text = "i"
         Me.BtnDownArrow.UseVisualStyleBackColor = True
         '
         'BtnLeftArrow
         '
         Me.BtnLeftArrow.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnLeftArrow.Location = New System.Drawing.Point(84, 384)
+        Me.BtnLeftArrow.Location = New System.Drawing.Point(83, 282)
+        Me.BtnLeftArrow.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnLeftArrow.Name = "BtnLeftArrow"
-        Me.BtnLeftArrow.Size = New System.Drawing.Size(61, 49)
+        Me.BtnLeftArrow.Size = New System.Drawing.Size(55, 46)
         Me.BtnLeftArrow.TabIndex = 14
         Me.BtnLeftArrow.Text = "f"
         Me.BtnLeftArrow.UseVisualStyleBackColor = True
@@ -195,9 +208,10 @@ Partial Class FrmEditButton
         'BtnUpArrow
         '
         Me.BtnUpArrow.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnUpArrow.Location = New System.Drawing.Point(156, 324)
+        Me.BtnUpArrow.Location = New System.Drawing.Point(151, 237)
+        Me.BtnUpArrow.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnUpArrow.Name = "BtnUpArrow"
-        Me.BtnUpArrow.Size = New System.Drawing.Size(61, 49)
+        Me.BtnUpArrow.Size = New System.Drawing.Size(55, 46)
         Me.BtnUpArrow.TabIndex = 13
         Me.BtnUpArrow.Text = "h"
         Me.BtnUpArrow.UseVisualStyleBackColor = True
@@ -205,9 +219,10 @@ Partial Class FrmEditButton
         'BtnReturn
         '
         Me.BtnReturn.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnReturn.Location = New System.Drawing.Point(300, 180)
+        Me.BtnReturn.Location = New System.Drawing.Point(298, 183)
+        Me.BtnReturn.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnReturn.Name = "BtnReturn"
-        Me.BtnReturn.Size = New System.Drawing.Size(61, 49)
+        Me.BtnReturn.Size = New System.Drawing.Size(55, 46)
         Me.BtnReturn.TabIndex = 12
         Me.BtnReturn.Text = "8"
         Me.BtnReturn.UseVisualStyleBackColor = True
@@ -215,107 +230,118 @@ Partial Class FrmEditButton
         'BtnBackspace
         '
         Me.BtnBackspace.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnBackspace.Location = New System.Drawing.Point(264, 120)
+        Me.BtnBackspace.Location = New System.Drawing.Point(225, 75)
+        Me.BtnBackspace.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnBackspace.Name = "BtnBackspace"
-        Me.BtnBackspace.Size = New System.Drawing.Size(61, 49)
-        Me.BtnBackspace.TabIndex = 11
+        Me.BtnBackspace.Size = New System.Drawing.Size(55, 46)
+        Me.BtnBackspace.TabIndex = 3
         Me.BtnBackspace.Text = "!"
         Me.BtnBackspace.UseVisualStyleBackColor = True
         '
         'BtnPageDown
         '
         Me.BtnPageDown.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPageDown.Location = New System.Drawing.Point(228, 240)
+        Me.BtnPageDown.Location = New System.Drawing.Point(225, 183)
+        Me.BtnPageDown.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPageDown.Name = "BtnPageDown"
-        Me.BtnPageDown.Size = New System.Drawing.Size(61, 49)
-        Me.BtnPageDown.TabIndex = 10
+        Me.BtnPageDown.Size = New System.Drawing.Size(55, 46)
+        Me.BtnPageDown.TabIndex = 11
         Me.BtnPageDown.Text = "Page Down"
         Me.BtnPageDown.UseVisualStyleBackColor = True
         '
         'BtnEnd
         '
         Me.BtnEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnEnd.Location = New System.Drawing.Point(156, 240)
+        Me.BtnEnd.Location = New System.Drawing.Point(151, 183)
+        Me.BtnEnd.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnEnd.Name = "BtnEnd"
-        Me.BtnEnd.Size = New System.Drawing.Size(61, 49)
-        Me.BtnEnd.TabIndex = 9
+        Me.BtnEnd.Size = New System.Drawing.Size(55, 46)
+        Me.BtnEnd.TabIndex = 10
         Me.BtnEnd.Text = "End"
         Me.BtnEnd.UseVisualStyleBackColor = True
         '
         'BtnDelete
         '
         Me.BtnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnDelete.Location = New System.Drawing.Point(84, 240)
+        Me.BtnDelete.Location = New System.Drawing.Point(83, 183)
+        Me.BtnDelete.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnDelete.Name = "BtnDelete"
-        Me.BtnDelete.Size = New System.Drawing.Size(61, 49)
-        Me.BtnDelete.TabIndex = 8
+        Me.BtnDelete.Size = New System.Drawing.Size(55, 46)
+        Me.BtnDelete.TabIndex = 9
         Me.BtnDelete.Text = "Delete"
         Me.BtnDelete.UseVisualStyleBackColor = True
         '
         'BtnBacktab
         '
         Me.BtnBacktab.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnBacktab.Location = New System.Drawing.Point(12, 240)
+        Me.BtnBacktab.Location = New System.Drawing.Point(15, 183)
+        Me.BtnBacktab.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnBacktab.Name = "BtnBacktab"
-        Me.BtnBacktab.Size = New System.Drawing.Size(61, 49)
-        Me.BtnBacktab.TabIndex = 7
+        Me.BtnBacktab.Size = New System.Drawing.Size(55, 46)
+        Me.BtnBacktab.TabIndex = 8
         Me.BtnBacktab.Text = ")"
         Me.BtnBacktab.UseVisualStyleBackColor = True
         '
         'BtnPageUp
         '
         Me.BtnPageUp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPageUp.Location = New System.Drawing.Point(228, 180)
+        Me.BtnPageUp.Location = New System.Drawing.Point(225, 129)
+        Me.BtnPageUp.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPageUp.Name = "BtnPageUp"
-        Me.BtnPageUp.Size = New System.Drawing.Size(61, 49)
-        Me.BtnPageUp.TabIndex = 6
+        Me.BtnPageUp.Size = New System.Drawing.Size(55, 46)
+        Me.BtnPageUp.TabIndex = 7
         Me.BtnPageUp.Text = "Page Up"
         Me.BtnPageUp.UseVisualStyleBackColor = True
         '
         'BtnHome
         '
         Me.BtnHome.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnHome.Location = New System.Drawing.Point(156, 180)
+        Me.BtnHome.Location = New System.Drawing.Point(154, 129)
+        Me.BtnHome.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnHome.Name = "BtnHome"
-        Me.BtnHome.Size = New System.Drawing.Size(61, 49)
-        Me.BtnHome.TabIndex = 5
+        Me.BtnHome.Size = New System.Drawing.Size(55, 46)
+        Me.BtnHome.TabIndex = 6
         Me.BtnHome.Text = "Home"
         Me.BtnHome.UseVisualStyleBackColor = True
         '
         'BtnInsert
         '
         Me.BtnInsert.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInsert.Location = New System.Drawing.Point(84, 180)
+        Me.BtnInsert.Location = New System.Drawing.Point(83, 129)
+        Me.BtnInsert.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnInsert.Name = "BtnInsert"
-        Me.BtnInsert.Size = New System.Drawing.Size(61, 49)
-        Me.BtnInsert.TabIndex = 4
+        Me.BtnInsert.Size = New System.Drawing.Size(55, 46)
+        Me.BtnInsert.TabIndex = 5
         Me.BtnInsert.Text = "Insert"
         Me.BtnInsert.UseVisualStyleBackColor = True
         '
         'BtnTab
         '
         Me.BtnTab.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnTab.Location = New System.Drawing.Point(12, 180)
+        Me.BtnTab.Location = New System.Drawing.Point(15, 129)
+        Me.BtnTab.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnTab.Name = "BtnTab"
-        Me.BtnTab.Size = New System.Drawing.Size(61, 49)
-        Me.BtnTab.TabIndex = 3
+        Me.BtnTab.Size = New System.Drawing.Size(55, 46)
+        Me.BtnTab.TabIndex = 4
         Me.BtnTab.Text = "*"
         Me.BtnTab.UseVisualStyleBackColor = True
         '
         'BtnCloseCurlyBracket
         '
-        Me.BtnCloseCurlyBracket.Location = New System.Drawing.Point(156, 120)
+        Me.BtnCloseCurlyBracket.Location = New System.Drawing.Point(154, 75)
+        Me.BtnCloseCurlyBracket.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnCloseCurlyBracket.Name = "BtnCloseCurlyBracket"
-        Me.BtnCloseCurlyBracket.Size = New System.Drawing.Size(61, 49)
+        Me.BtnCloseCurlyBracket.Size = New System.Drawing.Size(55, 46)
         Me.BtnCloseCurlyBracket.TabIndex = 2
         Me.BtnCloseCurlyBracket.Text = "}"
         Me.BtnCloseCurlyBracket.UseVisualStyleBackColor = True
         '
         'BtnOpenCurlyBracket
         '
-        Me.BtnOpenCurlyBracket.Location = New System.Drawing.Point(84, 120)
+        Me.BtnOpenCurlyBracket.Location = New System.Drawing.Point(83, 75)
+        Me.BtnOpenCurlyBracket.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnOpenCurlyBracket.Name = "BtnOpenCurlyBracket"
-        Me.BtnOpenCurlyBracket.Size = New System.Drawing.Size(61, 49)
+        Me.BtnOpenCurlyBracket.Size = New System.Drawing.Size(55, 46)
         Me.BtnOpenCurlyBracket.TabIndex = 1
         Me.BtnOpenCurlyBracket.Text = "{"
         Me.BtnOpenCurlyBracket.UseVisualStyleBackColor = True
@@ -326,9 +352,10 @@ Partial Class FrmEditButton
         Me.CbDbValue.DisplayMember = "sendername"
         Me.CbDbValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CbDbValue.FormattingEnabled = True
-        Me.CbDbValue.Location = New System.Drawing.Point(84, 60)
+        Me.CbDbValue.Location = New System.Drawing.Point(83, 43)
+        Me.CbDbValue.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.CbDbValue.Name = "CbDbValue"
-        Me.CbDbValue.Size = New System.Drawing.Size(277, 21)
+        Me.CbDbValue.Size = New System.Drawing.Size(270, 24)
         Me.CbDbValue.TabIndex = 0
         Me.CbDbValue.ValueMember = "senderid"
         '
@@ -344,19 +371,21 @@ Partial Class FrmEditButton
         '
         'TxtPreview
         '
-        Me.TxtPreview.Location = New System.Drawing.Point(12, 372)
+        Me.TxtPreview.Location = New System.Drawing.Point(14, 311)
+        Me.TxtPreview.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtPreview.Name = "TxtPreview"
-        Me.TxtPreview.Size = New System.Drawing.Size(457, 169)
-        Me.TxtPreview.TabIndex = 2
+        Me.TxtPreview.Size = New System.Drawing.Size(390, 136)
+        Me.TxtPreview.TabIndex = 5
         Me.TxtPreview.Text = ""
         '
         'TxtString
         '
         Me.TxtString.ContextMenuStrip = Me.mnuEdit
-        Me.TxtString.Location = New System.Drawing.Point(12, 144)
+        Me.TxtString.Location = New System.Drawing.Point(14, 139)
+        Me.TxtString.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtString.Name = "TxtString"
-        Me.TxtString.Size = New System.Drawing.Size(457, 181)
-        Me.TxtString.TabIndex = 3
+        Me.TxtString.Size = New System.Drawing.Size(390, 136)
+        Me.TxtString.TabIndex = 4
         Me.TxtString.Text = ""
         '
         'mnuEdit
@@ -442,26 +471,29 @@ Partial Class FrmEditButton
         '
         'BtnFont
         '
-        Me.BtnFont.Location = New System.Drawing.Point(336, 12)
+        Me.BtnFont.Location = New System.Drawing.Point(310, 7)
+        Me.BtnFont.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnFont.Name = "BtnFont"
-        Me.BtnFont.Size = New System.Drawing.Size(193, 37)
-        Me.BtnFont.TabIndex = 4
+        Me.BtnFont.Size = New System.Drawing.Size(323, 46)
+        Me.BtnFont.TabIndex = 1
         Me.BtnFont.Text = "Caption Font"
         Me.BtnFont.UseVisualStyleBackColor = True
         '
         'TxtHint
         '
-        Me.TxtHint.Location = New System.Drawing.Point(108, 60)
+        Me.TxtHint.Location = New System.Drawing.Point(73, 71)
+        Me.TxtHint.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.TxtHint.Name = "TxtHint"
-        Me.TxtHint.Size = New System.Drawing.Size(337, 20)
-        Me.TxtHint.TabIndex = 6
+        Me.TxtHint.Size = New System.Drawing.Size(391, 24)
+        Me.TxtHint.TabIndex = 2
         '
         'BtnCancel
         '
         Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnCancel.Location = New System.Drawing.Point(312, 564)
+        Me.BtnCancel.Location = New System.Drawing.Point(263, 500)
+        Me.BtnCancel.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnCancel.Name = "BtnCancel"
-        Me.BtnCancel.Size = New System.Drawing.Size(121, 23)
+        Me.BtnCancel.Size = New System.Drawing.Size(141, 39)
         Me.BtnCancel.TabIndex = 7
         Me.BtnCancel.Text = "Cancel"
         Me.BtnCancel.UseVisualStyleBackColor = True
@@ -469,84 +501,114 @@ Partial Class FrmEditButton
         'BtnOK
         '
         Me.BtnOK.DialogResult = System.Windows.Forms.DialogResult.Abort
-        Me.BtnOK.Location = New System.Drawing.Point(12, 564)
+        Me.BtnOK.Location = New System.Drawing.Point(14, 500)
+        Me.BtnOK.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnOK.Name = "BtnOK"
-        Me.BtnOK.Size = New System.Drawing.Size(121, 23)
-        Me.BtnOK.TabIndex = 8
+        Me.BtnOK.Size = New System.Drawing.Size(141, 39)
+        Me.BtnOK.TabIndex = 6
         Me.BtnOK.Text = "Update"
         Me.BtnOK.UseVisualStyleBackColor = True
         '
         'LblBtnSeq
         '
         Me.LblBtnSeq.AutoSize = True
-        Me.LblBtnSeq.Location = New System.Drawing.Point(672, 60)
+        Me.LblBtnSeq.Location = New System.Drawing.Point(792, 36)
+        Me.LblBtnSeq.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblBtnSeq.Name = "LblBtnSeq"
-        Me.LblBtnSeq.Size = New System.Drawing.Size(39, 13)
-        Me.LblBtnSeq.TabIndex = 9
+        Me.LblBtnSeq.Size = New System.Drawing.Size(47, 17)
+        Me.LblBtnSeq.TabIndex = 0
         Me.LblBtnSeq.Text = "Label2"
         '
         'LblBtnGrp
         '
         Me.LblBtnGrp.AutoSize = True
-        Me.LblBtnGrp.Location = New System.Drawing.Point(672, 24)
+        Me.LblBtnGrp.Location = New System.Drawing.Point(792, 9)
+        Me.LblBtnGrp.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblBtnGrp.Name = "LblBtnGrp"
-        Me.LblBtnGrp.Size = New System.Drawing.Size(39, 13)
-        Me.LblBtnGrp.TabIndex = 10
+        Me.LblBtnGrp.Size = New System.Drawing.Size(47, 17)
+        Me.LblBtnGrp.TabIndex = 15
         Me.LblBtnGrp.Text = "Label2"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(552, 24)
+        Me.Label2.Location = New System.Drawing.Point(656, 9)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(73, 13)
-        Me.Label2.TabIndex = 11
+        Me.Label2.Size = New System.Drawing.Size(97, 17)
+        Me.Label2.TabIndex = 13
         Me.Label2.Text = "Button Group:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(24, 336)
+        Me.Label3.Location = New System.Drawing.Point(14, 290)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(45, 13)
+        Me.Label3.Size = New System.Drawing.Size(55, 17)
         Me.Label3.TabIndex = 12
         Me.Label3.Text = "Preview"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(24, 60)
+        Me.Label4.Location = New System.Drawing.Point(37, 74)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(26, 13)
-        Me.Label4.TabIndex = 13
+        Me.Label4.Size = New System.Drawing.Size(32, 17)
+        Me.Label4.TabIndex = 10
         Me.Label4.Text = "Hint"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(12, 18)
+        Me.Label5.Location = New System.Drawing.Point(14, 22)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(43, 13)
-        Me.Label5.TabIndex = 14
+        Me.Label5.Size = New System.Drawing.Size(55, 17)
+        Me.Label5.TabIndex = 9
         Me.Label5.Text = "Caption"
         '
         'txtCaption
         '
-        Me.txtCaption.Location = New System.Drawing.Point(108, 12)
+        Me.txtCaption.Location = New System.Drawing.Point(73, 19)
+        Me.txtCaption.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.txtCaption.Name = "txtCaption"
-        Me.txtCaption.Size = New System.Drawing.Size(181, 20)
-        Me.txtCaption.TabIndex = 15
+        Me.txtCaption.Size = New System.Drawing.Size(209, 24)
+        Me.txtCaption.TabIndex = 0
         '
         'SendersTableAdapter
         '
         Me.SendersTableAdapter.ClearBeforeFill = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(14, 118)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(40, 17)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "Value"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(656, 36)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(119, 17)
+        Me.Label6.TabIndex = 16
+        Me.Label6.Text = "Button Sequence:"
+        '
         'FrmEditButton
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(890, 640)
+        Me.ClientSize = New System.Drawing.Size(880, 566)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtCaption)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
@@ -562,7 +624,9 @@ Partial Class FrmEditButton
         Me.Controls.Add(Me.TxtPreview)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.grpOpts)
+        Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.Name = "FrmEditButton"
         Me.Text = "Edit Button"
         Me.grpOpts.ResumeLayout(False)
@@ -630,4 +694,6 @@ Partial Class FrmEditButton
     Friend WithEvents TypeRightDataSet As TypeRightDataSet
     Friend WithEvents SendersBindingSource As Windows.Forms.BindingSource
     Friend WithEvents SendersTableAdapter As TypeRightDataSetTableAdapters.sendersTableAdapter
+    Friend WithEvents Label1 As Windows.Forms.Label
+    Friend WithEvents Label6 As Windows.Forms.Label
 End Class

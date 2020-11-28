@@ -3592,7 +3592,7 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, false)>  _
-        Public Overloads Overridable Function InsertButton(ByVal buttonGroup As Integer, ByVal buttonSeq As Integer, ByVal buttonText As String, ByVal buttonHint As String, ByVal buttonValue As String, ByVal buttonFont As String, ByVal buttonBold As Byte, ByVal buttonFontSize As Decimal, ByVal buttonItalic As Byte, ByVal buttonEncrypt As Byte) As Integer
+        Public Overloads Overridable Function InsertButton(ByVal buttonGroup As Integer, ByVal buttonSeq As Integer, ByVal buttonText As String, ByVal buttonHint As String, ByVal buttonValue As String, ByVal buttonFont As String, ByVal buttonBold As Byte, ByVal buttonFontSize As Decimal, ByVal buttonItalic As Byte, ByVal buttonEncrypt As Byte) As Object
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(5)
             command.Parameters(0).Value = CType(buttonGroup,Integer)
             command.Parameters(1).Value = CType(buttonSeq,Integer)
@@ -3625,15 +3625,20 @@ Namespace TypeRightDataSetTableAdapters
                         <> Global.System.Data.ConnectionState.Open) Then
                 command.Connection.Open
             End If
-            Dim returnValue As Integer
+            Dim returnValue As Object
             Try 
-                returnValue = command.ExecuteNonQuery
+                returnValue = command.ExecuteScalar
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
                     command.Connection.Close
                 End If
             End Try
-            Return returnValue
+            If ((returnValue Is Nothing)  _
+                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
+                Return Nothing
+            Else
+                Return CType(returnValue,Object)
+            End If
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

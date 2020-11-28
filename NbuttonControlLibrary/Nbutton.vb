@@ -59,13 +59,26 @@ Public Class Nbutton
             m_Id = value
         End Set
     End Property
+    Public Overrides Property Font() As Font
+        Get
+            Return Button1.Font
+        End Get
+        Set(ByVal value As Font)
+            m_Fontname = value.Name
+            m_Fontsize = value.Size
+            m_Bold = value.Bold
+            m_Italic = value.Italic
+            UpdateFont(m_Fontname, m_Fontsize, m_Bold, m_Italic)
+        End Set
+    End Property
+
     Public Property FontName() As String
         Get
             Return m_Fontname
         End Get
         Set(ByVal value As String)
             m_Fontname = value
-            m_Typeface = MakeTypeface(m_Fontname, m_Fontsize, m_Bold, m_Italic)
+            UpdateFont(m_Fontname, m_Fontsize, m_Bold, m_Italic)
         End Set
     End Property
     Public Property FontSize() As Single
@@ -74,6 +87,7 @@ Public Class Nbutton
         End Get
         Set(ByVal value As Single)
             m_Fontsize = value
+            UpdateFont(m_Fontname, m_Fontsize, m_Bold, m_Italic)
         End Set
     End Property
     Public Property FontBold() As Boolean
@@ -82,6 +96,7 @@ Public Class Nbutton
         End Get
         Set(ByVal value As Boolean)
             m_Bold = value
+            UpdateFont(m_Fontname, m_Fontsize, m_Bold, m_Italic)
         End Set
     End Property
     Public Property FontItalic() As Boolean
@@ -90,6 +105,7 @@ Public Class Nbutton
         End Get
         Set(ByVal value As Boolean)
             m_Italic = value
+            UpdateFont(m_Fontname, m_Fontsize, m_Bold, m_Italic)
         End Set
     End Property
     Public Property Caption() As String
@@ -166,10 +182,9 @@ Public Class Nbutton
         m_Fontsize = pFontSize
         m_Bold = pBold
         m_Italic = pItalic
-        m_Typeface = MakeTypeface(m_Fontname, m_Fontsize, m_Bold, m_Italic)
+        UpdateFont(m_Fontname, m_Fontsize, m_Bold, m_Italic)
         m_Caption = pCaption
         Button1.Text = pCaption
-        Button1.Font = MakeFont(m_Typeface)
         Value = pValue
         Hint = pHint
         Group = pGroup
@@ -190,6 +205,10 @@ Public Class Nbutton
         tf.isItalic = isFontItalic
         Return tf
     End Function
+    Private Sub UpdateFont(p_FontName As String, p_FontSize As Integer, isFontBold As Boolean, isFontItalic As Boolean)
+        m_Typeface = MakeTypeface(m_Fontname, m_Fontsize, m_Bold, m_Italic)
+        Button1.Font = MakeFont(m_Typeface)
+    End Sub
     Private Sub Nbutton_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         Button1.Size = Size
     End Sub

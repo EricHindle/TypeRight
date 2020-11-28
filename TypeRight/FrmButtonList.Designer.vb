@@ -25,6 +25,8 @@ Partial Class FrmButtonList
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmButtonList))
         Me.GrpTop = New System.Windows.Forms.GroupBox()
+        Me.BtnAddCol = New System.Windows.Forms.Button()
+        Me.BtnRmvCol = New System.Windows.Forms.Button()
         Me.ImgTack = New System.Windows.Forms.PictureBox()
         Me.cbNames = New System.Windows.Forms.ComboBox()
         Me.BtnReDraw = New System.Windows.Forms.Button()
@@ -59,8 +61,6 @@ Partial Class FrmButtonList
         Me.DelayTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
         Me.SenderButtonPanel = New System.Windows.Forms.Panel()
-        Me.BtnRmvCol = New System.Windows.Forms.Button()
-        Me.BtnAddCol = New System.Windows.Forms.Button()
         Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuPopup.SuspendLayout()
@@ -92,6 +92,26 @@ Partial Class FrmButtonList
         Me.GrpTop.Size = New System.Drawing.Size(120, 62)
         Me.GrpTop.TabIndex = 0
         Me.GrpTop.TabStop = False
+        '
+        'BtnAddCol
+        '
+        Me.BtnAddCol.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_right
+        Me.BtnAddCol.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnAddCol.Location = New System.Drawing.Point(60, 13)
+        Me.BtnAddCol.Name = "BtnAddCol"
+        Me.BtnAddCol.Size = New System.Drawing.Size(20, 20)
+        Me.BtnAddCol.TabIndex = 4
+        Me.BtnAddCol.UseVisualStyleBackColor = True
+        '
+        'BtnRmvCol
+        '
+        Me.BtnRmvCol.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
+        Me.BtnRmvCol.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnRmvCol.Location = New System.Drawing.Point(36, 13)
+        Me.BtnRmvCol.Name = "BtnRmvCol"
+        Me.BtnRmvCol.Size = New System.Drawing.Size(20, 20)
+        Me.BtnRmvCol.TabIndex = 3
+        Me.BtnRmvCol.UseVisualStyleBackColor = True
         '
         'ImgTack
         '
@@ -155,42 +175,42 @@ Partial Class FrmButtonList
         'CopyToClipboardToolStripMenuItem
         '
         Me.CopyToClipboardToolStripMenuItem.Name = "CopyToClipboardToolStripMenuItem"
-        Me.CopyToClipboardToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.CopyToClipboardToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CopyToClipboardToolStripMenuItem.Text = "Copy to Clipboard"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(168, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'mnuNew
         '
         Me.mnuNew.Name = "mnuNew"
-        Me.mnuNew.Size = New System.Drawing.Size(171, 22)
+        Me.mnuNew.Size = New System.Drawing.Size(180, 22)
         Me.mnuNew.Text = "&New Button"
         '
         'mnuEdit
         '
         Me.mnuEdit.Name = "mnuEdit"
-        Me.mnuEdit.Size = New System.Drawing.Size(171, 22)
+        Me.mnuEdit.Size = New System.Drawing.Size(180, 22)
         Me.mnuEdit.Text = "&Edit Button"
         '
         'mnuDelete
         '
         Me.mnuDelete.Name = "mnuDelete"
-        Me.mnuDelete.Size = New System.Drawing.Size(171, 22)
+        Me.mnuDelete.Size = New System.Drawing.Size(180, 22)
         Me.mnuDelete.Text = "&Delete Button"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(168, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
         '
         'mnuGroups
         '
         Me.mnuGroups.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddToolStripMenuItem, Me.ChangeNameToolStripMenuItem, Me.TransferToolStripMenuItem})
         Me.mnuGroups.Name = "mnuGroups"
-        Me.mnuGroups.Size = New System.Drawing.Size(171, 22)
+        Me.mnuGroups.Size = New System.Drawing.Size(180, 22)
         Me.mnuGroups.Text = "&Groups"
         '
         'AddToolStripMenuItem
@@ -214,12 +234,12 @@ Partial Class FrmButtonList
         'mnuSep3
         '
         Me.mnuSep3.Name = "mnuSep3"
-        Me.mnuSep3.Size = New System.Drawing.Size(168, 6)
+        Me.mnuSep3.Size = New System.Drawing.Size(177, 6)
         '
         'mnuOptions1
         '
         Me.mnuOptions1.Name = "mnuOptions1"
-        Me.mnuOptions1.Size = New System.Drawing.Size(171, 22)
+        Me.mnuOptions1.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptions1.Text = "&Options"
         '
         'GrpBottom
@@ -319,6 +339,7 @@ Partial Class FrmButtonList
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(82, 21)
         Me.ProgressBar1.TabIndex = 7
+        Me.ProgressBar1.Visible = False
         '
         'NotifyIcon1
         '
@@ -356,26 +377,6 @@ Partial Class FrmButtonList
         Me.SenderButtonPanel.Size = New System.Drawing.Size(120, 161)
         Me.SenderButtonPanel.TabIndex = 5
         '
-        'BtnRmvCol
-        '
-        Me.BtnRmvCol.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
-        Me.BtnRmvCol.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnRmvCol.Location = New System.Drawing.Point(36, 13)
-        Me.BtnRmvCol.Name = "BtnRmvCol"
-        Me.BtnRmvCol.Size = New System.Drawing.Size(20, 20)
-        Me.BtnRmvCol.TabIndex = 3
-        Me.BtnRmvCol.UseVisualStyleBackColor = True
-        '
-        'BtnAddCol
-        '
-        Me.BtnAddCol.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_right
-        Me.BtnAddCol.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnAddCol.Location = New System.Drawing.Point(60, 13)
-        Me.BtnAddCol.Name = "BtnAddCol"
-        Me.BtnAddCol.Size = New System.Drawing.Size(20, 20)
-        Me.BtnAddCol.TabIndex = 4
-        Me.BtnAddCol.UseVisualStyleBackColor = True
-        '
         'FrmButtonList
         '
         Me.ClientSize = New System.Drawing.Size(122, 421)
@@ -390,6 +391,7 @@ Partial Class FrmButtonList
         Me.MinimizeBox = False
         Me.Name = "FrmButtonList"
         Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
         Me.GrpTop.ResumeLayout(False)
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).EndInit()

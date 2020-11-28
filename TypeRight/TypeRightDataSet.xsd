@@ -351,7 +351,7 @@ ORDER BY buttonSeq</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="TypeRightConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertButton" Modifier="Public" Name="InsertButton" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="InsertButton">
+              <DbSource ConnectionRef="TypeRightConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertButton" Modifier="Public" Name="InsertButton" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="InsertButton">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>INSERT INTO button
@@ -421,7 +421,7 @@ SELECT buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, bu
   <xs:element name="TypeRightDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="TypeRightDataSet" msprop:Generator_UserDSName="TypeRightDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="buttongroups" msprop:Generator_TableClassName="buttongroupsDataTable" msprop:Generator_TableVarName="tablebuttongroups" msprop:Generator_TablePropName="buttongroups" msprop:Generator_RowDeletingName="buttongroupsRowDeleting" msprop:Generator_RowChangingName="buttongroupsRowChanging" msprop:Generator_RowEvHandlerName="buttongroupsRowChangeEventHandler" msprop:Generator_RowDeletedName="buttongroupsRowDeleted" msprop:Generator_UserTableName="buttongroups" msprop:Generator_RowChangedName="buttongroupsRowChanged" msprop:Generator_RowEvArgName="buttongroupsRowChangeEvent" msprop:Generator_RowClassName="buttongroupsRow">
+        <xs:element name="buttongroups" msprop:Generator_TableClassName="buttongroupsDataTable" msprop:Generator_TableVarName="tablebuttongroups" msprop:Generator_RowChangedName="buttongroupsRowChanged" msprop:Generator_TablePropName="buttongroups" msprop:Generator_RowDeletingName="buttongroupsRowDeleting" msprop:Generator_RowChangingName="buttongroupsRowChanging" msprop:Generator_RowEvHandlerName="buttongroupsRowChangeEventHandler" msprop:Generator_RowDeletedName="buttongroupsRowDeleted" msprop:Generator_RowClassName="buttongroupsRow" msprop:Generator_UserTableName="buttongroups" msprop:Generator_RowEvArgName="buttongroupsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="buttongroupid" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnbuttongroupid" msprop:Generator_ColumnPropNameInRow="buttongroupid" msprop:Generator_ColumnPropNameInTable="buttongroupidColumn" msprop:Generator_UserColumnName="buttongroupid" type="xs:int" />
@@ -435,7 +435,7 @@ SELECT buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, bu
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="senders" msprop:Generator_TableClassName="sendersDataTable" msprop:Generator_TableVarName="tablesenders" msprop:Generator_RowChangedName="sendersRowChanged" msprop:Generator_TablePropName="senders" msprop:Generator_RowDeletingName="sendersRowDeleting" msprop:Generator_RowChangingName="sendersRowChanging" msprop:Generator_RowEvHandlerName="sendersRowChangeEventHandler" msprop:Generator_RowDeletedName="sendersRowDeleted" msprop:Generator_RowClassName="sendersRow" msprop:Generator_UserTableName="senders" msprop:Generator_RowEvArgName="sendersRowChangeEvent">
+        <xs:element name="senders" msprop:Generator_TableClassName="sendersDataTable" msprop:Generator_TableVarName="tablesenders" msprop:Generator_TablePropName="senders" msprop:Generator_RowDeletingName="sendersRowDeleting" msprop:Generator_RowChangingName="sendersRowChanging" msprop:Generator_RowEvHandlerName="sendersRowChangeEventHandler" msprop:Generator_RowDeletedName="sendersRowDeleted" msprop:Generator_UserTableName="senders" msprop:Generator_RowChangedName="sendersRowChanged" msprop:Generator_RowEvArgName="sendersRowChangeEvent" msprop:Generator_RowClassName="sendersRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="senderid" msprop:Generator_ColumnVarNameInTable="columnsenderid" msprop:Generator_ColumnPropNameInRow="senderid" msprop:Generator_ColumnPropNameInTable="senderidColumn" msprop:Generator_UserColumnName="senderid" type="xs:int" />
@@ -492,7 +492,7 @@ SELECT buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, bu
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="button" msprop:Generator_TableClassName="buttonDataTable" msprop:Generator_TableVarName="tablebutton" msprop:Generator_RowChangedName="buttonRowChanged" msprop:Generator_TablePropName="button" msprop:Generator_RowDeletingName="buttonRowDeleting" msprop:Generator_RowChangingName="buttonRowChanging" msprop:Generator_RowEvHandlerName="buttonRowChangeEventHandler" msprop:Generator_RowDeletedName="buttonRowDeleted" msprop:Generator_RowClassName="buttonRow" msprop:Generator_UserTableName="button" msprop:Generator_RowEvArgName="buttonRowChangeEvent">
+        <xs:element name="button" msprop:Generator_TableClassName="buttonDataTable" msprop:Generator_TableVarName="tablebutton" msprop:Generator_TablePropName="button" msprop:Generator_RowDeletingName="buttonRowDeleting" msprop:Generator_RowChangingName="buttonRowChanging" msprop:Generator_RowEvHandlerName="buttonRowChangeEventHandler" msprop:Generator_RowDeletedName="buttonRowDeleted" msprop:Generator_UserTableName="button" msprop:Generator_RowChangedName="buttonRowChanged" msprop:Generator_RowEvArgName="buttonRowChangeEvent" msprop:Generator_RowClassName="buttonRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="buttonId" msprop:Generator_ColumnVarNameInTable="columnbuttonId" msprop:Generator_ColumnPropNameInRow="buttonId" msprop:Generator_ColumnPropNameInTable="buttonIdColumn" msprop:Generator_UserColumnName="buttonId" type="xs:int" />
