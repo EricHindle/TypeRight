@@ -68,7 +68,7 @@ Public Class FrmButtonList
         GrpTop.Visible = isPro
         mnuGroups.Visible = isPro
         mnuSep3.Visible = isPro
-        Me.Opacity = iTransPerc
+        Me.Opacity = iTransPerc / 100
         GrpBottom.Visible = bToolBar
 
         ImgTack_Click()
@@ -101,22 +101,6 @@ Public Class FrmButtonList
             Me.WindowState = FormWindowState.Normal
         End If
         isLoading = False
-        Debug.Print(Me.Height)
-        Debug.Print(GrpTop.Top & " " & GrpTop.Left)
-        Debug.Print(GroupButtonPanel.Top & " " & GroupButtonPanel.Left)
-        Debug.Print(SenderButtonPanel.Top & " " & SenderButtonPanel.Left)
-        Debug.Print(GrpBottom.Top & " " & GrpBottom.Left)
-        Debug.Print(GroupButtonPanel.Controls.Count)
-        For Each _control As Control In GroupButtonPanel.Controls
-            Debug.Print(_control.Name)
-            Debug.Print(_control.Text)
-        Next
-        Debug.Print(SenderButtonPanel.Controls.Count)
-        For Each _control As Control In SenderButtonPanel.Controls
-            Debug.Print(_control.Name)
-            Debug.Print(_control.Text)
-        Next
-
     End Sub
     Private Sub BtnReDraw_Click(sender As Object, e As EventArgs) Handles BtnReDraw.Click
         If cbNames.SelectedIndex > -1 Then
@@ -721,17 +705,33 @@ Public Class FrmButtonList
         oPanel.Height = iRowCt * 27
         Dim iBtnRow As Integer = 0
         Dim iBtnCol As Integer = 0
+        Debug.Print("iMod:" & iMod)
+        Debug.Print("iRowCt:" & iRowCt)
         For Each oBtn In oList
+            Debug.Print("iBtnrow: " & iBtnRow & " " & "iBtncol: " & iBtnCol & " " & oBtn.Caption)
             oPanel.Controls.Add(oBtn)
             oBtn.Top = 1 + (iBtnRow * 27)
             oBtn.Left = 1 + (iBtnCol * iButtonWidth)
             oBtn.Size = New Drawing.Size(iButtonWidth, 27)
             oBtn.Visible = True
             iBtnRow += 1
-            If iBtnRow > iRowCt - 1 Then
-                iBtnCol += 1
-                iBtnRow = 0
-            End If
+            If iBtnRow > iRowCt - 2 Then
+                Debug.Print("is " & iBtnRow & " after last row?")
+                If iBtnCol > iMod - 1 And iMod > 0 Then
+                    Debug.Print("yes")
+                    iBtnCol += 1
+                    iBtnRow = 0
+                    Continue For
+                Else
+                    Debug.Print("no")
+                    If iBtnRow > iRowCt - 1 Then
+                        Debug.Print(iBtnRow & " is after last row")
+                        iBtnCol += 1
+                        iBtnRow = 0
+                    End If
+                End If
+                End If
+
         Next
     End Sub
 
@@ -752,7 +752,9 @@ Public Class FrmButtonList
     Private Sub ShowOptions()
         Using _options As New FrmOptions
             _options.ShowDialog()
-
+            LoadOptions()
+            Me.Opacity = iTransPerc / 100
+            GrpBottom.Visible = bToolBar
 
         End Using
     End Sub

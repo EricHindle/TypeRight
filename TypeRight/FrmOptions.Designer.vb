@@ -200,14 +200,13 @@ Partial Class FrmOptions
         '
         'HScroll1
         '
-        Me.HScroll1.LargeChange = 100
         Me.HScroll1.Location = New System.Drawing.Point(27, 69)
         Me.HScroll1.Maximum = 450
-        Me.HScroll1.Minimum = 80
+        Me.HScroll1.Minimum = 120
         Me.HScroll1.Name = "HScroll1"
         Me.HScroll1.Size = New System.Drawing.Size(208, 17)
         Me.HScroll1.TabIndex = 0
-        Me.HScroll1.Value = 80
+        Me.HScroll1.Value = 120
         '
         'Slider1
         '
