@@ -167,6 +167,7 @@ Public Class Nbutton
         m_Bold = pBold
         m_Italic = pItalic
         m_Typeface = MakeTypeface(m_Fontname, m_Fontsize, m_Bold, m_Italic)
+        m_Caption = pCaption
         Button1.Text = pCaption
         Button1.Font = MakeFont(m_Typeface)
         Value = pValue

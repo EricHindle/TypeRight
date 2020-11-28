@@ -38,7 +38,7 @@ Public Class FrmOptions
         My.Settings.Delay = iDelay
         If isPro Then
             My.Settings.ToolBar = CbToolBar.Checked
-            My.Settings.Splash = cbSplash.Checked
+            My.Settings.Splash = chkSplash.Checked
             My.Settings.Minimise = cbMinimise.Checked
         End If
         iTransPerc = Slider1.Value
@@ -55,7 +55,7 @@ Public Class FrmOptions
     End Sub
     Private Sub FrmOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CbToolBar.Checked = bToolBar
-        cbSplash.Checked = bSplash
+        chkSplash.Checked = bSplash
         cbMinimise.Checked = bMinimise
         If isPro Then
             'Image2.Visible = True
@@ -63,9 +63,9 @@ Public Class FrmOptions
             GrpLicence.Enabled = False
         Else
             nudDelay.Visible = False
-            cbSplash.Checked = True
+            chkSplash.Checked = True
             CbToolBar.Checked = False
-            cbSplash.Enabled = False
+            chkSplash.Enabled = False
             CbToolBar.Enabled = False
             'Image2.Visible = False
             'Image1.Visible = True

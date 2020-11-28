@@ -24,7 +24,7 @@ Partial Class FrmButtonList
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmButtonList))
-        Me.grpTop = New System.Windows.Forms.GroupBox()
+        Me.GrpTop = New System.Windows.Forms.GroupBox()
         Me.ImgTack = New System.Windows.Forms.PictureBox()
         Me.cbNames = New System.Windows.Forms.ComboBox()
         Me.BtnReDraw = New System.Windows.Forms.Button()
@@ -46,47 +46,52 @@ Partial Class FrmButtonList
         Me.mnuSep3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOptions1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.GrpBottom = New System.Windows.Forms.GroupBox()
-        Me.whiteclock = New System.Windows.Forms.PictureBox()
-        Me.greenclock = New System.Windows.Forms.PictureBox()
+        Me.WhiteClock = New System.Windows.Forms.PictureBox()
+        Me.GreenClock = New System.Windows.Forms.PictureBox()
         Me.imgExit = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.imgOptions = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.redclock = New System.Windows.Forms.PictureBox()
+        Me.ImgLock = New System.Windows.Forms.PictureBox()
+        Me.RedClock = New System.Windows.Forms.PictureBox()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.ButtonPanel = New System.Windows.Forms.Panel()
-        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
+        Me.GroupButtonPanel = New System.Windows.Forms.Panel()
         Me.DelayTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.grpTop.SuspendLayout()
+        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
+        Me.SenderButtonPanel = New System.Windows.Forms.Panel()
+        Me.BtnRmvCol = New System.Windows.Forms.Button()
+        Me.BtnAddCol = New System.Windows.Forms.Button()
+        Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuPopup.SuspendLayout()
         Me.mnuButtons.SuspendLayout()
         Me.GrpBottom.SuspendLayout()
-        CType(Me.whiteclock, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.greenclock, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WhiteClock, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GreenClock, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.imgExit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.imgOptions, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.redclock, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ImgLock, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RedClock, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'grpTop
+        'GrpTop
         '
-        Me.grpTop.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GrpTop.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpTop.Controls.Add(Me.ImgTack)
-        Me.grpTop.Controls.Add(Me.cbNames)
-        Me.grpTop.Controls.Add(Me.BtnReDraw)
-        Me.grpTop.Location = New System.Drawing.Point(0, 0)
-        Me.grpTop.Margin = New System.Windows.Forms.Padding(0)
-        Me.grpTop.Name = "grpTop"
-        Me.grpTop.Padding = New System.Windows.Forms.Padding(0)
-        Me.grpTop.Size = New System.Drawing.Size(128, 62)
-        Me.grpTop.TabIndex = 0
-        Me.grpTop.TabStop = False
+        Me.GrpTop.Controls.Add(Me.BtnAddCol)
+        Me.GrpTop.Controls.Add(Me.BtnRmvCol)
+        Me.GrpTop.Controls.Add(Me.ImgTack)
+        Me.GrpTop.Controls.Add(Me.cbNames)
+        Me.GrpTop.Controls.Add(Me.BtnReDraw)
+        Me.GrpTop.Location = New System.Drawing.Point(0, 0)
+        Me.GrpTop.Margin = New System.Windows.Forms.Padding(0)
+        Me.GrpTop.Name = "GrpTop"
+        Me.GrpTop.Padding = New System.Windows.Forms.Padding(0)
+        Me.GrpTop.Size = New System.Drawing.Size(120, 62)
+        Me.GrpTop.TabIndex = 0
+        Me.GrpTop.TabStop = False
         '
         'ImgTack
         '
@@ -104,15 +109,15 @@ Partial Class FrmButtonList
         Me.cbNames.FormattingEnabled = True
         Me.cbNames.Location = New System.Drawing.Point(7, 37)
         Me.cbNames.Name = "cbNames"
-        Me.cbNames.Size = New System.Drawing.Size(114, 21)
+        Me.cbNames.Size = New System.Drawing.Size(106, 21)
         Me.cbNames.TabIndex = 1
         '
         'BtnReDraw
         '
         Me.BtnReDraw.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnReDraw.Location = New System.Drawing.Point(94, 12)
+        Me.BtnReDraw.Location = New System.Drawing.Point(86, 13)
         Me.BtnReDraw.Name = "BtnReDraw"
-        Me.BtnReDraw.Size = New System.Drawing.Size(29, 23)
+        Me.BtnReDraw.Size = New System.Drawing.Size(31, 20)
         Me.BtnReDraw.TabIndex = 0
         Me.BtnReDraw.Text = "Go"
         Me.BtnReDraw.UseVisualStyleBackColor = True
@@ -219,48 +224,49 @@ Partial Class FrmButtonList
         '
         'GrpBottom
         '
-        Me.GrpBottom.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GrpBottom.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GrpBottom.Controls.Add(Me.whiteclock)
-        Me.GrpBottom.Controls.Add(Me.greenclock)
+        Me.GrpBottom.Controls.Add(Me.WhiteClock)
+        Me.GrpBottom.Controls.Add(Me.GreenClock)
         Me.GrpBottom.Controls.Add(Me.imgExit)
         Me.GrpBottom.Controls.Add(Me.PictureBox4)
         Me.GrpBottom.Controls.Add(Me.imgOptions)
-        Me.GrpBottom.Controls.Add(Me.PictureBox2)
-        Me.GrpBottom.Controls.Add(Me.redclock)
+        Me.GrpBottom.Controls.Add(Me.ImgLock)
+        Me.GrpBottom.Controls.Add(Me.RedClock)
         Me.GrpBottom.Controls.Add(Me.ProgressBar1)
         Me.GrpBottom.Location = New System.Drawing.Point(0, 387)
         Me.GrpBottom.Margin = New System.Windows.Forms.Padding(0)
         Me.GrpBottom.Name = "GrpBottom"
         Me.GrpBottom.Padding = New System.Windows.Forms.Padding(0)
-        Me.GrpBottom.Size = New System.Drawing.Size(128, 32)
+        Me.GrpBottom.Size = New System.Drawing.Size(120, 32)
         Me.GrpBottom.TabIndex = 3
         Me.GrpBottom.TabStop = False
         '
-        'whiteclock
+        'WhiteClock
         '
-        Me.whiteclock.Image = Global.TypeRight.My.Resources.Resources.whiteclock
-        Me.whiteclock.Location = New System.Drawing.Point(7, 11)
-        Me.whiteclock.Name = "whiteclock"
-        Me.whiteclock.Size = New System.Drawing.Size(16, 16)
-        Me.whiteclock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.whiteclock.TabIndex = 6
-        Me.whiteclock.TabStop = False
+        Me.WhiteClock.Image = Global.TypeRight.My.Resources.Resources.whiteclock
+        Me.WhiteClock.Location = New System.Drawing.Point(7, 11)
+        Me.WhiteClock.Name = "WhiteClock"
+        Me.WhiteClock.Size = New System.Drawing.Size(16, 16)
+        Me.WhiteClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.WhiteClock.TabIndex = 6
+        Me.WhiteClock.TabStop = False
         '
-        'greenclock
+        'GreenClock
         '
-        Me.greenclock.Image = Global.TypeRight.My.Resources.Resources.greenclock
-        Me.greenclock.Location = New System.Drawing.Point(7, 11)
-        Me.greenclock.Name = "greenclock"
-        Me.greenclock.Size = New System.Drawing.Size(16, 16)
-        Me.greenclock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.greenclock.TabIndex = 5
-        Me.greenclock.TabStop = False
+        Me.GreenClock.Image = Global.TypeRight.My.Resources.Resources.greenclock
+        Me.GreenClock.Location = New System.Drawing.Point(7, 11)
+        Me.GreenClock.Name = "GreenClock"
+        Me.GreenClock.Size = New System.Drawing.Size(16, 16)
+        Me.GreenClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.GreenClock.TabIndex = 5
+        Me.GreenClock.TabStop = False
         '
         'imgExit
         '
+        Me.imgExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.imgExit.Image = Global.TypeRight.My.Resources.Resources.cancel
-        Me.imgExit.Location = New System.Drawing.Point(105, 11)
+        Me.imgExit.Location = New System.Drawing.Point(97, 11)
         Me.imgExit.Name = "imgExit"
         Me.imgExit.Size = New System.Drawing.Size(16, 16)
         Me.imgExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -270,9 +276,9 @@ Partial Class FrmButtonList
         'PictureBox4
         '
         Me.PictureBox4.Image = Global.TypeRight.My.Resources.Resources.check
-        Me.PictureBox4.Location = New System.Drawing.Point(83, 11)
+        Me.PictureBox4.Location = New System.Drawing.Point(73, 11)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox4.Size = New System.Drawing.Size(15, 16)
         Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
@@ -280,38 +286,38 @@ Partial Class FrmButtonList
         'imgOptions
         '
         Me.imgOptions.Image = Global.TypeRight.My.Resources.Resources.options
-        Me.imgOptions.Location = New System.Drawing.Point(61, 11)
+        Me.imgOptions.Location = New System.Drawing.Point(51, 11)
         Me.imgOptions.Name = "imgOptions"
         Me.imgOptions.Size = New System.Drawing.Size(16, 16)
         Me.imgOptions.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.imgOptions.TabIndex = 2
         Me.imgOptions.TabStop = False
         '
-        'PictureBox2
+        'ImgLock
         '
-        Me.PictureBox2.Image = Global.TypeRight.My.Resources.Resources.lock
-        Me.PictureBox2.Location = New System.Drawing.Point(39, 11)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 1
-        Me.PictureBox2.TabStop = False
+        Me.ImgLock.Image = Global.TypeRight.My.Resources.Resources.lock
+        Me.ImgLock.Location = New System.Drawing.Point(29, 11)
+        Me.ImgLock.Name = "ImgLock"
+        Me.ImgLock.Size = New System.Drawing.Size(16, 16)
+        Me.ImgLock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.ImgLock.TabIndex = 1
+        Me.ImgLock.TabStop = False
         '
-        'redclock
+        'RedClock
         '
-        Me.redclock.Image = Global.TypeRight.My.Resources.Resources.redclock
-        Me.redclock.Location = New System.Drawing.Point(7, 11)
-        Me.redclock.Name = "redclock"
-        Me.redclock.Size = New System.Drawing.Size(16, 16)
-        Me.redclock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.redclock.TabIndex = 0
-        Me.redclock.TabStop = False
+        Me.RedClock.Image = Global.TypeRight.My.Resources.Resources.redclock
+        Me.RedClock.Location = New System.Drawing.Point(7, 11)
+        Me.RedClock.Name = "RedClock"
+        Me.RedClock.Size = New System.Drawing.Size(16, 16)
+        Me.RedClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.RedClock.TabIndex = 0
+        Me.RedClock.TabStop = False
         '
         'ProgressBar1
         '
         Me.ProgressBar1.Location = New System.Drawing.Point(6, 8)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(95, 21)
+        Me.ProgressBar1.Size = New System.Drawing.Size(82, 21)
         Me.ProgressBar1.TabIndex = 7
         '
         'NotifyIcon1
@@ -322,54 +328,88 @@ Partial Class FrmButtonList
         Me.NotifyIcon1.Text = "TypeRight"
         Me.NotifyIcon1.Visible = True
         '
-        'ButtonPanel
+        'GroupButtonPanel
         '
-        Me.ButtonPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.GroupButtonPanel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ButtonPanel.Location = New System.Drawing.Point(0, 65)
-        Me.ButtonPanel.Name = "ButtonPanel"
-        Me.ButtonPanel.Size = New System.Drawing.Size(128, 324)
-        Me.ButtonPanel.TabIndex = 4
+        Me.GroupButtonPanel.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.GroupButtonPanel.Location = New System.Drawing.Point(0, 65)
+        Me.GroupButtonPanel.Name = "GroupButtonPanel"
+        Me.GroupButtonPanel.Size = New System.Drawing.Size(120, 161)
+        Me.GroupButtonPanel.TabIndex = 4
+        '
+        'DelayTimer
+        '
         '
         'TypeRightDataSet
         '
         Me.TypeRightDataSet.DataSetName = "TypeRightDataSet"
         Me.TypeRightDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'SenderButtonPanel
+        '
+        Me.SenderButtonPanel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.SenderButtonPanel.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.SenderButtonPanel.Location = New System.Drawing.Point(0, 228)
+        Me.SenderButtonPanel.Name = "SenderButtonPanel"
+        Me.SenderButtonPanel.Size = New System.Drawing.Size(120, 161)
+        Me.SenderButtonPanel.TabIndex = 5
+        '
+        'BtnRmvCol
+        '
+        Me.BtnRmvCol.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
+        Me.BtnRmvCol.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnRmvCol.Location = New System.Drawing.Point(36, 13)
+        Me.BtnRmvCol.Name = "BtnRmvCol"
+        Me.BtnRmvCol.Size = New System.Drawing.Size(20, 20)
+        Me.BtnRmvCol.TabIndex = 3
+        Me.BtnRmvCol.UseVisualStyleBackColor = True
+        '
+        'BtnAddCol
+        '
+        Me.BtnAddCol.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_right
+        Me.BtnAddCol.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnAddCol.Location = New System.Drawing.Point(60, 13)
+        Me.BtnAddCol.Name = "BtnAddCol"
+        Me.BtnAddCol.Size = New System.Drawing.Size(20, 20)
+        Me.BtnAddCol.TabIndex = 4
+        Me.BtnAddCol.UseVisualStyleBackColor = True
+        '
         'FrmButtonList
         '
-        Me.ClientSize = New System.Drawing.Size(128, 421)
+        Me.ClientSize = New System.Drawing.Size(122, 421)
         Me.ControlBox = False
-        Me.Controls.Add(Me.ButtonPanel)
+        Me.Controls.Add(Me.SenderButtonPanel)
+        Me.Controls.Add(Me.GroupButtonPanel)
         Me.Controls.Add(Me.GrpBottom)
-        Me.Controls.Add(Me.grpTop)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.Controls.Add(Me.GrpTop)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FrmButtonList"
         Me.ShowInTaskbar = False
         Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
-        Me.grpTop.ResumeLayout(False)
+        Me.GrpTop.ResumeLayout(False)
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mnuPopup.ResumeLayout(False)
         Me.mnuButtons.ResumeLayout(False)
         Me.GrpBottom.ResumeLayout(False)
-        CType(Me.whiteclock, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.greenclock, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WhiteClock, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GreenClock, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.imgExit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.imgOptions, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.redclock, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ImgLock, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RedClock, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
 
-    Friend WithEvents grpTop As Windows.Forms.GroupBox
+    Friend WithEvents GrpTop As Windows.Forms.GroupBox
     Friend WithEvents BtnReDraw As Windows.Forms.Button
     Friend WithEvents cbNames As Windows.Forms.ComboBox
     Friend WithEvents ImgTack As Windows.Forms.PictureBox
@@ -392,15 +432,18 @@ Partial Class FrmButtonList
     Friend WithEvents mnuOptions1 As Windows.Forms.ToolStripMenuItem
     Friend WithEvents GrpBottom As Windows.Forms.GroupBox
     Friend WithEvents NotifyIcon1 As Windows.Forms.NotifyIcon
-    Friend WithEvents ButtonPanel As Windows.Forms.Panel
-    Friend WithEvents redclock As Windows.Forms.PictureBox
+    Friend WithEvents GroupButtonPanel As Windows.Forms.Panel
+    Friend WithEvents RedClock As Windows.Forms.PictureBox
     Friend WithEvents imgExit As Windows.Forms.PictureBox
     Friend WithEvents PictureBox4 As Windows.Forms.PictureBox
     Friend WithEvents imgOptions As Windows.Forms.PictureBox
-    Friend WithEvents PictureBox2 As Windows.Forms.PictureBox
-    Friend WithEvents whiteclock As Windows.Forms.PictureBox
-    Friend WithEvents greenclock As Windows.Forms.PictureBox
+    Friend WithEvents ImgLock As Windows.Forms.PictureBox
+    Friend WithEvents WhiteClock As Windows.Forms.PictureBox
+    Friend WithEvents GreenClock As Windows.Forms.PictureBox
     Friend WithEvents TypeRightDataSet As TypeRightDataSet
     Friend WithEvents ProgressBar1 As Windows.Forms.ProgressBar
     Friend WithEvents DelayTimer As Windows.Forms.Timer
+    Friend WithEvents SenderButtonPanel As Windows.Forms.Panel
+    Friend WithEvents BtnAddCol As Windows.Forms.Button
+    Friend WithEvents BtnRmvCol As Windows.Forms.Button
 End Class

@@ -224,6 +224,8 @@
     <Content Include="images\kbd.bmp" />
     <Content Include="images\KEYS03.ICO" />
     <None Include="images\lock.bmp" />
+    <None Include="images\menu_left.jpg" />
+    <None Include="images\menu_right.jpg" />
     <Content Include="images\options.bmp" />
     <None Include="images\redclock.bmp" />
     <Content Include="images\tackdown.bmp" />

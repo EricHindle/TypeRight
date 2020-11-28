@@ -46,7 +46,7 @@ Partial Class FrmOptions
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cbOnTop = New System.Windows.Forms.CheckBox()
         Me.CbToolBar = New System.Windows.Forms.CheckBox()
-        Me.cbSplash = New System.Windows.Forms.CheckBox()
+        Me.chkSplash = New System.Windows.Forms.CheckBox()
         Me.cbMinimise = New System.Windows.Forms.CheckBox()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         Me.nudDelay = New System.Windows.Forms.NumericUpDown()
@@ -171,9 +171,9 @@ Partial Class FrmOptions
         '
         'BtnSample
         '
-        Me.BtnSample.Location = New System.Drawing.Point(267, 117)
+        Me.BtnSample.Location = New System.Drawing.Point(255, 119)
         Me.BtnSample.Name = "BtnSample"
-        Me.BtnSample.Size = New System.Drawing.Size(94, 31)
+        Me.BtnSample.Size = New System.Drawing.Size(80, 36)
         Me.BtnSample.TabIndex = 3
         Me.BtnSample.Text = "Sample"
         Me.BtnSample.UseVisualStyleBackColor = True
@@ -202,18 +202,19 @@ Partial Class FrmOptions
         '
         Me.HScroll1.LargeChange = 100
         Me.HScroll1.Location = New System.Drawing.Point(27, 69)
-        Me.HScroll1.Maximum = 4500
-        Me.HScroll1.Minimum = 800
+        Me.HScroll1.Maximum = 450
+        Me.HScroll1.Minimum = 80
         Me.HScroll1.Name = "HScroll1"
         Me.HScroll1.Size = New System.Drawing.Size(208, 17)
         Me.HScroll1.TabIndex = 0
-        Me.HScroll1.Value = 1000
+        Me.HScroll1.Value = 80
         '
         'Slider1
         '
         Me.Slider1.LargeChange = 10
         Me.Slider1.Location = New System.Drawing.Point(15, 165)
         Me.Slider1.Maximum = 100
+        Me.Slider1.Minimum = 10
         Me.Slider1.Name = "Slider1"
         Me.Slider1.Size = New System.Drawing.Size(208, 45)
         Me.Slider1.SmallChange = 5
@@ -261,7 +262,7 @@ Partial Class FrmOptions
         '
         Me.GroupBox2.Controls.Add(Me.cbOnTop)
         Me.GroupBox2.Controls.Add(Me.CbToolBar)
-        Me.GroupBox2.Controls.Add(Me.cbSplash)
+        Me.GroupBox2.Controls.Add(Me.chkSplash)
         Me.GroupBox2.Controls.Add(Me.cbMinimise)
         Me.GroupBox2.Location = New System.Drawing.Point(487, 13)
         Me.GroupBox2.Name = "GroupBox2"
@@ -289,15 +290,15 @@ Partial Class FrmOptions
         Me.CbToolBar.Text = "Tool Bar"
         Me.CbToolBar.UseVisualStyleBackColor = True
         '
-        'cbSplash
+        'chkSplash
         '
-        Me.cbSplash.AutoSize = True
-        Me.cbSplash.Location = New System.Drawing.Point(13, 88)
-        Me.cbSplash.Name = "cbSplash"
-        Me.cbSplash.Size = New System.Drawing.Size(66, 21)
-        Me.cbSplash.TabIndex = 2
-        Me.cbSplash.Text = "Splash"
-        Me.cbSplash.UseVisualStyleBackColor = True
+        Me.chkSplash.AutoSize = True
+        Me.chkSplash.Location = New System.Drawing.Point(13, 88)
+        Me.chkSplash.Name = "chkSplash"
+        Me.chkSplash.Size = New System.Drawing.Size(66, 21)
+        Me.chkSplash.TabIndex = 2
+        Me.chkSplash.Text = "Splash"
+        Me.chkSplash.UseVisualStyleBackColor = True
         '
         'cbMinimise
         '
@@ -393,7 +394,7 @@ Partial Class FrmOptions
     Friend WithEvents GroupBox2 As Windows.Forms.GroupBox
     Friend WithEvents cbOnTop As Windows.Forms.CheckBox
     Friend WithEvents CbToolBar As Windows.Forms.CheckBox
-    Friend WithEvents cbSplash As Windows.Forms.CheckBox
+    Friend WithEvents chkSplash As Windows.Forms.CheckBox
     Friend WithEvents cbMinimise As Windows.Forms.CheckBox
     Friend WithEvents FontDialog1 As Windows.Forms.FontDialog
     Friend WithEvents nudDelay As Windows.Forms.NumericUpDown

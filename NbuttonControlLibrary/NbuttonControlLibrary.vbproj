@@ -139,5 +139,11 @@
   <ItemGroup>
     <Folder Include="Design\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_left.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_right.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

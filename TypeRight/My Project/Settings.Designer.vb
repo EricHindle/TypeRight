@@ -55,7 +55,7 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("Eric Hindle")>  _
     Public Property RegName() As String
         Get
             Return CType(Me("RegName"),String)
@@ -67,7 +67,7 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("CGL26PUYVR950JEA")>  _
     Public Property RegCode() As String
         Get
             Return CType(Me("RegCode"),String)
@@ -79,7 +79,7 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("1200")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("120")>  _
     Public Property ButtonWidth() As Integer
         Get
             Return CType(Me("ButtonWidth"),Integer)
@@ -115,7 +115,7 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
     Public Property ToolBar() As Boolean
         Get
             Return CType(Me("ToolBar"),Boolean)
@@ -270,7 +270,7 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
     Public Property Sender() As Integer
         Get
             Return CType(Me("Sender"),Integer)

@@ -1,4 +1,5 @@
-﻿Imports System.Drawing
+﻿Imports System.Diagnostics
+Imports System.Drawing
 Imports System.Globalization
 Imports System.Windows.Forms
 
@@ -141,7 +142,7 @@ Module TypeRightMain
         LoadOptions()
         If bSplash Then
             Using _splash As New FrmSplash
-                _splash.Delay = iSplashDelay
+                _splash.Delay = iSplashDelay * 1000
                 _splash.Show()
             End Using
         End If

@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="RegName" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Eric Hindle</Value>
     </Setting>
     <Setting Name="RegCode" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">CGL26PUYVR950JEA</Value>
     </Setting>
     <Setting Name="ButtonWidth" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1200</Value>
+      <Value Profile="(Default)">120</Value>
     </Setting>
     <Setting Name="Transparency" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
@@ -18,7 +18,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ToolBar" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Splash" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -62,7 +62,7 @@
       <Value Profile="(Default)">Data Source=NETWYRKS_6-PC\SQLEXPRESS;Initial Catalog=TypeRight;Persist Security Info=True;User ID=sa;Password=dkk.sql</Value>
     </Setting>
     <Setting Name="Sender" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

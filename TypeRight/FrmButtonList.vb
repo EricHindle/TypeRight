@@ -4,6 +4,8 @@ Imports System.Text
 Imports NbuttonControlLibrary
 Imports System.Runtime.InteropServices
 Imports System.Windows.Forms
+Imports System.Diagnostics
+Imports System.Drawing
 
 Public Class FrmButtonList
 #Region "constants"
@@ -15,9 +17,12 @@ Public Class FrmButtonList
     Private Const strPunctuationList As String = "[]:@~;'#<>?,./|\_+-= "
 #End Region
 #Region "dll"
-    <DllImport("user32.dll", EntryPoint:="keybd_event")>
+    <DllImport("user32.dll")>
     Public Shared Sub keybd_event(ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As UInteger, ByVal dwExtraInfo As UInteger)
     End Sub
+    Public Shared Function GetForegroundWindow() As Long
+    End Function
+
 #End Region
 #Region "private variables"
     Private strKeyText As String
@@ -37,19 +42,22 @@ Public Class FrmButtonList
     Private senderButtonList As New List(Of Nbutton)
     Private buttonBuilder As New NButtonBuilder
     Private spath As String
+    Private bLockClock As Boolean
+    Private bDrag As Boolean
+    Private iDragBtnIndex As Integer
+
 #End Region
 #Region "form control handlers"
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
         InitialiseApplication()
         ' Set window width based on number of columns and button width
-        Me.Width = (iColCt * iButtonWidth) + 120
+        Me.Width = (iColCt * iButtonWidth) + 12
         FillNamesList()
-
         For Each cmbItem As KeyValuePair(Of Integer, String) In cbNames.Items
             Dim key As Integer = cmbItem.Key
             Dim value As String = cmbItem.Value
-            If iCurrGrp <> 0 AndAlso key + -1 = iCurrGrp Then
+            If iCurrGrp <> 0 AndAlso key * -1 = iCurrGrp Then
                 cbNames.SelectedIndex = cbNames.FindString(value)
                 Exit For
             ElseIf iCurrSender <> 0 AndAlso key = iCurrSender Then
@@ -57,42 +65,62 @@ Public Class FrmButtonList
                 Exit For
             End If
         Next
-        grpTop.Visible = isPro
+        GrpTop.Visible = isPro
         mnuGroups.Visible = isPro
         mnuSep3.Visible = isPro
         Me.Opacity = iTransPerc
         GrpBottom.Visible = bToolBar
-        'bNewWidth = False
-        'lResizeActive = False
-        ' Make window stay on top or not depending on options
+
         ImgTack_Click()
         Me.Top = iTop
         Me.Left = iLeft
         iButtonCt = 0
         If isPro Then
-            ButtonPanel.Top = grpTop.Height
+            GroupButtonPanel.Top = GrpTop.Height
         Else
-            ButtonPanel.Top = 0
+            GroupButtonPanel.Top = 0
         End If
-        Me.Text = cbNames.SelectedValue
-        '       iListidx = cboNames.ListIndex
-        DrawButtons()
+        Me.Text = cbNames.SelectedItem.value
+        If iCurrGrp > 0 Then
+            LoadGroupButtons(iCurrGrp)
+            DrawGroupButtons()
+        End If
+        If iCurrSender > 0 Then
+            LoadSenderButtons(iCurrSender)
+            DrawSenderButtons()
+        End If
         lResizeActive = True
-        whiteclock.Visible = True
-        greenclock.Visible = False
-        redclock.Visible = False
+        WhiteClock.Visible = True
+        GreenClock.Visible = False
+        RedClock.Visible = False
         DelayTimer.Enabled = False
-        '      bLockClock = False
+        bLockClock = False
         If bMinimise Then
             Me.WindowState = FormWindowState.Minimized
         Else
             Me.WindowState = FormWindowState.Normal
         End If
         isLoading = False
+        Debug.Print(Me.Height)
+        Debug.Print(GrpTop.Top & " " & GrpTop.Left)
+        Debug.Print(GroupButtonPanel.Top & " " & GroupButtonPanel.Left)
+        Debug.Print(SenderButtonPanel.Top & " " & SenderButtonPanel.Left)
+        Debug.Print(GrpBottom.Top & " " & GrpBottom.Left)
+        Debug.Print(GroupButtonPanel.Controls.Count)
+        For Each _control As Control In GroupButtonPanel.Controls
+            Debug.Print(_control.Name)
+            Debug.Print(_control.Text)
+        Next
+        Debug.Print(SenderButtonPanel.Controls.Count)
+        For Each _control As Control In SenderButtonPanel.Controls
+            Debug.Print(_control.Name)
+            Debug.Print(_control.Text)
+        Next
+
     End Sub
     Private Sub BtnReDraw_Click(sender As Object, e As EventArgs) Handles BtnReDraw.Click
         If cbNames.SelectedIndex > -1 Then
-            ButtonPanel.Controls.Clear()
+            GroupButtonPanel.Controls.Clear()
             iButtonCt = 0
             Dim btnVal As Integer = cbNames.SelectedValue
             If btnVal < 0 Then
@@ -198,8 +226,8 @@ Public Class FrmButtonList
         Next
         If comboItems.Count > 0 Then
             cbNames.DataSource = New BindingSource(comboItems, Nothing)
-            cbNames.DisplayMember = "Values"
-            cbNames.ValueMember = "Keys"
+            cbNames.DisplayMember = "Value"
+            cbNames.ValueMember = "Key"
         End If
     End Sub
     'Private Sub Button_Click(Index As Integer)
@@ -418,110 +446,124 @@ Public Class FrmButtonList
     '    End If
     'End Sub
     Private Sub LoadSenderButtons(sndKey As Integer)
-        '
+        senderButtonList.Clear()
         'Dim sSql As String
         'Dim strBct As String
-        'Dim B As Integer
-        'Dim strButtonTxt As String
-        'Dim strButtonValue As String
+        Dim B As Integer
+        Dim strButtonTxt As String
+        Dim strButtonValue As String
         'Dim xxx As String
         'Dim yyy As String
-        'Dim fname As String
-        'Dim lname As String
-        'Dim fullname As String
-        'Dim add1 As String
-        'Dim add2 As String
-        'Dim town As String
-        'Dim county As String
-        'Dim country As String
-        'Dim pcode As String
-        'Dim fulladdr As String
-        'Dim dtDob As Date
-        'Dim strAge As String
+        Dim fname As String
+        Dim lname As String
+        Dim fullname As String
+        Dim add1 As String
+        Dim add2 As String
+        Dim town As String
+        Dim county As String
+        Dim country As String
+        Dim pcode As String
+        Dim fulladdr As String
+        Dim dtDob As Date
+        Dim strAge As String
         'Dim bBoldIt As Boolean
         'Dim iFldCt As Integer
 
         'bBoldIt = False
-        'fname = ""
-        'lname = ""
-        'fullname = ""
-        'add1 = ""
-        'add2 = ""
-        'town = ""
-        'county = ""
-        'country = ""
-        'pcode = ""
-        'fulladdr = ""
+        fname = ""
+        lname = ""
+        fullname = ""
+        add1 = ""
+        add2 = ""
+        town = ""
+        county = ""
+        country = ""
+        pcode = ""
+        fulladdr = ""
 
 
 
-        'Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(sndKey)
+        Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(sndKey)
+        Dim oTable As New TypeRightDataSet.sendersDataTable
+        fname = oRow.firstname
+        lname = oRow.lastname
+        add1 = If(oRow.Isaddress1Null, "", oRow.address1)
+        add2 = If(oRow.Isaddress2Null, "", oRow.address2)
+        town = If(oRow.IstownNull, "", oRow.town)
+        county = If(oRow.IscountyNull, "", oRow.county)
+        pcode = If(oRow.IspostcodeNull, "", oRow.postcode)
+        dtDob = If(oRow.IsdobNull, Date.MinValue, oRow.dob)
+        fullname = Trim(fname & " " & lname)
+        Dim addBuilder As New StringBuilder
+        If Not String.IsNullOrEmpty(add1) Then
+            addBuilder.Append(add1)
+        End If
+        If Not String.IsNullOrEmpty(add2) Then
+            If addBuilder.Length > 0 Then
+                addBuilder.Append("{Return}")
+            End If
+            addBuilder.Append(add2)
+        End If
+        If Not String.IsNullOrEmpty(town) Then
+            If addBuilder.Length > 0 Then
+                addBuilder.Append("{Return}")
+            End If
+            addBuilder.Append(town)
+        End If
+        If Not String.IsNullOrEmpty(county) Then
+            If addBuilder.Length > 0 Then
+                addBuilder.Append("{Return}")
+            End If
+            addBuilder.Append(county)
+        End If
+        If Not String.IsNullOrEmpty(pcode) Then
+            If addBuilder.Length > 0 Then
+                addBuilder.Append("{Return}")
+            End If
+            addBuilder.Append(pcode)
+        End If
+        fulladdr = addBuilder.ToString
+        strAge = Format(calc_age(dtDob))
 
-        'Dim oTable As New TypeRightDataSet.sendersDataTable
-        'fname = oRow.firstname
-        'lname = oRow.lastname
-        'add1 = If(oRow.Isaddress1Null, "", oRow.address1)
-        'add2 = If(oRow.Isaddress2Null, "", oRow.address2)
-        'town = If(oRow.IstownNull, "", oRow.town)
-        'county = If(oRow.IscountyNull, "", oRow.county)
-        'pcode = If(oRow.IspostcodeNull, "", oRow.postcode)
-        'dtDob = If(oRow.IsdobNull, Date.MinValue, oRow.dob)
-        'fullname = Trim(fname & " " & lname)
-        'Dim addBuilder As New StringBuilder
-        'If Not String.IsNullOrEmpty(add1) Then
-        '    addBuilder.Append(add1)
-        'End If
+        AddButton(1, "Full Name", fullname, strButtonFont, 9.0, fullname, False, False)
+        AddButton(2, "Full Addr", fulladdr, strButtonFont, 9.0, fulladdr.Substring(0, 15), False, False)
 
-        'If Not String.IsNullOrEmpty(add2) Then
-        '    If addBuilder.Length > 0 Then
-        '        addBuilder.Append("{Return}")
-        '    End If
-        '    addBuilder.Append(add2)
-        'End If
-        'If Not String.IsNullOrEmpty(town) Then
-        '    If addBuilder.Length > 0 Then
-        '        addBuilder.Append("{Return}")
-        '    End If
-        '    addBuilder.Append(town)
-        'End If
-        'If Not String.IsNullOrEmpty(county) Then
-        '    If addBuilder.Length > 0 Then
-        '        addBuilder.Append("{Return}")
-        '    End If
-        '    addBuilder.Append(county)
-        'End If
-        'If Not String.IsNullOrEmpty(pcode) Then
-        '    If addBuilder.Length > 0 Then
-        '        addBuilder.Append("{Return}")
-        '    End If
-        '    addBuilder.Append(pcode)
-        'End If
-        'fulladdr = addBuilder.ToString
-        'strAge = Format(calc_age(dtDob))
-        'AddButton(1, fullname, "Full Name", strButtonFont, fullname, bBoldIt)
-        'AddButton(2, fulladdr, "Full Addr", strButtonFont, fulladdr.Substring(0, 15), bBoldIt)
-
-        'iBct = 2
+        iBct = 2
         'B = 1
 
-        'For Each _col As DataColumn In oTable.Columns
-        '    strButtonValue = oRow(_col.ColumnName).value
-        '    strButtonTxt = _col.ColumnName
-        '    strButtonCaption = strButtonTxt.Substring(0, 8)
-        '    strButtonHint = strButtonValue.Substring(0, 15)
-        '    If B + iBct > iButtonCt Then
-        '        iButtonCt = B + iBct
-        '        groupButtonList.Add()
-        '    End If
-        '    AddButton(B + iBct, strButtonValue, strButtonCaption, strButtonFont, strButtonHint, bBoldIt)
+        For Each _col As DataColumn In oTable.Columns
+            strButtonValue = oRow(_col.ColumnName)
+            strButtonTxt = _col.ColumnName
+            strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 8))
+            strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 15))
 
-        '    B += 1
-        'Next
+            AddButton(B + iBct, strButtonCaption, strButtonValue, strButtonFont, 9.0, strButtonHint, False, False)
+
+            B += 1
+        Next
 
 
-        'B = iBct + iFldCt
-        'AddButton(B, strAge, "Age", strButtonFont, strAge, bBoldIt)
-        'iButtonCt = iButtonCt + 1
+
+        AddButton(B + iBct, "Age", strAge, strButtonFont, 9.0, strAge, False, False)
+
+    End Sub
+    Private Sub AddButton(btnSeq As Integer, btnCaption As String, btnValue As String, btnFontName As String, btnSize As Single,
+                          btnHint As String, isBold As Boolean, isItalic As Boolean)
+        If btnValue IsNot Nothing AndAlso Not String.IsNullOrEmpty(btnValue) Then
+            Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(-1, -1, btnSeq, btnCaption, btnHint, btnValue, btnFontName, btnSize, isBold, isItalic, False, Nbutton.DataSource.Sender).Build
+            senderButtonList.Add(_nbutton)
+        End If
+
+    End Sub
+    Private Sub AddButton(btnId As Integer, btnSeq As Integer,
+                          btnCaption As String, btnValue As String, btnFontname As String, btnSize As Single,
+                          btnHint As String, isBold As Boolean, isItalic As Boolean, isEncrypt As Boolean,
+                           iActGrpNo As Integer)
+        If btnValue IsNot Nothing AndAlso Not String.IsNullOrEmpty(btnValue) Then
+            Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(btnId, iActGrpNo, btnSeq, btnCaption, btnHint, btnValue, btnFontname,
+                                                                            btnSize, isBold, isItalic, isEncrypt, Nbutton.DataSource.Group).Build
+            groupButtonList.Add(_nbutton)
+        End If
 
     End Sub
     Public Sub LoadGroupButtons(grpNo As Long)
@@ -533,28 +575,31 @@ Public Class FrmButtonList
                 groupButtonList.Add(_nbutton)
             End If
         Next
-        RemoveNButtons()
-        LoadNButtons()
     End Sub
-    Private Sub LoadNButtons()
-        'Dim iBtnRow As Integer = 0
-        'Dim iBtnCol As Integer = 0
-        'For Each oBtn As Nbutton In groupButtonList
+    Private Sub DrawGroupButtons()
+        lResizeActive = False
+        RemoveGroupButtons()
+        FillButtonPanel(GroupButtonPanel, groupButtonList)
+        SenderButtonPanel.Top = GroupButtonPanel.Top + GroupButtonPanel.Height
+        Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 36
 
-        '    ButtonPanel.Controls.Add(oBtn)
-        '    oBtn.Top = grpTop.Top + grpTop.Height + (iBtnRow * 27)
-        '    oBtn.Left = iBtnCol * iButtonWidth
-        '    oBtn.Size = New Drawing.Size(iButtonWidth, 27)
-        '    Me.Controls.Add(oBtn)
-        '    iBtnRow += 1
-        '    If iBtnRow > iRowCt Then
-        '        iBtnCol += 1
-        '        iBtnRow = 0
-        '    End If
-        'Next
+        GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height
+        lResizeActive = True
     End Sub
-    Private Sub RemoveNButtons()
-        ButtonPanel.Controls.Clear()
+    Private Sub DrawSenderButtons()
+        lResizeActive = False
+        RemoveSenderButtons()
+        SenderButtonPanel.Controls.Clear()
+        FillButtonPanel(SenderButtonPanel, senderButtonList)
+        Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 36
+        GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height
+        lResizeActive = True
+    End Sub
+    Private Sub RemoveGroupButtons()
+        GroupButtonPanel.Controls.Clear()
+    End Sub
+    Private Sub RemoveSenderButtons()
+        SenderButtonPanel.Controls.Clear()
     End Sub
     'Private Sub AddButton(iPos As Integer, strText As String, strCaption As String, strFont As String, strHint As String, bBold As Boolean)
     '    Dim strFontName As String
@@ -656,49 +701,40 @@ Public Class FrmButtonList
     '    End If
     'End Sub
     Friend Sub DrawButtons()
-        Dim iBtnCt As Integer
-        Dim iBtnCol As Integer
-        Dim iBtnRow As Integer
-        Dim iRowCt As Integer
-        Dim iRow As Integer
-        Dim iCol As Integer
-        Dim iMod As Integer
-        Dim iLastRow As Integer
         lResizeActive = False
         ' Size of window
-        Me.Width = (iColCt * iButtonWidth) + 120
-        ' Number of rows
-        iRowCt = Int((iButtonCt + 1) / iColCt)
+        Me.Width = (iColCt * iButtonWidth) + 12
+        DrawGroupButtons()
+        DrawSenderButtons()
+        lResizeActive = True
+    End Sub
+
+    Private Sub FillButtonPanel(ByRef oPanel As Panel, ByRef oList As List(Of Nbutton))
+        iButtonCt = oList.Count
+        oPanel.Width = Me.Width - 12
+        Dim iRowCt As Integer = CInt(iButtonCt / iColCt)
         ' Any left over ? Then add a row
-        iMod = (iButtonCt + 1) Mod iColCt
+        Dim iMod As Integer = (iButtonCt) Mod iColCt
         If iMod > 0 Then
             iRowCt += 1
         End If
-
-        iBtnRow = 0
-        iBtnCol = 0
-        For Each oBtn In groupButtonList
-            oBtn.Top = grpTop.Top + grpTop.Height + (iBtnRow * 27)
-            oBtn.Left = iBtnCol * iButtonWidth
+        oPanel.Height = iRowCt * 27
+        Dim iBtnRow As Integer = 0
+        Dim iBtnCol As Integer = 0
+        For Each oBtn In oList
+            oPanel.Controls.Add(oBtn)
+            oBtn.Top = 1 + (iBtnRow * 27)
+            oBtn.Left = 1 + (iBtnCol * iButtonWidth)
             oBtn.Size = New Drawing.Size(iButtonWidth, 27)
-            Me.Controls.Add(oBtn)
+            oBtn.Visible = True
             iBtnRow += 1
-            If iBtnRow > iRowCt Then
+            If iBtnRow > iRowCt - 1 Then
                 iBtnCol += 1
                 iBtnRow = 0
             End If
         Next
-
-        Me.Height = (iRowCt * (27)) + iTop + 380 + grpTop.Height
-        lResizeActive = True
-        ' Reposition the frame that holds the controls at the bottom of the window
-        GrpBottom.Top = iRowCt * 27
-        GrpBottom.Width = iColCt * iButtonWidth
-        ' Resize the name/group list control
-        cbNames.Width = grpTop.Width - 620 - BtnReDraw.Width
-        BtnReDraw.Left = cbNames.Left + cbNames.Width + 20
-
     End Sub
+
     Private Sub ImgTack_Click()
         If bOnTop Then
             ImgTack.Image = My.Resources.tackdown
@@ -716,6 +752,8 @@ Public Class FrmButtonList
     Private Sub ShowOptions()
         Using _options As New FrmOptions
             _options.ShowDialog()
+
+
         End Using
     End Sub
 #End Region
@@ -733,6 +771,90 @@ Public Class FrmButtonList
         End If
         calc_age = age
     End Function
+
+    Private Sub imgExit_Click(sender As Object, e As EventArgs) Handles imgExit.Click
+        Me.Close()
+    End Sub
+
+    Private Sub GrpTop_Enter(sender As Object, e As EventArgs) Handles GrpTop.Enter
+
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles ImgLock.Click
+        GreenClock.Visible = False
+        WhiteClock.Visible = True
+        RedClock.Visible = False
+        bLockClock = False
+        ImgLock.Visible = False
+    End Sub
+
+    Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
+        Dim lcurhwnd As Long
+        DelayTimer.Enabled = False
+        ProgressBar1.Visible = False
+        lcurhwnd = GetForegroundWindow()
+
+        If bLockClock Then
+            If RedClock.Visible Then
+                RedClock.Visible = False
+                GreenClock.Visible = True
+                If lcurhwnd <> Me.Handle.ToInt32 Then
+                    Post_keys()
+                End If
+            End If
+        Else
+            If RedClock.Visible Then
+                RedClock.Visible = False
+                WhiteClock.Visible = True
+                If lcurhwnd <> Me.Handle.ToInt32 Then
+                    Post_keys()
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub Clock_Click(sender As Object, e As EventArgs) Handles WhiteClock.Click, GreenClock.Click, RedClock.Click
+        If WhiteClock.Visible Then
+            GreenClock.Visible = True
+            WhiteClock.Visible = False
+        Else
+            If GreenClock.Visible Then
+                WhiteClock.Visible = True
+                GreenClock.Visible = False
+                bLockClock = False
+                ImgLock.Visible = False
+            End If
+        End If
+    End Sub
+
+    Private Sub Clock_DoubleClick(sender As Object, e As EventArgs) Handles WhiteClock.DoubleClick, GreenClock.DoubleClick, RedClock.DoubleClick
+        If Not (bLockClock) Then
+            bLockClock = True
+            ImgLock.Visible = True
+        End If
+    End Sub
+
+    Private Sub FrmButtonList_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+
+    End Sub
+
+    Private Sub BtnRmvCol_Click(sender As Object, e As EventArgs) Handles BtnRmvCol.Click
+        If iColCt > 1 Then
+            iColCt -= 1
+            DrawButtons()
+        End If
+        Me.Width = (iColCt * iButtonWidth) + 12
+    End Sub
+
+    Private Sub BtnAddCol_Click(sender As Object, e As EventArgs) Handles BtnAddCol.Click
+        If (groupButtonList.Count / (iColCt + 1) > 1) Or (senderButtonList.Count / (iColCt + 1) > 1) Then
+            iColCt += 1
+            DrawButtons()
+        End If
+        Me.Width = (iColCt * iButtonWidth) + 12
+    End Sub
+
+
 
 #End Region
 End Class
