@@ -235,27 +235,7 @@ Public Class FrmButtonList
     '        Post_keys()
     '    End If
     'End Sub
-    Private Sub Post_keys()
-        ' flip to previous window
-        keybd_event(CByte(Keys.Menu), 0, KEYEVENTF_KEYDOWN, 0)  ' press Alt
-        keybd_event(CByte(Keys.Tab), 0, KEYEVENTF_KEYDOWN, 0)  ' press tab
-        keybd_event(CByte(Keys.Tab), 0, KEYEVENTF_KEYUP, 0)  ' release Tab
-        keybd_event(CByte(Keys.Menu), 0, KEYEVENTF_KEYUP, 0) ' release Alt
-        iStrLen = Len(strKeyText)
-        For iChar = 1 To iStrLen
-            strChar = Mid(strKeyText, iChar, 1)
 
-            If InStr(strPunctuationList, strChar) > 0 Then
-                Punctuation_char()    ' Punctuation mark
-            Else
-                If strChar = "{" Then
-                    Special_char()    ' Special char (eg Return)
-                Else
-                    Single_char()     ' Regular char
-                End If
-            End If
-        Next iChar
-    End Sub
     Private Sub Punctuation_char()
         Dim i As Integer
         ' Is shift required
@@ -327,7 +307,7 @@ Public Class FrmButtonList
         iKbdVal = Asc(strUChar)
         i = InStr(strShiftList, strUChar)
         If i > 0 Then
-            strChar = Mid(strNoShiftList, i, 1)
+            strChar = Mid(strShiftList, i, 1)
             iKbdVal = Asc(strChar)
             keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYDOWN, 0)
             keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
@@ -336,10 +316,10 @@ Public Class FrmButtonList
         Else
             '   if char is uppercase then apply shift
             If strUChar = strChar Then
-                keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYDOWN, 0)
+                keybd_event(System.Windows.Forms.Keys.ShiftKey, 0, KEYEVENTF_KEYDOWN, 0)
                 keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
                 keybd_event(iKbdVal, 0, KEYEVENTF_KEYUP, 0)
-                keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0)
+                keybd_event(System.Windows.Forms.Keys.ShiftKey, 0, KEYEVENTF_KEYUP, 0)
             Else
                 keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
                 keybd_event(iKbdVal, 0, KEYEVENTF_KEYUP, 0)
@@ -424,18 +404,91 @@ Public Class FrmButtonList
 
 
     End Sub
-    'Private Sub cmdText_MouseUp(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
-    '    '   Right Button causes menu to pop up
-    '    If Button = vbRightButton Then
-    '        mnuBtnEdit.Enabled = True
-    '        mnuBtnDelete.Enabled = True
-    '        mnuClipCopy.Enabled = True
-    '        mnuTransferGrp.Enabled = True
+    Private Sub Button_Click(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs)
+        Dim _button As Button = TryCast(eventSender, Button)
+        If _button IsNot Nothing Then
+            Dim _nButton As Nbutton = _button.Parent
+            ' Undo button
+            ' debug.print "cmdText_Click (" & Index & ") (" & bDrag & ")"
+            'If Index = 0 Then
+            '    keybd_event(System.Windows.Forms.Keys.Menu, 0, 0, 0) ' press Alt
+            '    keybd_event(System.Windows.Forms.Keys.Tab, 0, 0, 0) ' press tab
+            '    keybd_event(System.Windows.Forms.Keys.Tab, 0, KEYEVENTF_KEYUP, 0) ' release Tab
+            '    keybd_event(System.Windows.Forms.Keys.Menu, 0, KEYEVENTF_KEYUP, 0) ' release Alt
+            '    keybd_event(System.Windows.Forms.Keys.ControlKey, 0, 0, 0) ' press Control
+            '    keybd_event(System.Windows.Forms.Keys.Z, 0, 0, 0) ' press Z
+            '    keybd_event(System.Windows.Forms.Keys.ControlKey, 0, KEYEVENTF_KEYUP, 0) ' release Control
+            '    Exit Sub
+            'End If
+            ' strKeyText = strButtonText(Index)
+            strKeyText = _nButton.Value
+            If isPro And _nButton.Encrypt Then
+                strKeyText = oNCrypter.DecryptData(strKeyText)
+            End If
 
-    '        iCurrBtn = Index        ' icurrbtn set to button under mouse
-    '        PopupMenu(mnuButtons)
-    '    End If
-    'End Sub
+            'strKeyText = getDBFields(strKeyText)
+
+            'If imgClock(0).Visible = True Then
+            ' flip to previous window
+            '''keybd_event(System.Windows.Forms.Keys.Menu, 0, 0, 0) ' press Alt
+            '''keybd_event(System.Windows.Forms.Keys.Escape, 0, 0, 0) ' press tab
+            '''keybd_event(System.Windows.Forms.Keys.Escape, 0, KEYEVENTF_KEYUP, 0) ' release Tab
+            '''keybd_event(System.Windows.Forms.Keys.Menu, 0, KEYEVENTF_KEYUP, 0) ' release Alt
+            '''post_keys(strKeyText)
+            'Else
+            '    If imgClock(1).Visible = True Then
+            '        imgClock(1).Visible = False
+            '        imgClock(2).Visible = True
+            '        'UPGRADE_WARNING: Timer property DelayTimer.Interval cannot have a value of 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="169ECF4A-1968-402D-B243-16603CC08604"'
+            '        DelayTimer.Interval = iDelay
+            '        ProgressBar1.Maximum = iDelay
+            '        ProgressBar1.Value = iDelay
+            '        ProgressBar1.Visible = True
+            '        DelayTimer.Enabled = True
+            '        secondTimer.Interval = 500
+            '        secondTimer.Enabled = True
+            '    End If
+            'End If
+
+            SendKeys.Send("%{ESC}")
+            SendKeys.Send(strKeyText)
+        End If
+    End Sub
+    Private Sub post_keys(_postText As String)
+        iStrLen = _postText.Length
+        iChar = 0
+        For Each strChar In _postText
+            iChar += 1
+            If InStr(strPunctuationList, strChar) > 0 Then
+                Punctuation_char() ' Punctuation mark
+            ElseIf strChar = "{" Then
+                Special_char() ' Special char (eg Return)
+            Else
+                Single_char() ' Regular char
+            End If
+        Next
+
+        '    imgClock(0).Visible = True
+        '    imgClock(1).Visible = False
+        '    imgClock(2).Visible = False
+
+    End Sub
+
+    Private Function GetValueBetweenBrackets(ByRef sKeyText As String, ByRef iChar As Short) As Object
+        Dim oPos As Short
+        Dim cPos As Short
+
+        oPos = iChar + 1
+        cPos = InStr(oPos, sKeyText, "}")
+        If cPos = 0 Then
+            cPos = Len(sKeyText) + 1
+            iChar = Len(sKeyText)
+        Else
+            iChar = cPos
+        End If
+        GetValueBetweenBrackets = Mid(sKeyText, oPos, cPos - oPos)
+    End Function
+
     Private Sub LoadSenderButtons(sndKey As Integer)
         senderButtonList.Clear()
         'Dim sSql As String
@@ -491,25 +544,25 @@ Public Class FrmButtonList
         End If
         If Not String.IsNullOrEmpty(add2) Then
             If addBuilder.Length > 0 Then
-                addBuilder.Append("{Return}")
+                addBuilder.Append("{ENTER}")
             End If
             addBuilder.Append(add2)
         End If
         If Not String.IsNullOrEmpty(town) Then
             If addBuilder.Length > 0 Then
-                addBuilder.Append("{Return}")
+                addBuilder.Append("{ENTER}")
             End If
             addBuilder.Append(town)
         End If
         If Not String.IsNullOrEmpty(county) Then
             If addBuilder.Length > 0 Then
-                addBuilder.Append("{Return}")
+                addBuilder.Append("{ENTER}")
             End If
             addBuilder.Append(county)
         End If
         If Not String.IsNullOrEmpty(pcode) Then
             If addBuilder.Length > 0 Then
-                addBuilder.Append("{Return}")
+                addBuilder.Append("{ENTER}")
             End If
             addBuilder.Append(pcode)
         End If
@@ -711,28 +764,34 @@ Public Class FrmButtonList
         Dim iBtnRow As Integer = 0
         Dim iBtnCol As Integer = 0
         For Each oBtn In oList
+            AddHandler oBtn.Click, AddressOf Button_Click
             oPanel.Controls.Add(oBtn)
+
             oBtn.Top = 1 + (iBtnRow * 27)
             oBtn.Left = 1 + (iBtnCol * iButtonWidth)
             oBtn.Size = New Drawing.Size(iButtonWidth, 27)
             oBtn.Visible = True
             oBtn.ContextMenuStrip = mnuButtons
+            oBtn.Name = oPanel.Name & CStr(iBtnRow) & CStr(iBtnCol)
             iBtnRow += 1
             If iBtnRow > iRowCt - 2 Then
                 If iBtnCol > iMod - 1 And iMod > 0 Then
-                    Debug.Print("yes")
                     iBtnCol += 1
                     iBtnRow = 0
                     Continue For
                 Else
-                    Debug.Print("no")
                     If iBtnRow > iRowCt - 1 Then
                         iBtnCol += 1
                         iBtnRow = 0
                     End If
                 End If
             End If
+
         Next
+        For Each _btn As Nbutton In oPanel.Controls
+            AddHandler _btn.Button1.Click, AddressOf Button_Click
+        Next
+
     End Sub
 
     Private Sub ImgTack_Click()
@@ -794,30 +853,30 @@ Public Class FrmButtonList
         ImgLock.Visible = False
     End Sub
 
-    Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
-        Dim lcurhwnd As Long
-        DelayTimer.Enabled = False
-        ProgressBar1.Visible = False
-        lcurhwnd = GetForegroundWindow()
+    'Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
+    '    Dim lcurhwnd As Long
+    '    DelayTimer.Enabled = False
+    '    ProgressBar1.Visible = False
+    '    lcurhwnd = GetForegroundWindow()
 
-        If bLockClock Then
-            If RedClock.Visible Then
-                RedClock.Visible = False
-                GreenClock.Visible = True
-                If lcurhwnd <> Me.Handle.ToInt32 Then
-                    Post_keys()
-                End If
-            End If
-        Else
-            If RedClock.Visible Then
-                RedClock.Visible = False
-                WhiteClock.Visible = True
-                If lcurhwnd <> Me.Handle.ToInt32 Then
-                    Post_keys()
-                End If
-            End If
-        End If
-    End Sub
+    '    If bLockClock Then
+    '        If RedClock.Visible Then
+    '            RedClock.Visible = False
+    '            GreenClock.Visible = True
+    '            If lcurhwnd <> Me.Handle.ToInt32 Then
+    '                Post_keys()
+    '            End If
+    '        End If
+    '    Else
+    '        If RedClock.Visible Then
+    '            RedClock.Visible = False
+    '            WhiteClock.Visible = True
+    '            If lcurhwnd <> Me.Handle.ToInt32 Then
+    '                Post_keys()
+    '            End If
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub Clock_Click(sender As Object, e As EventArgs) Handles WhiteClock.Click, GreenClock.Click, RedClock.Click
         If WhiteClock.Visible Then
@@ -855,8 +914,77 @@ Public Class FrmButtonList
         Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
     End Sub
 
-    Private Sub mnuButtons_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles mnuButtons.Opening
+    Private Function GetDBFields(ByRef sKeyText As String) As String
+        'Dim iFldCt As Short
+        'Dim iFldNo As Short
 
+        'Dim iActGrpNo As Short
+        'Dim sSql As String
+        'Dim iStrLen As Short
+        'Dim iCPos As Short
+        'Dim sChar As String
+        'Dim sNewText As String
+        'Dim sFieldName As String
+        'Dim bFieldFound As Boolean
+        'Dim sFieldValue As String
+
+        'iActGrpNo = VB6.GetItemData(cboNames, cboNames.SelectedIndex)
+
+        ''  Set db2 = New ADODB.Connection
+        'rsSender2 = New ADODB.Recordset
+        ''  db2.Open sDbName
+        'sSql = "SELECT * from " & sSenderTable & " WHERE AddressId = " & VB6.Format(iActGrpNo)
+        'rsSender2.CursorType = ADODB.CursorTypeEnum.adOpenForwardOnly
+        'rsSender2.LockType = ADODB.LockTypeEnum.adLockReadOnly
+        'rsSender2.Open(sSql, Db,  ,  , ADODB.CommandTypeEnum.adCmdText)
+
+        'iFldCt = rsSender2.Fields.Count
+
+        'iStrLen = Len(sKeyText)
+
+        'For iCPos = 1 To iStrLen
+        '    sChar = Mid(sKeyText, iCPos, 1)
+        '    If sChar = "{" Then
+        '        'UPGRADE_WARNING: Couldn't resolve default property of object GetValueBetweenBrackets(). Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6A50421D-15FE-4896-8A1B-2EC21E9037B2"'
+        '        sFieldName = GetValueBetweenBrackets(sKeyText, iCPos)
+        '        bFieldFound = False
+        '        For iFldNo = 1 To iFldCt - 1
+        '            If rsSender2.Fields(iFldNo).Name = sFieldName Then
+        '                bFieldFound = True
+        '                Exit For
+        '            End If
+        '        Next iFldNo
+        '        If bFieldFound Then
+        '            sFieldValue = rsSender2.Fields(iFldNo).Value
+        '            Select Case LCase(rsSender2.Fields(iFldNo).Name)
+        '                Case "passwd"
+        '                    sFieldValue = oNCrypter.Decrypt(sFieldValue, APP_STRING, False, NetWYrks.frezCryptoEncryptionType.frezBlockEncryption)
+        '                Case "secretword"
+        '                    sFieldValue = oNCrypter.Decrypt(sFieldValue, APP_STRING, False, NetWYrks.frezCryptoEncryptionType.frezBlockEncryption)
+        '            End Select
+        '            sNewText = sNewText & sFieldValue
+        '        Else
+        '            sNewText = sNewText & "{" & sFieldName & "}"
+        '        End If
+
+        '    Else
+        '        sNewText = sNewText & sChar
+        '    End If
+        'Next iCPos
+
+        'GetDBFields = sNewText
+        'rsSender2.Close()
+        '' db2.Close
+        ''UPGRADE_NOTE: Object rsSender2 may not be destroyed until it is garbage collected. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6E35BFF6-CD74-4B09-9689-3E1A43DF8969"'
+        'rsSender2 = Nothing
+        '' Set db2 = Nothing
+
+    End Function
+
+    Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        My.Settings.Top = Me.Top
+        My.Settings.Left = Me.Left
+        My.Settings.Save()
     End Sub
 
 

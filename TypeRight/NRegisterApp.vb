@@ -21,7 +21,6 @@ Public Class NRegisterApp
             lChar = CLng("&H" & Mid(strCodedString, (lCount * 2) - 1, 2)) Mod 32
             strRegCode &= Mid(VALID_CHARS, lChar + 1, 1)
         Next
-        Debug.Print(strRegCode)
         My.Settings.RegCode = strRegCode
         My.Settings.Save()
 

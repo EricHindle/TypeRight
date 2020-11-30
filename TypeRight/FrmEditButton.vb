@@ -33,7 +33,7 @@ Public Class FrmEditButton
             LblBtnSeq.Text = CStr(iSeq)
             LblBtnGrp.Text = btnGrpRow.groupname
             TxtHint.Text = _button.Hint
-            TxtString.Text = If(chkEncrypt.Checked, oNCrypter.DecryptData(_button.Value), _button.Value)
+            TxtValue.Text = If(chkEncrypt.Checked, oNCrypter.DecryptData(_button.Value), _button.Value)
             txtCaption.Text = _button.Caption
             BtnFont.Font = _button.Font
         Else
@@ -53,9 +53,9 @@ Public Class FrmEditButton
     End Sub
     Private Sub CbDBValue_Click()
         Dim pos As Long
-        pos = TxtString.SelectionStart
-        TxtString.Text = TxtString.Text.Substring(0, pos) + "{" + Trim(CbDbValue.Text) + "}" + TxtString.Text.Substring(pos + 1)
-        TxtString.SelectionStart = pos + Trim(CbDbValue.Text).Length + 2
+        pos = TxtValue.SelectionStart
+        TxtValue.Text = TxtValue.Text.Substring(0, pos) + "{" + Trim(CbDbValue.Text) + "}" + TxtValue.Text.Substring(pos + 1)
+        TxtValue.SelectionStart = pos + Trim(CbDbValue.Text).Length + 2
     End Sub
     Private Sub BtnFont_Click(sender As Object, e As EventArgs) Handles BtnFont.Click
         ' Set Cancel to True
@@ -76,40 +76,56 @@ Public Class FrmEditButton
 
         Dim isEncrypted As Boolean
         Dim strNewText As String
-
-        If isPro And chkEncrypt.Checked Then
-            isEncrypted = True
-            strNewText = oNCrypter.EncryptData(TxtString.Text)
-        Else
-            isEncrypted = False
-            strNewText = TxtString.Text
-        End If
-        If bUserDefinedGroup Then
-            '    iBtnGrp = FrmButtonList.cbNames.ItemData(iListidx) * -1
-            '    iOffset = 0
-        Else
-            '    iBtnGrp = 0
-            '    iOffset = iDbBtnCt
-        End If
+        If isValidated() Then
 
 
-        With _button
-            .Caption = txtCaption.Text
-            .Hint = TxtHint.Text
-            .FontName = BtnFont.Font.Name
-            .FontSize = BtnFont.Font.Size
-            .FontBold = BtnFont.Font.Bold
-            .FontItalic = BtnFont.Font.Italic
-            .Value = strNewText
-            .Encrypt = isEncrypted
-        End With
-        Dim oBtn As TypeRightDataSet.buttonRow = GetButtonByGroupAndSeq(iGrp, iSeq)
-        If oBtn IsNot Nothing Then
-            UpdateButton(oBtn.buttonGroup, oBtn.buttonSeq, txtCaption.Text, TxtHint.Text, strNewText, BtnFont.Font.Name, BtnFont.Font.Bold, BtnFont.Font.Size, BtnFont.Font.Italic, isEncrypted, oBtn.buttonId)
+
+
+            If isPro And chkEncrypt.Checked Then
+                isEncrypted = True
+                strNewText = oNCrypter.EncryptData(TxtValue.Text)
+            Else
+                isEncrypted = False
+                strNewText = TxtValue.Text
+            End If
+            If bUserDefinedGroup Then
+                '    iBtnGrp = FrmButtonList.cbNames.ItemData(iListidx) * -1
+                '    iOffset = 0
+            Else
+                '    iBtnGrp = 0
+                '    iOffset = iDbBtnCt
+            End If
+
+
+            With _button
+                .Caption = txtCaption.Text
+                .Hint = TxtHint.Text
+                .FontName = BtnFont.Font.Name
+                .FontSize = BtnFont.Font.Size
+                .FontBold = BtnFont.Font.Bold
+                .FontItalic = BtnFont.Font.Italic
+                .Value = strNewText
+                .Encrypt = isEncrypted
+            End With
+            Dim oBtn As TypeRightDataSet.buttonRow = GetButtonByGroupAndSeq(iGrp, iSeq)
+            If oBtn IsNot Nothing Then
+                UpdateButton(oBtn.buttonGroup, oBtn.buttonSeq, txtCaption.Text, TxtHint.Text, strNewText, BtnFont.Font.Name, BtnFont.Font.Bold, BtnFont.Font.Size, BtnFont.Font.Italic, isEncrypted, oBtn.buttonId)
+            End If
+            Me.Close()
         End If
-        Me.Close()
     End Sub
-
+    Private Function isValidated() As Boolean
+        Dim isOK As Boolean = True
+        If txtCaption.TextLength = 0 Then
+            LblErrs.Text &= "Missing Caption | "
+            isOK = False
+        End If
+        If TxtValue.TextLength = 0 Then
+            LblErrs.Text &= "Missing Value | "
+            isOK = False
+        End If
+        Return isOK
+    End Function
     Private Sub BtnSpecialKey1_Click(sender As Object, e As EventArgs) Handles BtnOpenCurlyBracket.Click,
                                                                                 BtnAlt.Click,
                                                                                 BtnBackspace.Click,
@@ -135,7 +151,7 @@ Public Class FrmEditButton
             Case "BtnAlt"
                 keyText = "Alt"
             Case "BtnBackspace"
-                keyText = "Backspace"
+                keyText = "BACKSPACE"
             Case "BtnBacktab"
                 keyText = "BackTab"
             Case "BtnCloseCurlyBracket"
@@ -143,39 +159,39 @@ Public Class FrmEditButton
             Case "BtnCtrl"
                 keyText = "Ctrl"
             Case "BtnDelete"
-                keyText = "Delete"
+                keyText = "DELETE"
             Case "BtnDownArrow"
-                keyText = "Down"
+                keyText = "DOWN"
             Case "BtnEnd"
-                keyText = "End"
+                keyText = "END"
             Case "BtnHome"
-                keyText = "Home"
+                keyText = "HOME"
             Case "BtnInsert"
-                keyText = "Insert"
+                keyText = "INSERT"
             Case "BtnLeftArrow"
-                keyText = "Left"
+                keyText = "LEFT"
             Case "BtnOpenCurlyBracket"
                 keyText = "{"
             Case "BtnPageDown"
-                keyText = "PgDn"
+                keyText = "PGDN"
             Case "BtnPageUp"
-                keyText = "PgUp"
+                keyText = "PGUP"
             Case "BtnReturn"
-                keyText = "Return"
+                keyText = "ENTER"
             Case "BtnRightArrow"
-                keyText = "Right"
+                keyText = "RIGHT"
             Case "BtnTab"
-                keyText = "Tab"
+                keyText = "TAB"
             Case "BtnUpArrow"
-                keyText = "Up"
+                keyText = "UP"
         End Select
         Dim pos As Long
-        pos = TxtString.SelectionStart
-        TxtString.Text = TxtString.Text.Substring(0, pos) + "{" + keyText + "}" + Mid(TxtString.Text, pos + 1)
-        TxtString.SelectionStart = pos + Len(keyText) + 2
+        pos = TxtValue.SelectionStart
+        TxtValue.Text = TxtValue.Text.Substring(0, pos) + "{" + keyText + "}" + Mid(TxtValue.Text, pos + 1)
+        TxtValue.SelectionStart = pos + Len(keyText) + 2
 
     End Sub
-    Private Sub TxtString_TextChanged(sender As Object, e As EventArgs) Handles TxtString.TextChanged
+    Private Sub TxtString_TextChanged(sender As Object, e As EventArgs) Handles TxtValue.TextChanged
 
         Dim iStrLen As Long
         Dim prevText As String
@@ -183,17 +199,17 @@ Public Class FrmEditButton
         Dim iChar As Integer
         Dim specChar As String
 
-        iStrLen = TxtString.TextLength
+        iStrLen = TxtValue.TextLength
         prevText = ""
         For iChar = 1 To iStrLen
-            strChar = Mid(TxtString.Text, iChar, 1)
+            strChar = Mid(TxtValue.Text, iChar, 1)
 
             If strChar = "{" Then
                 specChar = ""
                 ' special_char    ' Special char (eg Return)
                 While strChar <> "}" And iChar < iStrLen
                     iChar += 1
-                    strChar = Mid(TxtString.Text, iChar, 1)
+                    strChar = Mid(TxtValue.Text, iChar, 1)
                     If strChar <> "}" Then
                         specChar &= strChar
                     End If

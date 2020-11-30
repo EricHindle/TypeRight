@@ -158,6 +158,8 @@ Public Class Nbutton
             m_Encrypt = value
         End Set
     End Property
+
+
     Public Sub New()
         Me.InitializeComponent()
         m_Id = -1

@@ -50,7 +50,7 @@ Partial Class FrmEditButton
         Me.SendersBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
         Me.TxtPreview = New System.Windows.Forms.RichTextBox()
-        Me.TxtString = New System.Windows.Forms.RichTextBox()
+        Me.TxtValue = New System.Windows.Forms.RichTextBox()
         Me.mnuEdit = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -79,6 +79,7 @@ Partial Class FrmEditButton
         Me.SendersTableAdapter = New TypeRight.TypeRightDataSetTableAdapters.sendersTableAdapter()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.LblErrs = New System.Windows.Forms.Label()
         Me.grpOpts.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.SendersBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -378,15 +379,15 @@ Partial Class FrmEditButton
         Me.TxtPreview.TabIndex = 5
         Me.TxtPreview.Text = ""
         '
-        'TxtString
+        'TxtValue
         '
-        Me.TxtString.ContextMenuStrip = Me.mnuEdit
-        Me.TxtString.Location = New System.Drawing.Point(14, 139)
-        Me.TxtString.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
-        Me.TxtString.Name = "TxtString"
-        Me.TxtString.Size = New System.Drawing.Size(390, 136)
-        Me.TxtString.TabIndex = 4
-        Me.TxtString.Text = ""
+        Me.TxtValue.ContextMenuStrip = Me.mnuEdit
+        Me.TxtValue.Location = New System.Drawing.Point(14, 139)
+        Me.TxtValue.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
+        Me.TxtValue.Name = "TxtValue"
+        Me.TxtValue.Size = New System.Drawing.Size(390, 136)
+        Me.TxtValue.TabIndex = 4
+        Me.TxtValue.Text = ""
         '
         'mnuEdit
         '
@@ -601,12 +602,24 @@ Partial Class FrmEditButton
         Me.Label6.TabIndex = 16
         Me.Label6.Text = "Button Sequence:"
         '
+        'LblErrs
+        '
+        Me.LblErrs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LblErrs.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblErrs.ForeColor = System.Drawing.Color.Crimson
+        Me.LblErrs.Location = New System.Drawing.Point(17, 451)
+        Me.LblErrs.Name = "LblErrs"
+        Me.LblErrs.Size = New System.Drawing.Size(387, 32)
+        Me.LblErrs.TabIndex = 17
+        Me.LblErrs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'FrmEditButton
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnCancel
         Me.ClientSize = New System.Drawing.Size(880, 566)
+        Me.Controls.Add(Me.LblErrs)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtCaption)
@@ -620,7 +633,7 @@ Partial Class FrmEditButton
         Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.TxtHint)
         Me.Controls.Add(Me.BtnFont)
-        Me.Controls.Add(Me.TxtString)
+        Me.Controls.Add(Me.TxtValue)
         Me.Controls.Add(Me.TxtPreview)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.grpOpts)
@@ -665,7 +678,7 @@ Partial Class FrmEditButton
     Friend WithEvents BtnOpenCurlyBracket As Windows.Forms.Button
     Friend WithEvents CbDbValue As Windows.Forms.ComboBox
     Friend WithEvents TxtPreview As Windows.Forms.RichTextBox
-    Friend WithEvents TxtString As Windows.Forms.RichTextBox
+    Friend WithEvents TxtValue As Windows.Forms.RichTextBox
     Friend WithEvents FontDialog1 As Windows.Forms.FontDialog
     Friend WithEvents BtnFont As Windows.Forms.Button
     Friend WithEvents TxtHint As Windows.Forms.TextBox
@@ -696,4 +709,5 @@ Partial Class FrmEditButton
     Friend WithEvents SendersTableAdapter As TypeRightDataSetTableAdapters.sendersTableAdapter
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents Label6 As Windows.Forms.Label
+    Friend WithEvents LblErrs As Windows.Forms.Label
 End Class

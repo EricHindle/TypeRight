@@ -168,6 +168,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="TypeRightDataSet.vb">
+      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="TypeRightMain.vb" />
   </ItemGroup>
   <ItemGroup>

@@ -48,6 +48,6 @@ Partial Class Nbutton
 
     End Sub
 
-    Friend WithEvents Button1 As Button
+    Public WithEvents Button1 As Button
     Friend WithEvents ToolTip1 As ToolTip
 End Class
