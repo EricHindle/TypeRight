@@ -9,22 +9,9 @@ Imports System.Drawing
 
 Public Class FrmButtonList
 #Region "constants"
-    Const KEYEVENTF_EXTENDEDKEY = &H1
-    Const KEYEVENTF_KEYUP = &H2
-    Const KEYEVENTF_KEYDOWN = &H0
-    Private Const strShiftList As String = "!" + Chr(34) + "£$%^&*(){}@:~<>?_+"
-    Private Const strNoShiftList As String = "1234567890"
-    Private Const strPunctuationList As String = "[]:@~;'#<>?,./|\_+-= "
     Private FRAME_WIDTH = 18
 #End Region
-#Region "dll"
-    <DllImport("user32.dll")>
-    Public Shared Sub keybd_event(ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As UInteger, ByVal dwExtraInfo As UInteger)
-    End Sub
-    Public Shared Function GetForegroundWindow() As Long
-    End Function
 
-#End Region
 #Region "private variables"
     Private strKeyText As String
     Private iChar As Integer
@@ -73,7 +60,6 @@ Public Class FrmButtonList
         mnuSep3.Visible = isPro
         Me.Opacity = iTransPerc / 100
         GrpBottom.Visible = bToolBar
-
         ImgTack_Click()
         Me.Top = iTop
         Me.Left = iLeft
@@ -126,10 +112,10 @@ Public Class FrmButtonList
         ImgTack_Click()
         SaveOptions()
     End Sub
-    Private Sub mnuOptions1_Click(sender As Object, e As EventArgs) Handles mnuOptions1.Click
+    Private Sub MnuOptions1_Click(sender As Object, e As EventArgs) Handles mnuOptions1.Click
         ShowOptions()
     End Sub
-    Private Sub mnuOptions_Click(sender As Object, e As EventArgs) Handles mnuOptions.Click
+    Private Sub MnuOptions_Click(sender As Object, e As EventArgs) Handles mnuOptions.Click
         ShowOptions()
     End Sub
     Private Sub ImgOptions_Click(sender As Object, e As EventArgs) Handles imgOptions.Click
@@ -221,206 +207,10 @@ Public Class FrmButtonList
             cbNames.ValueMember = "Key"
         End If
     End Sub
-    'Private Sub Button_Click(Index As Integer)
-    '    If Index = 0 Then
-    '        keybd_event(CByte(Keys.Menu), 0, KEYEVENTF_KEYDOWN, 0) ' press Alt
-    '        keybd_event(CByte(Keys.Tab), 0, KEYEVENTF_KEYDOWN, 0) ' press tab
-    '        keybd_event(CByte(Keys.Tab), 0, KEYEVENTF_KEYUP, 0) ' release Tab
-    '        keybd_event(CByte(Keys.Menu), 0, KEYEVENTF_KEYUP, 0) ' release Alt
-    '        keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYDOWN, 0)  ' press Control
-    '        keybd_event(CByte(Keys.Z), 0, KEYEVENTF_KEYDOWN, 0) ' press Z
-    '        keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0) ' release Control
-    '    Else
-    '        strKeyText = strButtonText(Index)
-    '        Post_keys()
-    '    End If
-    'End Sub
-
-    Private Sub Punctuation_char()
-        Dim i As Integer
-        ' Is shift required
-        i = InStr(strShiftList, strChar)
-        Select Case strChar
-            Case "["
-                iKbdVal = VK_OEM_4
-            Case "]"
-                iKbdVal = VK_OEM_6
-            Case ":"
-                iKbdVal = VK_OEM_1
-            Case "¬"
-                iKbdVal = VK_OEM_8
-            Case "~"
-                iKbdVal = VK_OEM_7
-            Case ";"
-                iKbdVal = VK_OEM_1
-            Case "'"
-                iKbdVal = VK_OEM_8
-            Case "#"
-                iKbdVal = VK_OEM_7
-            Case "<"
-                iKbdVal = VK_OEM_COMMA
-            Case ">"
-                iKbdVal = VK_OEM_PERIOD
-            Case "?"
-                iKbdVal = VK_OEM_2
-            Case ","
-                iKbdVal = VK_OEM_COMMA
-            Case "."
-                iKbdVal = VK_OEM_PERIOD
-            Case "/"
-                iKbdVal = VK_OEM_2
-            Case "|"
-                iKbdVal = VK_OEM_5
-            Case "\"
-                iKbdVal = VK_OEM_5
-            Case "_"
-                iKbdVal = VK_OEM_MINUS
-            Case "+"
-                iKbdVal = VK_OEM_PLUS
-            Case "-"
-                iKbdVal = VK_OEM_MINUS
-            Case "="
-                iKbdVal = VK_OEM_PLUS
-            Case " "
-                iKbdVal = VK_SPACE
-            Case "@"
-                iKbdVal = 192
-        End Select
-
-        If i > 0 Then
-            keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYDOWN, 0)
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYUP, 0)
-            keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0)
-        Else
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYUP, 0)
-        End If
-    End Sub
-    Private Sub Single_char()
-        Dim i As Integer
-        strUChar = UCase(strChar)
-        If IsNumeric(strChar) Then
-            strChar = ""
-        End If
-        ' find char in shift list and apply shift to unshifted character
-        iKbdVal = Asc(strUChar)
-        i = InStr(strShiftList, strUChar)
-        If i > 0 Then
-            strChar = Mid(strShiftList, i, 1)
-            iKbdVal = Asc(strChar)
-            keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYDOWN, 0)
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYUP, 0)
-            keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0)
-        Else
-            '   if char is uppercase then apply shift
-            If strUChar = strChar Then
-                keybd_event(System.Windows.Forms.Keys.ShiftKey, 0, KEYEVENTF_KEYDOWN, 0)
-                keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
-                keybd_event(iKbdVal, 0, KEYEVENTF_KEYUP, 0)
-                keybd_event(System.Windows.Forms.Keys.ShiftKey, 0, KEYEVENTF_KEYUP, 0)
-            Else
-                keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
-                keybd_event(iKbdVal, 0, KEYEVENTF_KEYUP, 0)
-            End If
-        End If
-    End Sub
-    Private Sub Special_char()
-        Dim strSpecial As String
-        Dim oPos As Integer
-        Dim cPos As Integer
-        Dim lShift As Boolean
-        Dim strBracketTest As String
-
-        lShift = False
-        strSpecial = ""
-        strBracketTest = Mid(strKeyText, iChar, 3)
-
-        Select Case strBracketTest
-            Case "{{}"
-                lShift = True
-                iKbdVal = VK_OEM_4
-                iChar = iChar + 2
-            Case "{}}"
-                lShift = True
-                iKbdVal = VK_OEM_6
-                iChar = iChar + 2
-            Case Else
-                oPos = iChar + 1
-                cPos = InStr(oPos, strKeyText, "}")
-                If cPos = 0 Then
-                    cPos = Len(strKeyText) + 1
-                    iChar = Len(strKeyText)
-                Else
-                    iChar = cPos
-                End If
-                strSpecial = Mid(strKeyText, oPos, cPos - oPos)
-                Select Case strSpecial
-        '        Case "."
-        '            iKbdVal = vbKeyDecimal
-                    Case "Return"
-                        iKbdVal = Keys.Return
-                    Case "BackTab"
-                        lShift = True
-                        iKbdVal = Keys.Tab
-                    Case "Tab"
-                        iKbdVal = Keys.Tab
-                    Case "Left"
-                        iKbdVal = Keys.Left
-                    Case "Right"
-                        iKbdVal = Keys.Right
-                    Case "Up"
-                        iKbdVal = Keys.Up
-                    Case "Down"
-                        iKbdVal = Keys.Down
-        '        Case "Space"
-        '            iKbdVal = vbKeySpace
-                    Case "PgUp"
-                        iKbdVal = Keys.PageUp
-                    Case "PgDn"
-                        iKbdVal = Keys.PageDown
-                    Case "Insert"
-                        iKbdVal = VK_INSERT
-                    Case "Delete"
-                        iKbdVal = VK_DELETE
-                    Case "Home"
-                        iKbdVal = VK_HOME
-                    Case "End"
-                        iKbdVal = VK_END
-                    Case Else
-                        iKbdVal = Keys.Multiply
-                End Select
-        End Select
-        If lShift Then
-            keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYDOWN, 0)
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYUP, 0)
-            keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0)
-        Else
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYDOWN, 0)
-            keybd_event(iKbdVal, 0, KEYEVENTF_KEYUP, 0)
-        End If
-
-
-    End Sub
     Private Sub Button_Click(ByVal eventSender As System.Object, ByVal eventArgs As System.EventArgs)
         Dim _button As Button = TryCast(eventSender, Button)
         If _button IsNot Nothing Then
             Dim _nButton As Nbutton = _button.Parent
-            ' Undo button
-            ' debug.print "cmdText_Click (" & Index & ") (" & bDrag & ")"
-            'If Index = 0 Then
-            '    keybd_event(System.Windows.Forms.Keys.Menu, 0, 0, 0) ' press Alt
-            '    keybd_event(System.Windows.Forms.Keys.Tab, 0, 0, 0) ' press tab
-            '    keybd_event(System.Windows.Forms.Keys.Tab, 0, KEYEVENTF_KEYUP, 0) ' release Tab
-            '    keybd_event(System.Windows.Forms.Keys.Menu, 0, KEYEVENTF_KEYUP, 0) ' release Alt
-            '    keybd_event(System.Windows.Forms.Keys.ControlKey, 0, 0, 0) ' press Control
-            '    keybd_event(System.Windows.Forms.Keys.Z, 0, 0, 0) ' press Z
-            '    keybd_event(System.Windows.Forms.Keys.ControlKey, 0, KEYEVENTF_KEYUP, 0) ' release Control
-            '    Exit Sub
-            'End If
-            ' strKeyText = strButtonText(Index)
             strKeyText = _nButton.Value
             If isPro And _nButton.Encrypt Then
                 strKeyText = oNCrypter.DecryptData(strKeyText)
@@ -454,41 +244,6 @@ Public Class FrmButtonList
             SendKeys.Send(strKeyText)
         End If
     End Sub
-    Private Sub post_keys(_postText As String)
-        iStrLen = _postText.Length
-        iChar = 0
-        For Each strChar In _postText
-            iChar += 1
-            If InStr(strPunctuationList, strChar) > 0 Then
-                Punctuation_char() ' Punctuation mark
-            ElseIf strChar = "{" Then
-                Special_char() ' Special char (eg Return)
-            Else
-                Single_char() ' Regular char
-            End If
-        Next
-
-        '    imgClock(0).Visible = True
-        '    imgClock(1).Visible = False
-        '    imgClock(2).Visible = False
-
-    End Sub
-
-    Private Function GetValueBetweenBrackets(ByRef sKeyText As String, ByRef iChar As Short) As Object
-        Dim oPos As Short
-        Dim cPos As Short
-
-        oPos = iChar + 1
-        cPos = InStr(oPos, sKeyText, "}")
-        If cPos = 0 Then
-            cPos = Len(sKeyText) + 1
-            iChar = Len(sKeyText)
-        Else
-            iChar = cPos
-        End If
-        GetValueBetweenBrackets = Mid(sKeyText, oPos, cPos - oPos)
-    End Function
-
     Private Sub LoadSenderButtons(sndKey As Integer)
         senderButtonList.Clear()
         'Dim sSql As String
@@ -602,14 +357,19 @@ Public Class FrmButtonList
                           btnHint As String, isBold As Boolean, isItalic As Boolean, isEncrypt As Boolean,
                            iActGrpNo As Integer)
         If btnValue IsNot Nothing AndAlso Not String.IsNullOrEmpty(btnValue) Then
-            Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(btnId, iActGrpNo, btnSeq, btnCaption, btnHint, btnValue, btnFontname,
-                                                                            btnSize, isBold, isItalic, isEncrypt, Nbutton.DataSource.Group).Build
+            Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(btnId, iActGrpNo, btnSeq,
+                                                                            btnCaption, btnHint, btnValue,
+                                                                            btnFontname, btnSize, isBold,
+                                                                            isItalic, isEncrypt, Nbutton.DataSource.Group).Build
             groupButtonList.Add(_nbutton)
         End If
 
     End Sub
     Public Sub LoadGroupButtons(grpNo As Long)
         groupButtonList.Clear()
+        Dim _nbb As New NButtonBuilder
+        Dim undoButton As Nbutton = _nbb.StartingWith(0, grpNo, 0, "Undo", "", "^z", "Tahoma", 10, False, False, False, Nbutton.DataSource.Undefined).Build
+        groupButtonList.Add(undoButton)
         Dim btnTable As TypeRightDataSet.buttonDataTable = GetButtonsByGroup(grpNo)
         For Each btnRow As TypeRightDataSet.buttonRow In btnTable.Rows
             If Not btnRow.IsbuttonValueNull AndAlso Not String.IsNullOrEmpty(btnRow.buttonValue) Then
@@ -643,105 +403,6 @@ Public Class FrmButtonList
     Private Sub RemoveSenderButtons()
         SenderButtonPanel.Controls.Clear()
     End Sub
-    'Private Sub AddButton(iPos As Integer, strText As String, strCaption As String, strFont As String, strHint As String, bBold As Boolean)
-    '    Dim strFontName As String
-    '    Dim iFontSize As Long
-    '    Dim bFontItalic As Boolean
-    '    Dim pos1 As Long
-    '    Dim pos2 As Long
-
-    '    If cmdText.Count < iPos + 1 Then
-    '        Load(cmdText(iPos))
-    '    End If
-
-    '    strButtonText(iPos) = strText
-    '    cmdText(iPos).Caption = strCaption
-    '    cmdText(iPos).FontBold = bBold
-    '    cmdText(iPos).ToolTipText = strHint
-    '    If strFont <> "" Then
-    '        pos1 = InStr(strFont, "\")
-    '        pos2 = InStr(pos1 + 1, strFont, "\")
-    '        strFontName = Left(strFont, InStr(strFont, "\") - 1)
-    '        iFontSize = CLng(Mid(strFont, pos1 + 1, pos2 - pos1 - 1))
-    '        If Right(strFont, 2) = "\I" Then
-    '            bFontItalic = True
-    '        End If
-    '        cmdText(iPos).FontName = strFontName
-    '        cmdText(iPos).FontSize = iFontSize
-    '        cmdText(iPos).FontItalic = bFontItalic
-    '    End If
-    '    cmdText(iPos).Visible = True  ' Make new button visible.
-
-    'End Sub
-    'Private Sub Form_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    '    Static Message As Long
-    '    Static RR As Boolean
-
-    '    'x is the current mouse location along the x-axis
-    '    Message = x / Screen.TwipsPerPixelX
-
-    '    If RR = False Then
-    '        RR = True
-    '        If Me.WindowState = vbMinimized Then    ' If reduced to tray icon
-    '            Select Case Message
-    '            ' Left click (This should open the keylist)
-    '                Case WM_LBUTTONUP
-    '                    Me.WindowState = vbNormal
-    '                    Me.Show()
-    '            ' Right button up (This should bring up a menu)
-    '                Case WM_RBUTTONUP
-    '                    Me.PopupMenu(mnuPopup)
-    '            End Select
-    '        End If
-    '        RR = False
-    '    End If
-    'End Sub
-    'Private Sub Form_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    '    '   Right Button causes menu to pop up
-    '    If Button = vbRightButton Then
-    '        mnuBtnEdit.Enabled = False
-    '        mnuBtnDelete.Enabled = False
-    '        mnuClipCopy.Enabled = False
-    '        mnuTransferGrp.Enabled = False
-
-    '        PopupMenu(mnuButtons)
-    '    End If
-
-    'End Sub
-    'Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-    '    If UnloadMode = vbFormControlMenu Then  'unload just minimises to tray icon
-    '        Me.WindowState = vbMinimized
-    '        Cancel = True
-    '    End If
-    'End Sub
-    'Friend Sub Form_Resize()
-    '    Dim iNewColCt
-    '    If Me.WindowState = 1 Then
-    '        'If minimized selected
-    '        Call Shell_NotifyIcon(NIM_ADD, IconData)
-    '        ' Add the form's icon to the tray
-    '        Me.Hide()
-    '        ' Hide the button at the taskbar
-    '        Exit Sub
-    '    End If
-
-    '    If lResizeActive Then
-    '        If bNewWidth Then
-    '            bNewWidth = False
-    '            iNewColCt = iColCt
-    '        Else
-    '            iNewColCt = Int(FrmButtonList.Width / iButtonWidth)
-    '        End If
-    '        If iNewColCt < 1 Then
-    '            iNewColCt = 1
-    '        End If
-    '        If iNewColCt <> iColCt Then
-    '            iColCt = iNewColCt
-    '            oRegistry.WriteString(strApplication & "Options", "Columns", Format(iColCt))
-    '        End If
-    '        DrawButtons()
-    '    End If
-    'End Sub
     Friend Sub DrawButtons()
         lResizeActive = False
         ' Size of window
@@ -833,8 +494,7 @@ Public Class FrmButtonList
         calc_age = age
     End Function
 
-    Private Sub imgExit_Click(sender As Object, e As EventArgs) Handles imgExit.Click
-        SavePosition
+    Private Sub ImgExit_Click(sender As Object, e As EventArgs) Handles imgExit.Click
         Me.Close()
     End Sub
 
@@ -982,12 +642,7 @@ Public Class FrmButtonList
     End Function
 
     Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        My.Settings.Top = Me.Top
-        My.Settings.Left = Me.Left
-        My.Settings.Save()
+        SavePosition()
     End Sub
-
-
-
 #End Region
 End Class

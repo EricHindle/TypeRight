@@ -144,20 +144,43 @@ Public Class FrmEditButton
                                                                                 BtnReturn.Click,
                                                                                 BtnRightArrow.Click,
                                                                                 BtnTab.Click,
-                                                                                BtnUpArrow.Click
+                                                                                BtnUpArrow.Click,
+                                                                                BtnPct.Click,
+                                                                                btnCaret.Click,
+                                                                                BtnPlus.Click,
+                                                                                BtnTilde.Click,
+                                                                                BtnOpenBracket.Click,
+                                                                                BtnCloseBracket.Click
+
         Dim specialButton As Windows.Forms.Button = TryCast(sender, Windows.Forms.Button)
         Dim keyText As String = ""
+        Dim isAddBrackets As Boolean = True
         Select Case specialButton.Name
+            Case "BtnPct"
+                keyText = "%"
+            Case "btnCaret"
+                keyText = "^"
+            Case "BtnPlus"
+                keyText = "+"
+            Case "BtnTilde"
+                keyText = "~"
+            Case "BtnOpenBracket"
+                keyText = "("
+            Case "BtnCloseBracket"
+                keyText = "("
             Case "BtnAlt"
-                keyText = "Alt"
+                keyText = "%"
+                isAddBrackets = False
             Case "BtnBackspace"
                 keyText = "BACKSPACE"
             Case "BtnBacktab"
-                keyText = "BackTab"
+                keyText = "+{TAB}"
+                isAddBrackets = False
             Case "BtnCloseCurlyBracket"
                 keyText = "}"
             Case "BtnCtrl"
-                keyText = "Ctrl"
+                keyText = "^"
+                isAddBrackets = False
             Case "BtnDelete"
                 keyText = "DELETE"
             Case "BtnDownArrow"
@@ -187,9 +210,13 @@ Public Class FrmEditButton
         End Select
         Dim pos As Long
         pos = TxtValue.SelectionStart
-        TxtValue.Text = TxtValue.Text.Substring(0, pos) + "{" + keyText + "}" + Mid(TxtValue.Text, pos + 1)
-        TxtValue.SelectionStart = pos + Len(keyText) + 2
-
+        If isAddBrackets Then
+            TxtValue.Text = TxtValue.Text.Substring(0, pos) + "{" + keyText + "}" + Mid(TxtValue.Text, pos + 1)
+            TxtValue.SelectionStart = pos + Len(keyText) + 2
+        Else
+            TxtValue.Text = TxtValue.Text.Substring(0, pos) + keyText + Mid(TxtValue.Text, pos + 1)
+            TxtValue.SelectionStart = pos + Len(keyText) + 2
+        End If
     End Sub
     Private Sub TxtString_TextChanged(sender As Object, e As EventArgs) Handles TxtValue.TextChanged
 
@@ -278,6 +305,5 @@ Public Class FrmEditButton
             _textBox.SelectedText = NTextUtil.ToggleText(_textBox.SelectedText)
         End If
     End Sub
-
 
 End Class
