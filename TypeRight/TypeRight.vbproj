@@ -112,10 +112,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Db.vb" />
+    <Compile Include="Domain\sender.vb" />
+    <Compile Include="Domain\SenderBuilder.vb" />
     <Compile Include="FrmButtonList.Designer.vb">
       <DependentUpon>FrmButtonList.vb</DependentUpon>
     </Compile>
     <Compile Include="FrmButtonList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDbUpdate.Designer.vb">
+      <DependentUpon>FrmDbUpdate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDbUpdate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmEditButton.Designer.vb">
@@ -142,6 +150,13 @@
     <Compile Include="FrmSplash.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Logging\frmLogViewer.designer.vb">
+      <DependentUpon>frmLogViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Logging\frmLogViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logging\LogUtil.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -186,6 +201,9 @@
     <EmbeddedResource Include="FrmButtonList.resx">
       <DependentUpon>FrmButtonList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmDbUpdate.resx">
+      <DependentUpon>FrmDbUpdate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmEditButton.resx">
       <DependentUpon>FrmEditButton.vb</DependentUpon>
     </EmbeddedResource>
@@ -197,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSplash.resx">
       <DependentUpon>FrmSplash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logging\frmLogViewer.resx">
+      <DependentUpon>frmLogViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
@@ -237,5 +258,6 @@
     <Content Include="images\TypeRight1.gif" />
     <Content Include="images\TypeRight2.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

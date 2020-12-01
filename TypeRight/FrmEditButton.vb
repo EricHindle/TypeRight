@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.ComponentModel
+Imports System.Windows.Forms
 
 Public Class FrmEditButton
     Private CtrlOn As Boolean
@@ -18,6 +19,7 @@ Public Class FrmEditButton
         End Set
     End Property
     Private Sub FrmEditButton_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetFormPos(Me, My.Settings.EditButtonPos)
         Me.SendersTableAdapter.Fill(Me.TypeRightDataSet.senders)
         grpOpts.Visible = isPro
         chkEncrypt.Checked = False
@@ -70,6 +72,7 @@ Public Class FrmEditButton
         End With
     End Sub
     Private Sub BtnCancel_Click() Handles BtnCancel.Click
+        Me.DialogResult = DialogResult.Cancel
         Me.Close()
     End Sub
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles BtnOK.Click
@@ -77,10 +80,6 @@ Public Class FrmEditButton
         Dim isEncrypted As Boolean
         Dim strNewText As String
         If isValidated() Then
-
-
-
-
             If isPro And chkEncrypt.Checked Then
                 isEncrypted = True
                 strNewText = oNCrypter.EncryptData(TxtValue.Text)
@@ -95,8 +94,6 @@ Public Class FrmEditButton
                 '    iBtnGrp = 0
                 '    iOffset = iDbBtnCt
             End If
-
-
             With _button
                 .Caption = txtCaption.Text
                 .Hint = TxtHint.Text
@@ -111,6 +108,7 @@ Public Class FrmEditButton
             If oBtn IsNot Nothing Then
                 UpdateButton(oBtn.buttonGroup, oBtn.buttonSeq, txtCaption.Text, TxtHint.Text, strNewText, BtnFont.Font.Name, BtnFont.Font.Bold, BtnFont.Font.Size, BtnFont.Font.Italic, isEncrypted, oBtn.buttonId)
             End If
+            Me.DialogResult = DialogResult.OK
             Me.Close()
         End If
     End Sub
@@ -306,4 +304,8 @@ Public Class FrmEditButton
         End If
     End Sub
 
+    Private Sub FrmEditButton_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        My.Settings.EditButtonPos = SetFormPos(Me)
+        My.Settings.Save()
+    End Sub
 End Class

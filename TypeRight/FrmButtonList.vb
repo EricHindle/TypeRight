@@ -1,11 +1,8 @@
 ﻿Imports System.Collections.Generic
 Imports System.Data
 Imports System.Text
-Imports NbuttonControlLibrary
-Imports System.Runtime.InteropServices
 Imports System.Windows.Forms
-Imports System.Diagnostics
-Imports System.Drawing
+Imports NbuttonControlLibrary
 
 Public Class FrmButtonList
 #Region "constants"
@@ -118,7 +115,7 @@ Public Class FrmButtonList
     Private Sub MnuOptions_Click(sender As Object, e As EventArgs) Handles mnuOptions.Click
         ShowOptions()
     End Sub
-    Private Sub ImgOptions_Click(sender As Object, e As EventArgs) Handles imgOptions.Click
+    Private Sub ImgOptions_Click(sender As Object, e As EventArgs) Handles PicOptions.Click
         ShowOptions()
     End Sub
     Private Sub ShowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowToolStripMenuItem.Click
@@ -256,46 +253,34 @@ Public Class FrmButtonList
         Dim fname As String
         Dim lname As String
         Dim fullname As String
+        Dim stNo As String
         Dim add1 As String
         Dim add2 As String
         Dim town As String
         Dim county As String
         Dim country As String
         Dim pcode As String
+        Dim username As String
         Dim fulladdr As String
         Dim dtDob As Date
         Dim strAge As String
-        'Dim bBoldIt As Boolean
-        'Dim iFldCt As Integer
-
-        'bBoldIt = False
-        fname = ""
-        lname = ""
-        fullname = ""
-        add1 = ""
-        add2 = ""
-        town = ""
-        county = ""
-        country = ""
-        pcode = ""
-        fulladdr = ""
-
-
-
         Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(sndKey)
         Dim oTable As New TypeRightDataSet.sendersDataTable
         fname = oRow.firstname
         lname = oRow.lastname
-        add1 = If(oRow.Isaddress1Null, "", oRow.address1)
+        stNo = If(oRow.IshousenumberNull, "", oRow.housenumber)
+        add1 = If(oRow.IsstreetNull, "", oRow.street)
         add2 = If(oRow.Isaddress2Null, "", oRow.address2)
         town = If(oRow.IstownNull, "", oRow.town)
         county = If(oRow.IscountyNull, "", oRow.county)
+        country = If(oRow.IscountyNull, "", oRow.country)
+        username = If(oRow.IsusernameNull, "", oRow.username)
         pcode = If(oRow.IspostcodeNull, "", oRow.postcode)
         dtDob = If(oRow.IsdobNull, Date.MinValue, oRow.dob)
         fullname = Trim(fname & " " & lname)
         Dim addBuilder As New StringBuilder
-        If Not String.IsNullOrEmpty(add1) Then
-            addBuilder.Append(add1)
+        If Not String.IsNullOrEmpty(add1) Or Not String.IsNullOrEmpty(stNo) Then
+            addBuilder.Append(stNo).Append(If(String.IsNullOrEmpty(stNo), "", " ")).Append(add1)
         End If
         If Not String.IsNullOrEmpty(add2) Then
             If addBuilder.Length > 0 Then
@@ -330,8 +315,9 @@ Public Class FrmButtonList
         iBct = 2
         'B = 1
 
+
         For Each _col As DataColumn In oTable.Columns
-            strButtonValue = oRow(_col.ColumnName)
+            strButtonValue = If(IsDBNull(oRow(_col.ColumnName)), "", oRow(_col.ColumnName))
             strButtonTxt = _col.ColumnName
             strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 10))
             strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
@@ -494,7 +480,7 @@ Public Class FrmButtonList
         calc_age = age
     End Function
 
-    Private Sub ImgExit_Click(sender As Object, e As EventArgs) Handles imgExit.Click
+    Private Sub ImgExit_Click(sender As Object, e As EventArgs) Handles PicExit.Click
         Me.Close()
     End Sub
 
@@ -505,12 +491,12 @@ Public Class FrmButtonList
         My.Settings.Save()
     End Sub
 
-    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles ImgLock.Click
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PicLock.Click
         GreenClock.Visible = False
         WhiteClock.Visible = True
         RedClock.Visible = False
         bLockClock = False
-        ImgLock.Visible = False
+        PicLock.Visible = False
     End Sub
 
     'Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
@@ -547,7 +533,7 @@ Public Class FrmButtonList
                 WhiteClock.Visible = True
                 GreenClock.Visible = False
                 bLockClock = False
-                ImgLock.Visible = False
+                PicLock.Visible = False
             End If
         End If
     End Sub
@@ -555,7 +541,7 @@ Public Class FrmButtonList
     Private Sub Clock_DoubleClick(sender As Object, e As EventArgs) Handles WhiteClock.DoubleClick, GreenClock.DoubleClick, RedClock.DoubleClick
         If Not (bLockClock) Then
             bLockClock = True
-            ImgLock.Visible = True
+            PicLock.Visible = True
         End If
     End Sub
     Private Sub BtnRmvCol_Click(sender As Object, e As EventArgs) Handles BtnRmvCol.Click
@@ -643,6 +629,13 @@ Public Class FrmButtonList
 
     Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         SavePosition()
+    End Sub
+
+    Private Sub PicDatabase_Click(sender As Object, e As EventArgs) Handles PicDatabase.Click
+        Using _dbUpdate As New FrmDbUpdate
+            _dbUpdate.SenderId = iCurrSender
+            _dbUpdate.ShowDialog()
+        End Using
     End Sub
 #End Region
 End Class

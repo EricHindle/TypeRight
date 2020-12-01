@@ -1,4 +1,5 @@
-﻿Imports System.Drawing
+﻿Imports System.ComponentModel
+Imports System.Drawing
 
 Public Class FrmOptions
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
@@ -54,6 +55,7 @@ Public Class FrmOptions
         Me.Close()
     End Sub
     Private Sub FrmOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetFormPos(Me, My.Settings.OptionsPos)
         CbToolBar.Checked = bToolBar
         chkSplash.Checked = bSplash
         cbMinimise.Checked = bMinimise
@@ -93,5 +95,10 @@ Public Class FrmOptions
     End Sub
     Private Sub Slider1_Scroll(sender As Object, e As EventArgs) Handles Slider1.Scroll
         MakeTransparent(lBtnListHandle, Slider1.Value)
+    End Sub
+
+    Private Sub FrmOptions_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        My.Settings.OptionsPos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
 End Class

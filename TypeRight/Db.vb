@@ -8,6 +8,10 @@
     Private ReadOnly oSndTable As New TypeRightDataSet.sendersDataTable
 #End Region
 #Region "buttons"
+    Public Function GetButtons()
+        oBtnTa.Fill(oBtnTable)
+        Return oBtnTable
+    End Function
     Public Function GetButtonByGroupAndSeq(_buttonGrpId As Integer, _buttonSeq As Integer) As TypeRightDataSet.buttonRow
         Dim oBtnRow As TypeRightDataSet.buttonRow = Nothing
         oBtnTa.FillByGroupSeq(oBtnTable, _buttonGrpId, _buttonSeq)
@@ -82,6 +86,20 @@
             oSndRow = oSndTable.Rows(0)
         End If
         Return oSndRow
+    End Function
+    Public Function InsertSender(ByRef oSender As sender) As Integer
+        Return oSndTa.InsertSender(oSender.Address2, oSender.County, Format(oSender.DateOfBirth, "yyyy-MM-dd"), oSender.FirstName, oSender.LastName, oSender.PostCode, oSender.Town, oSender.Country,
+                            oSender.Email, oSender.Gender, oSender.HouseNumber, oSender.MaritalStatus, oSender.Mobile, oSender.Occupation, oSender.Password, oSender.Phone, oSender.SecretWord,
+                            oSender.Street, oSender.Title, oSender.Username)
+    End Function
+    Public Function UpdateSender(ByRef oSender As sender) As Integer
+        Return oSndTa.UpdateSender(oSender.Address2, oSender.County, Format(oSender.DateOfBirth, "yyyy-MM-dd"), oSender.FirstName, oSender.LastName, oSender.PostCode, oSender.Town, oSender.Country,
+                            oSender.Email, oSender.Gender, oSender.HouseNumber, oSender.MaritalStatus, oSender.Mobile, oSender.Occupation, oSender.Password, oSender.Phone, oSender.SecretWord,
+                            oSender.Street, oSender.Title, oSender.Username, oSender.SenderId)
+
+    End Function
+    Public Function DeleteSender(_id As Integer) As Integer
+        Return oSndTa.DeleteSender(_id)
     End Function
 #End Region
 End Module

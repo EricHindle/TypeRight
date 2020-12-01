@@ -116,6 +116,8 @@ Module TypeRightMain
 #End Region
 #Region "common subroutines"
     Public Sub InitialiseApplication()
+        LogUtil.LogFolder = My.Settings.LogFolder
+        LogUtil.StartLogging()
         Dim iSplashDelay As Integer
         sLicName = ""
         sLicCode = ""
@@ -188,8 +190,36 @@ Module TypeRightMain
         My.Settings.FontItalic = bDfltFontItalic
         My.Settings.Save()
     End Sub
+
+    Public Sub GetFormPos(ByRef oForm As Form, ByVal sPos As String)
+        If sPos = "max" Then
+            oForm.WindowState = FormWindowState.Maximized
+        ElseIf sPos = "min" Then
+            oForm.WindowState = FormWindowState.Minimized
+        Else
+            Dim pos As String() = sPos.Split("~")
+            If pos.Length = 4 Then
+                oForm.Top = CInt(pos(0))
+                oForm.Left = CInt(pos(1))
+                oForm.Height = CInt(pos(2))
+                oForm.Width = CInt(pos(3))
+            End If
+        End If
+    End Sub
+
 #End Region
 #Region "common functions"
+    Public Function SetFormPos(ByRef oForm As Form) As String
+        Dim sPos As String
+        If oForm.WindowState = FormWindowState.Maximized Then
+            sPos = "max"
+        ElseIf oForm.WindowState = FormWindowState.Minimized Then
+            sPos = "min"
+        Else
+            sPos = oForm.Top & "~" & oForm.Left & "~" & oForm.Height & "~" & oForm.Width
+        End If
+        Return sPos
+    End Function
     Public Function GetSourceControl(ByRef menuItem As Object) As Object
         Dim _menuItem As ToolStripMenuItem = CType(menuItem, ToolStripMenuItem)
         Dim menuStrip As ContextMenuStrip = CType(_menuItem.Owner, ContextMenuStrip)

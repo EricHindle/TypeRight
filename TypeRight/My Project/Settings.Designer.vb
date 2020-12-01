@@ -279,6 +279,90 @@ Partial Friend NotInheritable Class Settings
             Me("Sender") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property DBUpdatePos() As String
+        Get
+            Return CType(Me("DBUpdatePos"),String)
+        End Get
+        Set
+            Me("DBUpdatePos") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property EditButtonPos() As String
+        Get
+            Return CType(Me("EditButtonPos"),String)
+        End Get
+        Set
+            Me("EditButtonPos") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property GroupMaintPos() As String
+        Get
+            Return CType(Me("GroupMaintPos"),String)
+        End Get
+        Set
+            Me("GroupMaintPos") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property OptionsPos() As String
+        Get
+            Return CType(Me("OptionsPos"),String)
+        End Get
+        Set
+            Me("OptionsPos") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("F:\TypeRight\Logs")>  _
+    Public Property LogFolder() As String
+        Get
+            Return CType(Me("LogFolder"),String)
+        End Get
+        Set
+            Me("LogFolder") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+    Public Property DebugOn() As Boolean
+        Get
+            Return CType(Me("DebugOn"),Boolean)
+        End Get
+        Set
+            Me("DebugOn") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("F:\TypeRight\Backups")>  _
+    Public Property BackupFolder() As String
+        Get
+            Return CType(Me("BackupFolder"),String)
+        End Get
+        Set
+            Me("BackupFolder") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

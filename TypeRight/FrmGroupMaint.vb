@@ -1,4 +1,6 @@
-﻿Public Class FrmGroupMaint
+﻿Imports System.ComponentModel
+
+Public Class FrmGroupMaint
     Private _action As GroupAction
     Public Property Action() As Integer
         Get
@@ -146,10 +148,16 @@
         Me.Close()
     End Sub
     Private Sub FrmGroupMaint_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        GetFormPos(Me, My.Settings.GroupMaintPos)
         Me.ButtongroupsTableAdapter.Fill(Me.TypeRightDataSet.buttongroups)
     End Sub
 
     Private Sub Nbutton1_Load(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Private Sub FrmGroupMaint_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        My.Settings.GroupMaintPos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
 End Class

@@ -588,9 +588,9 @@ Partial Class FrmEditButton
         Me.LblBtnSeq.Location = New System.Drawing.Point(792, 36)
         Me.LblBtnSeq.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblBtnSeq.Name = "LblBtnSeq"
-        Me.LblBtnSeq.Size = New System.Drawing.Size(47, 17)
+        Me.LblBtnSeq.Size = New System.Drawing.Size(16, 17)
         Me.LblBtnSeq.TabIndex = 11
-        Me.LblBtnSeq.Text = "Label2"
+        Me.LblBtnSeq.Text = "0"
         '
         'LblBtnGrp
         '
@@ -598,9 +598,9 @@ Partial Class FrmEditButton
         Me.LblBtnGrp.Location = New System.Drawing.Point(792, 9)
         Me.LblBtnGrp.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblBtnGrp.Name = "LblBtnGrp"
-        Me.LblBtnGrp.Size = New System.Drawing.Size(47, 17)
+        Me.LblBtnGrp.Size = New System.Drawing.Size(16, 17)
         Me.LblBtnGrp.TabIndex = 9
-        Me.LblBtnGrp.Text = "Label2"
+        Me.LblBtnGrp.Text = "0"
         '
         'Label2
         '
