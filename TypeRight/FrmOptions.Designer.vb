@@ -53,6 +53,7 @@ Partial Class FrmOptions
         Me.nudDelay = New System.Windows.Forms.NumericUpDown()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.BtnPosReset = New System.Windows.Forms.Button()
         Me.GrpLicence.SuspendLayout()
         CType(Me.Slider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -334,11 +335,21 @@ Partial Class FrmOptions
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.lblStatus.Size = New System.Drawing.Size(6, 17)
         '
+        'BtnPosReset
+        '
+        Me.BtnPosReset.Location = New System.Drawing.Point(20, 364)
+        Me.BtnPosReset.Name = "BtnPosReset"
+        Me.BtnPosReset.Size = New System.Drawing.Size(145, 32)
+        Me.BtnPosReset.TabIndex = 14
+        Me.BtnPosReset.Text = "Reset form positions"
+        Me.BtnPosReset.UseVisualStyleBackColor = True
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(617, 430)
+        Me.Controls.Add(Me.BtnPosReset)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.nudDelay)
         Me.Controls.Add(Me.GroupBox2)
@@ -357,7 +368,7 @@ Partial Class FrmOptions
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmOptions"
-        Me.Text = "FrmOptions"
+        Me.Text = "Options"
         Me.GrpLicence.ResumeLayout(False)
         Me.GrpLicence.PerformLayout()
         CType(Me.Slider1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -401,4 +412,5 @@ Partial Class FrmOptions
     Friend WithEvents nudDelay As Windows.Forms.NumericUpDown
     Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
     Friend WithEvents lblStatus As Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents BtnPosReset As Windows.Forms.Button
 End Class

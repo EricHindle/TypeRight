@@ -388,7 +388,7 @@ Partial Class FrmButtonList
         Me.MinimizeBox = False
         Me.Name = "FrmButtonList"
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
         Me.GrpTop.ResumeLayout(False)
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).EndInit()

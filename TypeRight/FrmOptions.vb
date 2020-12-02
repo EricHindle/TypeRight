@@ -39,7 +39,6 @@ Public Class FrmOptions
         My.Settings.Delay = iDelay
         If isPro Then
             My.Settings.ToolBar = CbToolBar.Checked
-            My.Settings.Splash = chkSplash.Checked
             My.Settings.Minimise = cbMinimise.Checked
         End If
         iTransPerc = Slider1.Value
@@ -99,6 +98,15 @@ Public Class FrmOptions
 
     Private Sub FrmOptions_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         My.Settings.OptionsPos = SetFormPos(Me)
+        My.Settings.Save()
+    End Sub
+
+    Private Sub BtnPosReset_Click(sender As Object, e As EventArgs) Handles BtnPosReset.Click
+        My.Settings.EditButtonPos = "10~10~604~896"
+        My.Settings.DBUpdatePos = "10~10~660~836"
+        My.Settings.GroupMaintPos = "10~10~300~645"
+        My.Settings.OptionsPos = "10~10~468~633"
+        My.Settings.ButtonListPos = "10~10~423~124"
         My.Settings.Save()
     End Sub
 End Class

@@ -1,4 +1,5 @@
 ﻿Imports System.Collections.Generic
+Imports System.ComponentModel
 Imports System.Data
 Imports System.Text
 Imports System.Windows.Forms
@@ -36,8 +37,7 @@ Public Class FrmButtonList
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
         InitialiseApplication()
-        Me.Top = iTop
-        Me.Left = iLeft
+        GetFormPos(Me, My.Settings.ButtonListPos)
         ' Set window width based on number of columns and button width
         Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
         FillNamesList()
@@ -58,8 +58,6 @@ Public Class FrmButtonList
         Me.Opacity = iTransPerc / 100
         GrpBottom.Visible = bToolBar
         ImgTack_Click()
-        Me.Top = iTop
-        Me.Left = iLeft
         iButtonCt = 0
         If isPro Then
             GroupButtonPanel.Top = GrpTop.Height
@@ -485,10 +483,7 @@ Public Class FrmButtonList
     End Sub
 
     Private Sub SavePosition()
-        My.Settings.Top = Me.Top
-        My.Settings.Left = Me.Left
-        My.Settings.Minimise = Me.WindowState = FormWindowState.Minimized
-        My.Settings.Save()
+        My.Settings.ButtonListPos = SetFormPos(Me)
     End Sub
 
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PicLock.Click
@@ -624,11 +619,12 @@ Public Class FrmButtonList
         ''UPGRADE_NOTE: Object rsSender2 may not be destroyed until it is garbage collected. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6E35BFF6-CD74-4B09-9689-3E1A43DF8969"'
         'rsSender2 = Nothing
         '' Set db2 = Nothing
-
+        Return Nothing
     End Function
 
     Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         SavePosition()
+        NotifyIcon1.Visible = False
     End Sub
 
     Private Sub PicDatabase_Click(sender As Object, e As EventArgs) Handles PicDatabase.Click
@@ -637,5 +633,6 @@ Public Class FrmButtonList
             _dbUpdate.ShowDialog()
         End Using
     End Sub
+
 #End Region
 End Class

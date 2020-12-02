@@ -246,6 +246,7 @@
     <None Include="images\whiteclock.bmp" />
     <None Include="images\greenclock.bmp" />
     <Content Include="images\kbd.bmp" />
+    <None Include="images\keys.jpg" />
     <Content Include="images\KEYS03.ICO" />
     <None Include="images\lock.bmp" />
     <None Include="images\menu_left.jpg" />

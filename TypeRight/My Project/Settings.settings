@@ -20,9 +20,6 @@
     <Setting Name="ToolBar" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="Splash" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="Minimise" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -37,12 +34,6 @@
     </Setting>
     <Setting Name="FontItalic" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="Top" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="Left" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="OnTop" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -84,6 +75,9 @@
     </Setting>
     <Setting Name="BackupFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">F:\TypeRight\Backups</Value>
+    </Setting>
+    <Setting Name="ButtonListPos" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

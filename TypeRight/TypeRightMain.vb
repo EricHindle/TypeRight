@@ -23,8 +23,6 @@ Module TypeRightMain
     Public iButtonCt As Long
     Public bOnTop As Boolean
     Public bToolBar As Boolean
-    Public iTop As Integer
-    Public iLeft As Integer
     Public iDelay As Integer
     Public isPro As Boolean
     Public sLicName As String
@@ -118,7 +116,6 @@ Module TypeRightMain
     Public Sub InitialiseApplication()
         LogUtil.LogFolder = My.Settings.LogFolder
         LogUtil.StartLogging()
-        Dim iSplashDelay As Integer
         sLicName = ""
         sLicCode = ""
         isPro = False
@@ -134,20 +131,12 @@ Module TypeRightMain
         If oRegister.IsValidKey(sLicCode, sLicName, APP_STRING) Then
             ' Running pro version
             isPro = True
-            iSplashDelay = 2
         Else
             ' Running free version
             isPro = False
-            iSplashDelay = 5
         End If
         ' Load the options from the registry
         LoadOptions()
-        If bSplash Then
-            Using _splash As New FrmSplash
-                _splash.Delay = iSplashDelay * 1000
-                _splash.Show()
-            End Using
-        End If
     End Sub
     Public Sub LoadOptions()
         iButtonWidth = My.Settings.ButtonWidth          ' Button width
@@ -156,18 +145,14 @@ Module TypeRightMain
         iCurrGrp = My.Settings.Group                    ' Current group
         iCurrSender = My.Settings.Sender
         bOnTop = My.Settings.OnTop                      ' Keep on top
-        iTop = My.Settings.Top                          ' Position on screen
-        iLeft = My.Settings.Left
         bToolBar = My.Settings.ToolBar                  ' Display Toolbar
         iDelay = My.Settings.Delay                      ' Text injection delay
-        bSplash = My.Settings.Splash                    ' Display splash screen on startup
         bMinimise = My.Settings.Minimise                ' Minimise on startup
         sDfltFontName = My.Settings.FontName            ' Default button caption font
         iDfltFontSize = My.Settings.FontSize
         bDfltFontBold = My.Settings.FontBold
         bDfltFontItalic = My.Settings.FontItalic
         If Not isPro Then
-            bSplash = True
             bToolBar = False
         End If
     End Sub
@@ -178,11 +163,8 @@ Module TypeRightMain
         My.Settings.Group = iCurrGrp
         My.Settings.Sender = iCurrSender
         My.Settings.OnTop = bOnTop
-        My.Settings.Top = iTop
-        My.Settings.Left = iLeft
         My.Settings.ToolBar = bToolBar
         My.Settings.Delay = iDelay
-        My.Settings.Splash = bSplash
         My.Settings.Minimise = bMinimise
         My.Settings.FontName = sDfltFontName
         My.Settings.FontSize = iDfltFontSize
