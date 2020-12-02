@@ -178,7 +178,7 @@ Partial Class FrmDbUpdate
         '
         'TxtEmail
         '
-        Me.TxtEmail.Location = New System.Drawing.Point(65, 29)
+        Me.TxtEmail.Location = New System.Drawing.Point(65, 35)
         Me.TxtEmail.Name = "TxtEmail"
         Me.TxtEmail.Size = New System.Drawing.Size(170, 24)
         Me.TxtEmail.TabIndex = 0
@@ -192,7 +192,7 @@ Partial Class FrmDbUpdate
         '
         'TxtPhone
         '
-        Me.TxtPhone.Location = New System.Drawing.Point(65, 64)
+        Me.TxtPhone.Location = New System.Drawing.Point(65, 70)
         Me.TxtPhone.Name = "TxtPhone"
         Me.TxtPhone.Size = New System.Drawing.Size(170, 24)
         Me.TxtPhone.TabIndex = 1
@@ -255,14 +255,14 @@ Partial Class FrmDbUpdate
         '
         'TxtMobile
         '
-        Me.TxtMobile.Location = New System.Drawing.Point(65, 99)
+        Me.TxtMobile.Location = New System.Drawing.Point(65, 105)
         Me.TxtMobile.Name = "TxtMobile"
         Me.TxtMobile.Size = New System.Drawing.Size(170, 24)
         Me.TxtMobile.TabIndex = 2
         '
         'TxtPassword
         '
-        Me.TxtPassword.Location = New System.Drawing.Point(136, 106)
+        Me.TxtPassword.Location = New System.Drawing.Point(136, 105)
         Me.TxtPassword.Name = "TxtPassword"
         Me.TxtPassword.Size = New System.Drawing.Size(152, 24)
         Me.TxtPassword.TabIndex = 2
@@ -447,7 +447,7 @@ Partial Class FrmDbUpdate
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(6, 32)
+        Me.Label12.Location = New System.Drawing.Point(6, 39)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(39, 17)
         Me.Label12.TabIndex = 3
@@ -456,7 +456,7 @@ Partial Class FrmDbUpdate
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(6, 71)
+        Me.Label13.Location = New System.Drawing.Point(6, 74)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(52, 17)
         Me.Label13.TabIndex = 4
@@ -528,7 +528,7 @@ Partial Class FrmDbUpdate
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(6, 102)
+        Me.Label21.Location = New System.Drawing.Point(6, 109)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(50, 17)
         Me.Label21.TabIndex = 5
@@ -625,14 +625,14 @@ Partial Class FrmDbUpdate
         '
         'TxtSWord
         '
-        Me.TxtSWord.Location = New System.Drawing.Point(136, 36)
+        Me.TxtSWord.Location = New System.Drawing.Point(136, 35)
         Me.TxtSWord.Name = "TxtSWord"
         Me.TxtSWord.Size = New System.Drawing.Size(152, 24)
         Me.TxtSWord.TabIndex = 0
         '
         'TxtUsername
         '
-        Me.TxtUsername.Location = New System.Drawing.Point(136, 71)
+        Me.TxtUsername.Location = New System.Drawing.Point(136, 70)
         Me.TxtUsername.Name = "TxtUsername"
         Me.TxtUsername.Size = New System.Drawing.Size(152, 24)
         Me.TxtUsername.TabIndex = 1

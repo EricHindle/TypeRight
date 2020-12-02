@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.Generic
 Imports System.ComponentModel
 Imports System.Data
+Imports System.Diagnostics
 Imports System.Text
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
@@ -316,7 +317,7 @@ Public Class FrmButtonList
         AddButton(2, "Full Addr", fulladdr, strButtonFont, 9.0, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)), False, False)
 
         iBct = 2
-        'B = 1
+        '   B = 1
 
 
         For Each _col As DataColumn In oTable.Columns
@@ -326,7 +327,7 @@ Public Class FrmButtonList
             strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
 
             AddButton(B + iBct, strButtonCaption, strButtonValue, strButtonFont, 9.0, strButtonHint, False, False)
-
+            Debug.Print(strButtonTxt)
             B += 1
         Next
 
@@ -416,7 +417,7 @@ Public Class FrmButtonList
         For Each oBtn In oList
             AddHandler oBtn.Click, AddressOf Button_Click
             oPanel.Controls.Add(oBtn)
-
+            Debug.Print(oBtn.Caption)
             oBtn.Top = 1 + (iBtnRow * 27)
             oBtn.Left = 1 + (iBtnCol * iButtonWidth)
             oBtn.Size = New Drawing.Size(iButtonWidth, 27)

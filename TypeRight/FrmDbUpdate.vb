@@ -145,7 +145,7 @@ Public Class FrmDbUpdate
         End If
     End Sub
     Private Function IsValid() As Boolean
-        Dim bMissingData As Boolean
+        Dim isOK As Boolean
         Dim sErrorMsg As String
         sErrorMsg = ""
         TxtForename.Text = StrConv(TxtForename.Text, vbProperCase)
@@ -155,40 +155,40 @@ Public Class FrmDbUpdate
         TxtCounty.Text = StrConv(TxtCounty.Text, vbProperCase)
         TxtTown.Text = StrConv(TxtTown.Text, vbProperCase)
         TxtPostCode.Text = StrConv(TxtPostCode.Text, vbUpperCase)
-        bMissingData = False
+        isOK = True
         If String.IsNullOrEmpty(TxtForename.Text) Then
             sErrorMsg = "First name is mandatory"
-            bMissingData = True
+            isOK = False
         End If
         If String.IsNullOrEmpty(TxtSurname.Text) Then
             sErrorMsg = sErrorMsg & vbCrLf & "Last name is mandatory"
-            bMissingData = True
+            isOK = False
         End If
         If String.IsNullOrEmpty(TxtAdd1.Text) Then
             sErrorMsg = sErrorMsg & vbCrLf & "Address1 is mandatory"
-            bMissingData = True
+            isOK = False
         End If
         If String.IsNullOrEmpty(TxtTown.Text) Then
             sErrorMsg = sErrorMsg & vbCrLf & "Town is mandatory"
-            bMissingData = True
+            isOK = False
         End If
         If String.IsNullOrEmpty(TxtPostCode.Text) Then
             sErrorMsg = sErrorMsg & vbCrLf & "Postcode is mandatory"
-            bMissingData = True
+            isOK = False
         End If
         If String.IsNullOrEmpty(TxtEmail.Text) Then
             sErrorMsg = sErrorMsg & vbCrLf & "Email is mandatory"
-            bMissingData = True
+            isOK = False
         Else
             If Not (TxtEmail.Text Like "?*[@]?*[.]?*") Then
                 sErrorMsg = sErrorMsg & vbCrLf & "Email: Invalid format"
-                bMissingData = True
+                isOK = False
             End If
         End If
-        If bMissingData = True Then
+        If isOK = False Then
             MsgBox(sErrorMsg, vbExclamation)
         End If
-        Return bMissingData
+        Return isOK
     End Function
     Private Sub Display_Sender()
         isLoadingForm = True
