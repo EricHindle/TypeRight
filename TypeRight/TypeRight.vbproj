@@ -112,7 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Db.vb" />
-    <Compile Include="Domain\sender.vb" />
+    <Compile Include="Domain\Sender.vb" />
     <Compile Include="Domain\SenderBuilder.vb" />
     <Compile Include="FrmButtonList.Designer.vb">
       <DependentUpon>FrmButtonList.vb</DependentUpon>

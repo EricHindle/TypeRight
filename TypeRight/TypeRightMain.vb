@@ -43,7 +43,6 @@ Module TypeRightMain
     Public oNCrypter As NCrypt
     Public lBtnListHandle As Long
     Public bNewWidth As Boolean
-    Public bSplash As Boolean
     Public bMinimise As Boolean
     Public bUserDefinedGroup As Boolean
     Public iDbBtnCt As Integer
@@ -174,6 +173,8 @@ Module TypeRightMain
     End Sub
 
     Public Sub GetFormPos(ByRef oForm As Form, ByVal sPos As String)
+        Dim thisScreen As Screen = My.Computer.Screen
+        Dim workingArea As Rectangle = thisScreen.WorkingArea
         If sPos = "max" Then
             oForm.WindowState = FormWindowState.Maximized
         ElseIf sPos = "min" Then
@@ -185,6 +186,9 @@ Module TypeRightMain
                 oForm.Left = CInt(pos(1))
                 oForm.Height = CInt(pos(2))
                 oForm.Width = CInt(pos(3))
+                If oForm.Left > workingArea.Width Then
+                    oForm.Left = workingArea.Width - oForm.Width
+                End If
             End If
         End If
     End Sub

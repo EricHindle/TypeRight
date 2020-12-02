@@ -8,8 +8,7 @@
     Private _postcode As String
     Private _dob As DateTime
     Private _title As String
-    Private _housenumber As String
-    Private _street As String
+    Private _address1 As String
     Private _country As String
     Private _email As String
     Private _phone As String
@@ -25,7 +24,7 @@
         Return New SenderBuilder
     End Function
 
-    Public Function StartingWith(ByVal pSender As sender) As SenderBuilder
+    Public Function StartingWith(ByVal pSender As Sender) As SenderBuilder
         _id = pSender.SenderId
         _firstname = pSender.FirstName
         _lastname = pSender.LastName
@@ -35,8 +34,7 @@
         _postcode = pSender.PostCode
         _dob = pSender.DateOfBirth
         _title = pSender.Title
-        _housenumber = pSender.HouseNumber
-        _street = pSender.Street
+        _address1 = pSender.Address1
         _country = pSender.Country
         _email = pSender.Email
         _phone = pSender.Phone
@@ -59,9 +57,8 @@
         _county = oRow.county
         _postcode = oRow.postcode
         _dob = oRow.dob
-        _title = oRow.title
-        _housenumber = oRow.housenumber
-        _street = oRow.street
+        _title = oRow.Title
+        _address1 = oRow.Address1
         _country = oRow.country
         _email = oRow.email
         _phone = oRow.phone
@@ -84,8 +81,7 @@
                     pPostCode As String,
                     pDateOfBirth As DateTime,
                     pTitle As String,
-                    pHouseNumber As String,
-                    pStreet As String,
+                    pAddress1 As String,
                     pCountry As String,
                     pEmail As String,
                     pPhone As String,
@@ -106,8 +102,7 @@
         _postcode = pPostCode
         _dob = pDateOfBirth
         _title = pTitle
-        _housenumber = pHouseNumber
-        _street = pStreet
+        _address1 = pAddress1
         _country = pCountry
         _email = pEmail
         _phone = pPhone
@@ -121,8 +116,8 @@
         Return Me
     End Function
 
-    Public Function Build() As sender
-        Return New sender(_id,
+    Public Function Build() As Sender
+        Return New Sender(_id,
                     _firstname,
                     _lastname,
                     _address2,
@@ -131,8 +126,7 @@
                     _postcode,
                     _dob,
                     _title,
-                    _housenumber,
-                    _street,
+                    _address1,
                     _country,
                     _email,
                     _phone,

@@ -47,7 +47,6 @@ Partial Class FrmOptions
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cbOnTop = New System.Windows.Forms.CheckBox()
         Me.CbToolBar = New System.Windows.Forms.CheckBox()
-        Me.chkSplash = New System.Windows.Forms.CheckBox()
         Me.cbMinimise = New System.Windows.Forms.CheckBox()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         Me.nudDelay = New System.Windows.Forms.NumericUpDown()
@@ -263,11 +262,10 @@ Partial Class FrmOptions
         '
         Me.GroupBox2.Controls.Add(Me.cbOnTop)
         Me.GroupBox2.Controls.Add(Me.CbToolBar)
-        Me.GroupBox2.Controls.Add(Me.chkSplash)
         Me.GroupBox2.Controls.Add(Me.cbMinimise)
         Me.GroupBox2.Location = New System.Drawing.Point(487, 13)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(121, 157)
+        Me.GroupBox2.Size = New System.Drawing.Size(121, 123)
         Me.GroupBox2.TabIndex = 4
         Me.GroupBox2.TabStop = False
         '
@@ -291,20 +289,10 @@ Partial Class FrmOptions
         Me.CbToolBar.Text = "Tool Bar"
         Me.CbToolBar.UseVisualStyleBackColor = True
         '
-        'chkSplash
-        '
-        Me.chkSplash.AutoSize = True
-        Me.chkSplash.Location = New System.Drawing.Point(13, 88)
-        Me.chkSplash.Name = "chkSplash"
-        Me.chkSplash.Size = New System.Drawing.Size(66, 21)
-        Me.chkSplash.TabIndex = 2
-        Me.chkSplash.Text = "Splash"
-        Me.chkSplash.UseVisualStyleBackColor = True
-        '
         'cbMinimise
         '
         Me.cbMinimise.AutoSize = True
-        Me.cbMinimise.Location = New System.Drawing.Point(13, 120)
+        Me.cbMinimise.Location = New System.Drawing.Point(13, 88)
         Me.cbMinimise.Name = "cbMinimise"
         Me.cbMinimise.Size = New System.Drawing.Size(76, 21)
         Me.cbMinimise.TabIndex = 3
@@ -313,12 +301,14 @@ Partial Class FrmOptions
         '
         'nudDelay
         '
-        Me.nudDelay.Increment = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.nudDelay.Increment = New Decimal(New Integer() {200, 0, 0, 0})
         Me.nudDelay.Location = New System.Drawing.Point(516, 240)
         Me.nudDelay.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudDelay.Minimum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudDelay.Name = "nudDelay"
         Me.nudDelay.Size = New System.Drawing.Size(74, 24)
         Me.nudDelay.TabIndex = 5
+        Me.nudDelay.Value = New Decimal(New Integer() {1000, 0, 0, 0})
         '
         'StatusStrip1
         '
@@ -406,7 +396,6 @@ Partial Class FrmOptions
     Friend WithEvents GroupBox2 As Windows.Forms.GroupBox
     Friend WithEvents cbOnTop As Windows.Forms.CheckBox
     Friend WithEvents CbToolBar As Windows.Forms.CheckBox
-    Friend WithEvents chkSplash As Windows.Forms.CheckBox
     Friend WithEvents cbMinimise As Windows.Forms.CheckBox
     Friend WithEvents FontDialog1 As Windows.Forms.FontDialog
     Friend WithEvents nudDelay As Windows.Forms.NumericUpDown

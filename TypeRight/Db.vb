@@ -87,15 +87,17 @@
         End If
         Return oSndRow
     End Function
-    Public Function InsertSender(ByRef oSender As sender) As Integer
-        Return oSndTa.InsertSender(oSender.Address2, oSender.County, Format(oSender.DateOfBirth, "yyyy-MM-dd"), oSender.FirstName, oSender.LastName, oSender.PostCode, oSender.Town, oSender.Country,
-                            oSender.Email, oSender.Gender, oSender.HouseNumber, oSender.MaritalStatus, oSender.Mobile, oSender.Occupation, oSender.Password, oSender.Phone, oSender.SecretWord,
-                            oSender.Street, oSender.Title, oSender.Username)
+    Public Function InsertSender(ByRef oSender As Sender) As Integer
+        Return oSndTa.InsertSender(oSender.Title, oSender.FirstName, oSender.LastName, oSender.Address1, oSender.Address2, oSender.Town,
+        oSender.County, oSender.Country, oSender.PostCode, Format(oSender.DateOfBirth, "yyyy-MM-dd"),
+                            oSender.Email, oSender.Phone, oSender.Mobile, oSender.Password, oSender.SecretWord,
+                            oSender.Gender, oSender.Occupation, oSender.MaritalStatus, oSender.Username)
     End Function
-    Public Function UpdateSender(ByRef oSender As sender) As Integer
-        Return oSndTa.UpdateSender(oSender.Address2, oSender.County, Format(oSender.DateOfBirth, "yyyy-MM-dd"), oSender.FirstName, oSender.LastName, oSender.PostCode, oSender.Town, oSender.Country,
-                            oSender.Email, oSender.Gender, oSender.HouseNumber, oSender.MaritalStatus, oSender.Mobile, oSender.Occupation, oSender.Password, oSender.Phone, oSender.SecretWord,
-                            oSender.Street, oSender.Title, oSender.Username, oSender.SenderId)
+    Public Function UpdateSender(ByRef oSender As Sender) As Integer
+        Return oSndTa.UpdateSender(oSender.Title, oSender.FirstName, oSender.LastName, oSender.Address1, oSender.Address2, oSender.Town,
+        oSender.County, oSender.Country, oSender.PostCode, Format(oSender.DateOfBirth, "yyyy-MM-dd"),
+                            oSender.Email, oSender.Phone, oSender.Mobile, oSender.Password, oSender.SecretWord,
+                            oSender.Gender, oSender.Occupation, oSender.MaritalStatus, oSender.Username, oSender.SenderId)
 
     End Function
     Public Function DeleteSender(_id As Integer) As Integer

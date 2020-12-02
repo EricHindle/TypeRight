@@ -4,34 +4,32 @@ Imports System.Data
 Imports System.Text
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
-
 Public Class FrmButtonList
 #Region "constants"
-    Private FRAME_WIDTH = 18
+    Private Const FRAME_WIDTH As Integer = 18
 #End Region
-
 #Region "private variables"
     Private strKeyText As String
-    Private iChar As Integer
-    Private strChar As String
-    Private strUChar As String
-    Private iStrLen As Integer
-    Private iKbdVal As Integer
-    Private strIniTxt As String
+    Private ReadOnly iChar As Integer
+    Private ReadOnly strChar As String
+    Private ReadOnly strUChar As String
+    Private ReadOnly iStrLen As Integer
+    Private ReadOnly iKbdVal As Integer
+    Private ReadOnly strIniTxt As String
     Private strButtonHint As String
-    Private strButtonFont As String
+    Private ReadOnly strButtonFont As String
     Private isLoading As Boolean = False
     Private iBct As Integer
     Private lResizeActive As Boolean
-    Private lMoving As Boolean
+    Private ReadOnly lMoving As Boolean
     Private groupButtonList As New List(Of Nbutton)
     Private senderButtonList As New List(Of Nbutton)
-    Private buttonBuilder As New NButtonBuilder
-    Private spath As String
+    Private ReadOnly buttonBuilder As New NButtonBuilder
+    Private ReadOnly spath As String
     Private bLockClock As Boolean
-    Private bDrag As Boolean
-    Private iDragBtnIndex As Integer
-
+    Private ReadOnly bDrag As Boolean
+    Private ReadOnly iDragBtnIndex As Integer
+    Dim redClockText As String
 #End Region
 #Region "form control handlers"
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -194,7 +192,7 @@ Public Class FrmButtonList
             comboItems.Add(grpRow.buttongroupid * -1, "** " & grpRow.groupname & " **")
         Next
         For Each sndRow As TypeRightDataSet.sendersRow In _senders.Rows
-            comboItems.Add(sndRow.senderid, sndRow.firstname & " " & sndRow.lastname)
+            comboItems.Add(sndRow.SenderId, sndRow.FirstName & " " & sndRow.LastName)
         Next
         If comboItems.Count > 0 Then
             cbNames.DataSource = New BindingSource(comboItems, Nothing)
@@ -213,7 +211,21 @@ Public Class FrmButtonList
 
             'strKeyText = getDBFields(strKeyText)
 
-            'If imgClock(0).Visible = True Then
+            If GreenClock.Visible = True Then
+                RedClock.Visible = True
+                GreenClock.Visible = False
+                DelayTimer.Interval = iDelay
+                ProgressBar1.Maximum = iDelay
+                ProgressBar1.Value = iDelay
+                ProgressBar1.Visible = True
+                ProgressBar1.BringToFront()
+                DelayTimer.Enabled = True
+                ProgressTimer.Enabled = True
+                redClockText = strKeyText
+            Else
+                SendKeys.Send("%{ESC}")
+                SendKeys.Send(strKeyText)
+            End If
             ' flip to previous window
             '''keybd_event(System.Windows.Forms.Keys.Menu, 0, 0, 0) ' press Alt
             '''keybd_event(System.Windows.Forms.Keys.Escape, 0, 0, 0) ' press tab
@@ -225,18 +237,13 @@ Public Class FrmButtonList
             '        imgClock(1).Visible = False
             '        imgClock(2).Visible = True
             '        'UPGRADE_WARNING: Timer property DelayTimer.Interval cannot have a value of 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="169ECF4A-1968-402D-B243-16603CC08604"'
-            '        DelayTimer.Interval = iDelay
-            '        ProgressBar1.Maximum = iDelay
-            '        ProgressBar1.Value = iDelay
-            '        ProgressBar1.Visible = True
-            '        DelayTimer.Enabled = True
+
             '        secondTimer.Interval = 500
             '        secondTimer.Enabled = True
             '    End If
             'End If
 
-            SendKeys.Send("%{ESC}")
-            SendKeys.Send(strKeyText)
+
         End If
     End Sub
     Private Sub LoadSenderButtons(sndKey As Integer)
@@ -251,7 +258,6 @@ Public Class FrmButtonList
         Dim fname As String
         Dim lname As String
         Dim fullname As String
-        Dim stNo As String
         Dim add1 As String
         Dim add2 As String
         Dim town As String
@@ -264,21 +270,20 @@ Public Class FrmButtonList
         Dim strAge As String
         Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(sndKey)
         Dim oTable As New TypeRightDataSet.sendersDataTable
-        fname = oRow.firstname
-        lname = oRow.lastname
-        stNo = If(oRow.IshousenumberNull, "", oRow.housenumber)
-        add1 = If(oRow.IsstreetNull, "", oRow.street)
-        add2 = If(oRow.Isaddress2Null, "", oRow.address2)
-        town = If(oRow.IstownNull, "", oRow.town)
-        county = If(oRow.IscountyNull, "", oRow.county)
-        country = If(oRow.IscountyNull, "", oRow.country)
-        username = If(oRow.IsusernameNull, "", oRow.username)
-        pcode = If(oRow.IspostcodeNull, "", oRow.postcode)
+        fname = oRow.FirstName
+        lname = oRow.LastName
+        add1 = If(oRow.IsAddress1Null, "", oRow.Address1)
+        add2 = If(oRow.IsAddress2Null, "", oRow.Address2)
+        town = If(oRow.IsTownNull, "", oRow.Town)
+        county = If(oRow.IsCountyNull, "", oRow.County)
+        country = If(oRow.IsCountyNull, "", oRow.Country)
+        username = If(oRow.IsUsernameNull, "", oRow.Username)
+        pcode = If(oRow.IsPostCodeNull, "", oRow.PostCode)
         dtDob = If(oRow.IsdobNull, Date.MinValue, oRow.dob)
         fullname = Trim(fname & " " & lname)
         Dim addBuilder As New StringBuilder
-        If Not String.IsNullOrEmpty(add1) Or Not String.IsNullOrEmpty(stNo) Then
-            addBuilder.Append(stNo).Append(If(String.IsNullOrEmpty(stNo), "", " ")).Append(add1)
+        If Not String.IsNullOrEmpty(add1) Then
+            addBuilder.Append(add1)
         End If
         If Not String.IsNullOrEmpty(add2) Then
             If addBuilder.Length > 0 Then
@@ -305,7 +310,7 @@ Public Class FrmButtonList
             addBuilder.Append(pcode)
         End If
         fulladdr = addBuilder.ToString
-        strAge = Format(calc_age(dtDob))
+        strAge = Format(Calc_age(dtDob))
 
         AddButton(1, "Full Name", fullname, strButtonFont, 9.0, fullname.Substring(0, Math.Min(fullname.Length, 50)), False, False)
         AddButton(2, "Full Addr", fulladdr, strButtonFont, 9.0, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)), False, False)
@@ -464,7 +469,7 @@ Public Class FrmButtonList
     End Sub
 #End Region
 #Region "functions"
-    Public Function calc_age(dtDob As DateTime) As Integer
+    Public Shared Function Calc_age(dtDob As DateTime) As Integer
         Dim fmm As Integer
         Dim tmm As Integer
         Dim age As Integer
@@ -473,52 +478,41 @@ Public Class FrmButtonList
         tmm = Month(Now)
         age = Year(Now) - Year(dtDob)
         If fmm > tmm Or (fmm = tmm And dtDob.Day > Now.Day) Then
-            age = age - 1
+            age -= 1
         End If
-        calc_age = age
+        Calc_age = age
     End Function
-
     Private Sub ImgExit_Click(sender As Object, e As EventArgs) Handles PicExit.Click
         Me.Close()
     End Sub
-
     Private Sub SavePosition()
         My.Settings.ButtonListPos = SetFormPos(Me)
     End Sub
-
-    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PicLock.Click
-        GreenClock.Visible = False
-        WhiteClock.Visible = True
+    Private Sub PicLock_Click(sender As Object, e As EventArgs) Handles PicLock.Click
+        GreenClock.Visible = True
+        WhiteClock.Visible = False
         RedClock.Visible = False
-        bLockClock = False
         PicLock.Visible = False
+        bLockClock = True
     End Sub
+    Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
+        ProgressTimer.Enabled = False
+        DelayTimer.Enabled = False
+        ProgressBar1.Visible = False
+        ProgressBar1.SendToBack()
 
-    'Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
-    '    Dim lcurhwnd As Long
-    '    DelayTimer.Enabled = False
-    '    ProgressBar1.Visible = False
-    '    lcurhwnd = GetForegroundWindow()
+        If RedClock.Visible Then
+            SendKeys.Send("%{ESC}")
+            SendKeys.Send(redClockText)
+            RedClock.Visible = False
+        End If
+        If bLockClock Then
+            GreenClock.Visible = True
+        Else
+            WhiteClock.Visible = True
+        End If
 
-    '    If bLockClock Then
-    '        If RedClock.Visible Then
-    '            RedClock.Visible = False
-    '            GreenClock.Visible = True
-    '            If lcurhwnd <> Me.Handle.ToInt32 Then
-    '                Post_keys()
-    '            End If
-    '        End If
-    '    Else
-    '        If RedClock.Visible Then
-    '            RedClock.Visible = False
-    '            WhiteClock.Visible = True
-    '            If lcurhwnd <> Me.Handle.ToInt32 Then
-    '                Post_keys()
-    '            End If
-    '        End If
-    '    End If
-    'End Sub
-
+    End Sub
     Private Sub Clock_Click(sender As Object, e As EventArgs) Handles WhiteClock.Click, GreenClock.Click, RedClock.Click
         If WhiteClock.Visible Then
             GreenClock.Visible = True
@@ -527,12 +521,12 @@ Public Class FrmButtonList
             If GreenClock.Visible Then
                 WhiteClock.Visible = True
                 GreenClock.Visible = False
+                DelayTimer.Enabled = False
                 bLockClock = False
-                PicLock.Visible = False
+                PicLock.Visible = True
             End If
         End If
     End Sub
-
     Private Sub Clock_DoubleClick(sender As Object, e As EventArgs) Handles WhiteClock.DoubleClick, GreenClock.DoubleClick, RedClock.DoubleClick
         If Not (bLockClock) Then
             bLockClock = True
@@ -546,7 +540,6 @@ Public Class FrmButtonList
         End If
         Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
     End Sub
-
     Private Sub BtnAddCol_Click(sender As Object, e As EventArgs) Handles BtnAddCol.Click
         If (groupButtonList.Count / (iColCt + 1) > 1) Or (senderButtonList.Count / (iColCt + 1) > 1) Then
             iColCt += 1
@@ -554,7 +547,6 @@ Public Class FrmButtonList
         End If
         Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
     End Sub
-
     Private Function GetDBFields(ByRef sKeyText As String) As String
         'Dim iFldCt As Short
         'Dim iFldNo As Short
@@ -621,17 +613,24 @@ Public Class FrmButtonList
         '' Set db2 = Nothing
         Return Nothing
     End Function
-
     Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         SavePosition()
         NotifyIcon1.Visible = False
     End Sub
-
     Private Sub PicDatabase_Click(sender As Object, e As EventArgs) Handles PicDatabase.Click
         Using _dbUpdate As New FrmDbUpdate
             _dbUpdate.SenderId = iCurrSender
             _dbUpdate.ShowDialog()
         End Using
+    End Sub
+    Private Sub ProgressTimer_Tick(sender As Object, e As EventArgs) Handles ProgressTimer.Tick
+        If ProgressBar1.Value > 0 Then
+            If ProgressBar1.Value >= ProgressTimer.Interval Then
+                ProgressBar1.Value -= ProgressTimer.Interval
+            Else
+                ProgressBar1.Value = 0
+            End If
+        End If
     End Sub
 
 #End Region

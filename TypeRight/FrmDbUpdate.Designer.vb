@@ -23,7 +23,6 @@ Partial Class FrmDbUpdate
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDbUpdate))
-        Me.txtHouseNo = New System.Windows.Forms.TextBox()
         Me.CbOcc = New System.Windows.Forms.ComboBox()
         Me.CbMarStat = New System.Windows.Forms.ComboBox()
         Me.CbGender = New System.Windows.Forms.ComboBox()
@@ -97,8 +96,8 @@ Partial Class FrmDbUpdate
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.BtnClear = New System.Windows.Forms.Button()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -109,17 +108,10 @@ Partial Class FrmDbUpdate
         Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
-        'txtHouseNo
-        '
-        Me.txtHouseNo.Location = New System.Drawing.Point(100, 83)
-        Me.txtHouseNo.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
-        Me.txtHouseNo.Name = "txtHouseNo"
-        Me.txtHouseNo.Size = New System.Drawing.Size(101, 24)
-        Me.txtHouseNo.TabIndex = 3
-        '
         'CbOcc
         '
         Me.CbOcc.FormattingEnabled = True
+        Me.CbOcc.Items.AddRange(New Object() {"Retired", "Full-time", "Part-time", "Student", "Unemployed"})
         Me.CbOcc.Location = New System.Drawing.Point(116, 147)
         Me.CbOcc.Name = "CbOcc"
         Me.CbOcc.Size = New System.Drawing.Size(121, 24)
@@ -128,6 +120,7 @@ Partial Class FrmDbUpdate
         'CbMarStat
         '
         Me.CbMarStat.FormattingEnabled = True
+        Me.CbMarStat.Items.AddRange(New Object() {"Married", "Single", "Widowed", "Divorced", "Separated"})
         Me.CbMarStat.Location = New System.Drawing.Point(116, 117)
         Me.CbMarStat.Name = "CbMarStat"
         Me.CbMarStat.Size = New System.Drawing.Size(121, 24)
@@ -136,6 +129,7 @@ Partial Class FrmDbUpdate
         'CbGender
         '
         Me.CbGender.FormattingEnabled = True
+        Me.CbGender.Items.AddRange(New Object() {"Male", "Female", "Other"})
         Me.CbGender.Location = New System.Drawing.Point(116, 87)
         Me.CbGender.Name = "CbGender"
         Me.CbGender.Size = New System.Drawing.Size(121, 24)
@@ -144,6 +138,7 @@ Partial Class FrmDbUpdate
         'CbTitle
         '
         Me.CbTitle.FormattingEnabled = True
+        Me.CbTitle.Items.AddRange(New Object() {"Mr.", "Ms.", "Mrs.", "Miss"})
         Me.CbTitle.Location = New System.Drawing.Point(100, 53)
         Me.CbTitle.Name = "CbTitle"
         Me.CbTitle.Size = New System.Drawing.Size(101, 24)
@@ -232,9 +227,9 @@ Partial Class FrmDbUpdate
         '
         'TxtAdd1
         '
-        Me.TxtAdd1.Location = New System.Drawing.Point(207, 83)
+        Me.TxtAdd1.Location = New System.Drawing.Point(100, 83)
         Me.TxtAdd1.Name = "TxtAdd1"
-        Me.TxtAdd1.Size = New System.Drawing.Size(302, 24)
+        Me.TxtAdd1.Size = New System.Drawing.Size(345, 24)
         Me.TxtAdd1.TabIndex = 4
         '
         'TxtSurname
@@ -661,7 +656,6 @@ Partial Class FrmDbUpdate
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Controls.Add(Me.txtHouseNo)
         Me.GroupBox1.Controls.Add(Me.Label18)
         Me.GroupBox1.Controls.Add(Me.TxtAdd2)
         Me.GroupBox1.Controls.Add(Me.Label17)
@@ -745,6 +739,15 @@ Partial Class FrmDbUpdate
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Record"
         '
+        'BtnClear
+        '
+        Me.BtnClear.Location = New System.Drawing.Point(462, 17)
+        Me.BtnClear.Name = "BtnClear"
+        Me.BtnClear.Size = New System.Drawing.Size(47, 34)
+        Me.BtnClear.TabIndex = 6
+        Me.BtnClear.Text = "Clear"
+        Me.BtnClear.UseVisualStyleBackColor = True
+        '
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.BtnAdd)
@@ -756,15 +759,6 @@ Partial Class FrmDbUpdate
         Me.GroupBox6.TabIndex = 5
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Action"
-        '
-        'BtnClear
-        '
-        Me.BtnClear.Location = New System.Drawing.Point(462, 17)
-        Me.BtnClear.Name = "BtnClear"
-        Me.BtnClear.Size = New System.Drawing.Size(47, 34)
-        Me.BtnClear.TabIndex = 6
-        Me.BtnClear.Text = "Clear"
-        Me.BtnClear.UseVisualStyleBackColor = True
         '
         'FrmDbUpdate
         '
@@ -807,8 +801,6 @@ Partial Class FrmDbUpdate
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtHouseNo As Windows.Forms.TextBox
     Friend WithEvents CbOcc As Windows.Forms.ComboBox
     Friend WithEvents CbMarStat As Windows.Forms.ComboBox
     Friend WithEvents CbGender As Windows.Forms.ComboBox

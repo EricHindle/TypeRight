@@ -112,7 +112,7 @@ Public Class FrmEditButton
             Me.Close()
         End If
     End Sub
-    Private Function isValidated() As Boolean
+    Private Function IsValidated() As Boolean
         Dim isOK As Boolean = True
         If txtCaption.TextLength = 0 Then
             LblErrs.Text &= "Missing Caption | "

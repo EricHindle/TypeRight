@@ -1,15 +1,14 @@
-﻿Public Class sender
+﻿Public Class Sender
     Private _id As Integer
     Private _firstname As String
     Private _lastname As String
+    Private _address1 As String
     Private _address2 As String
     Private _town As String
     Private _county As String
     Private _postcode As String
     Private _dob As DateTime
     Private _title As String
-    Private _housenumber As String
-    Private _street As String
     Private _country As String
     Private _email As String
     Private _phone As String
@@ -92,20 +91,12 @@
             _title = value
         End Set
     End Property
-    Public Property HouseNumber() As String
+    Public Property Address1() As String
         Get
-            Return _housenumber
+            Return _address1
         End Get
         Set(ByVal value As String)
-            _housenumber = value
-        End Set
-    End Property
-    Public Property Street() As String
-        Get
-            Return _street
-        End Get
-        Set(ByVal value As String)
-            _street = value
+            _address1 = value
         End Set
     End Property
     Public Property Country() As String
@@ -198,8 +189,7 @@
         PostCode = ""
         DateOfBirth = Date.MinValue
         Title = ""
-        HouseNumber = ""
-        Street = ""
+        Address1 = ""
         Country = ""
         Email = ""
         Phone = ""
@@ -220,8 +210,7 @@
                     pPostCode As String,
                     pDateOfBirth As DateTime,
                     pTitle As String,
-                    pHouseNumber As String,
-                    pStreet As String,
+                    pAddress1 As String,
                     pCountry As String,
                     pEmail As String,
                     pPhone As String,
@@ -242,8 +231,7 @@
         PostCode = pPostCode
         DateOfBirth = pDateOfBirth
         Title = pTitle
-        HouseNumber = pHouseNumber
-        Street = pStreet
+        Address1 = pAddress1
         Country = pCountry
         Email = pEmail
         Phone = pPhone

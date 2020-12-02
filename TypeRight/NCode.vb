@@ -3,8 +3,8 @@
     Private Const BYTES_TO_A_WORD As Long = 4
     Private Const BITS_TO_A_WORD As Long = BYTES_TO_A_WORD * BITS_TO_A_BYTE
 
-    Private m_lOnBits(0 To 30) As Long
-    Private m_l2Power(0 To 30) As Long
+    Private ReadOnly m_lOnBits(0 To 30) As Long
+    Private ReadOnly m_l2Power(0 To 30) As Long
 
     Public Sub New()
         Class_Initialize()
@@ -548,14 +548,15 @@
     ' value
     '*******************************************************************************
     Private Function WordToHex(ByVal lValue As Long) As String
+        Dim wHex As String = ""
         Dim lByte As Long
         Dim lCount As Long
-
         For lCount = 0 To 3
             lByte = RShift(lValue, lCount * BITS_TO_A_BYTE) And
                 m_lOnBits(BITS_TO_A_BYTE - 1)
-            WordToHex = WordToHex & Right("0" & Hex(lByte), 2)
+            wHex &= Right("0" & Hex(lByte), 2)
         Next
+        Return wHex
     End Function
 
     '*******************************************************************************

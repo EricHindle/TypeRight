@@ -56,7 +56,6 @@ Public Class FrmOptions
     Private Sub FrmOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GetFormPos(Me, My.Settings.OptionsPos)
         CbToolBar.Checked = bToolBar
-        chkSplash.Checked = bSplash
         cbMinimise.Checked = bMinimise
         If isPro Then
             'Image2.Visible = True
@@ -64,9 +63,7 @@ Public Class FrmOptions
             GrpLicence.Enabled = False
         Else
             nudDelay.Visible = False
-            chkSplash.Checked = True
             CbToolBar.Checked = False
-            chkSplash.Enabled = False
             CbToolBar.Enabled = False
             'Image2.Visible = False
             'Image1.Visible = True
@@ -109,4 +106,5 @@ Public Class FrmOptions
         My.Settings.ButtonListPos = "10~10~423~124"
         My.Settings.Save()
     End Sub
+
 End Class

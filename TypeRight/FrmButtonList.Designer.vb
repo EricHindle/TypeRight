@@ -30,6 +30,7 @@ Partial Class FrmButtonList
         Me.ImgTack = New System.Windows.Forms.PictureBox()
         Me.cbNames = New System.Windows.Forms.ComboBox()
         Me.BtnReDraw = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.mnuPopup = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,12 +56,12 @@ Partial Class FrmButtonList
         Me.PicOptions = New System.Windows.Forms.PictureBox()
         Me.PicLock = New System.Windows.Forms.PictureBox()
         Me.RedClock = New System.Windows.Forms.PictureBox()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.GroupButtonPanel = New System.Windows.Forms.Panel()
         Me.DelayTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
         Me.SenderButtonPanel = New System.Windows.Forms.Panel()
+        Me.ProgressTimer = New System.Windows.Forms.Timer(Me.components)
         Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuPopup.SuspendLayout()
@@ -85,6 +86,7 @@ Partial Class FrmButtonList
         Me.GrpTop.Controls.Add(Me.ImgTack)
         Me.GrpTop.Controls.Add(Me.cbNames)
         Me.GrpTop.Controls.Add(Me.BtnReDraw)
+        Me.GrpTop.Controls.Add(Me.ProgressBar1)
         Me.GrpTop.Location = New System.Drawing.Point(0, 0)
         Me.GrpTop.Margin = New System.Windows.Forms.Padding(0)
         Me.GrpTop.Name = "GrpTop"
@@ -141,6 +143,14 @@ Partial Class FrmButtonList
         Me.BtnReDraw.TabIndex = 0
         Me.BtnReDraw.Text = "Go"
         Me.BtnReDraw.UseVisualStyleBackColor = True
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(5, 11)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(110, 21)
+        Me.ProgressBar1.TabIndex = 8
+        Me.ProgressBar1.Visible = False
         '
         'mnuPopup
         '
@@ -253,7 +263,6 @@ Partial Class FrmButtonList
         Me.GrpBottom.Controls.Add(Me.PicOptions)
         Me.GrpBottom.Controls.Add(Me.PicLock)
         Me.GrpBottom.Controls.Add(Me.RedClock)
-        Me.GrpBottom.Controls.Add(Me.ProgressBar1)
         Me.GrpBottom.Location = New System.Drawing.Point(0, 387)
         Me.GrpBottom.Margin = New System.Windows.Forms.Padding(0)
         Me.GrpBottom.Name = "GrpBottom"
@@ -281,6 +290,7 @@ Partial Class FrmButtonList
         Me.GreenClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.GreenClock.TabIndex = 5
         Me.GreenClock.TabStop = False
+        Me.GreenClock.Visible = False
         '
         'PicExit
         '
@@ -332,14 +342,7 @@ Partial Class FrmButtonList
         Me.RedClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.RedClock.TabIndex = 0
         Me.RedClock.TabStop = False
-        '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.Location = New System.Drawing.Point(6, 8)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(82, 21)
-        Me.ProgressBar1.TabIndex = 7
-        Me.ProgressBar1.Visible = False
+        Me.RedClock.Visible = False
         '
         'NotifyIcon1
         '
@@ -359,6 +362,9 @@ Partial Class FrmButtonList
         Me.GroupButtonPanel.Size = New System.Drawing.Size(120, 161)
         Me.GroupButtonPanel.TabIndex = 4
         '
+        'DelayTimer
+        '
+        '
         'TypeRightDataSet
         '
         Me.TypeRightDataSet.DataSetName = "TypeRightDataSet"
@@ -373,6 +379,9 @@ Partial Class FrmButtonList
         Me.SenderButtonPanel.Name = "SenderButtonPanel"
         Me.SenderButtonPanel.Size = New System.Drawing.Size(120, 161)
         Me.SenderButtonPanel.TabIndex = 5
+        '
+        'ProgressTimer
+        '
         '
         'FrmButtonList
         '
@@ -440,9 +449,10 @@ Partial Class FrmButtonList
     Friend WithEvents WhiteClock As Windows.Forms.PictureBox
     Friend WithEvents GreenClock As Windows.Forms.PictureBox
     Friend WithEvents TypeRightDataSet As TypeRightDataSet
-    Friend WithEvents ProgressBar1 As Windows.Forms.ProgressBar
     Friend WithEvents DelayTimer As Windows.Forms.Timer
     Friend WithEvents SenderButtonPanel As Windows.Forms.Panel
     Friend WithEvents BtnAddCol As Windows.Forms.Button
     Friend WithEvents BtnRmvCol As Windows.Forms.Button
+    Friend WithEvents ProgressTimer As Windows.Forms.Timer
+    Friend WithEvents ProgressBar1 As Windows.Forms.ProgressBar
 End Class
