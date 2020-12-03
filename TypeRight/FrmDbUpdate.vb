@@ -208,7 +208,7 @@ Public Class FrmDbUpdate
             If Not .IsTownNull Then
                 TxtTown.Text = .Town
             End If
-            If .IsCountyNull Then
+            If Not .IsCountyNull Then
                 TxtCounty.Text = .County
             End If
             If Not .IsCountryNull Then

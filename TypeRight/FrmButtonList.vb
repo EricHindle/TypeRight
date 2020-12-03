@@ -211,7 +211,7 @@ Public Class FrmButtonList
             End If
 
             'strKeyText = getDBFields(strKeyText)
-
+            Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
             If GreenClock.Visible = True Then
                 RedClock.Visible = True
                 GreenClock.Visible = False
@@ -327,7 +327,6 @@ Public Class FrmButtonList
             strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
 
             AddButton(B + iBct, strButtonCaption, strButtonValue, strButtonFont, 9.0, strButtonHint, False, False)
-            Debug.Print(strButtonTxt)
             B += 1
         Next
 
@@ -417,7 +416,6 @@ Public Class FrmButtonList
         For Each oBtn In oList
             AddHandler oBtn.Click, AddressOf Button_Click
             oPanel.Controls.Add(oBtn)
-            Debug.Print(oBtn.Caption)
             oBtn.Top = 1 + (iBtnRow * 27)
             oBtn.Left = 1 + (iBtnCol * iButtonWidth)
             oBtn.Size = New Drawing.Size(iButtonWidth, 27)

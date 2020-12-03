@@ -339,6 +339,18 @@ Partial Friend NotInheritable Class Settings
             Me("ButtonListPos") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("2.0.4")>  _
+    Public Property Version() As String
+        Get
+            Return CType(Me("Version"),String)
+        End Get
+        Set
+            Me("Version") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

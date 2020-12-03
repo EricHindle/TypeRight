@@ -113,8 +113,22 @@ Module TypeRightMain
 #End Region
 #Region "common subroutines"
     Public Sub InitialiseApplication()
+        Dim thisVersion As String = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build & "." & My.Application.Info.Version.Revision
+        ' Preserve previous version user application settings
+        Dim isVersionChange As Boolean = False
+        Dim oldVersion As String = My.Settings.Version
+        If oldVersion <> thisVersion Then
+            isVersionChange = True
+            My.Settings.Upgrade()
+        End If
+        My.Settings.Version = thisVersion
+        My.Settings.Save()
         LogUtil.LogFolder = My.Settings.LogFolder
         LogUtil.StartLogging()
+        If isVersionChange Then
+            LogUtil.Info("Version change " & oldVersion & " >> " & My.Settings.Version)
+            LogUtil.Info("Upgrading settings")
+        End If
         sLicName = ""
         sLicCode = ""
         isPro = False
