@@ -62,6 +62,9 @@ Partial Class FrmButtonList
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
         Me.SenderButtonPanel = New System.Windows.Forms.Panel()
         Me.ProgressTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.ResetPositionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuPopup.SuspendLayout()
@@ -154,26 +157,26 @@ Partial Class FrmButtonList
         '
         'mnuPopup
         '
-        Me.mnuPopup.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptions, Me.ShowToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.mnuPopup.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptions, Me.ToolStripSeparator4, Me.ShowToolStripMenuItem, Me.ResetPositionToolStripMenuItem, Me.ToolStripSeparator3, Me.ExitToolStripMenuItem})
         Me.mnuPopup.Name = "mnuPopup"
-        Me.mnuPopup.Size = New System.Drawing.Size(117, 70)
+        Me.mnuPopup.Size = New System.Drawing.Size(181, 126)
         '
         'mnuOptions
         '
         Me.mnuOptions.Name = "mnuOptions"
-        Me.mnuOptions.Size = New System.Drawing.Size(116, 22)
+        Me.mnuOptions.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptions.Text = "&Options"
         '
         'ShowToolStripMenuItem
         '
         Me.ShowToolStripMenuItem.Name = "ShowToolStripMenuItem"
-        Me.ShowToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.ShowToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ShowToolStripMenuItem.Text = "&Show"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'mnuButtons
@@ -383,6 +386,22 @@ Partial Class FrmButtonList
         'ProgressTimer
         '
         '
+        'ResetPositionToolStripMenuItem
+        '
+        Me.ResetPositionToolStripMenuItem.Name = "ResetPositionToolStripMenuItem"
+        Me.ResetPositionToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ResetPositionToolStripMenuItem.Text = "Reset position"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(177, 6)
+        '
         'FrmButtonList
         '
         Me.ClientSize = New System.Drawing.Size(122, 421)
@@ -455,4 +474,7 @@ Partial Class FrmButtonList
     Friend WithEvents BtnRmvCol As Windows.Forms.Button
     Friend WithEvents ProgressTimer As Windows.Forms.Timer
     Friend WithEvents ProgressBar1 As Windows.Forms.ProgressBar
+    Friend WithEvents ResetPositionToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripSeparator4 As Windows.Forms.ToolStripSeparator
 End Class

@@ -230,5 +230,16 @@ Module TypeRightMain
         Dim newFont As Font = New Font(p_FontName, p_FontSize, newStyle)
         Return newFont
     End Function
+
+    Public Function GetValueBetweenBrackets(sKeyText As String, Optional marker1 As String = "(", Optional marker2 As String = ")")
+        Dim value As String = ""
+        Dim parts1 As String() = Split(sKeyText, marker1)
+        Dim parts2 As String()
+        If parts1.Length > 1 Then
+            parts2 = Split(parts1(1), marker2)
+            value = parts2(0)
+        End If
+        Return value
+    End Function
 #End Region
 End Module

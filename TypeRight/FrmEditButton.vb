@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Data
 Imports System.Windows.Forms
 
 Public Class FrmEditButton
@@ -10,6 +11,7 @@ Public Class FrmEditButton
 
     Private ReadOnly oTextUtil As NTextUtil
     Private _button As NbuttonControlLibrary.Nbutton
+    Private ReadOnly oTable As New TypeRight.TypeRightDataSet.sendersDataTable
     Public Property Button() As NbuttonControlLibrary.Nbutton
         Get
             Return _button
@@ -19,11 +21,16 @@ Public Class FrmEditButton
         End Set
     End Property
     Private Sub FrmEditButton_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.EditButtonPos)
-        Me.SendersTableAdapter.Fill(Me.TypeRightDataSet.senders)
+        For Each _col As DataColumn In oTable.Columns
+            CbDbValue.Items.Add(_col.ColumnName)
+        Next
+
         grpOpts.Visible = isPro
         chkEncrypt.Checked = False
         If _button IsNot Nothing Then
+            LogUtil.Info("Editing button " & _button.Caption)
             iSeq = _button.Sequence
             iGrp = _button.Group
             iId = _button.Id
@@ -42,13 +49,6 @@ Public Class FrmEditButton
 
         End If
 
-        'If bUserDefinedGroup Then
-        '    LblDbField.Visible = False
-        '    CbDbValue.Visible = False
-        'Else
-        '    LblDbField.Visible = True
-        '    CbDbValue.Visible = True
-        'End If
         Dim oTextUtil As New NTextUtil
         CtrlOn = False
         AltOn = False
@@ -79,7 +79,7 @@ Public Class FrmEditButton
 
         Dim isEncrypted As Boolean
         Dim strNewText As String
-        If isValidated() Then
+        If IsValidated() Then
             If isPro And chkEncrypt.Checked Then
                 isEncrypted = True
                 strNewText = oNCrypter.EncryptData(TxtValue.Text)
@@ -304,8 +304,18 @@ Public Class FrmEditButton
         End If
     End Sub
 
-    Private Sub FrmEditButton_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub FrmEditButton_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.EditButtonPos = SetFormPos(Me)
         My.Settings.Save()
+        LogUtil.Info("Closing", MyBase.Name)
+    End Sub
+
+    Private Sub BtnField_Click(sender As Object, e As EventArgs) Handles BtnField.Click
+        If CbDbValue.SelectedIndex >= 0 Then
+            Dim pos As Long
+            pos = TxtValue.SelectionStart
+            TxtValue.Text = TxtValue.Text.Substring(0, pos) + "?=" + CbDbValue.SelectedItem + "=?" + Mid(TxtValue.Text, pos + 1)
+            TxtValue.SelectionStart = pos + Len(CbDbValue.SelectedItem) + 2
+        End If
     End Sub
 End Class

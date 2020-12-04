@@ -3,6 +3,7 @@ Imports System.Drawing
 
 Public Class FrmOptions
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
+        LogUtil.Info("Closing", MyBase.Name)
         Me.Close()
     End Sub
     Private Sub BtnDfltFont_Click(sender As Object, e As EventArgs) Handles BtnDfltFont.Click
@@ -17,6 +18,7 @@ Public Class FrmOptions
         End With
     End Sub
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles BtnOK.Click
+        LogUtil.Info("Updating Options", MyBase.Name)
         iDelay = nudDelay.Value
         If isPro = False Then
             sLicName = TxtLicName.Text
@@ -34,6 +36,10 @@ Public Class FrmOptions
             End If
         End If
         bOnTop = cbOnTop.Checked
+        My.Settings.DebugOn = CbDebug.Checked
+        LogUtil.IsDebugOn = CbDebug.Checked
+        My.Settings.LogFolder = TxtLogFolder.Text.Trim
+        My.Settings.BackupFolder = TxtBkUpFolder.Text.Trim
         My.Settings.ButtonWidth = HScroll1.Value
         My.Settings.Transparency = Slider1.Value
         My.Settings.Delay = iDelay
@@ -51,22 +57,25 @@ Public Class FrmOptions
         My.Settings.FontBold = bDfltFontBold
         My.Settings.FontItalic = bDfltFontItalic
         My.Settings.Save()
+        LogUtil.Info("Saved", MyBase.Name)
+        LogUtil.Info("Closing", MyBase.Name)
         Me.Close()
     End Sub
     Private Sub FrmOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.OptionsPos)
         CbToolBar.Checked = bToolBar
         cbMinimise.Checked = bMinimise
         If isPro Then
-            'Image2.Visible = True
-            'Image1.Visible = False
+            Image2.Visible = True
+            Image1.Visible = False
             GrpLicence.Enabled = False
         Else
             nudDelay.Visible = False
             CbToolBar.Checked = False
             CbToolBar.Enabled = False
-            'Image2.Visible = False
-            'Image1.Visible = True
+            Image2.Visible = False
+            Image1.Visible = True
             GrpLicence.Enabled = True
         End If
         TxtLicName.Text = sLicName
@@ -74,15 +83,15 @@ Public Class FrmOptions
         TxtLic2.Text = Mid(sLicCode, 5, 4)
         TxtLic3.Text = Mid(sLicCode, 9, 4)
         TxtLic4.Text = Mid(sLicCode, 13, 4)
-        '   lOrigWidth = frmButtonList.cmdText(0).Width
-        'BtnSample.Caption = Format(frmButtonList.cmdText(0).Width)
-        'BtnSample.Width = frmButtonList.cmdText(0).Width
-        'HScroll1.Value = frmButtonList.cmdText(0).Width
         Slider1.Value = iTransPerc
         cbOnTop.Checked = bOnTop
         nudDelay.Text = Format(iDelay)
         BtnDfltFont.Text = sDfltFontName & " " & Format(iDfltFontSize)
         BtnDfltFont.Font = MakeFont(sDfltFontName, iDfltFontSize, bDfltFontBold, bDfltFontItalic)
+        TxtBkUpFolder.Text = My.Settings.BackupFolder
+        TxtLogFolder.Text = My.Settings.LogFolder
+        CbDebug.Checked = My.Settings.DebugOn
+        LblVersion.Text = System.String.Format(LblVersion.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
     End Sub
     Private Sub HScroll1_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles HScroll1.Scroll
         BtnSample.Text = Format(HScroll1.Value)
@@ -106,5 +115,9 @@ Public Class FrmOptions
         My.Settings.ButtonListPos = "10~10~423~124"
         My.Settings.Save()
     End Sub
-
+    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
+        lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
+        StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(pText, MyBase.Name)
+    End Sub
 End Class

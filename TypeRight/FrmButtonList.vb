@@ -31,6 +31,7 @@ Public Class FrmButtonList
     Private ReadOnly bDrag As Boolean
     Private ReadOnly iDragBtnIndex As Integer
     Dim redClockText As String
+    Dim fieldRow As TypeRightDataSet.senderButtonRow
 #End Region
 #Region "form control handlers"
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -149,6 +150,10 @@ Public Class FrmButtonList
                 EditButton(_btn)
                 LoadGroupButtons(_btn.Group)
                 DrawButtons()
+            Else
+                EditSenderButton(_btn)
+                LoadSenderButtons(iCurrSender)
+                DrawButtons()
             End If
         End If
     End Sub
@@ -185,6 +190,12 @@ Public Class FrmButtonList
             End If
         End Using
     End Sub
+    Private Sub EditSenderButton(_btn As Nbutton)
+        Using _editForm As New FrmSenderButtonFormat
+            _editForm.StartField = _btn.Caption
+            Dim rtnValue As DialogResult = _editForm.ShowDialog
+        End Using
+    End Sub
     Private Sub FillNamesList()
         Dim _senders As TypeRightDataSet.sendersDataTable = GetSenders()
         Dim _groups As TypeRightDataSet.buttongroupsDataTable = GetButtonGroups()
@@ -210,7 +221,8 @@ Public Class FrmButtonList
                 strKeyText = oNCrypter.DecryptData(strKeyText)
             End If
 
-            'strKeyText = getDBFields(strKeyText)
+            strKeyText = GetDBFields(strKeyText)
+
             Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
             If GreenClock.Visible = True Then
                 RedClock.Visible = True
@@ -227,33 +239,16 @@ Public Class FrmButtonList
                 SendKeys.Send("%{ESC}")
                 SendKeys.Send(strKeyText)
             End If
-            ' flip to previous window
-            '''keybd_event(System.Windows.Forms.Keys.Menu, 0, 0, 0) ' press Alt
-            '''keybd_event(System.Windows.Forms.Keys.Escape, 0, 0, 0) ' press tab
-            '''keybd_event(System.Windows.Forms.Keys.Escape, 0, KEYEVENTF_KEYUP, 0) ' release Tab
-            '''keybd_event(System.Windows.Forms.Keys.Menu, 0, KEYEVENTF_KEYUP, 0) ' release Alt
-            '''post_keys(strKeyText)
-            'Else
-            '    If imgClock(1).Visible = True Then
-            '        imgClock(1).Visible = False
-            '        imgClock(2).Visible = True
-            '        'UPGRADE_WARNING: Timer property DelayTimer.Interval cannot have a value of 0. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="169ECF4A-1968-402D-B243-16603CC08604"'
-
-            '        secondTimer.Interval = 500
-            '        secondTimer.Enabled = True
-            '    End If
-            'End If
-
-
         End If
     End Sub
     Private Sub LoadSenderButtons(sndKey As Integer)
         senderButtonList.Clear()
         'Dim sSql As String
         'Dim strBct As String
-        Dim B As Integer
+
         Dim strButtonTxt As String
         Dim strButtonValue As String
+
         'Dim xxx As String
         'Dim yyy As String
         Dim fname As String
@@ -312,31 +307,45 @@ Public Class FrmButtonList
         End If
         fulladdr = addBuilder.ToString
         strAge = Format(Calc_age(dtDob))
-
-        AddButton(1, "Full Name", fullname, strButtonFont, 9.0, fullname.Substring(0, Math.Min(fullname.Length, 50)), False, False)
-        AddButton(2, "Full Addr", fulladdr, strButtonFont, 9.0, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)), False, False)
-
-        iBct = 2
-        '   B = 1
-
-
+        iBct = 0
         For Each _col As DataColumn In oTable.Columns
+            fieldRow = GetSenderButton(_col.ColumnName)
             strButtonValue = If(IsDBNull(oRow(_col.ColumnName)), "", oRow(_col.ColumnName))
+            If fieldRow IsNot Nothing AndAlso CBool(fieldRow.buttonEncrypted) Then
+                strButtonValue = oNCrypter.DecryptData(strButtonValue)
+            End If
             strButtonTxt = _col.ColumnName
             strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 10))
             strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
-
-            AddButton(B + iBct, strButtonCaption, strButtonValue, strButtonFont, 9.0, strButtonHint, False, False)
-            B += 1
+            AddSenderButton(iBct, strButtonCaption, strButtonValue, strButtonHint)
+            iBct += 1
         Next
-
-        AddButton(B + iBct, "Age", strAge, strButtonFont, 9.0, strAge, False, False)
+        AddSenderButton(iBct, "Full Name", fullname, fullname.Substring(0, Math.Min(fullname.Length, 50)))
+        iBct += 1
+        AddSenderButton(iBct, "Full Addr", fulladdr, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)))
+        iBct += 1
+        AddSenderButton(iBct, "Age", strAge, strAge)
 
     End Sub
-    Private Sub AddButton(btnSeq As Integer, btnCaption As String, btnValue As String, btnFontName As String, btnSize As Single,
-                          btnHint As String, isBold As Boolean, isItalic As Boolean)
+    Private Sub AddSenderButton(btnSeq As Integer, btnCaption As String, btnValue As String, btnHint As String)
+        Dim isButtonBold As Boolean
+        Dim isButtonItalic As Boolean
+        Dim strButtonFontName As String
+        Dim dButtonFontSize As Decimal
+        Dim oSenderButton As TypeRight.TypeRightDataSet.senderButtonRow = GetSenderButton(btnCaption)
+        If oSenderButton IsNot Nothing Then
+            isButtonBold = oSenderButton.buttonBold
+            isButtonItalic = oSenderButton.buttonItalic
+            strButtonFontName = oSenderButton.buttonFontName
+            dButtonFontSize = oSenderButton.buttonFontSize
+        Else
+            strButtonFontName = "Tahoma"
+            isButtonBold = False
+            isButtonItalic = False
+            dButtonFontSize = 9.0
+        End If
         If btnValue IsNot Nothing AndAlso Not String.IsNullOrEmpty(btnValue) Then
-            Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(-1, -1, btnSeq, btnCaption, btnHint, btnValue, btnFontName, btnSize, isBold, isItalic, False, Nbutton.DataSource.Sender).Build
+            Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(-1, -1, btnSeq, btnCaption, btnHint, btnValue, strButtonFontName, dButtonFontSize, isButtonBold, isButtonItalic, False, Nbutton.DataSource.Sender).Build
             senderButtonList.Add(_nbutton)
         End If
 
@@ -452,12 +461,14 @@ Public Class FrmButtonList
         Me.TopMost = bOnTop
     End Sub
     Private Sub ShowGroupMaint(_action As GroupAction)
+        LogUtil.Info("Showing groups")
         Using _grpMaint As New FrmGroupMaint
             _grpMaint.Action = _action
             _grpMaint.ShowDialog()
         End Using
     End Sub
     Private Sub ShowOptions()
+        LogUtil.Info("Showing options")
         Using _options As New FrmOptions
             _options.ShowDialog()
             LoadOptions()
@@ -485,9 +496,11 @@ Public Class FrmButtonList
         Me.Close()
     End Sub
     Private Sub SavePosition()
+        LogUtil.Info("Saved screen position")
         My.Settings.ButtonListPos = SetFormPos(Me)
     End Sub
     Private Sub PicLock_Click(sender As Object, e As EventArgs) Handles PicLock.Click
+        LogUtil.Info("Lock timer on")
         GreenClock.Visible = True
         WhiteClock.Visible = False
         RedClock.Visible = False
@@ -495,12 +508,14 @@ Public Class FrmButtonList
         bLockClock = True
     End Sub
     Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
+        LogUtil.Info("Clock tick")
         ProgressTimer.Enabled = False
         DelayTimer.Enabled = False
         ProgressBar1.Visible = False
         ProgressBar1.SendToBack()
 
         If RedClock.Visible Then
+            LogUtil.Info("Red clock - posting keys")
             SendKeys.Send("%{ESC}")
             SendKeys.Send(redClockText)
             RedClock.Visible = False
@@ -513,11 +528,14 @@ Public Class FrmButtonList
 
     End Sub
     Private Sub Clock_Click(sender As Object, e As EventArgs) Handles WhiteClock.Click, GreenClock.Click, RedClock.Click
+        LogUtil.Info("Clock click")
         If WhiteClock.Visible Then
+            LogUtil.Info("White clock")
             GreenClock.Visible = True
             WhiteClock.Visible = False
         Else
             If GreenClock.Visible Then
+                LogUtil.Info("Green clock")
                 WhiteClock.Visible = True
                 GreenClock.Visible = False
                 DelayTimer.Enabled = False
@@ -526,97 +544,50 @@ Public Class FrmButtonList
             End If
         End If
     End Sub
-    Private Sub Clock_DoubleClick(sender As Object, e As EventArgs) Handles WhiteClock.DoubleClick, GreenClock.DoubleClick, RedClock.DoubleClick
-        If Not (bLockClock) Then
-            bLockClock = True
-            PicLock.Visible = True
-        End If
-    End Sub
     Private Sub BtnRmvCol_Click(sender As Object, e As EventArgs) Handles BtnRmvCol.Click
         If iColCt > 1 Then
+            LogUtil.Info("Remove a button list column")
             iColCt -= 1
             DrawButtons()
         End If
         Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
     End Sub
     Private Sub BtnAddCol_Click(sender As Object, e As EventArgs) Handles BtnAddCol.Click
+
         If (groupButtonList.Count / (iColCt + 1) > 1) Or (senderButtonList.Count / (iColCt + 1) > 1) Then
+            LogUtil.Info("Add a button list column")
             iColCt += 1
             DrawButtons()
         End If
         Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
     End Sub
-    Private Function GetDBFields(ByRef sKeyText As String) As String
-        'Dim iFldCt As Short
-        'Dim iFldNo As Short
-
-        'Dim iActGrpNo As Short
-        'Dim sSql As String
-        'Dim iStrLen As Short
-        'Dim iCPos As Short
-        'Dim sChar As String
-        'Dim sNewText As String
-        'Dim sFieldName As String
-        'Dim bFieldFound As Boolean
-        'Dim sFieldValue As String
-
-        'iActGrpNo = VB6.GetItemData(cboNames, cboNames.SelectedIndex)
-
-        ''  Set db2 = New ADODB.Connection
-        'rsSender2 = New ADODB.Recordset
-        ''  db2.Open sDbName
-        'sSql = "SELECT * from " & sSenderTable & " WHERE AddressId = " & VB6.Format(iActGrpNo)
-        'rsSender2.CursorType = ADODB.CursorTypeEnum.adOpenForwardOnly
-        'rsSender2.LockType = ADODB.LockTypeEnum.adLockReadOnly
-        'rsSender2.Open(sSql, Db,  ,  , ADODB.CommandTypeEnum.adCmdText)
-
-        'iFldCt = rsSender2.Fields.Count
-
-        'iStrLen = Len(sKeyText)
-
-        'For iCPos = 1 To iStrLen
-        '    sChar = Mid(sKeyText, iCPos, 1)
-        '    If sChar = "{" Then
-        '        'UPGRADE_WARNING: Couldn't resolve default property of object GetValueBetweenBrackets(). Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6A50421D-15FE-4896-8A1B-2EC21E9037B2"'
-        '        sFieldName = GetValueBetweenBrackets(sKeyText, iCPos)
-        '        bFieldFound = False
-        '        For iFldNo = 1 To iFldCt - 1
-        '            If rsSender2.Fields(iFldNo).Name = sFieldName Then
-        '                bFieldFound = True
-        '                Exit For
-        '            End If
-        '        Next iFldNo
-        '        If bFieldFound Then
-        '            sFieldValue = rsSender2.Fields(iFldNo).Value
-        '            Select Case LCase(rsSender2.Fields(iFldNo).Name)
-        '                Case "passwd"
-        '                    sFieldValue = oNCrypter.Decrypt(sFieldValue, APP_STRING, False, NetWYrks.frezCryptoEncryptionType.frezBlockEncryption)
-        '                Case "secretword"
-        '                    sFieldValue = oNCrypter.Decrypt(sFieldValue, APP_STRING, False, NetWYrks.frezCryptoEncryptionType.frezBlockEncryption)
-        '            End Select
-        '            sNewText = sNewText & sFieldValue
-        '        Else
-        '            sNewText = sNewText & "{" & sFieldName & "}"
-        '        End If
-
-        '    Else
-        '        sNewText = sNewText & sChar
-        '    End If
-        'Next iCPos
-
-        'GetDBFields = sNewText
-        'rsSender2.Close()
-        '' db2.Close
-        ''UPGRADE_NOTE: Object rsSender2 may not be destroyed until it is garbage collected. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="6E35BFF6-CD74-4B09-9689-3E1A43DF8969"'
-        'rsSender2 = Nothing
-        '' Set db2 = Nothing
-        Return Nothing
+    Private Function GetDBFields(ByVal sKeyText As String) As String
+        Dim fieldName As String
+        Dim fieldStartMarker As String = "?="
+        Dim fieldEndMarker As String = "=?"
+        Dim fieldValue As String
+        Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(iCurrSender)
+        '     Dim oTable As New TypeRightDataSet.sendersDataTable
+        Dim newText As String = sKeyText
+        fieldName = GetValueBetweenBrackets(newText, fieldStartMarker, fieldEndMarker)
+        Do Until String.IsNullOrEmpty(fieldName)
+            fieldRow = GetSenderButton(fieldName)
+            fieldValue = If(IsDBNull(oRow(fieldName)), "", CStr(oRow(fieldName)))
+            If fieldRow IsNot Nothing AndAlso CBool(fieldRow.buttonEncrypted) Then
+                fieldValue = oNCrypter.DecryptData(fieldValue)
+            End If
+            newText = newText.Replace(fieldStartMarker & fieldName & fieldEndMarker, fieldValue)
+            fieldName = GetValueBetweenBrackets(newText, fieldStartMarker, fieldEndMarker)
+        Loop
+        Return newText
     End Function
     Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing")
         SavePosition()
         NotifyIcon1.Visible = False
     End Sub
     Private Sub PicDatabase_Click(sender As Object, e As EventArgs) Handles PicDatabase.Click
+        LogUtil.Info("Updating Database")
         Using _dbUpdate As New FrmDbUpdate
             _dbUpdate.SenderId = iCurrSender
             _dbUpdate.ShowDialog()
@@ -630,6 +601,11 @@ Public Class FrmButtonList
                 ProgressBar1.Value = 0
             End If
         End If
+    End Sub
+    Private Sub ResetPositionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetPositionToolStripMenuItem.Click
+        LogUtil.Info("Resetting button list position")
+        Me.Top = 50
+        Me.Left = 50
     End Sub
 
 #End Region

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmEditButton
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,13 +20,14 @@ Partial Class FrmEditButton
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEditButton))
         Me.grpOpts = New System.Windows.Forms.GroupBox()
         Me.chkEncrypt = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BtnField = New System.Windows.Forms.Button()
         Me.BtnCloseBracket = New System.Windows.Forms.Button()
         Me.BtnOpenBracket = New System.Windows.Forms.Button()
         Me.BtnTilde = New System.Windows.Forms.Button()
@@ -53,7 +54,6 @@ Partial Class FrmEditButton
         Me.BtnCloseCurlyBracket = New System.Windows.Forms.Button()
         Me.BtnOpenCurlyBracket = New System.Windows.Forms.Button()
         Me.CbDbValue = New System.Windows.Forms.ComboBox()
-        Me.SendersBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
         Me.TxtPreview = New System.Windows.Forms.RichTextBox()
         Me.TxtValue = New System.Windows.Forms.RichTextBox()
@@ -82,13 +82,11 @@ Partial Class FrmEditButton
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtCaption = New System.Windows.Forms.TextBox()
-        Me.SendersTableAdapter = New TypeRight.TypeRightDataSetTableAdapters.sendersTableAdapter()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.LblErrs = New System.Windows.Forms.Label()
         Me.grpOpts.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.SendersBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuEdit.SuspendLayout()
         Me.SuspendLayout()
@@ -118,6 +116,7 @@ Partial Class FrmEditButton
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.BtnField)
         Me.GroupBox1.Controls.Add(Me.BtnCloseBracket)
         Me.GroupBox1.Controls.Add(Me.BtnOpenBracket)
         Me.GroupBox1.Controls.Add(Me.BtnTilde)
@@ -151,6 +150,15 @@ Partial Class FrmEditButton
         Me.GroupBox1.Size = New System.Drawing.Size(369, 381)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
+        '
+        'BtnField
+        '
+        Me.BtnField.Location = New System.Drawing.Point(282, 43)
+        Me.BtnField.Name = "BtnField"
+        Me.BtnField.Size = New System.Drawing.Size(71, 23)
+        Me.BtnField.TabIndex = 26
+        Me.BtnField.Text = "<Insert"
+        Me.BtnField.UseVisualStyleBackColor = True
         '
         'BtnCloseBracket
         '
@@ -421,21 +429,13 @@ Partial Class FrmEditButton
         '
         'CbDbValue
         '
-        Me.CbDbValue.DataSource = Me.SendersBindingSource
-        Me.CbDbValue.DisplayMember = "sendername"
         Me.CbDbValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CbDbValue.FormattingEnabled = True
-        Me.CbDbValue.Location = New System.Drawing.Point(83, 43)
+        Me.CbDbValue.Location = New System.Drawing.Point(15, 43)
         Me.CbDbValue.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.CbDbValue.Name = "CbDbValue"
-        Me.CbDbValue.Size = New System.Drawing.Size(270, 24)
+        Me.CbDbValue.Size = New System.Drawing.Size(256, 24)
         Me.CbDbValue.TabIndex = 0
-        Me.CbDbValue.ValueMember = "senderid"
-        '
-        'SendersBindingSource
-        '
-        Me.SendersBindingSource.DataMember = "senders"
-        Me.SendersBindingSource.DataSource = Me.TypeRightDataSet
         '
         'TypeRightDataSet
         '
@@ -650,10 +650,6 @@ Partial Class FrmEditButton
         Me.txtCaption.Size = New System.Drawing.Size(209, 24)
         Me.txtCaption.TabIndex = 0
         '
-        'SendersTableAdapter
-        '
-        Me.SendersTableAdapter.ClearBeforeFill = True
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -718,7 +714,6 @@ Partial Class FrmEditButton
         Me.grpOpts.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.SendersBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mnuEdit.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -777,8 +772,6 @@ Partial Class FrmEditButton
     Friend WithEvents TOGGLECASEToolStripMenuItem As Windows.Forms.ToolStripMenuItem
     Friend WithEvents txtCaption As Windows.Forms.TextBox
     Friend WithEvents TypeRightDataSet As TypeRightDataSet
-    Friend WithEvents SendersBindingSource As Windows.Forms.BindingSource
-    Friend WithEvents SendersTableAdapter As TypeRightDataSetTableAdapters.sendersTableAdapter
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents Label6 As Windows.Forms.Label
     Friend WithEvents LblErrs As Windows.Forms.Label
@@ -788,4 +781,5 @@ Partial Class FrmEditButton
     Friend WithEvents BtnOpenBracket As Windows.Forms.Button
     Friend WithEvents BtnTilde As Windows.Forms.Button
     Friend WithEvents BtnPlus As Windows.Forms.Button
+    Friend WithEvents BtnField As Windows.Forms.Button
 End Class

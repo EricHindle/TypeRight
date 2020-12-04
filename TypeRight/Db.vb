@@ -6,6 +6,8 @@
     Private ReadOnly oBtnTable As New TypeRightDataSet.buttonDataTable
     Private ReadOnly oSndTa As New TypeRightDataSetTableAdapters.sendersTableAdapter
     Private ReadOnly oSndTable As New TypeRightDataSet.sendersDataTable
+    Private ReadOnly oSndBtnTa As New TypeRightDataSetTableAdapters.senderButtonTableAdapter
+    Private ReadOnly oSndBtnTable As New TypeRightDataSet.senderButtonDataTable
 #End Region
 #Region "buttons"
     Public Function GetButtons()
@@ -104,4 +106,24 @@
         Return oSndTa.DeleteSender(_id)
     End Function
 #End Region
+#Region "senderbuttons"
+    Public Function GetSenderButton(columnName As String) As TypeRight.TypeRightDataSet.senderButtonRow
+        Dim oRow As TypeRight.TypeRightDataSet.senderButtonRow = Nothing
+        oSndBtnTa.FillByColName(oSndBtnTable, columnName)
+        If oSndBtnTable.Rows.Count = 1 Then
+            oRow = oSndBtnTable.Rows(0)
+        End If
+        Return oRow
+    End Function
+    Public Function DeleteSenderButton(columnName As String) As Integer
+        Return oSndBtnTa.DeleteSenderButton(columnName)
+    End Function
+    Public Function InsertSenderButton(ColumnName As String, buttonFontName As String, buttonFontSize As Decimal, buttonItalic As Boolean, buttonBold As Boolean, buttonEncrypted As Boolean) As Integer
+        Return oSndBtnTa.InsertSenderButton(ColumnName, CByte(buttonBold), CByte(buttonItalic), buttonFontName, buttonFontSize, CByte(buttonEncrypted))
+    End Function
+    Public Function UpdateSenderButton(ColumnName As String, buttonFontName As String, buttonFontSize As Decimal, buttonItalic As Boolean, buttonBold As Boolean, buttonEncrypted As Boolean) As Integer
+        Return oSndBtnTa.UpdateSenderButton(CByte(buttonBold), CByte(buttonItalic), buttonFontName, buttonFontSize, CByte(buttonEncrypted), ColumnName)
+    End Function
+#End Region
+
 End Module

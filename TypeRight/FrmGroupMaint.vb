@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Windows.Forms
 
 Public Class FrmGroupMaint
     Private _action As GroupAction
@@ -152,11 +153,7 @@ Public Class FrmGroupMaint
         Me.ButtongroupsTableAdapter.Fill(Me.TypeRightDataSet.buttongroups)
     End Sub
 
-    Private Sub Nbutton1_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub FrmGroupMaint_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub FrmGroupMaint_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.GroupMaintPos = SetFormPos(Me)
         My.Settings.Save()
     End Sub

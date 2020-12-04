@@ -151,7 +151,7 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("9")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
     Public Property FontSize() As Decimal
         Get
             Return CType(Me("FontSize"),Decimal)
@@ -349,6 +349,18 @@ Partial Friend NotInheritable Class Settings
         End Get
         Set
             Me("Version") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property SndrBtnFormPos() As String
+        Get
+            Return CType(Me("SndrBtnFormPos"),String)
+        End Get
+        Set
+            Me("SndrBtnFormPos") = value
         End Set
     End Property
 End Class
