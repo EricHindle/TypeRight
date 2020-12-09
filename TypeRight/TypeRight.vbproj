@@ -260,6 +260,7 @@
     <None Include="images\lock.bmp" />
     <None Include="images\menu_left.jpg" />
     <None Include="images\menu_right.jpg" />
+    <None Include="images\minimise.jpg" />
     <Content Include="images\options.bmp" />
     <None Include="images\redclock.bmp" />
     <Content Include="images\tackdown.bmp" />

@@ -608,5 +608,8 @@ Public Class FrmButtonList
         Me.Left = 50
     End Sub
 
+    Private Sub BtnMinimise_Click(sender As Object, e As EventArgs) Handles BtnMinimise.Click, mnuMinimise.Click, MnuMinimise1.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
 #End Region
 End Class
