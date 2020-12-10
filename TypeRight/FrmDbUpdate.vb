@@ -2,6 +2,8 @@
 Imports System.Data
 Imports System.IO
 Imports System.Text
+Imports System.Windows.Forms
+
 Public Class FrmDbUpdate
 #Region "variables"
     Private ReadOnly bAdd As Boolean
@@ -13,6 +15,7 @@ Public Class FrmDbUpdate
     Dim oSndTable As New TypeRight.TypeRightDataSet.sendersDataTable
     Dim oBtnTable As New TypeRight.TypeRightDataSet.buttonDataTable
     Dim oSndrTable As New TypeRight.TypeRightDataSet.sendersDataTable
+    Dim oSndrBtnTable As New TypeRight.TypeRightDataSet.senderButtonDataTable
     Dim oGrpTable As New TypeRight.TypeRightDataSet.buttongroupsDataTable
     Dim oSndRow As TypeRight.TypeRightDataSet.sendersRow = Nothing
 #End Region
@@ -40,56 +43,53 @@ Public Class FrmDbUpdate
         Me.Close()
     End Sub
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
-        If isValid() Then
+        If IsValid() Then
+            ShowStatus("Inserting new sender", True)
             InsertSender(StoreSenderValues())
             LoadSenderTable()
+            ShowStatus("Inserted new sender", True)
         End If
     End Sub
+
+    Private Sub ShowStatus(sText As String, isLogged As Boolean)
+        LblStatus.Text = sText
+        If isLogged Then LogUtil.Info(sText, MyBase.Name)
+    End Sub
+
     Private Sub BtnUpd_Click(sender As Object, e As EventArgs) Handles BtnUpd.Click
-        If isValid() Then
+        If IsValid() Then
+            ShowStatus("Updating sender", True)
             UpdateSender(StoreSenderValues())
             LoadSenderTable()
+            ShowStatus("Updated sender", True)
         End If
     End Sub
     Private Sub BtnDel_Click(sender As Object, e As EventArgs) Handles BtnDel.Click
         If Not String.IsNullOrEmpty(TxtId.Text) Then
+            ShowStatus("Deleting sender", True)
             DeleteSender(CInt(TxtId.Text))
+            LoadSenderTable()
+            ShowStatus("Deleted sender", True)
+            ShowRecord(0, "first")
         End If
-        Display_Sender()
-        SetAllowUpdate()
     End Sub
     Private Sub BtnTop_Click(sender As Object, e As EventArgs) Handles BtnTop.Click
-        If oSndTable.Rows.Count > 0 Then
-            iCurrSnd = 0
-            oSndRow = oSndTable.Rows(iCurrSnd)
-            TxtId.Text = CStr(oSndRow.SenderId)
-        End If
+        ShowRecord(0, "first")
     End Sub
     Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles BtnPrev.Click
-        If oSndTable.Rows.Count > 0 AndAlso iCurrSnd > 0 Then
-            iCurrSnd -= 1
-            oSndRow = oSndTable.Rows(iCurrSnd)
-            TxtId.Text = CStr(oSndRow.SenderId)
+        If iCurrSnd > 0 Then
+            ShowRecord(iCurrSnd - 1, "previous")
         End If
     End Sub
     Private Sub BtnNext_Click(sender As Object, e As EventArgs) Handles BtnNext.Click
-
         If oSndTable.Rows.Count > 0 AndAlso iCurrSnd < (oSndTable.Rows.Count - 1) Then
-            iCurrSnd += 1
-            oSndRow = oSndTable.Rows(iCurrSnd)
-            TxtId.Text = CStr(oSndRow.SenderId)
+            ShowRecord(iCurrSnd + 1, "next")
         End If
     End Sub
     Private Sub BtnEnd_Click(sender As Object, e As EventArgs) Handles BtnEnd.Click
         If oSndTable.Rows.Count > 0 Then
-            iCurrSnd = oSndTable.Rows.Count - 1
-            oSndRow = oSndTable.Rows(iCurrSnd)
-            TxtId.Text = CStr(oSndRow.SenderId)
+            ShowRecord(oSndTable.Rows.Count - 1, "last")
         End If
-    End Sub
-    Private Sub FrmDbUpdate_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        My.Settings.DBUpdatePos = SetFormPos(Me)
-        My.Settings.Save()
     End Sub
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         TxtId.Text = -1
@@ -106,18 +106,22 @@ Public Class FrmDbUpdate
         Me.Close()
     End Sub
     Private Sub MnuBkUpDatabase_Click(sender As Object, e As EventArgs) Handles MnuBkUpDatabase.Click
-        dataBackupSenders()
+        DataBackupSenders()
     End Sub
     Private Sub MnuBkUpButtons_Click(sender As Object, e As EventArgs) Handles MnuBkUpButtons.Click
-        dataBackupButtons()
+        DataBackupButtons()
     End Sub
     Private Sub MnuBkUpGroups_Click(sender As Object, e As EventArgs) Handles MnuBkUpGroups.Click
-        dataBackupGroups()
+        DataBackupGroups()
+    End Sub
+    Private Sub MnuBkUpSenderButtons_Click(sender As Object, e As EventArgs) Handles MnuBkUpSenderButtons.Click
+        DataBackupSenderButtons()
     End Sub
     Private Sub MnuBkUpAll_Click(sender As Object, e As EventArgs) Handles MnuBkUpAll.Click
-        dataBackupButtons()
-        dataBackupGroups()
-        dataBackupSenders()
+        DataBackupButtons()
+        DataBackupGroups()
+        DataBackupSenders()
+        DataBackupSenderButtons()
     End Sub
     Private Sub MnuRestDatabase_Click(sender As Object, e As EventArgs) Handles MnuRestDatabase.Click
     End Sub
@@ -126,6 +130,8 @@ Public Class FrmDbUpdate
     Private Sub MnuRestGroups_Click(sender As Object, e As EventArgs) Handles MnuRestGroups.Click
     End Sub
     Private Sub MnuRestAll_Click(sender As Object, e As EventArgs) Handles MnuRestAll.Click
+    End Sub
+    Private Sub MnuRestSenderButtons_Click(sender As Object, e As EventArgs) Handles MnuRestSenderButtons.Click
     End Sub
 #End Region
 #Region "subroutines"
@@ -222,7 +228,7 @@ Public Class FrmDbUpdate
             End If
             If Not .IsdobNull Then
                 DtpDob.Value = .dob
-                IntAge = calc_age(.dob)
+                IntAge = Calc_age(.dob)
                 TxtAge.Text = Format(IntAge)
             End If
             If Not .IsPostCodeNull Then
@@ -258,11 +264,11 @@ Public Class FrmDbUpdate
         If Not isPro And oSndTable.Rows.Count > 0 Then
             BtnAdd.Enabled = False
             BtnUpd.Enabled = False
-            LblMsg.Text = "** Record Limit Reached **"
+            LblStatus.Text = "** Record Limit Reached **"
         Else
             BtnAdd.Enabled = True
             BtnUpd.Enabled = True
-            LblMsg.Text = ""
+            LblStatus.Text = ""
         End If
     End Sub
     Public Shared Function Calc_age(dtDob) As Integer
@@ -310,49 +316,93 @@ Public Class FrmDbUpdate
 
     End Function
     Private Sub DataBackupButtons()
+        LogUtil.Info("Backup buttons", MyBase.Name)
         oBtnTable = GetButtons()
         Dim sTableName As String = oBtnTable.TableName
-        Dim sDbFullPath As String = My.Settings.BackupFolder
+        Dim sDbFullPath As String = GetBackupFolder()
         Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".csv")
+        LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
         Using _backupFile As New StreamWriter(sBackupFile, False)
             For Each oRow As TypeRight.TypeRightDataSet.buttonRow In oBtnTable.Rows
                 Dim sb As New StringBuilder()
-                For Each oCol In oBtnTable.Columns
-                    sb.Append(CStr(oRow(oCol.index).value)).Append(",")
+                For Each oCol As DataColumn In oBtnTable.Columns
+                    sb.Append(CStr(oRow(oCol.ColumnName))).Append(",")
                 Next
                 _backupFile.WriteLine(sb.ToString)
             Next
         End Using
     End Sub
     Private Sub DataBackupGroups()
+        LogUtil.Info("Backup groups", MyBase.Name)
         oGrpTable = GetButtonGroups()
         Dim sTableName As String = oGrpTable.TableName
-        Dim sDbFullPath As String = My.Settings.BackupFolder
+        Dim sDbFullPath As String = GetBackupFolder()
         Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".csv")
+        LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
         Using _backupFile As New StreamWriter(sBackupFile, False)
             For Each oRow As TypeRight.TypeRightDataSet.buttongroupsRow In oGrpTable.Rows
                 Dim sb As New StringBuilder()
-                For Each oCol In oGrpTable.Columns
-                    sb.Append(CStr(oRow(oCol.index).value)).Append(",")
+                For Each oCol As DataColumn In oGrpTable.Columns
+                    sb.Append(CStr(oRow(oCol.ColumnName))).Append(",")
                 Next
                 _backupFile.WriteLine(sb.ToString)
             Next
         End Using
     End Sub
     Private Sub DataBackupSenders()
+        LogUtil.Info("Backup senders", MyBase.Name)
         oSndrTable = GetSenders()
         Dim sTableName As String = oSndrTable.TableName
-        Dim sDbFullPath As String = My.Settings.BackupFolder
+        Dim sDbFullPath As String = GetBackupFolder()
         Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".csv")
+        LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
         Using _backupFile As New StreamWriter(sBackupFile, False)
             For Each oRow As TypeRight.TypeRightDataSet.sendersRow In oSndrTable.Rows
                 Dim sb As New StringBuilder()
-                For Each oCol In oSndrTable.Columns
-                    sb.Append(CStr(oRow(oCol.index).value)).Append(",")
+                For Each oCol As DataColumn In oSndrTable.Columns
+                    sb.Append(CStr(oRow(oCol.ColumnName))).Append(",")
                 Next
                 _backupFile.WriteLine(sb.ToString)
             Next
         End Using
+    End Sub
+    Private Sub DataBackupSenderButtons()
+        LogUtil.Info("Backup sender buttons", MyBase.Name)
+        oSndrBtnTable = GetSenderButtons()
+        Dim sTableName As String = oSndrBtnTable.TableName
+        Dim sDbFullPath As String = GetBackupFolder()
+        Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".csv")
+        LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
+        Using _backupFile As New StreamWriter(sBackupFile, False)
+            For Each oRow As TypeRight.TypeRightDataSet.senderButtonRow In oSndrBtnTable.Rows
+                Dim sb As New StringBuilder()
+                For Each oCol As DataColumn In oSndrBtnTable.Columns
+                    sb.Append(CStr(oRow(oCol.ColumnName))).Append(",")
+                Next
+                _backupFile.WriteLine(sb.ToString)
+            Next
+        End Using
+    End Sub
+    Private Sub FrmDbUpdate_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
+        My.Settings.DBUpdatePos = SetFormPos(Me)
+        My.Settings.Save()
+    End Sub
+    Private Function GetBackupFolder() As String
+        Dim sFolder As String = My.Settings.BackupFolder
+        If Not My.Computer.FileSystem.DirectoryExists(sFolder) Then
+            LogUtil.Info("Creating folder " & sFolder, MyBase.Name)
+            My.Computer.FileSystem.CreateDirectory(sFolder)
+        End If
+        Return sFolder
+    End Function
+    Private Sub ShowRecord(iRecord As Integer, sText As String)
+        If oSndTable.Rows.Count >= iRecord Then
+            LogUtil.Info("Go to " & sText & " record", MyBase.Name)
+            iCurrSnd = iRecord
+            oSndRow = oSndTable.Rows(iCurrSnd)
+            TxtId.Text = CStr(oSndRow.SenderId)
+        End If
     End Sub
 #End Region
 End Class

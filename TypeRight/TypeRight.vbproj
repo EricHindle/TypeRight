@@ -261,8 +261,10 @@
     <None Include="images\menu_left.jpg" />
     <None Include="images\menu_right.jpg" />
     <None Include="images\minimise.jpg" />
+    <None Include="images\menustrip.jpg" />
     <Content Include="images\options.bmp" />
     <None Include="images\redclock.bmp" />
+    <None Include="images\statusstrip.jpg" />
     <Content Include="images\tackdown.bmp" />
     <Content Include="images\tackdown2.bmp" />
     <Content Include="images\tackup.bmp" />

@@ -92,6 +92,8 @@ Partial Class FrmSenderButtonFormat
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
+        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 222)
         Me.StatusStrip1.Name = "StatusStrip1"
@@ -101,9 +103,13 @@ Partial Class FrmSenderButtonFormat
         '
         'LblStatus
         '
+        Me.LblStatus.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
+        Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.LblStatus.Name = "LblStatus"
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.LblStatus.Size = New System.Drawing.Size(6, 17)
+        Me.LblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'chkEncrypted
         '
@@ -129,9 +135,11 @@ Partial Class FrmSenderButtonFormat
         Me.Controls.Add(Me.BtnOK)
         Me.Controls.Add(Me.BtnCancel)
         Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.Name = "FrmSenderButtonFormat"
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Sender Button Format"
         Me.StatusStrip1.ResumeLayout(False)

@@ -32,7 +32,6 @@ Partial Class FrmGroupMaint
         Me.LblNewGroup = New System.Windows.Forms.Label()
         Me.TxtNewGroup = New System.Windows.Forms.TextBox()
         Me.LblTrans = New System.Windows.Forms.Label()
-        Me.LblConfirm = New System.Windows.Forms.Label()
         Me.LblThisBtn = New System.Windows.Forms.Label()
         Me.TxtGrpName = New System.Windows.Forms.TextBox()
         Me.TxtGrpNumber = New System.Windows.Forms.TextBox()
@@ -40,8 +39,11 @@ Partial Class FrmGroupMaint
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Nbutton1 = New NbuttonControlLibrary.Nbutton()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.ButtongroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'BtnCancel
@@ -112,15 +114,6 @@ Partial Class FrmGroupMaint
         Me.LblTrans.Text = "Move button to group"
         Me.LblTrans.Visible = False
         '
-        'LblConfirm
-        '
-        Me.LblConfirm.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LblConfirm.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LblConfirm.Location = New System.Drawing.Point(16, 220)
-        Me.LblConfirm.Name = "LblConfirm"
-        Me.LblConfirm.Size = New System.Drawing.Size(601, 33)
-        Me.LblConfirm.TabIndex = 6
-        '
         'LblThisBtn
         '
         Me.LblThisBtn.AutoSize = True
@@ -182,22 +175,43 @@ Partial Class FrmGroupMaint
         Me.Nbutton1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Nbutton1.Name = "Nbutton1"
         Me.Nbutton1.Sequence = 999
-        Me.Nbutton1.Size = New System.Drawing.Size(87, 34)
+        Me.Nbutton1.Size = New System.Drawing.Size(118, 52)
         Me.Nbutton1.TabIndex = 14
         Me.Nbutton1.Value = "?"
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
+        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 225)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(629, 22)
+        Me.StatusStrip1.TabIndex = 15
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'LblStatus
+        '
+        Me.LblStatus.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
+        Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
+        Me.LblStatus.Name = "LblStatus"
+        Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'FrmGroupMaint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(629, 262)
+        Me.ClientSize = New System.Drawing.Size(629, 247)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Nbutton1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtGrpNumber)
         Me.Controls.Add(Me.TxtGrpName)
         Me.Controls.Add(Me.LblThisBtn)
-        Me.Controls.Add(Me.LblConfirm)
         Me.Controls.Add(Me.LblTrans)
         Me.Controls.Add(Me.TxtNewGroup)
         Me.Controls.Add(Me.LblNewGroup)
@@ -205,13 +219,17 @@ Partial Class FrmGroupMaint
         Me.Controls.Add(Me.BtnUpdate)
         Me.Controls.Add(Me.BtnCancel)
         Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmGroupMaint"
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Group Maintenance"
         CType(Me.ButtongroupsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -223,7 +241,6 @@ Partial Class FrmGroupMaint
     Friend WithEvents LblNewGroup As Windows.Forms.Label
     Friend WithEvents TxtNewGroup As Windows.Forms.TextBox
     Friend WithEvents LblTrans As Windows.Forms.Label
-    Friend WithEvents LblConfirm As Windows.Forms.Label
     Friend WithEvents LblThisBtn As Windows.Forms.Label
     Friend WithEvents TxtGrpName As Windows.Forms.TextBox
     Friend WithEvents TxtGrpNumber As Windows.Forms.TextBox
@@ -233,4 +250,6 @@ Partial Class FrmGroupMaint
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents Label2 As Windows.Forms.Label
     Friend WithEvents Nbutton1 As NbuttonControlLibrary.Nbutton
+    Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
+    Friend WithEvents LblStatus As Windows.Forms.ToolStripStatusLabel
 End Class

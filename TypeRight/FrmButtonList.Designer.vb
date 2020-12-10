@@ -88,6 +88,8 @@ Partial Class FrmButtonList
         '
         Me.GrpTop.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GrpTop.BackgroundImage = Global.TypeRight.My.Resources.Resources.menustrip
+        Me.GrpTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.GrpTop.Controls.Add(Me.BtnMinimise)
         Me.GrpTop.Controls.Add(Me.BtnAddCol)
         Me.GrpTop.Controls.Add(Me.BtnRmvCol)
@@ -308,6 +310,8 @@ Partial Class FrmButtonList
         '
         Me.GrpBottom.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GrpBottom.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
+        Me.GrpBottom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.GrpBottom.Controls.Add(Me.WhiteClock)
         Me.GrpBottom.Controls.Add(Me.GreenClock)
         Me.GrpBottom.Controls.Add(Me.PicExit)

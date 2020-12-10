@@ -82,7 +82,7 @@ Partial Class FrmOptions
         Me.GrpLicence.Controls.Add(Me.TxtLic3)
         Me.GrpLicence.Controls.Add(Me.TxtLic2)
         Me.GrpLicence.Controls.Add(Me.TxtLic1)
-        Me.GrpLicence.Location = New System.Drawing.Point(12, 215)
+        Me.GrpLicence.Location = New System.Drawing.Point(12, 204)
         Me.GrpLicence.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GrpLicence.Name = "GrpLicence"
         Me.GrpLicence.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -173,7 +173,7 @@ Partial Class FrmOptions
         '
         'BtnDfltFont
         '
-        Me.BtnDfltFont.Location = New System.Drawing.Point(249, 53)
+        Me.BtnDfltFont.Location = New System.Drawing.Point(249, 42)
         Me.BtnDfltFont.Name = "BtnDfltFont"
         Me.BtnDfltFont.Size = New System.Drawing.Size(193, 31)
         Me.BtnDfltFont.TabIndex = 1
@@ -182,7 +182,7 @@ Partial Class FrmOptions
         '
         'BtnSample
         '
-        Me.BtnSample.Location = New System.Drawing.Point(249, 109)
+        Me.BtnSample.Location = New System.Drawing.Point(249, 98)
         Me.BtnSample.Name = "BtnSample"
         Me.BtnSample.Size = New System.Drawing.Size(80, 27)
         Me.BtnSample.TabIndex = 4
@@ -192,7 +192,7 @@ Partial Class FrmOptions
         'BtnCancel
         '
         Me.BtnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCancel.Location = New System.Drawing.Point(475, 351)
+        Me.BtnCancel.Location = New System.Drawing.Point(435, 351)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(94, 31)
         Me.BtnCancel.TabIndex = 10
@@ -202,7 +202,7 @@ Partial Class FrmOptions
         'BtnOK
         '
         Me.BtnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnOK.Location = New System.Drawing.Point(588, 351)
+        Me.BtnOK.Location = New System.Drawing.Point(548, 351)
         Me.BtnOK.Name = "BtnOK"
         Me.BtnOK.Size = New System.Drawing.Size(94, 31)
         Me.BtnOK.TabIndex = 11
@@ -211,7 +211,7 @@ Partial Class FrmOptions
         '
         'HScroll1
         '
-        Me.HScroll1.Location = New System.Drawing.Point(12, 59)
+        Me.HScroll1.Location = New System.Drawing.Point(12, 48)
         Me.HScroll1.Maximum = 450
         Me.HScroll1.Minimum = 120
         Me.HScroll1.Name = "HScroll1"
@@ -222,7 +222,7 @@ Partial Class FrmOptions
         'Slider1
         '
         Me.Slider1.LargeChange = 10
-        Me.Slider1.Location = New System.Drawing.Point(15, 109)
+        Me.Slider1.Location = New System.Drawing.Point(15, 98)
         Me.Slider1.Maximum = 100
         Me.Slider1.Minimum = 10
         Me.Slider1.Name = "Slider1"
@@ -235,7 +235,7 @@ Partial Class FrmOptions
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(12, 33)
+        Me.Label7.Location = New System.Drawing.Point(12, 22)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(91, 17)
         Me.Label7.TabIndex = 12
@@ -244,7 +244,7 @@ Partial Class FrmOptions
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(12, 89)
+        Me.Label8.Location = New System.Drawing.Point(12, 78)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(122, 17)
         Me.Label8.TabIndex = 14
@@ -253,7 +253,7 @@ Partial Class FrmOptions
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(267, 33)
+        Me.Label9.Location = New System.Drawing.Point(267, 22)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(134, 17)
         Me.Label9.TabIndex = 13
@@ -262,7 +262,7 @@ Partial Class FrmOptions
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(12, 172)
+        Me.Label10.Location = New System.Drawing.Point(12, 161)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(74, 17)
         Me.Label10.TabIndex = 15
@@ -274,7 +274,7 @@ Partial Class FrmOptions
         Me.GroupBox2.Controls.Add(Me.cbOnTop)
         Me.GroupBox2.Controls.Add(Me.CbToolBar)
         Me.GroupBox2.Controls.Add(Me.cbMinimise)
-        Me.GroupBox2.Location = New System.Drawing.Point(469, 31)
+        Me.GroupBox2.Location = New System.Drawing.Point(469, 20)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(121, 147)
         Me.GroupBox2.TabIndex = 2
@@ -323,7 +323,7 @@ Partial Class FrmOptions
         'nudDelay
         '
         Me.nudDelay.Increment = New Decimal(New Integer() {200, 0, 0, 0})
-        Me.nudDelay.Location = New System.Drawing.Point(92, 170)
+        Me.nudDelay.Location = New System.Drawing.Point(92, 159)
         Me.nudDelay.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudDelay.Minimum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudDelay.Name = "nudDelay"
@@ -333,22 +333,28 @@ Partial Class FrmOptions
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
+        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 395)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(694, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(654, 22)
         Me.StatusStrip1.TabIndex = 19
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'lblStatus
         '
+        Me.lblStatus.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
+        Me.lblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.lblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.lblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
-        Me.lblStatus.Size = New System.Drawing.Size(6, 17)
+        Me.lblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'BtnPosReset
         '
-        Me.BtnPosReset.Location = New System.Drawing.Point(249, 162)
+        Me.BtnPosReset.Location = New System.Drawing.Point(249, 151)
         Me.BtnPosReset.Name = "BtnPosReset"
         Me.BtnPosReset.Size = New System.Drawing.Size(145, 32)
         Me.BtnPosReset.TabIndex = 6
@@ -357,22 +363,22 @@ Partial Class FrmOptions
         '
         'TxtLogFolder
         '
-        Me.TxtLogFolder.Location = New System.Drawing.Point(428, 221)
+        Me.TxtLogFolder.Location = New System.Drawing.Point(428, 210)
         Me.TxtLogFolder.Name = "TxtLogFolder"
-        Me.TxtLogFolder.Size = New System.Drawing.Size(254, 24)
+        Me.TxtLogFolder.Size = New System.Drawing.Size(214, 24)
         Me.TxtLogFolder.TabIndex = 8
         '
         'TxtBkUpFolder
         '
-        Me.TxtBkUpFolder.Location = New System.Drawing.Point(428, 297)
+        Me.TxtBkUpFolder.Location = New System.Drawing.Point(428, 286)
         Me.TxtBkUpFolder.Name = "TxtBkUpFolder"
-        Me.TxtBkUpFolder.Size = New System.Drawing.Size(254, 24)
+        Me.TxtBkUpFolder.Size = New System.Drawing.Size(214, 24)
         Me.TxtBkUpFolder.TabIndex = 9
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(425, 201)
+        Me.Label6.Location = New System.Drawing.Point(425, 190)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(72, 17)
         Me.Label6.TabIndex = 16
@@ -381,7 +387,7 @@ Partial Class FrmOptions
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(425, 277)
+        Me.Label11.Location = New System.Drawing.Point(425, 266)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(94, 17)
         Me.Label11.TabIndex = 17
@@ -391,7 +397,7 @@ Partial Class FrmOptions
         '
         Me.LblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LblVersion.AutoSize = True
-        Me.LblVersion.Location = New System.Drawing.Point(9, 365)
+        Me.LblVersion.Location = New System.Drawing.Point(15, 365)
         Me.LblVersion.Name = "LblVersion"
         Me.LblVersion.Size = New System.Drawing.Size(156, 17)
         Me.LblVersion.TabIndex = 18
@@ -401,7 +407,7 @@ Partial Class FrmOptions
         '
         Me.Image1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Image1.Image = Global.TypeRight.My.Resources.Resources.TypeRight1
-        Me.Image1.Location = New System.Drawing.Point(12, 330)
+        Me.Image1.Location = New System.Drawing.Point(15, 330)
         Me.Image1.Name = "Image1"
         Me.Image1.Size = New System.Drawing.Size(150, 32)
         Me.Image1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -412,7 +418,7 @@ Partial Class FrmOptions
         '
         Me.Image2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Image2.Image = Global.TypeRight.My.Resources.Resources.TypeRight2
-        Me.Image2.Location = New System.Drawing.Point(12, 330)
+        Me.Image2.Location = New System.Drawing.Point(15, 330)
         Me.Image2.Name = "Image2"
         Me.Image2.Size = New System.Drawing.Size(200, 32)
         Me.Image2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -423,7 +429,7 @@ Partial Class FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(694, 417)
+        Me.ClientSize = New System.Drawing.Size(654, 417)
         Me.Controls.Add(Me.Image2)
         Me.Controls.Add(Me.Image1)
         Me.Controls.Add(Me.LblVersion)
@@ -447,9 +453,11 @@ Partial Class FrmOptions
         Me.Controls.Add(Me.BtnDfltFont)
         Me.Controls.Add(Me.GrpLicence)
         Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmOptions"
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "Options"
         Me.GrpLicence.ResumeLayout(False)
         Me.GrpLicence.PerformLayout()

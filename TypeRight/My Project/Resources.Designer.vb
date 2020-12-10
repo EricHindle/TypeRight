@@ -183,6 +183,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property menustrip() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("menustrip", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property minimise() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("minimise", resourceCulture)
@@ -206,6 +216,16 @@ Namespace My.Resources
         Friend ReadOnly Property redclock() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("redclock", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property statusstrip() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("statusstrip", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

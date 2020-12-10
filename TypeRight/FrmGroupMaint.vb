@@ -72,7 +72,7 @@ Public Class FrmGroupMaint
             Case GroupAction.GRP_ADD
                 LblThisBtn.Visible = False
                 Nbutton1.Visible = False
-                LblConfirm.Text = ""
+                LblStatus.Text = ""
                 LblNewGroup.Visible = False
                 TxtNewGroup.Visible = False
                 cmbGroups.Visible = False
@@ -86,7 +86,7 @@ Public Class FrmGroupMaint
             Case GroupAction.GRP_CHG
                 LblThisBtn.Visible = False
                 Nbutton1.Visible = False
-                LblConfirm.Text = ""
+                LblStatus.Text = ""
                 LblNewGroup.Visible = True
                 TxtNewGroup.Visible = True
                 cmbGroups.Visible = False
@@ -104,7 +104,7 @@ Public Class FrmGroupMaint
                 '               NButton1.Text = frmButtonList.cmdText(iCurrBtn).Text
                 LblThisBtn.Visible = True
                 Nbutton1.Visible = True
-                LblConfirm.Text = ""
+                LblStatus.Text = ""
                 LblNewGroup.Visible = False
                 TxtNewGroup.Visible = False
                 cmbGroups.Visible = True
@@ -130,9 +130,9 @@ Public Class FrmGroupMaint
                 End If
                 Dim btnTable As TypeRightDataSet.buttonDataTable = GetButtonsByGroup(iActGrp)
                 If btnTable.Rows.Count = 0 Then
-                    LblConfirm.Text = "** Click Update to confirm delete **"
+                    LblStatus.Text = "** Click Update to confirm delete **"
                 Else
-                    LblConfirm.Text = "** Group still has buttons **"
+                    LblStatus.Text = "** Group still has buttons **"
                     BtnUpdate.Enabled = False
                 End If
         End Select

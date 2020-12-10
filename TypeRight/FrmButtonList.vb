@@ -31,7 +31,6 @@ Public Class FrmButtonList
     Private ReadOnly bDrag As Boolean
     Private ReadOnly iDragBtnIndex As Integer
     Dim redClockText As String
-    Dim fieldRow As TypeRightDataSet.senderButtonRow
 #End Region
 #Region "form control handlers"
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -177,6 +176,104 @@ Public Class FrmButtonList
     Private Sub TransferToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransferToolStripMenuItem.Click
         ShowGroupMaint(GroupAction.GRP_TRANS)
     End Sub
+    Private Sub FrmButtonList_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
+        If Me.WindowState <> FormWindowState.Minimized Then
+            Me.ShowInTaskbar = False
+        End If
+    End Sub
+    Private Sub BtnMinimise_Click(sender As Object, e As EventArgs) Handles BtnMinimise.Click, mnuMinimise.Click, MnuMinimise1.Click
+        Me.ShowInTaskbar = True
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+    Private Sub ResetPositionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetPositionToolStripMenuItem.Click
+        LogUtil.Info("Resetting button list position")
+        Me.Top = 50
+        Me.Left = 50
+    End Sub
+    Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing")
+        SavePosition()
+        NotifyIcon1.Visible = False
+    End Sub
+    Private Sub PicDatabase_Click(sender As Object, e As EventArgs) Handles PicDatabase.Click
+        LogUtil.Info("Updating Database")
+        Using _dbUpdate As New FrmDbUpdate
+            _dbUpdate.SenderId = iCurrSender
+            _dbUpdate.ShowDialog()
+        End Using
+    End Sub
+    Private Sub ProgressTimer_Tick(sender As Object, e As EventArgs) Handles ProgressTimer.Tick
+        If ProgressBar1.Value > 0 Then
+            If ProgressBar1.Value >= ProgressTimer.Interval Then
+                ProgressBar1.Value -= ProgressTimer.Interval
+            Else
+                ProgressBar1.Value = 0
+            End If
+        End If
+    End Sub
+    Private Sub PicLock_Click(sender As Object, e As EventArgs) Handles PicLock.Click
+        LogUtil.Info("Lock timer on")
+        GreenClock.Visible = True
+        WhiteClock.Visible = False
+        RedClock.Visible = False
+        PicLock.Visible = False
+        bLockClock = True
+    End Sub
+    Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
+        LogUtil.Info("Clock tick")
+        ProgressTimer.Enabled = False
+        DelayTimer.Enabled = False
+        ProgressBar1.Visible = False
+        ProgressBar1.SendToBack()
+        If RedClock.Visible Then
+            LogUtil.Info("Red clock - posting keys")
+            SendKeys.Send("%{ESC}")
+            SendKeys.Send(redClockText)
+            RedClock.Visible = False
+        End If
+        If bLockClock Then
+            GreenClock.Visible = True
+        Else
+            WhiteClock.Visible = True
+        End If
+    End Sub
+    Private Sub Clock_Click(sender As Object, e As EventArgs) Handles WhiteClock.Click, GreenClock.Click, RedClock.Click
+        LogUtil.Info("Clock click")
+        If WhiteClock.Visible Then
+            LogUtil.Info("White clock")
+            GreenClock.Visible = True
+            WhiteClock.Visible = False
+        Else
+            If GreenClock.Visible Then
+                LogUtil.Info("Green clock")
+                WhiteClock.Visible = True
+                GreenClock.Visible = False
+                DelayTimer.Enabled = False
+                bLockClock = False
+                PicLock.Visible = True
+            End If
+        End If
+    End Sub
+    Private Sub BtnRmvCol_Click(sender As Object, e As EventArgs) Handles BtnRmvCol.Click
+        If iColCt > 1 Then
+            LogUtil.Info("Remove a button list column")
+            iColCt -= 1
+            DrawButtons()
+        End If
+        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
+    End Sub
+    Private Sub BtnAddCol_Click(sender As Object, e As EventArgs) Handles BtnAddCol.Click
+
+        If (groupButtonList.Count / (iColCt + 1) > 1) Or (senderButtonList.Count / (iColCt + 1) > 1) Then
+            LogUtil.Info("Add a button list column")
+            iColCt += 1
+            DrawButtons()
+        End If
+        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
+    End Sub
+    Private Sub ImgExit_Click(sender As Object, e As EventArgs) Handles PicExit.Click
+        Me.Close()
+    End Sub
 #End Region
 #Region "subroutines"
     Private Sub EditButton(_btn As Nbutton)
@@ -220,9 +317,7 @@ Public Class FrmButtonList
             If isPro And _nButton.Encrypt Then
                 strKeyText = oNCrypter.DecryptData(strKeyText)
             End If
-
             strKeyText = GetDBFields(strKeyText)
-
             Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
             If GreenClock.Visible = True Then
                 RedClock.Visible = True
@@ -242,15 +337,10 @@ Public Class FrmButtonList
         End If
     End Sub
     Private Sub LoadSenderButtons(sndKey As Integer)
+        LogUtil.Info("Fill button list with buttons for sender " & CStr(sndKey), MyBase.Name)
         senderButtonList.Clear()
-        'Dim sSql As String
-        'Dim strBct As String
-
         Dim strButtonTxt As String
         Dim strButtonValue As String
-
-        'Dim xxx As String
-        'Dim yyy As String
         Dim fname As String
         Dim lname As String
         Dim fullname As String
@@ -308,31 +398,30 @@ Public Class FrmButtonList
         fulladdr = addBuilder.ToString
         strAge = Format(Calc_age(dtDob))
         iBct = 0
+        Dim senderButton As TypeRightDataSet.senderButtonRow
         For Each _col As DataColumn In oTable.Columns
-            fieldRow = GetSenderButton(_col.ColumnName)
+            senderButton = GetSenderButton(_col.ColumnName)
             strButtonValue = If(IsDBNull(oRow(_col.ColumnName)), "", oRow(_col.ColumnName))
-            If fieldRow IsNot Nothing AndAlso CBool(fieldRow.buttonEncrypted) Then
+            If senderButton IsNot Nothing AndAlso CBool(senderButton.buttonEncrypted) Then
                 strButtonValue = oNCrypter.DecryptData(strButtonValue)
             End If
             strButtonTxt = _col.ColumnName
             strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 10))
             strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
-            AddSenderButton(iBct, strButtonCaption, strButtonValue, strButtonHint)
+            AddSenderButton(iBct, senderButton, strButtonCaption, strButtonValue, strButtonHint)
             iBct += 1
         Next
-        AddSenderButton(iBct, "Full Name", fullname, fullname.Substring(0, Math.Min(fullname.Length, 50)))
+        AddSenderButton(iBct, Nothing, "Full Name", fullname, fullname.Substring(0, Math.Min(fullname.Length, 50)))
         iBct += 1
-        AddSenderButton(iBct, "Full Addr", fulladdr, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)))
+        AddSenderButton(iBct, Nothing, "Full Addr", fulladdr, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)))
         iBct += 1
-        AddSenderButton(iBct, "Age", strAge, strAge)
-
+        AddSenderButton(iBct, Nothing, "Age", strAge, strAge)
     End Sub
-    Private Sub AddSenderButton(btnSeq As Integer, btnCaption As String, btnValue As String, btnHint As String)
+    Private Sub AddSenderButton(btnSeq As Integer, oSenderButton As TypeRightDataSet.senderButtonRow, btnCaption As String, btnValue As String, btnHint As String)
         Dim isButtonBold As Boolean
         Dim isButtonItalic As Boolean
         Dim strButtonFontName As String
         Dim dButtonFontSize As Decimal
-        Dim oSenderButton As TypeRight.TypeRightDataSet.senderButtonRow = GetSenderButton(btnCaption)
         If oSenderButton IsNot Nothing Then
             isButtonBold = oSenderButton.buttonBold
             isButtonItalic = oSenderButton.buttonItalic
@@ -348,7 +437,6 @@ Public Class FrmButtonList
             Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(-1, -1, btnSeq, btnCaption, btnHint, btnValue, strButtonFontName, dButtonFontSize, isButtonBold, isButtonItalic, False, Nbutton.DataSource.Sender).Build
             senderButtonList.Add(_nbutton)
         End If
-
     End Sub
     Private Sub AddButton(btnId As Integer, btnSeq As Integer,
                           btnCaption As String, btnValue As String, btnFontname As String, btnSize As Single,
@@ -361,9 +449,8 @@ Public Class FrmButtonList
                                                                             isItalic, isEncrypt, Nbutton.DataSource.Group).Build
             groupButtonList.Add(_nbutton)
         End If
-
     End Sub
-    Public Sub LoadGroupButtons(grpNo As Long)
+    Private Sub LoadGroupButtons(grpNo As Long)
         groupButtonList.Clear()
         Dim _nbb As New NButtonBuilder
         Dim undoButton As Nbutton = _nbb.StartingWith(0, grpNo, 0, "Undo", "", "^z", "Tahoma", 10, False, False, False, Nbutton.DataSource.Undefined).Build
@@ -378,16 +465,17 @@ Public Class FrmButtonList
         Next
     End Sub
     Private Sub DrawGroupButtons()
+        LogUtil.Info("Draw group buttons", MyBase.Name)
         lResizeActive = False
         RemoveGroupButtons()
         FillButtonPanel(GroupButtonPanel, groupButtonList)
         SenderButtonPanel.Top = GroupButtonPanel.Top + GroupButtonPanel.Height
         Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 36
-
         GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height
         lResizeActive = True
     End Sub
     Private Sub DrawSenderButtons()
+        LogUtil.Info("Draw sender buttons", MyBase.Name)
         lResizeActive = False
         RemoveSenderButtons()
         FillButtonPanel(SenderButtonPanel, senderButtonList)
@@ -402,6 +490,7 @@ Public Class FrmButtonList
         SenderButtonPanel.Controls.Clear()
     End Sub
     Friend Sub DrawButtons()
+        LogUtil.Info("Draw all buttons", MyBase.Name)
         lResizeActive = False
         ' Size of window
         Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
@@ -409,8 +498,8 @@ Public Class FrmButtonList
         DrawSenderButtons()
         lResizeActive = True
     End Sub
-
     Private Sub FillButtonPanel(ByRef oPanel As Panel, ByRef oList As List(Of Nbutton))
+        LogUtil.Info("Fill button panel " & oPanel.Name, MyBase.Name)
         iButtonCt = oList.Count
         oPanel.Width = Me.Width - FRAME_WIDTH
         Dim iRowCt As Integer = CInt(iButtonCt / iColCt)
@@ -449,9 +538,7 @@ Public Class FrmButtonList
         For Each _btn As Nbutton In oPanel.Controls
             AddHandler _btn.Button1.Click, AddressOf Button_Click
         Next
-
     End Sub
-
     Private Sub ImgTack_Click()
         If bOnTop Then
             ImgTack.Image = My.Resources.tackdown
@@ -474,7 +561,6 @@ Public Class FrmButtonList
             LoadOptions()
             Me.Opacity = iTransPerc / 100
             GrpBottom.Visible = bToolBar
-
         End Using
     End Sub
 #End Region
@@ -483,7 +569,6 @@ Public Class FrmButtonList
         Dim fmm As Integer
         Dim tmm As Integer
         Dim age As Integer
-
         fmm = Month(dtDob)
         tmm = Month(Now)
         age = Year(Now) - Year(dtDob)
@@ -492,74 +577,9 @@ Public Class FrmButtonList
         End If
         Calc_age = age
     End Function
-    Private Sub ImgExit_Click(sender As Object, e As EventArgs) Handles PicExit.Click
-        Me.Close()
-    End Sub
     Private Sub SavePosition()
         LogUtil.Info("Saved screen position")
         My.Settings.ButtonListPos = SetFormPos(Me)
-    End Sub
-    Private Sub PicLock_Click(sender As Object, e As EventArgs) Handles PicLock.Click
-        LogUtil.Info("Lock timer on")
-        GreenClock.Visible = True
-        WhiteClock.Visible = False
-        RedClock.Visible = False
-        PicLock.Visible = False
-        bLockClock = True
-    End Sub
-    Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
-        LogUtil.Info("Clock tick")
-        ProgressTimer.Enabled = False
-        DelayTimer.Enabled = False
-        ProgressBar1.Visible = False
-        ProgressBar1.SendToBack()
-
-        If RedClock.Visible Then
-            LogUtil.Info("Red clock - posting keys")
-            SendKeys.Send("%{ESC}")
-            SendKeys.Send(redClockText)
-            RedClock.Visible = False
-        End If
-        If bLockClock Then
-            GreenClock.Visible = True
-        Else
-            WhiteClock.Visible = True
-        End If
-
-    End Sub
-    Private Sub Clock_Click(sender As Object, e As EventArgs) Handles WhiteClock.Click, GreenClock.Click, RedClock.Click
-        LogUtil.Info("Clock click")
-        If WhiteClock.Visible Then
-            LogUtil.Info("White clock")
-            GreenClock.Visible = True
-            WhiteClock.Visible = False
-        Else
-            If GreenClock.Visible Then
-                LogUtil.Info("Green clock")
-                WhiteClock.Visible = True
-                GreenClock.Visible = False
-                DelayTimer.Enabled = False
-                bLockClock = False
-                PicLock.Visible = True
-            End If
-        End If
-    End Sub
-    Private Sub BtnRmvCol_Click(sender As Object, e As EventArgs) Handles BtnRmvCol.Click
-        If iColCt > 1 Then
-            LogUtil.Info("Remove a button list column")
-            iColCt -= 1
-            DrawButtons()
-        End If
-        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
-    End Sub
-    Private Sub BtnAddCol_Click(sender As Object, e As EventArgs) Handles BtnAddCol.Click
-
-        If (groupButtonList.Count / (iColCt + 1) > 1) Or (senderButtonList.Count / (iColCt + 1) > 1) Then
-            LogUtil.Info("Add a button list column")
-            iColCt += 1
-            DrawButtons()
-        End If
-        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
     End Sub
     Private Function GetDBFields(ByVal sKeyText As String) As String
         Dim fieldName As String
@@ -567,9 +587,9 @@ Public Class FrmButtonList
         Dim fieldEndMarker As String = "=?"
         Dim fieldValue As String
         Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(iCurrSender)
-        '     Dim oTable As New TypeRightDataSet.sendersDataTable
         Dim newText As String = sKeyText
         fieldName = GetValueBetweenBrackets(newText, fieldStartMarker, fieldEndMarker)
+        Dim fieldRow As TypeRightDataSet.senderButtonRow
         Do Until String.IsNullOrEmpty(fieldName)
             fieldRow = GetSenderButton(fieldName)
             fieldValue = If(IsDBNull(oRow(fieldName)), "", CStr(oRow(fieldName)))
@@ -581,35 +601,5 @@ Public Class FrmButtonList
         Loop
         Return newText
     End Function
-    Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing")
-        SavePosition()
-        NotifyIcon1.Visible = False
-    End Sub
-    Private Sub PicDatabase_Click(sender As Object, e As EventArgs) Handles PicDatabase.Click
-        LogUtil.Info("Updating Database")
-        Using _dbUpdate As New FrmDbUpdate
-            _dbUpdate.SenderId = iCurrSender
-            _dbUpdate.ShowDialog()
-        End Using
-    End Sub
-    Private Sub ProgressTimer_Tick(sender As Object, e As EventArgs) Handles ProgressTimer.Tick
-        If ProgressBar1.Value > 0 Then
-            If ProgressBar1.Value >= ProgressTimer.Interval Then
-                ProgressBar1.Value -= ProgressTimer.Interval
-            Else
-                ProgressBar1.Value = 0
-            End If
-        End If
-    End Sub
-    Private Sub ResetPositionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetPositionToolStripMenuItem.Click
-        LogUtil.Info("Resetting button list position")
-        Me.Top = 50
-        Me.Left = 50
-    End Sub
-
-    Private Sub BtnMinimise_Click(sender As Object, e As EventArgs) Handles BtnMinimise.Click, mnuMinimise.Click, MnuMinimise1.Click
-        Me.WindowState = FormWindowState.Minimized
-    End Sub
 #End Region
 End Class

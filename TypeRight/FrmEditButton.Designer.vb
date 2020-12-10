@@ -85,10 +85,13 @@ Partial Class FrmEditButton
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.LblErrs = New System.Windows.Forms.Label()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.grpOpts.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuEdit.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpOpts
@@ -675,18 +678,40 @@ Partial Class FrmEditButton
         Me.LblErrs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.LblErrs.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblErrs.ForeColor = System.Drawing.Color.Crimson
-        Me.LblErrs.Location = New System.Drawing.Point(17, 451)
+        Me.LblErrs.Location = New System.Drawing.Point(12, 451)
         Me.LblErrs.Name = "LblErrs"
-        Me.LblErrs.Size = New System.Drawing.Size(387, 32)
+        Me.LblErrs.Size = New System.Drawing.Size(392, 32)
         Me.LblErrs.TabIndex = 17
         Me.LblErrs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
+        Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 564)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(893, 22)
+        Me.StatusStrip1.TabIndex = 18
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'LblStatus
+        '
+        Me.LblStatus.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
+        Me.LblStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.LblStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.LblStatus.BorderStyle = System.Windows.Forms.Border3DStyle.Etched
+        Me.LblStatus.Name = "LblStatus"
+        Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.LblStatus.Size = New System.Drawing.Size(10, 17)
         '
         'FrmEditButton
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(880, 566)
+        Me.ClientSize = New System.Drawing.Size(893, 586)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.LblErrs)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label1)
@@ -706,9 +731,11 @@ Partial Class FrmEditButton
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.grpOpts)
         Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.Name = "FrmEditButton"
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "Edit Button"
         Me.grpOpts.ResumeLayout(False)
         Me.grpOpts.PerformLayout()
@@ -716,6 +743,8 @@ Partial Class FrmEditButton
         Me.GroupBox1.PerformLayout()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mnuEdit.ResumeLayout(False)
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -782,4 +811,6 @@ Partial Class FrmEditButton
     Friend WithEvents BtnTilde As Windows.Forms.Button
     Friend WithEvents BtnPlus As Windows.Forms.Button
     Friend WithEvents BtnField As Windows.Forms.Button
+    Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
+    Friend WithEvents LblStatus As Windows.Forms.ToolStripStatusLabel
 End Class
