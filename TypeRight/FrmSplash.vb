@@ -16,7 +16,5 @@
         End If
         Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build)
         Copyright.Text = My.Application.Info.Copyright
-
     End Sub
-
 End Class

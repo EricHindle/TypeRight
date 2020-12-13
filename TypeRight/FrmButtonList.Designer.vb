@@ -69,6 +69,7 @@ Partial Class FrmButtonList
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
         Me.SenderButtonPanel = New System.Windows.Forms.Panel()
         Me.ProgressTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.RemoveGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuPopup.SuspendLayout()
@@ -223,87 +224,87 @@ Partial Class FrmButtonList
         '
         Me.mnuButtons.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToClipboardToolStripMenuItem, Me.ToolStripSeparator1, Me.mnuNew, Me.mnuEdit, Me.mnuDelete, Me.ToolStripSeparator2, Me.mnuGroups, Me.mnuSep3, Me.mnuOptions1, Me.ToolStripSeparator5, Me.MnuMinimise1})
         Me.mnuButtons.Name = "mnuButtons"
-        Me.mnuButtons.Size = New System.Drawing.Size(172, 182)
+        Me.mnuButtons.Size = New System.Drawing.Size(181, 204)
         '
         'CopyToClipboardToolStripMenuItem
         '
         Me.CopyToClipboardToolStripMenuItem.Name = "CopyToClipboardToolStripMenuItem"
-        Me.CopyToClipboardToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.CopyToClipboardToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CopyToClipboardToolStripMenuItem.Text = "Copy to Clipboard"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(168, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'mnuNew
         '
         Me.mnuNew.Name = "mnuNew"
-        Me.mnuNew.Size = New System.Drawing.Size(171, 22)
+        Me.mnuNew.Size = New System.Drawing.Size(180, 22)
         Me.mnuNew.Text = "&New Button"
         '
         'mnuEdit
         '
         Me.mnuEdit.Name = "mnuEdit"
-        Me.mnuEdit.Size = New System.Drawing.Size(171, 22)
+        Me.mnuEdit.Size = New System.Drawing.Size(180, 22)
         Me.mnuEdit.Text = "&Edit Button"
         '
         'mnuDelete
         '
         Me.mnuDelete.Name = "mnuDelete"
-        Me.mnuDelete.Size = New System.Drawing.Size(171, 22)
+        Me.mnuDelete.Size = New System.Drawing.Size(180, 22)
         Me.mnuDelete.Text = "&Delete Button"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(168, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
         '
         'mnuGroups
         '
-        Me.mnuGroups.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddToolStripMenuItem, Me.ChangeNameToolStripMenuItem, Me.TransferToolStripMenuItem})
+        Me.mnuGroups.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddToolStripMenuItem, Me.ChangeNameToolStripMenuItem, Me.TransferToolStripMenuItem, Me.RemoveGroupToolStripMenuItem})
         Me.mnuGroups.Name = "mnuGroups"
-        Me.mnuGroups.Size = New System.Drawing.Size(171, 22)
+        Me.mnuGroups.Size = New System.Drawing.Size(180, 22)
         Me.mnuGroups.Text = "&Groups"
         '
         'AddToolStripMenuItem
         '
         Me.AddToolStripMenuItem.Name = "AddToolStripMenuItem"
-        Me.AddToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
-        Me.AddToolStripMenuItem.Text = "&Add"
+        Me.AddToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.AddToolStripMenuItem.Text = "&Add Group"
         '
         'ChangeNameToolStripMenuItem
         '
         Me.ChangeNameToolStripMenuItem.Name = "ChangeNameToolStripMenuItem"
-        Me.ChangeNameToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
-        Me.ChangeNameToolStripMenuItem.Text = "&Change Name"
+        Me.ChangeNameToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.ChangeNameToolStripMenuItem.Text = "&Change Group Name"
         '
         'TransferToolStripMenuItem
         '
         Me.TransferToolStripMenuItem.Name = "TransferToolStripMenuItem"
-        Me.TransferToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
-        Me.TransferToolStripMenuItem.Text = "&Transfer"
+        Me.TransferToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.TransferToolStripMenuItem.Text = "&Transfer Button"
         '
         'mnuSep3
         '
         Me.mnuSep3.Name = "mnuSep3"
-        Me.mnuSep3.Size = New System.Drawing.Size(168, 6)
+        Me.mnuSep3.Size = New System.Drawing.Size(177, 6)
         '
         'mnuOptions1
         '
         Me.mnuOptions1.Name = "mnuOptions1"
-        Me.mnuOptions1.Size = New System.Drawing.Size(171, 22)
+        Me.mnuOptions1.Size = New System.Drawing.Size(180, 22)
         Me.mnuOptions1.Text = "&Options"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(168, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(177, 6)
         '
         'MnuMinimise1
         '
         Me.MnuMinimise1.Name = "MnuMinimise1"
-        Me.MnuMinimise1.Size = New System.Drawing.Size(171, 22)
+        Me.MnuMinimise1.Size = New System.Drawing.Size(180, 22)
         Me.MnuMinimise1.Text = "Minimise"
         '
         'GrpBottom
@@ -439,6 +440,12 @@ Partial Class FrmButtonList
         'ProgressTimer
         '
         '
+        'RemoveGroupToolStripMenuItem
+        '
+        Me.RemoveGroupToolStripMenuItem.Name = "RemoveGroupToolStripMenuItem"
+        Me.RemoveGroupToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.RemoveGroupToolStripMenuItem.Text = "&Remove Group"
+        '
         'FrmButtonList
         '
         Me.ClientSize = New System.Drawing.Size(122, 421)
@@ -518,4 +525,5 @@ Partial Class FrmButtonList
     Friend WithEvents ToolStripSeparator5 As Windows.Forms.ToolStripSeparator
     Friend WithEvents MnuMinimise1 As Windows.Forms.ToolStripMenuItem
     Friend WithEvents BtnMinimise As Windows.Forms.Button
+    Friend WithEvents RemoveGroupToolStripMenuItem As Windows.Forms.ToolStripMenuItem
 End Class

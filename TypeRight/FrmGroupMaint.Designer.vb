@@ -29,7 +29,6 @@ Partial Class FrmGroupMaint
         Me.cmbGroups = New System.Windows.Forms.ComboBox()
         Me.ButtongroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
-        Me.LblNewGroup = New System.Windows.Forms.Label()
         Me.TxtNewGroup = New System.Windows.Forms.TextBox()
         Me.LblTrans = New System.Windows.Forms.Label()
         Me.LblThisBtn = New System.Windows.Forms.Label()
@@ -37,10 +36,12 @@ Partial Class FrmGroupMaint
         Me.TxtGrpNumber = New System.Windows.Forms.TextBox()
         Me.ButtongroupsTableAdapter = New TypeRight.TypeRightDataSetTableAdapters.buttongroupsTableAdapter()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Nbutton1 = New NbuttonControlLibrary.Nbutton()
+        Me.LblGroupName = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.LblNewGroupName = New System.Windows.Forms.Label()
+        Me.BtnCopy = New System.Windows.Forms.Button()
+        Me.Nbutton1 = New NbuttonControlLibrary.Nbutton()
         CType(Me.ButtongroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -48,7 +49,7 @@ Partial Class FrmGroupMaint
         '
         'BtnCancel
         '
-        Me.BtnCancel.Location = New System.Drawing.Point(532, 156)
+        Me.BtnCancel.Location = New System.Drawing.Point(520, 146)
         Me.BtnCancel.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(85, 37)
@@ -58,7 +59,7 @@ Partial Class FrmGroupMaint
         '
         'BtnUpdate
         '
-        Me.BtnUpdate.Location = New System.Drawing.Point(532, 111)
+        Me.BtnUpdate.Location = New System.Drawing.Point(520, 101)
         Me.BtnUpdate.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnUpdate.Name = "BtnUpdate"
         Me.BtnUpdate.Size = New System.Drawing.Size(85, 37)
@@ -71,9 +72,9 @@ Partial Class FrmGroupMaint
         Me.cmbGroups.DataSource = Me.ButtongroupsBindingSource
         Me.cmbGroups.DisplayMember = "groupname"
         Me.cmbGroups.FormattingEnabled = True
-        Me.cmbGroups.Location = New System.Drawing.Point(180, 165)
+        Me.cmbGroups.Location = New System.Drawing.Point(180, 156)
         Me.cmbGroups.Name = "cmbGroups"
-        Me.cmbGroups.Size = New System.Drawing.Size(301, 24)
+        Me.cmbGroups.Size = New System.Drawing.Size(253, 24)
         Me.cmbGroups.TabIndex = 2
         Me.cmbGroups.ValueMember = "buttongroupid"
         '
@@ -87,27 +88,18 @@ Partial Class FrmGroupMaint
         Me.TypeRightDataSet.DataSetName = "TypeRightDataSet"
         Me.TypeRightDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'LblNewGroup
-        '
-        Me.LblNewGroup.AutoSize = True
-        Me.LblNewGroup.Location = New System.Drawing.Point(24, 168)
-        Me.LblNewGroup.Name = "LblNewGroup"
-        Me.LblNewGroup.Size = New System.Drawing.Size(115, 17)
-        Me.LblNewGroup.TabIndex = 3
-        Me.LblNewGroup.Text = "New Group Name"
-        '
         'TxtNewGroup
         '
-        Me.TxtNewGroup.Location = New System.Drawing.Point(180, 165)
+        Me.TxtNewGroup.Location = New System.Drawing.Point(180, 118)
         Me.TxtNewGroup.Name = "TxtNewGroup"
-        Me.TxtNewGroup.Size = New System.Drawing.Size(313, 24)
+        Me.TxtNewGroup.Size = New System.Drawing.Size(253, 24)
         Me.TxtNewGroup.TabIndex = 4
         Me.TxtNewGroup.Visible = False
         '
         'LblTrans
         '
         Me.LblTrans.AutoSize = True
-        Me.LblTrans.Location = New System.Drawing.Point(24, 168)
+        Me.LblTrans.Location = New System.Drawing.Point(24, 156)
         Me.LblTrans.Name = "LblTrans"
         Me.LblTrans.Size = New System.Drawing.Size(145, 17)
         Me.LblTrans.TabIndex = 5
@@ -125,9 +117,9 @@ Partial Class FrmGroupMaint
         '
         'TxtGrpName
         '
-        Me.TxtGrpName.Location = New System.Drawing.Point(180, 96)
+        Me.TxtGrpName.Location = New System.Drawing.Point(180, 73)
         Me.TxtGrpName.Name = "TxtGrpName"
-        Me.TxtGrpName.Size = New System.Drawing.Size(313, 24)
+        Me.TxtGrpName.Size = New System.Drawing.Size(253, 24)
         Me.TxtGrpName.TabIndex = 9
         '
         'TxtGrpNumber
@@ -150,41 +142,21 @@ Partial Class FrmGroupMaint
         Me.Label1.TabIndex = 12
         Me.Label1.Text = "Group Number"
         '
-        'Label2
+        'LblGroupName
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(24, 99)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(84, 17)
-        Me.Label2.TabIndex = 13
-        Me.Label2.Text = "Group name"
-        '
-        'Nbutton1
-        '
-        Me.Nbutton1.Caption = Nothing
-        Me.Nbutton1.DataType = NbuttonControlLibrary.Nbutton.DataSource.Undefined
-        Me.Nbutton1.Encrypt = False
-        Me.Nbutton1.FontBold = False
-        Me.Nbutton1.FontItalic = False
-        Me.Nbutton1.FontName = "Tahoma"
-        Me.Nbutton1.FontSize = 10.0!
-        Me.Nbutton1.Group = 1
-        Me.Nbutton1.Hint = ""
-        Me.Nbutton1.Id = -1
-        Me.Nbutton1.Location = New System.Drawing.Point(467, 24)
-        Me.Nbutton1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Nbutton1.Name = "Nbutton1"
-        Me.Nbutton1.Sequence = 999
-        Me.Nbutton1.Size = New System.Drawing.Size(118, 52)
-        Me.Nbutton1.TabIndex = 14
-        Me.Nbutton1.Value = "?"
+        Me.LblGroupName.AutoSize = True
+        Me.LblGroupName.Location = New System.Drawing.Point(24, 76)
+        Me.LblGroupName.Name = "LblGroupName"
+        Me.LblGroupName.Size = New System.Drawing.Size(84, 17)
+        Me.LblGroupName.TabIndex = 13
+        Me.LblGroupName.Text = "Group name"
         '
         'StatusStrip1
         '
         Me.StatusStrip1.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 225)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 199)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(629, 22)
         Me.StatusStrip1.TabIndex = 15
@@ -200,21 +172,61 @@ Partial Class FrmGroupMaint
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.LblStatus.Size = New System.Drawing.Size(10, 17)
         '
+        'LblNewGroupName
+        '
+        Me.LblNewGroupName.AutoSize = True
+        Me.LblNewGroupName.Location = New System.Drawing.Point(24, 121)
+        Me.LblNewGroupName.Name = "LblNewGroupName"
+        Me.LblNewGroupName.Size = New System.Drawing.Size(115, 17)
+        Me.LblNewGroupName.TabIndex = 16
+        Me.LblNewGroupName.Text = "New Group Name"
+        '
+        'BtnCopy
+        '
+        Me.BtnCopy.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
+        Me.BtnCopy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnCopy.Location = New System.Drawing.Point(439, 118)
+        Me.BtnCopy.Name = "BtnCopy"
+        Me.BtnCopy.Size = New System.Drawing.Size(26, 23)
+        Me.BtnCopy.TabIndex = 17
+        Me.BtnCopy.UseVisualStyleBackColor = True
+        '
+        'Nbutton1
+        '
+        Me.Nbutton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Nbutton1.Caption = Nothing
+        Me.Nbutton1.DataType = NbuttonControlLibrary.Nbutton.DataSource.Undefined
+        Me.Nbutton1.Encrypt = False
+        Me.Nbutton1.FontBold = False
+        Me.Nbutton1.FontItalic = False
+        Me.Nbutton1.FontName = "Tahoma"
+        Me.Nbutton1.FontSize = 8.0!
+        Me.Nbutton1.Group = 1
+        Me.Nbutton1.Hint = ""
+        Me.Nbutton1.Id = -1
+        Me.Nbutton1.Location = New System.Drawing.Point(475, 24)
+        Me.Nbutton1.Name = "Nbutton1"
+        Me.Nbutton1.Sequence = 999
+        Me.Nbutton1.Size = New System.Drawing.Size(130, 38)
+        Me.Nbutton1.TabIndex = 18
+        Me.Nbutton1.Value = "?"
+        '
         'FrmGroupMaint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(629, 247)
-        Me.Controls.Add(Me.StatusStrip1)
+        Me.ClientSize = New System.Drawing.Size(629, 221)
         Me.Controls.Add(Me.Nbutton1)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.BtnCopy)
+        Me.Controls.Add(Me.LblNewGroupName)
+        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.LblGroupName)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TxtGrpNumber)
         Me.Controls.Add(Me.TxtGrpName)
         Me.Controls.Add(Me.LblThisBtn)
         Me.Controls.Add(Me.LblTrans)
         Me.Controls.Add(Me.TxtNewGroup)
-        Me.Controls.Add(Me.LblNewGroup)
         Me.Controls.Add(Me.cmbGroups)
         Me.Controls.Add(Me.BtnUpdate)
         Me.Controls.Add(Me.BtnCancel)
@@ -238,7 +250,6 @@ Partial Class FrmGroupMaint
     Friend WithEvents BtnCancel As Windows.Forms.Button
     Friend WithEvents BtnUpdate As Windows.Forms.Button
     Friend WithEvents cmbGroups As Windows.Forms.ComboBox
-    Friend WithEvents LblNewGroup As Windows.Forms.Label
     Friend WithEvents TxtNewGroup As Windows.Forms.TextBox
     Friend WithEvents LblTrans As Windows.Forms.Label
     Friend WithEvents LblThisBtn As Windows.Forms.Label
@@ -248,8 +259,10 @@ Partial Class FrmGroupMaint
     Friend WithEvents ButtongroupsBindingSource As Windows.Forms.BindingSource
     Friend WithEvents ButtongroupsTableAdapter As TypeRightDataSetTableAdapters.buttongroupsTableAdapter
     Friend WithEvents Label1 As Windows.Forms.Label
-    Friend WithEvents Label2 As Windows.Forms.Label
-    Friend WithEvents Nbutton1 As NbuttonControlLibrary.Nbutton
+    Friend WithEvents LblGroupName As Windows.Forms.Label
     Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
     Friend WithEvents LblStatus As Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents LblNewGroupName As Windows.Forms.Label
+    Friend WithEvents BtnCopy As Windows.Forms.Button
+    Friend WithEvents Nbutton1 As NbuttonControlLibrary.Nbutton
 End Class

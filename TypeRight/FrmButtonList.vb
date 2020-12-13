@@ -86,6 +86,10 @@ Public Class FrmButtonList
         isLoading = False
     End Sub
     Private Sub BtnReDraw_Click(sender As Object, e As EventArgs) Handles BtnReDraw.Click
+        RedrawButtons()
+    End Sub
+
+    Private Sub RedrawButtons()
         If cbNames.SelectedIndex > -1 Then
             iButtonCt = 0
             Dim btnVal As Integer = cbNames.SelectedValue
@@ -101,6 +105,7 @@ Public Class FrmButtonList
             Me.Text = cbNames.SelectedItem.value
         End If
     End Sub
+
     Private Sub ImgTack_Click(sender As Object, e As EventArgs) Handles ImgTack.Click
         bOnTop = Not (bOnTop)
         ImgTack_Click()
@@ -168,13 +173,20 @@ Public Class FrmButtonList
         End If
     End Sub
     Private Sub AddToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddToolStripMenuItem.Click
-        ShowGroupMaint(GroupAction.GRP_ADD)
+        ShowGroupMaint(GroupAction.GRP_ADD, Nothing)
     End Sub
     Private Sub ChangeNameToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeNameToolStripMenuItem.Click
-        ShowGroupMaint(GroupAction.GRP_CHG)
+        ShowGroupMaint(GroupAction.GRP_CHG, Nothing)
+    End Sub
+    Private Sub RemoveGroupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveGroupToolStripMenuItem.Click
+        ShowGroupMaint(GroupAction.GRP_RMV, Nothing)
     End Sub
     Private Sub TransferToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransferToolStripMenuItem.Click
-        ShowGroupMaint(GroupAction.GRP_TRANS)
+        Dim _menu As ToolStripDropDownMenu = CType(sender.Owner, ToolStripDropDownMenu)
+        Dim _menuTopItem As ToolStripMenuItem = CType(_menu.OwnerItem, ToolStripMenuItem)
+        Dim _strip As ContextMenuStrip = CType(_menuTopItem.Owner, ContextMenuStrip)
+        Dim selectedButton As Nbutton = _strip.SourceControl
+        ShowGroupMaint(GroupAction.GRP_TRANS, selectedButton)
     End Sub
     Private Sub FrmButtonList_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         If Me.WindowState <> FormWindowState.Minimized Then
@@ -547,16 +559,23 @@ Public Class FrmButtonList
         End If
         Me.TopMost = bOnTop
     End Sub
-    Private Sub ShowGroupMaint(_action As GroupAction)
-        LogUtil.Info("Showing groups")
+    Private Sub ShowGroupMaint(_action As GroupAction, _button As Nbutton)
+        LogUtil.Info("Showing group maintenance")
+        Dim result As DialogResult = DialogResult.None
         Using _grpMaint As New FrmGroupMaint
+            _grpMaint.SenderButton = _button
             _grpMaint.Action = _action
-            _grpMaint.ShowDialog()
+            result = _grpMaint.ShowDialog()
         End Using
+        If result = DialogResult.OK Then
+            FillNamesList()
+            RedrawButtons()
+        End If
     End Sub
     Private Sub ShowOptions()
         LogUtil.Info("Showing options")
         Using _options As New FrmOptions
+            _options.Owner = Me
             _options.ShowDialog()
             LoadOptions()
             Me.Opacity = iTransPerc / 100
@@ -601,5 +620,6 @@ Public Class FrmButtonList
         Loop
         Return newText
     End Function
+
 #End Region
 End Class

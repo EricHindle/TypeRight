@@ -458,6 +458,7 @@ Partial Class FrmOptions
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmOptions"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Options"
         Me.GrpLicence.ResumeLayout(False)
         Me.GrpLicence.PerformLayout()

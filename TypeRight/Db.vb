@@ -3,7 +3,7 @@
     Private ReadOnly oBgTa As New TypeRightDataSetTableAdapters.buttongroupsTableAdapter
     Private ReadOnly oBgTable As New TypeRightDataSet.buttongroupsDataTable
     Private ReadOnly oBtnTa As New TypeRightDataSetTableAdapters.buttonTableAdapter
-    Private ReadOnly oBtnTable As New TypeRightDataSet.buttonDataTable
+    Private oBtnTable As New TypeRightDataSet.buttonDataTable
     Private ReadOnly oSndTa As New TypeRightDataSetTableAdapters.sendersTableAdapter
     Private ReadOnly oSndTable As New TypeRightDataSet.sendersDataTable
     Private ReadOnly oSndBtnTa As New TypeRightDataSetTableAdapters.senderButtonTableAdapter
@@ -57,10 +57,21 @@
         LogUtil.Info("Updating button " & CStr(_buttonId), "Db")
         Return oBtnTa.UpdateButton(_buttonGrp, _buttonSeq, _buttontext, _buttonHint, _buttonValue, _buttonFont, CByte(_buttonBold), _buttonFontSize, CByte(_buttonItalic), _buttonEncrypt, _buttonId)
     End Function
+    Public Function UpdateButtonSeq(_seq As Integer, _id As Integer) As Integer
+        Return oBtnTa.UpdateSeq(_seq, _id)
+    End Function
     Public Function DeleteButton(_Id As Integer) As Integer
         LogUtil.Info("Deleting button " & CStr(_Id), "Db")
         Return oBtnTa.DeleteButton(_Id)
     End Function
+    Public Sub ResequenceButtons(_grp As Integer)
+        oBtnTable = GetButtonsByGroup(_grp)
+        Dim iSeq As Integer = 1
+        For Each oRow As TypeRightDataSet.buttonRow In oBtnTable.Rows
+            UpdateButtonSeq(iSeq, oRow.buttonId)
+            iSeq += 1
+        Next
+    End Sub
 #End Region
 #Region "groups"
     Public Function GetButtonGroup(_buttonGrpId As Integer) As TypeRightDataSet.buttongroupsRow
@@ -131,7 +142,7 @@
         Return oSndBtnTa.GetData()
     End Function
     Public Function GetSenderButton(columnName As String) As TypeRight.TypeRightDataSet.senderButtonRow
-        LogUtil.Info("Getting sender button row for " & columnName, "Db")
+        '      LogUtil.Info("Getting sender button row for " & columnName, "Db")
         Dim oRow As TypeRight.TypeRightDataSet.senderButtonRow = Nothing
         oSndBtnTa.FillByColName(oSndBtnTable, columnName)
         If oSndBtnTable.Rows.Count = 1 Then

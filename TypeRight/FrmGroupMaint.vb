@@ -1,8 +1,19 @@
-﻿Imports System.ComponentModel
-Imports System.Windows.Forms
-
+﻿Imports System.Windows.Forms
 Public Class FrmGroupMaint
+#Region "database variables"
+    Private oBtnGrpRow As TypeRightDataSet.buttongroupsRow
+#End Region
+#Region "properties"
     Private _action As GroupAction
+    Private _button As NbuttonControlLibrary.Nbutton
+    Public Property SenderButton() As NbuttonControlLibrary.Nbutton
+        Get
+            Return _button
+        End Get
+        Set(ByVal value As NbuttonControlLibrary.Nbutton)
+            _button = value
+        End Set
+    End Property
     Public Property Action() As Integer
         Get
             Return _action
@@ -11,150 +22,108 @@ Public Class FrmGroupMaint
             _action = value
         End Set
     End Property
+#End Region
+#Region "form control handlers"
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
-        Dim iActGrp As Integer
-        iActGrp = iCurrGrp * -1
-        If iGrpAction = GroupAction.GRP_ADD Then
-            DeleteButtonGroup(iActGrp)
-        End If
-        TidyAndClose()
+        Me.DialogResult = DialogResult.Cancel
+        Me.Close()
     End Sub
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnUpdate.Click
         Dim iActGrp As Integer
-        iActGrp = iCurrGrp * -1
+        iActGrp = iCurrGrp
+        Me.DialogResult = DialogResult.OK
         Dim btnGrpRow As TypeRightDataSet.buttongroupsRow = GetButtonGroup(iActGrp)
-        Select Case iGrpAction
+        Select Case _action
             Case GroupAction.GRP_TRANS
                 If cmbGroups.SelectedIndex = -1 Then
-                    MsgBox("Select group to transfer to", vbExclamation)
+                    MsgBox("Select group to transfer to", vbExclamation, "Missing Information")
                     Exit Sub
                 End If
-                If cmbGroups.SelectedValue = iCurrGrp * -1 Then
-                    MsgBox("Cannot transfer to same group", vbExclamation)
+                If cmbGroups.SelectedValue = _button.Group Then
+                    MsgBox("Cannot transfer to same group", vbExclamation, "Transfer error")
                     Exit Sub
                 End If
-                Dim btnRow As TypeRightDataSet.buttonRow = GetButtonByGroupAndSeq(iActGrp, iCurrBtn)
-                If btnRow Is Nothing Then
-                    MsgBox("Button to transfer not found!", vbCritical)
+                If _button Is Nothing Then
+                    MsgBox("Button to transfer not found", vbExclamation, "Transfer error")
+                    Exit Sub
                 End If
-                UpdateButtonGroupOnButton(iActGrp, btnRow.buttonId)
-                'For iBtCt = iButtonCt To 1 Step -1
-                '            Unload frmButtonList.cmdText(iBtCt)
-                'Next iBtCt
-                '   ReSeqButtons
-                iButtonCt = 0
-        '        frmButtonList.LoadButtons frmButtonList.cboNames.ItemData(frmButtonList.cboNames.ListIndex)
-        'frmButtonList.DrawButtons
+                Dim selectedGroup As Integer = cmbGroups.SelectedValue
+                UpdateButtonGroupOnButton(selectedGroup, _button.Id)
+                ResequenceButtons(_button.Group)
+                ResequenceButtons(selectedGroup)
             Case GroupAction.GRP_ADD
-                UpdateButtonGroupName(TxtGrpName.Text, iActGrp)
-                                'FrmButtonList.cboNames.AddItem("** " & TxtGrpName.Text & " **")
-                'FrmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
-                '        frmButtonList.cboNames.ListIndex = frmButtonList.cboNames.NewIndex
+                InsertButtonGroup(TxtNewGroup.Text)
             Case GroupAction.GRP_CHG
                 UpdateButtonGroupName(TxtGrpName.Text, iActGrp)
-                                'FrmButtonList.cboNames.RemoveItem(frmButtonList.cboNames.ListIndex)
-                'FrmButtonList.cboNames.AddItem("** " & TxtGrpName.Text & " **")
-                'FrmButtonList.cboNames.ItemData(frmButtonList.cboNames.NewIndex) = !GroupNo * -1
-                '        frmButtonList.cboNames.ListIndex = frmButtonList.cboNames.NewIndex
             Case GroupAction.GRP_RMV
-                DeleteButtonGroup(iActGrp)
-                'If frmButtonList.cboNames.ListCount > 0 Then
-                '    frmButtonList.cboNames.ListIndex = 0
-                '    frmButtonList.cmdReDraw_Click
-                'End If
-        End Select
-        TidyAndClose()
-    End Sub
-    Private Sub Form_Load()
-        Dim iActGrp As Integer
-        iActGrp = iCurrGrp * -1
-        Select Case iGrpAction
-            Case GroupAction.GRP_ADD
-                LblThisBtn.Visible = False
-                Nbutton1.Visible = False
-                LblStatus.Text = ""
-                LblNewGroup.Visible = False
-                TxtNewGroup.Visible = False
-                cmbGroups.Visible = False
-                LblTrans.Visible = False
-                TxtNewGroup.Enabled = False
-                cmbGroups.Enabled = False
-                TxtGrpName.Enabled = True
-                iActGrp = InsertButtonGroup("New")
-                iCurrGrp = iActGrp * -1
-                TxtGrpNumber.Text = CStr(iActGrp)
-            Case GroupAction.GRP_CHG
-                LblThisBtn.Visible = False
-                Nbutton1.Visible = False
-                LblStatus.Text = ""
-                LblNewGroup.Visible = True
-                TxtNewGroup.Visible = True
-                cmbGroups.Visible = False
-                LblTrans.Visible = False
-                TxtNewGroup.Enabled = True
-                cmbGroups.Enabled = False
-                TxtGrpName.Enabled = False
-                ' Put current value in text boxes
-                Dim bgRow As TypeRightDataSet.buttongroupsRow = GetButtonGroup(iActGrp)
-                If bgRow IsNot Nothing Then
-                    TxtGrpNumber.Text = iActGrp
-                    TxtGrpName.Text = bgRow.groupname
-                End If
-            Case GroupAction.GRP_TRANS
-                '               NButton1.Text = frmButtonList.cmdText(iCurrBtn).Text
-                LblThisBtn.Visible = True
-                Nbutton1.Visible = True
-                LblStatus.Text = ""
-                LblNewGroup.Visible = False
-                TxtNewGroup.Visible = False
-                cmbGroups.Visible = True
-                LblTrans.Visible = True
-                TxtNewGroup.Enabled = False
-                cmbGroups.Enabled = True
-                TxtGrpName.Enabled = False
-            Case GroupAction.GRP_RMV
-                LblThisBtn.Visible = False
-                Nbutton1.Visible = False
-                LblNewGroup.Visible = False
-                TxtNewGroup.Visible = False
-                cmbGroups.Visible = False
-                LblTrans.Visible = False
-                TxtNewGroup.Enabled = False
-                cmbGroups.Enabled = False
-                TxtGrpName.Enabled = False
-                ' Put current value in text boxes
-                Dim bgRow As TypeRightDataSet.buttongroupsRow = GetButtonGroup(iActGrp)
-                If bgRow IsNot Nothing Then
-                    TxtGrpNumber.Text = iActGrp
-                    TxtGrpName.Text = bgRow.groupname
-                End If
-                Dim btnTable As TypeRightDataSet.buttonDataTable = GetButtonsByGroup(iActGrp)
-                If btnTable.Rows.Count = 0 Then
-                    LblStatus.Text = "** Click Update to confirm delete **"
+                If GetButtonsByGroup(iActGrp).Rows.Count = 0 Then
+                    DeleteButtonGroup(iActGrp)
                 Else
-                    LblStatus.Text = "** Group still has buttons **"
-                    BtnUpdate.Enabled = False
+                    MsgBox("There are buttons in the group. Group cannot be removed", MsgBoxStyle.Exclamation, "Forbidden action")
+                    Me.DialogResult = DialogResult.Cancel
                 End If
         End Select
 
-    End Sub
-
-    Private Sub TidyAndClose()
-        iGrpAction = GroupAction.GRP_TRANS
-        LblNewGroup.Visible = False
-        TxtNewGroup.Visible = False
-        cmbGroups.Visible = False
-        LblTrans.Visible = False
-        BtnUpdate.Enabled = True
         Me.Close()
     End Sub
     Private Sub FrmGroupMaint_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.GroupMaintPos)
         Me.ButtongroupsTableAdapter.Fill(Me.TypeRightDataSet.buttongroups)
-    End Sub
+        ClearForm()
+        TxtGrpNumber.Text = CStr(iCurrGrp)
+        oBtnGrpRow = GetButtonGroup(iCurrGrp)
+        If oBtnGrpRow IsNot Nothing Then
+            TxtGrpName.Text = oBtnGrpRow.groupname
+        End If
 
+        Select Case _action
+            Case GroupAction.GRP_ADD
+                LogUtil.Info("Adding new group")
+                BtnUpdate.Text = "Add"
+                BtnCopy.Visible = True
+                LblNewGroupName.Visible = True
+                TxtNewGroup.Visible = True
+            Case GroupAction.GRP_CHG
+                LogUtil.Info("Amending group name")
+                BtnUpdate.Text = "Update"
+            Case GroupAction.GRP_RMV
+                LogUtil.Info("Removing group")
+                BtnUpdate.Text = "Remove"
+            Case GroupAction.GRP_TRANS
+                LogUtil.Info("Transferring button")
+                If _button IsNot Nothing Then
+                    Nbutton1.Caption = _button.Caption
+                    Nbutton1.Font = _button.Font
+                End If
+                Nbutton1.Visible = True
+                LblTrans.Visible = True
+                cmbGroups.Visible = True
+                LblThisBtn.Visible = True
+                BtnUpdate.Text = "Transfer"
+        End Select
+    End Sub
     Private Sub FrmGroupMaint_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
         My.Settings.GroupMaintPos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
+#End Region
+#Region "subroutines"
+    Private Sub ClearForm()
+        BtnCopy.Visible = False
+        LblThisBtn.Visible = False
+        Nbutton1.Visible = False
+        LblTrans.Visible = False
+        TxtNewGroup.Visible = False
+        LblNewGroupName.Visible = False
+        cmbGroups.Visible = False
+        TxtGrpNumber.Text = ""
+        TxtGrpName.Text = ""
+    End Sub
+    Private Sub BtnCopy_Click(sender As Object, e As EventArgs) Handles BtnCopy.Click
+        TxtNewGroup.Text = TxtGrpName.Text
+    End Sub
+
+#End Region
 End Class

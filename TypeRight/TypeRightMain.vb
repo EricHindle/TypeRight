@@ -46,7 +46,6 @@ Module TypeRightMain
     Public bMinimise As Boolean
     Public bUserDefinedGroup As Boolean
     Public iDbBtnCt As Integer
-    Public iGrpAction As GroupAction
 #End Region
 #Region "enums"
     Public Enum GroupAction
@@ -139,9 +138,7 @@ Module TypeRightMain
         sLicName = My.Settings.RegName
         sLicCode = My.Settings.RegCode
         ' Set a registration object
-        Dim oRegister As New NRegisterApp
-        ' Check for a valid registration
-        If oRegister.IsValidKey(sLicCode, sLicName, APP_STRING) Then
+        If NRegisterApp.IsValidKey(sLicCode, sLicName, APP_STRING) Then
             ' Running pro version
             isPro = True
         Else
