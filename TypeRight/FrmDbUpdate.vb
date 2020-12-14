@@ -331,13 +331,21 @@ Public Class FrmDbUpdate
         BackupTable(GetButtons())
     End Sub
     Private Sub DataRestoreButtons()
-        LogUtil.Info("Restore buttons", MyBase.Name)
+        LogUtil.Info("Restoring buttons", MyBase.Name)
         RestoreTable(oBtnTable)
         For Each oRow As TypeRightDataSet.buttonRow In oBtnTable.Rows
             If GetButtonById(oRow.buttonId) Is Nothing Then
-                InsertButton(oRow.buttonGroup, oRow.buttonSeq, oRow.buttonText, oRow.buttonHint, oRow.buttonValue, oRow.buttonFont, oRow.buttonBold, oRow.buttonFontSize, oRow.buttonItalic, oRow.buttonEncrypt)
+                InsertButton(oRow.buttonGroup, oRow.buttonSeq,
+                             oRow.buttonText, oRow.buttonHint,
+                             oRow.buttonValue, oRow.buttonFont,
+                             oRow.buttonBold, oRow.buttonFontSize,
+                             oRow.buttonItalic, oRow.buttonEncrypt)
             Else
-                UpdateButton(oRow.buttonGroup, oRow.buttonSeq, oRow.buttonText, oRow.buttonHint, oRow.buttonValue, oRow.buttonFont, oRow.buttonBold, oRow.buttonFontSize, oRow.buttonItalic, oRow.buttonEncrypt, oRow.buttonId)
+                UpdateButton(oRow.buttonGroup, oRow.buttonSeq,
+                             oRow.buttonText, oRow.buttonHint,
+                             oRow.buttonValue, oRow.buttonFont,
+                             oRow.buttonBold, oRow.buttonFontSize,
+                             oRow.buttonItalic, oRow.buttonEncrypt, oRow.buttonId)
             End If
         Next
     End Sub
@@ -346,7 +354,7 @@ Public Class FrmDbUpdate
         BackupTable(GetButtonGroups())
     End Sub
     Private Sub DataRestoreGroups()
-        LogUtil.Info("Restore groups", MyBase.Name)
+        LogUtil.Info("Restoring groups", MyBase.Name)
         RestoreTable(oGrpTable)
         For Each oRow As TypeRightDataSet.buttongroupsRow In oGrpTable.Rows
             If GetButtonGroup(oRow.buttongroupid) Is Nothing Then
@@ -361,7 +369,7 @@ Public Class FrmDbUpdate
         BackupTable(GetSenders())
     End Sub
     Private Sub DataRestoreSenders()
-        LogUtil.Info("Restore senders", MyBase.Name)
+        LogUtil.Info("Restoring senders", MyBase.Name)
         RestoreTable(oSndTable)
         For Each oRow As TypeRightDataSet.sendersRow In oSndTable.Rows
             Dim oRestoredSender As Sender = SenderBuilder.NewSender().StartingWith(oRow).Build
@@ -400,10 +408,10 @@ Public Class FrmDbUpdate
         Dim sDbFullPath As String = GetBackupFolder(False)
         Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".xml")
         If My.Computer.FileSystem.FileExists(sBackupFile) Then
-            LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
+            LogUtil.Info("Using " & sBackupFile, MyBase.Name)
             restoreDataTable.ReadXml(sBackupFile)
         Else
-            LogUtil.Info("Backup file " & sBackupFile & " missing. Table Not restored", MyBase.Name)
+            LogUtil.Info("Backup file " & sBackupFile & " missing. Table NOT restored", MyBase.Name)
         End If
     End Sub
     Private Function GetBackupFolder(isCreateOnMissing As Boolean) As String
