@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.Data
+﻿Imports System.Data
 Imports System.IO
 Imports System.Text
 Imports System.Windows.Forms
@@ -13,10 +12,10 @@ Public Class FrmDbUpdate
 #End Region
 #Region "database"
     Dim oSndTable As New TypeRight.TypeRightDataSet.sendersDataTable
-    Dim oBtnTable As New TypeRight.TypeRightDataSet.buttonDataTable
-    Dim oSndrTable As New TypeRight.TypeRightDataSet.sendersDataTable
-    Dim oSndrBtnTable As New TypeRight.TypeRightDataSet.senderButtonDataTable
-    Dim oGrpTable As New TypeRight.TypeRightDataSet.buttongroupsDataTable
+    ReadOnly oBtnTable As New TypeRight.TypeRightDataSet.buttonDataTable
+    ReadOnly oSndrTable As New TypeRight.TypeRightDataSet.sendersDataTable
+    ReadOnly oSndrBtnTable As New TypeRight.TypeRightDataSet.senderButtonDataTable
+    ReadOnly oGrpTable As New TypeRight.TypeRightDataSet.buttongroupsDataTable
     Dim oSndRow As TypeRight.TypeRightDataSet.sendersRow = Nothing
 #End Region
 #Region "properties"
@@ -32,11 +31,17 @@ Public Class FrmDbUpdate
 #End Region
 #Region "form handlers"
     Private Sub FrmDbUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        GetFormPos(Me, My.Settings.EditButtonPos)
+        LogUtil.Info("Loading", MyBase.Name)
+        GetFormPos(Me, My.Settings.DBUpdatePos)
         LoadSenderTable()
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
+    End Sub
+    Private Sub FrmDbUpdate_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        LogUtil.Info("Closing", MyBase.Name)
+        My.Settings.DBUpdatePos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
     Private Sub BtnOk_Click(sender As Object, e As EventArgs) Handles BtnOk.Click
         Me.DialogResult = Windows.Forms.DialogResult.OK
@@ -50,12 +55,10 @@ Public Class FrmDbUpdate
             ShowStatus("Inserted new sender", True)
         End If
     End Sub
-
     Private Sub ShowStatus(sText As String, isLogged As Boolean)
         LblStatus.Text = sText
         If isLogged Then LogUtil.Info(sText, MyBase.Name)
     End Sub
-
     Private Sub BtnUpd_Click(sender As Object, e As EventArgs) Handles BtnUpd.Click
         If IsValid() Then
             ShowStatus("Updating sender", True)
@@ -105,7 +108,7 @@ Public Class FrmDbUpdate
     Private Sub MnuClose_Click(sender As Object, e As EventArgs) Handles MnuClose.Click
         Me.Close()
     End Sub
-    Private Sub MnuBkUpDatabase_Click(sender As Object, e As EventArgs) Handles MnuBkUpDatabase.Click
+    Private Sub MnuBkUpDatabase_Click(sender As Object, e As EventArgs) Handles MnuBkUpSenders.Click
         DataBackupSenders()
     End Sub
     Private Sub MnuBkUpButtons_Click(sender As Object, e As EventArgs) Handles MnuBkUpButtons.Click
@@ -123,15 +126,23 @@ Public Class FrmDbUpdate
         DataBackupSenders()
         DataBackupSenderButtons()
     End Sub
-    Private Sub MnuRestDatabase_Click(sender As Object, e As EventArgs) Handles MnuRestDatabase.Click
+    Private Sub MnuRestDatabase_Click(sender As Object, e As EventArgs) Handles MnuRestSenders.Click
+        DataRestoreSenders()
     End Sub
     Private Sub MnuRestButtons_Click(sender As Object, e As EventArgs) Handles MnuRestButtons.Click
+        DataRestoreButtons()
     End Sub
     Private Sub MnuRestGroups_Click(sender As Object, e As EventArgs) Handles MnuRestGroups.Click
+        DataRestoreGroups()
     End Sub
     Private Sub MnuRestAll_Click(sender As Object, e As EventArgs) Handles MnuRestAll.Click
+        DataRestoreGroups()
+        DataRestoreButtons()
+        DataRestoreSenders()
+        DataRestoreSenderButtons()
     End Sub
     Private Sub MnuRestSenderButtons_Click(sender As Object, e As EventArgs) Handles MnuRestSenderButtons.Click
+        DataRestoreSenderButtons()
     End Sub
 #End Region
 #Region "subroutines"
@@ -317,80 +328,87 @@ Public Class FrmDbUpdate
     End Function
     Private Sub DataBackupButtons()
         LogUtil.Info("Backup buttons", MyBase.Name)
-        oBtnTable = GetButtons()
-        Dim sTableName As String = oBtnTable.TableName
-        Dim sDbFullPath As String = GetBackupFolder()
-        Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".csv")
-        LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
-        Using _backupFile As New StreamWriter(sBackupFile, False)
-            For Each oRow As TypeRight.TypeRightDataSet.buttonRow In oBtnTable.Rows
-                Dim sb As New StringBuilder()
-                For Each oCol As DataColumn In oBtnTable.Columns
-                    sb.Append(CStr(oRow(oCol.ColumnName))).Append(",")
-                Next
-                _backupFile.WriteLine(sb.ToString)
-            Next
-        End Using
+        BackupTable(GetButtons())
+    End Sub
+    Private Sub DataRestoreButtons()
+        LogUtil.Info("Restore buttons", MyBase.Name)
+        RestoreTable(oBtnTable)
+        For Each oRow As TypeRightDataSet.buttonRow In oBtnTable.Rows
+            If GetButtonById(oRow.buttonId) Is Nothing Then
+                InsertButton(oRow.buttonGroup, oRow.buttonSeq, oRow.buttonText, oRow.buttonHint, oRow.buttonValue, oRow.buttonFont, oRow.buttonBold, oRow.buttonFontSize, oRow.buttonItalic, oRow.buttonEncrypt)
+            Else
+                UpdateButton(oRow.buttonGroup, oRow.buttonSeq, oRow.buttonText, oRow.buttonHint, oRow.buttonValue, oRow.buttonFont, oRow.buttonBold, oRow.buttonFontSize, oRow.buttonItalic, oRow.buttonEncrypt, oRow.buttonId)
+            End If
+        Next
     End Sub
     Private Sub DataBackupGroups()
         LogUtil.Info("Backup groups", MyBase.Name)
-        oGrpTable = GetButtonGroups()
-        Dim sTableName As String = oGrpTable.TableName
-        Dim sDbFullPath As String = GetBackupFolder()
-        Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".csv")
-        LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
-        Using _backupFile As New StreamWriter(sBackupFile, False)
-            For Each oRow As TypeRight.TypeRightDataSet.buttongroupsRow In oGrpTable.Rows
-                Dim sb As New StringBuilder()
-                For Each oCol As DataColumn In oGrpTable.Columns
-                    sb.Append(CStr(oRow(oCol.ColumnName))).Append(",")
-                Next
-                _backupFile.WriteLine(sb.ToString)
-            Next
-        End Using
+        BackupTable(GetButtonGroups())
+    End Sub
+    Private Sub DataRestoreGroups()
+        LogUtil.Info("Restore groups", MyBase.Name)
+        RestoreTable(oGrpTable)
+        For Each oRow As TypeRightDataSet.buttongroupsRow In oGrpTable.Rows
+            If GetButtonGroup(oRow.buttongroupid) Is Nothing Then
+                InsertButtonGroup(oRow.groupname)
+            Else
+                UpdateButtonGroupName(oRow.groupname, oRow.buttongroupid)
+            End If
+        Next
     End Sub
     Private Sub DataBackupSenders()
         LogUtil.Info("Backup senders", MyBase.Name)
-        oSndrTable = GetSenders()
-        Dim sTableName As String = oSndrTable.TableName
-        Dim sDbFullPath As String = GetBackupFolder()
-        Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".csv")
-        LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
-        Using _backupFile As New StreamWriter(sBackupFile, False)
-            For Each oRow As TypeRight.TypeRightDataSet.sendersRow In oSndrTable.Rows
-                Dim sb As New StringBuilder()
-                For Each oCol As DataColumn In oSndrTable.Columns
-                    sb.Append(CStr(oRow(oCol.ColumnName))).Append(",")
-                Next
-                _backupFile.WriteLine(sb.ToString)
-            Next
-        End Using
+        BackupTable(GetSenders())
+    End Sub
+    Private Sub DataRestoreSenders()
+        LogUtil.Info("Restore senders", MyBase.Name)
+        RestoreTable(oSndTable)
+        For Each oRow As TypeRightDataSet.sendersRow In oSndTable.Rows
+            Dim oRestoredSender As Sender = SenderBuilder.NewSender().StartingWith(oRow).Build
+            If GetSenderById(oRow.SenderId) Is Nothing Then
+                InsertSender(oRestoredSender)
+            Else
+                UpdateSender(oRestoredSender)
+            End If
+        Next
     End Sub
     Private Sub DataBackupSenderButtons()
         LogUtil.Info("Backup sender buttons", MyBase.Name)
-        oSndrBtnTable = GetSenderButtons()
-        Dim sTableName As String = oSndrBtnTable.TableName
-        Dim sDbFullPath As String = GetBackupFolder()
-        Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".csv")
+        BackupTable(GetSenderButtons())
+    End Sub
+    Private Sub DataRestoreSenderButtons()
+        LogUtil.Info("Restore sender buttons", MyBase.Name)
+        RestoreTable(oSndrBtnTable)
+        For Each oRow As TypeRightDataSet.senderButtonRow In oSndrBtnTable.Rows
+            If GetSenderButton(oRow.ColumnName) Is Nothing Then
+                InsertSenderButton(oRow.ColumnName, oRow.buttonFontName, oRow.buttonFontSize, oRow.buttonItalic, oRow.buttonBold, oRow.buttonEncrypted)
+            Else
+                UpdateSenderButton(oRow.ColumnName, oRow.buttonFontName, oRow.buttonFontSize, oRow.buttonItalic, oRow.buttonBold, oRow.buttonEncrypted)
+            End If
+        Next
+    End Sub
+    Private Sub BackupTable(backupDataTable As DataTable)
+        Dim sTableName As String = backupDataTable.TableName
+        Dim sDbFullPath As String = GetBackupFolder(True)
+        Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".xml")
         LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
-        Using _backupFile As New StreamWriter(sBackupFile, False)
-            For Each oRow As TypeRight.TypeRightDataSet.senderButtonRow In oSndrBtnTable.Rows
-                Dim sb As New StringBuilder()
-                For Each oCol As DataColumn In oSndrBtnTable.Columns
-                    sb.Append(CStr(oRow(oCol.ColumnName))).Append(",")
-                Next
-                _backupFile.WriteLine(sb.ToString)
-            Next
-        End Using
+        backupDataTable.WriteXml(sBackupFile)
     End Sub
-    Private Sub FrmDbUpdate_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing", MyBase.Name)
-        My.Settings.DBUpdatePos = SetFormPos(Me)
-        My.Settings.Save()
+    Private Sub RestoreTable(ByRef restoreDataTable As DataTable)
+        restoreDataTable.Rows.Clear()
+        Dim sTableName As String = restoreDataTable.TableName
+        Dim sDbFullPath As String = GetBackupFolder(False)
+        Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".xml")
+        If My.Computer.FileSystem.FileExists(sBackupFile) Then
+            LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
+            restoreDataTable.ReadXml(sBackupFile)
+        Else
+            LogUtil.Info("Backup file " & sBackupFile & " missing. Table Not restored", MyBase.Name)
+        End If
     End Sub
-    Private Function GetBackupFolder() As String
+    Private Function GetBackupFolder(isCreateOnMissing As Boolean) As String
         Dim sFolder As String = My.Settings.BackupFolder
-        If Not My.Computer.FileSystem.DirectoryExists(sFolder) Then
+        If isCreateOnMissing AndAlso Not My.Computer.FileSystem.DirectoryExists(sFolder) Then
             LogUtil.Info("Creating folder " & sFolder, MyBase.Name)
             My.Computer.FileSystem.CreateDirectory(sFolder)
         End If

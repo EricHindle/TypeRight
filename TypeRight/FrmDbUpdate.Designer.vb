@@ -77,14 +77,16 @@ Partial Class FrmDbUpdate
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuBkUp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuBkUpDatabase = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuBkUpSenders = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuBkUpButtons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuBkUpGroups = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuBkUpSenderButtons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuBkUpAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuRest = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuRestDatabase = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuRestSenders = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuRestButtons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuRestGroups = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuRestSenderButtons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuRestAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.MnuClose = New System.Windows.Forms.ToolStripMenuItem()
@@ -98,8 +100,6 @@ Partial Class FrmDbUpdate
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.MnuBkUpSenderButtons = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuRestSenderButtons = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -562,16 +562,16 @@ Partial Class FrmDbUpdate
         '
         'MnuBkUp
         '
-        Me.MnuBkUp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuBkUpDatabase, Me.MnuBkUpButtons, Me.MnuBkUpGroups, Me.MnuBkUpSenderButtons, Me.MnuBkUpAll})
+        Me.MnuBkUp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuBkUpGroups, Me.MnuBkUpButtons, Me.MnuBkUpSenders, Me.MnuBkUpSenderButtons, Me.MnuBkUpAll})
         Me.MnuBkUp.Name = "MnuBkUp"
         Me.MnuBkUp.Size = New System.Drawing.Size(180, 22)
         Me.MnuBkUp.Text = "Backup"
         '
-        'MnuBkUpDatabase
+        'MnuBkUpSenders
         '
-        Me.MnuBkUpDatabase.Name = "MnuBkUpDatabase"
-        Me.MnuBkUpDatabase.Size = New System.Drawing.Size(180, 22)
-        Me.MnuBkUpDatabase.Text = "Database"
+        Me.MnuBkUpSenders.Name = "MnuBkUpSenders"
+        Me.MnuBkUpSenders.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpSenders.Text = "Senders"
         '
         'MnuBkUpButtons
         '
@@ -585,6 +585,12 @@ Partial Class FrmDbUpdate
         Me.MnuBkUpGroups.Size = New System.Drawing.Size(180, 22)
         Me.MnuBkUpGroups.Text = "Groups"
         '
+        'MnuBkUpSenderButtons
+        '
+        Me.MnuBkUpSenderButtons.Name = "MnuBkUpSenderButtons"
+        Me.MnuBkUpSenderButtons.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpSenderButtons.Text = "Sender Buttons"
+        '
         'MnuBkUpAll
         '
         Me.MnuBkUpAll.Name = "MnuBkUpAll"
@@ -593,28 +599,34 @@ Partial Class FrmDbUpdate
         '
         'MnuRest
         '
-        Me.MnuRest.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuRestDatabase, Me.MnuRestButtons, Me.MnuRestGroups, Me.MnuRestSenderButtons, Me.MnuRestAll})
+        Me.MnuRest.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuRestGroups, Me.MnuRestButtons, Me.MnuRestSenders, Me.MnuRestSenderButtons, Me.MnuRestAll})
         Me.MnuRest.Name = "MnuRest"
         Me.MnuRest.Size = New System.Drawing.Size(180, 22)
         Me.MnuRest.Text = "Restore"
         '
-        'MnuRestDatabase
+        'MnuRestSenders
         '
-        Me.MnuRestDatabase.Name = "MnuRestDatabase"
-        Me.MnuRestDatabase.Size = New System.Drawing.Size(180, 22)
-        Me.MnuRestDatabase.Text = "Database"
+        Me.MnuRestSenders.Name = "MnuRestSenders"
+        Me.MnuRestSenders.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestSenders.Text = "Senders"
         '
         'MnuRestButtons
         '
         Me.MnuRestButtons.Name = "MnuRestButtons"
         Me.MnuRestButtons.Size = New System.Drawing.Size(180, 22)
-        Me.MnuRestButtons.Text = "Buttons"
+        Me.MnuRestButtons.Text = "Group Buttons"
         '
         'MnuRestGroups
         '
         Me.MnuRestGroups.Name = "MnuRestGroups"
         Me.MnuRestGroups.Size = New System.Drawing.Size(180, 22)
         Me.MnuRestGroups.Text = "Groups"
+        '
+        'MnuRestSenderButtons
+        '
+        Me.MnuRestSenderButtons.Name = "MnuRestSenderButtons"
+        Me.MnuRestSenderButtons.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestSenderButtons.Text = "Sender Buttons"
         '
         'MnuRestAll
         '
@@ -770,18 +782,6 @@ Partial Class FrmDbUpdate
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Action"
         '
-        'MnuBkUpSenderButtons
-        '
-        Me.MnuBkUpSenderButtons.Name = "MnuBkUpSenderButtons"
-        Me.MnuBkUpSenderButtons.Size = New System.Drawing.Size(180, 22)
-        Me.MnuBkUpSenderButtons.Text = "Sender Buttons"
-        '
-        'MnuRestSenderButtons
-        '
-        Me.MnuRestSenderButtons.Name = "MnuRestSenderButtons"
-        Me.MnuRestSenderButtons.Size = New System.Drawing.Size(180, 22)
-        Me.MnuRestSenderButtons.Text = "Sender Buttons"
-        '
         'FrmDbUpdate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
@@ -879,12 +879,12 @@ Partial Class FrmDbUpdate
     Friend WithEvents MenuStrip1 As Windows.Forms.MenuStrip
     Friend WithEvents MnuFile As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuBkUp As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuBkUpDatabase As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuBkUpSenders As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuBkUpButtons As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuBkUpGroups As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuBkUpAll As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuRest As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MnuRestDatabase As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuRestSenders As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuRestButtons As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuRestGroups As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuRestAll As Windows.Forms.ToolStripMenuItem

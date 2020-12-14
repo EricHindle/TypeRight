@@ -1,7 +1,5 @@
 ﻿Imports System.Collections.Generic
-Imports System.ComponentModel
 Imports System.Data
-Imports System.Diagnostics
 Imports System.Text
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary

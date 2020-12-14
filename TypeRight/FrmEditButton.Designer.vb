@@ -32,7 +32,7 @@ Partial Class FrmEditButton
         Me.BtnOpenBracket = New System.Windows.Forms.Button()
         Me.BtnTilde = New System.Windows.Forms.Button()
         Me.BtnPlus = New System.Windows.Forms.Button()
-        Me.btnCaret = New System.Windows.Forms.Button()
+        Me.BtnCaret = New System.Windows.Forms.Button()
         Me.BtnPct = New System.Windows.Forms.Button()
         Me.LblDbField = New System.Windows.Forms.Label()
         Me.BtnAlt = New System.Windows.Forms.Button()
@@ -58,18 +58,18 @@ Partial Class FrmEditButton
         Me.TxtPreview = New System.Windows.Forms.RichTextBox()
         Me.TxtValue = New System.Windows.Forms.RichTextBox()
         Me.mnuEdit = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuCut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SelectAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ChangeCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LowercaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UPPERCASEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TitleCaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TOGGLECASEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuLowercase = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuUpperCase = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuTitleCase = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuToggleCase = New System.Windows.Forms.ToolStripMenuItem()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         Me.BtnFont = New System.Windows.Forms.Button()
         Me.TxtHint = New System.Windows.Forms.TextBox()
@@ -124,7 +124,7 @@ Partial Class FrmEditButton
         Me.GroupBox1.Controls.Add(Me.BtnOpenBracket)
         Me.GroupBox1.Controls.Add(Me.BtnTilde)
         Me.GroupBox1.Controls.Add(Me.BtnPlus)
-        Me.GroupBox1.Controls.Add(Me.btnCaret)
+        Me.GroupBox1.Controls.Add(Me.BtnCaret)
         Me.GroupBox1.Controls.Add(Me.BtnPct)
         Me.GroupBox1.Controls.Add(Me.LblDbField)
         Me.GroupBox1.Controls.Add(Me.BtnAlt)
@@ -203,15 +203,15 @@ Partial Class FrmEditButton
         Me.BtnPlus.Text = "+"
         Me.BtnPlus.UseVisualStyleBackColor = True
         '
-        'btnCaret
+        'BtnCaret
         '
-        Me.btnCaret.Location = New System.Drawing.Point(216, 75)
-        Me.btnCaret.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
-        Me.btnCaret.Name = "btnCaret"
-        Me.btnCaret.Size = New System.Drawing.Size(55, 32)
-        Me.btnCaret.TabIndex = 4
-        Me.btnCaret.Text = "^"
-        Me.btnCaret.UseVisualStyleBackColor = True
+        Me.BtnCaret.Location = New System.Drawing.Point(216, 75)
+        Me.BtnCaret.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
+        Me.BtnCaret.Name = "BtnCaret"
+        Me.BtnCaret.Size = New System.Drawing.Size(55, 32)
+        Me.BtnCaret.TabIndex = 4
+        Me.BtnCaret.Text = "^"
+        Me.BtnCaret.UseVisualStyleBackColor = True
         '
         'BtnPct
         '
@@ -466,44 +466,44 @@ Partial Class FrmEditButton
         '
         'mnuEdit
         '
-        Me.mnuEdit.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CutToolStripMenuItem, Me.CopyToolStripMenuItem, Me.PasteToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.ToolStripSeparator1, Me.SelectAllToolStripMenuItem, Me.ToolStripSeparator2, Me.ChangeCaseToolStripMenuItem})
+        Me.mnuEdit.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuCut, Me.MnuCopy, Me.MnuPaste, Me.MnuDelete, Me.ToolStripSeparator1, Me.MnuSelectAll, Me.ToolStripSeparator2, Me.ChangeCaseToolStripMenuItem})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(144, 148)
         '
-        'CutToolStripMenuItem
+        'MnuCut
         '
-        Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
-        Me.CutToolStripMenuItem.Text = "Cut"
+        Me.MnuCut.Name = "MnuCut"
+        Me.MnuCut.Size = New System.Drawing.Size(143, 22)
+        Me.MnuCut.Text = "Cut"
         '
-        'CopyToolStripMenuItem
+        'MnuCopy
         '
-        Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
-        Me.CopyToolStripMenuItem.Text = "Copy"
+        Me.MnuCopy.Name = "MnuCopy"
+        Me.MnuCopy.Size = New System.Drawing.Size(143, 22)
+        Me.MnuCopy.Text = "Copy"
         '
-        'PasteToolStripMenuItem
+        'MnuPaste
         '
-        Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
-        Me.PasteToolStripMenuItem.Text = "Paste"
+        Me.MnuPaste.Name = "MnuPaste"
+        Me.MnuPaste.Size = New System.Drawing.Size(143, 22)
+        Me.MnuPaste.Text = "Paste"
         '
-        'DeleteToolStripMenuItem
+        'MnuDelete
         '
-        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
-        Me.DeleteToolStripMenuItem.Text = "Delete"
+        Me.MnuDelete.Name = "MnuDelete"
+        Me.MnuDelete.Size = New System.Drawing.Size(143, 22)
+        Me.MnuDelete.Text = "Delete"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(140, 6)
         '
-        'SelectAllToolStripMenuItem
+        'MnuSelectAll
         '
-        Me.SelectAllToolStripMenuItem.Name = "SelectAllToolStripMenuItem"
-        Me.SelectAllToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
-        Me.SelectAllToolStripMenuItem.Text = "Select All"
+        Me.MnuSelectAll.Name = "MnuSelectAll"
+        Me.MnuSelectAll.Size = New System.Drawing.Size(143, 22)
+        Me.MnuSelectAll.Text = "Select All"
         '
         'ToolStripSeparator2
         '
@@ -512,34 +512,34 @@ Partial Class FrmEditButton
         '
         'ChangeCaseToolStripMenuItem
         '
-        Me.ChangeCaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LowercaseToolStripMenuItem, Me.UPPERCASEToolStripMenuItem, Me.TitleCaseToolStripMenuItem, Me.TOGGLECASEToolStripMenuItem})
+        Me.ChangeCaseToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuLowercase, Me.MnuUpperCase, Me.MnuTitleCase, Me.MnuToggleCase})
         Me.ChangeCaseToolStripMenuItem.Name = "ChangeCaseToolStripMenuItem"
         Me.ChangeCaseToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.ChangeCaseToolStripMenuItem.Text = "Change Case"
         '
-        'LowercaseToolStripMenuItem
+        'MnuLowercase
         '
-        Me.LowercaseToolStripMenuItem.Name = "LowercaseToolStripMenuItem"
-        Me.LowercaseToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
-        Me.LowercaseToolStripMenuItem.Text = "lowercase"
+        Me.MnuLowercase.Name = "MnuLowercase"
+        Me.MnuLowercase.Size = New System.Drawing.Size(144, 22)
+        Me.MnuLowercase.Text = "lowercase"
         '
-        'UPPERCASEToolStripMenuItem
+        'MnuUpperCase
         '
-        Me.UPPERCASEToolStripMenuItem.Name = "UPPERCASEToolStripMenuItem"
-        Me.UPPERCASEToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
-        Me.UPPERCASEToolStripMenuItem.Text = "UPPERCASE"
+        Me.MnuUpperCase.Name = "MnuUpperCase"
+        Me.MnuUpperCase.Size = New System.Drawing.Size(144, 22)
+        Me.MnuUpperCase.Text = "UPPERCASE"
         '
-        'TitleCaseToolStripMenuItem
+        'MnuTitleCase
         '
-        Me.TitleCaseToolStripMenuItem.Name = "TitleCaseToolStripMenuItem"
-        Me.TitleCaseToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
-        Me.TitleCaseToolStripMenuItem.Text = "Title Case"
+        Me.MnuTitleCase.Name = "MnuTitleCase"
+        Me.MnuTitleCase.Size = New System.Drawing.Size(144, 22)
+        Me.MnuTitleCase.Text = "Title Case"
         '
-        'TOGGLECASEToolStripMenuItem
+        'MnuToggleCase
         '
-        Me.TOGGLECASEToolStripMenuItem.Name = "TOGGLECASEToolStripMenuItem"
-        Me.TOGGLECASEToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
-        Me.TOGGLECASEToolStripMenuItem.Text = "tOGGLE cASE"
+        Me.MnuToggleCase.Name = "MnuToggleCase"
+        Me.MnuToggleCase.Size = New System.Drawing.Size(144, 22)
+        Me.MnuToggleCase.Text = "tOGGLE cASE"
         '
         'FontDialog1
         '
@@ -787,24 +787,24 @@ Partial Class FrmEditButton
     Friend WithEvents Label4 As Windows.Forms.Label
     Friend WithEvents Label5 As Windows.Forms.Label
     Friend WithEvents mnuEdit As Windows.Forms.ContextMenuStrip
-    Friend WithEvents CutToolStripMenuItem As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CopyToolStripMenuItem As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PasteToolStripMenuItem As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DeleteToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuCut As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuCopy As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuPaste As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuDelete As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
-    Friend WithEvents SelectAllToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuSelectAll As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents ChangeCaseToolStripMenuItem As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents LowercaseToolStripMenuItem As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents UPPERCASEToolStripMenuItem As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TitleCaseToolStripMenuItem As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TOGGLECASEToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuLowercase As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuUpperCase As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuTitleCase As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuToggleCase As Windows.Forms.ToolStripMenuItem
     Friend WithEvents txtCaption As Windows.Forms.TextBox
     Friend WithEvents TypeRightDataSet As TypeRightDataSet
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents Label6 As Windows.Forms.Label
     Friend WithEvents LblErrs As Windows.Forms.Label
-    Friend WithEvents btnCaret As Windows.Forms.Button
+    Friend WithEvents BtnCaret As Windows.Forms.Button
     Friend WithEvents BtnPct As Windows.Forms.Button
     Friend WithEvents BtnCloseBracket As Windows.Forms.Button
     Friend WithEvents BtnOpenBracket As Windows.Forms.Button

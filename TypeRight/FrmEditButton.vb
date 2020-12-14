@@ -1,17 +1,16 @@
-﻿Imports System.ComponentModel
-Imports System.Data
+﻿Imports System.Data
 Imports System.Windows.Forms
 
 Public Class FrmEditButton
-    Private CtrlOn As Boolean
-    Private AltOn As Boolean
+#Region "variables"
     Private iId As Integer
     Private iSeq As Integer
     Private iGrp As Integer
-
     Private ReadOnly oTextUtil As NTextUtil
-    Private _button As NbuttonControlLibrary.Nbutton
     Private ReadOnly oTable As New TypeRight.TypeRightDataSet.sendersDataTable
+#End Region
+#Region "properties"
+    Private _button As NbuttonControlLibrary.Nbutton
     Public Property Button() As NbuttonControlLibrary.Nbutton
         Get
             Return _button
@@ -20,13 +19,14 @@ Public Class FrmEditButton
             _button = value
         End Set
     End Property
+#End Region
+#Region "form control handlers"
     Private Sub FrmEditButton_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.EditButtonPos)
         For Each _col As DataColumn In oTable.Columns
             CbDbValue.Items.Add(_col.ColumnName)
         Next
-
         grpOpts.Visible = isPro
         chkEncrypt.Checked = False
         If _button IsNot Nothing Then
@@ -48,35 +48,33 @@ Public Class FrmEditButton
         Else
 
         End If
-
         Dim oTextUtil As New NTextUtil
-        CtrlOn = False
-        AltOn = False
-    End Sub
-    Private Sub CbDBValue_Click()
-        Dim pos As Long
-        pos = TxtValue.SelectionStart
-        TxtValue.Text = TxtValue.Text.Substring(0, pos) + "{" + Trim(CbDbValue.Text) + "}" + TxtValue.Text.Substring(pos + 1)
-        TxtValue.SelectionStart = pos + Trim(CbDbValue.Text).Length + 2
     End Sub
     Private Sub BtnFont_Click(sender As Object, e As EventArgs) Handles BtnFont.Click
-        ' Set Cancel to True
+        LogUtil.Info("Selecting font", MyBase.Name)
+        Dim dlogResult As DialogResult = DialogResult.Cancel
         With FontDialog1
             .FontMustExist = True
-            .Font = BtnFont.Font
-            .ShowDialog()
+            .Font = MakeFont(sDfltFontName, iDfltFontSize, bDfltFontBold, bDfltFontItalic)
+            dlogResult = .ShowDialog()
         End With
         With BtnFont
-            .Font = FontDialog1.Font
-            .Text = .Font.Name & "(" & CStr(.Font.Size) & ")"
+            If dlogResult = DialogResult.OK Then
+                .Text = FontDialog1.Font.Name & " " & Format(FontDialog1.Font.Size)
+                .Font = MakeFont(FontDialog1.Font.Name, FontDialog1.Font.Size, FontDialog1.Font.Bold, FontDialog1.Font.Italic)
+                LogUtil.Info("Font selected", MyBase.Name)
+            Else
+                LogUtil.Info("Font not selected", MyBase.Name)
+            End If
         End With
     End Sub
     Private Sub BtnCancel_Click() Handles BtnCancel.Click
+        LogUtil.Info("Button not updated", MyBase.Name)
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
     End Sub
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles BtnOK.Click
-
+        LogUtil.Info("Updating button", MyBase.Name)
         Dim isEncrypted As Boolean
         Dim strNewText As String
         If IsValidated() Then
@@ -86,13 +84,6 @@ Public Class FrmEditButton
             Else
                 isEncrypted = False
                 strNewText = TxtValue.Text
-            End If
-            If bUserDefinedGroup Then
-                '    iBtnGrp = FrmButtonList.cbNames.ItemData(iListidx) * -1
-                '    iOffset = 0
-            Else
-                '    iBtnGrp = 0
-                '    iOffset = iDbBtnCt
             End If
             With _button
                 .Caption = txtCaption.Text
@@ -112,18 +103,6 @@ Public Class FrmEditButton
             Me.Close()
         End If
     End Sub
-    Private Function IsValidated() As Boolean
-        Dim isOK As Boolean = True
-        If txtCaption.TextLength = 0 Then
-            LblErrs.Text &= "Missing Caption | "
-            isOK = False
-        End If
-        If TxtValue.TextLength = 0 Then
-            LblErrs.Text &= "Missing Value | "
-            isOK = False
-        End If
-        Return isOK
-    End Function
     Private Sub BtnSpecialKey1_Click(sender As Object, e As EventArgs) Handles BtnOpenCurlyBracket.Click,
                                                                                 BtnAlt.Click,
                                                                                 BtnBackspace.Click,
@@ -144,7 +123,7 @@ Public Class FrmEditButton
                                                                                 BtnTab.Click,
                                                                                 BtnUpArrow.Click,
                                                                                 BtnPct.Click,
-                                                                                btnCaret.Click,
+                                                                                BtnCaret.Click,
                                                                                 BtnPlus.Click,
                                                                                 BtnTilde.Click,
                                                                                 BtnOpenBracket.Click,
@@ -153,82 +132,81 @@ Public Class FrmEditButton
         Dim specialButton As Windows.Forms.Button = TryCast(sender, Windows.Forms.Button)
         Dim keyText As String = ""
         Dim isAddBrackets As Boolean = True
-        Select Case specialButton.Name
-            Case "BtnPct"
-                keyText = "%"
-            Case "btnCaret"
-                keyText = "^"
-            Case "BtnPlus"
-                keyText = "+"
-            Case "BtnTilde"
-                keyText = "~"
-            Case "BtnOpenBracket"
-                keyText = "("
-            Case "BtnCloseBracket"
-                keyText = "("
-            Case "BtnAlt"
-                keyText = "%"
-                isAddBrackets = False
-            Case "BtnBackspace"
-                keyText = "BACKSPACE"
-            Case "BtnBacktab"
-                keyText = "+{TAB}"
-                isAddBrackets = False
-            Case "BtnCloseCurlyBracket"
-                keyText = "}"
-            Case "BtnCtrl"
-                keyText = "^"
-                isAddBrackets = False
-            Case "BtnDelete"
-                keyText = "DELETE"
-            Case "BtnDownArrow"
-                keyText = "DOWN"
-            Case "BtnEnd"
-                keyText = "END"
-            Case "BtnHome"
-                keyText = "HOME"
-            Case "BtnInsert"
-                keyText = "INSERT"
-            Case "BtnLeftArrow"
-                keyText = "LEFT"
-            Case "BtnOpenCurlyBracket"
-                keyText = "{"
-            Case "BtnPageDown"
-                keyText = "PGDN"
-            Case "BtnPageUp"
-                keyText = "PGUP"
-            Case "BtnReturn"
-                keyText = "ENTER"
-            Case "BtnRightArrow"
-                keyText = "RIGHT"
-            Case "BtnTab"
-                keyText = "TAB"
-            Case "BtnUpArrow"
-                keyText = "UP"
-        End Select
-        Dim pos As Long
-        pos = TxtValue.SelectionStart
-        If isAddBrackets Then
-            TxtValue.Text = TxtValue.Text.Substring(0, pos) + "{" + keyText + "}" + Mid(TxtValue.Text, pos + 1)
-            TxtValue.SelectionStart = pos + Len(keyText) + 2
-        Else
-            TxtValue.Text = TxtValue.Text.Substring(0, pos) + keyText + Mid(TxtValue.Text, pos + 1)
-            TxtValue.SelectionStart = pos + Len(keyText) + 2
+        If specialButton IsNot Nothing Then
+            Select Case specialButton.Name
+                Case "BtnPct"
+                    keyText = "%"
+                Case "BtnCaret"
+                    keyText = "^"
+                Case "BtnPlus"
+                    keyText = "+"
+                Case "BtnTilde"
+                    keyText = "~"
+                Case "BtnOpenBracket"
+                    keyText = "("
+                Case "BtnCloseBracket"
+                    keyText = "("
+                Case "BtnAlt"
+                    keyText = "%"
+                    isAddBrackets = False
+                Case "BtnBackspace"
+                    keyText = "BACKSPACE"
+                Case "BtnBacktab"
+                    keyText = "+{TAB}"
+                    isAddBrackets = False
+                Case "BtnCloseCurlyBracket"
+                    keyText = "}"
+                Case "BtnCtrl"
+                    keyText = "^"
+                    isAddBrackets = False
+                Case "BtnDelete"
+                    keyText = "DELETE"
+                Case "BtnDownArrow"
+                    keyText = "DOWN"
+                Case "BtnEnd"
+                    keyText = "END"
+                Case "BtnHome"
+                    keyText = "HOME"
+                Case "BtnInsert"
+                    keyText = "INSERT"
+                Case "BtnLeftArrow"
+                    keyText = "LEFT"
+                Case "BtnOpenCurlyBracket"
+                    keyText = "{"
+                Case "BtnPageDown"
+                    keyText = "PGDN"
+                Case "BtnPageUp"
+                    keyText = "PGUP"
+                Case "BtnReturn"
+                    keyText = "ENTER"
+                Case "BtnRightArrow"
+                    keyText = "RIGHT"
+                Case "BtnTab"
+                    keyText = "TAB"
+                Case "BtnUpArrow"
+                    keyText = "UP"
+            End Select
+            Dim pos As Long
+            pos = TxtValue.SelectionStart
+            If isAddBrackets Then
+                TxtValue.Text = TxtValue.Text.Substring(0, pos) + "{" + keyText + "}" + Mid(TxtValue.Text, pos + 1)
+                TxtValue.SelectionStart = pos + Len(keyText) + 2
+            Else
+                TxtValue.Text = TxtValue.Text.Substring(0, pos) + keyText + Mid(TxtValue.Text, pos + 1)
+                TxtValue.SelectionStart = pos + Len(keyText) + 2
+            End If
         End If
     End Sub
     Private Sub TxtString_TextChanged(sender As Object, e As EventArgs) Handles TxtValue.TextChanged
-
         Dim iStrLen As Long
         Dim prevText As String
         Dim strChar As String
         Dim iChar As Integer
         Dim specChar As String
-
         iStrLen = TxtValue.TextLength
         prevText = ""
         For iChar = 1 To iStrLen
             strChar = Mid(TxtValue.Text, iChar, 1)
-
             If strChar = "{" Then
                 specChar = ""
                 ' special_char    ' Special char (eg Return)
@@ -243,38 +221,33 @@ Public Class FrmEditButton
                     Case "Tab"
                         prevText &= Chr(9)
                 End Select
-
             Else
                 prevText &= strChar    ' Regular char
             End If
         Next iChar
         TxtPreview.Text = prevText
     End Sub
-    Private Sub CutToolStripMenuItem_Click(menuItem As Object, e As EventArgs) Handles CutToolStripMenuItem.Click
+    Private Sub MnuCut_Click(menuItem As Object, e As EventArgs) Handles MnuCut.Click
         GetSourceControl(menuItem).Cut()
     End Sub
-
-    Private Sub CopyToolStripMenuItem_Click(menuItem As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
+    Private Sub MnuCopy_Click(menuItem As Object, e As EventArgs) Handles MnuCopy.Click
         GetSourceControl(menuItem).Copy()
     End Sub
-
-    Private Sub PasteToolStripMenuItem_Click(menuItem As Object, e As EventArgs) Handles PasteToolStripMenuItem.Click
+    Private Sub MnuPaste_Click(menuItem As Object, e As EventArgs) Handles MnuPaste.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Paste()
         End If
     End Sub
-
-    Private Sub DeleteToolStripMenuItem_Click(menuItem As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+    Private Sub MnuDelete_Click(menuItem As Object, e As EventArgs) Handles MnuDelete.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = ""
         End If
     End Sub
-
-    Private Sub SelectAllToolStripMenuItem_Click(menuItem As Object, e As EventArgs) Handles SelectAllToolStripMenuItem.Click
+    Private Sub MnuSelectAll_Click(menuItem As Object, e As EventArgs) Handles MnuSelectAll.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
@@ -283,33 +256,27 @@ Public Class FrmEditButton
             End If
         End If
     End Sub
-
-    Private Sub LowercaseToolStripMenuItem_Click(menuItem As Object, e As EventArgs) Handles LowercaseToolStripMenuItem.Click
+    Private Sub MnuLowercase_Click(menuItem As Object, e As EventArgs) Handles MnuLowercase.Click
         NTextUtil.ConvertSelectedTextToLowercase(GetSourceControl(menuItem))
     End Sub
-
-    Private Sub UPPERCASEToolStripMenuItem_Click(menuItem As Object, e As EventArgs) Handles UPPERCASEToolStripMenuItem.Click
+    Private Sub MnuUpperCase_Click(menuItem As Object, e As EventArgs) Handles MnuUpperCase.Click
         NTextUtil.ConvertSelectedTextToUpperCase(GetSourceControl(menuItem))
     End Sub
-
-    Private Sub TitleCaseToolStripMenuItem_Click(menuItem As Object, e As EventArgs) Handles TitleCaseToolStripMenuItem.Click
+    Private Sub MnuTitleCase_Click(menuItem As Object, e As EventArgs) Handles MnuTitleCase.Click
         NTextUtil.ConvertSelectedTextToTitleCase(GetSourceControl(menuItem))
     End Sub
-
-    Private Sub TOGGLECASEToolStripMenuItem_Click(menuItem As Object, e As EventArgs) Handles TOGGLECASEToolStripMenuItem.Click
+    Private Sub MnuToggleCase_Click(menuItem As Object, e As EventArgs) Handles MnuToggleCase.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = NTextUtil.ToggleText(_textBox.SelectedText)
         End If
     End Sub
-
     Private Sub FrmEditButton_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.EditButtonPos = SetFormPos(Me)
         My.Settings.Save()
         LogUtil.Info("Closing", MyBase.Name)
     End Sub
-
     Private Sub BtnField_Click(sender As Object, e As EventArgs) Handles BtnField.Click
         If CbDbValue.SelectedIndex >= 0 Then
             Dim pos As Long
@@ -318,4 +285,19 @@ Public Class FrmEditButton
             TxtValue.SelectionStart = pos + Len(CbDbValue.SelectedItem) + 2
         End If
     End Sub
+#End Region
+#Region "subroutines"
+    Private Function IsValidated() As Boolean
+        Dim isOK As Boolean = True
+        If txtCaption.TextLength = 0 Then
+            LblErrs.Text &= "Missing Caption | "
+            isOK = False
+        End If
+        If TxtValue.TextLength = 0 Then
+            LblErrs.Text &= "Missing Value | "
+            isOK = False
+        End If
+        Return isOK
+    End Function
+#End Region
 End Class
