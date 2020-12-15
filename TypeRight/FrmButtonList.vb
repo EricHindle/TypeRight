@@ -212,6 +212,7 @@ Public Class FrmButtonList
             _dbUpdate.SenderId = iCurrSender
             _dbUpdate.ShowDialog()
         End Using
+        FillNamesList()
     End Sub
     Private Sub ProgressTimer_Tick(sender As Object, e As EventArgs) Handles ProgressTimer.Tick
         If ProgressBar1.Value > 0 Then

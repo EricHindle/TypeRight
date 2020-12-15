@@ -28,7 +28,6 @@ Partial Class FrmDbUpdate
         Me.CbGender = New System.Windows.Forms.ComboBox()
         Me.CbTitle = New System.Windows.Forms.ComboBox()
         Me.BtnOk = New System.Windows.Forms.Button()
-        Me.BtnClose = New System.Windows.Forms.Button()
         Me.TxtAge = New System.Windows.Forms.TextBox()
         Me.DtpDob = New System.Windows.Forms.DateTimePicker()
         Me.TxtEmail = New System.Windows.Forms.TextBox()
@@ -77,15 +76,15 @@ Partial Class FrmDbUpdate
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.MnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuBkUp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuBkUpSenders = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuBkUpButtons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuBkUpGroups = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuBkUpButtons = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuBkUpSenders = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuBkUpSenderButtons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuBkUpAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuRest = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuRestSenders = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MnuRestButtons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuRestGroups = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuRestButtons = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuRestSenders = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuRestSenderButtons = New System.Windows.Forms.ToolStripMenuItem()
         Me.MnuRestAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -100,6 +99,7 @@ Partial Class FrmDbUpdate
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.LblId = New System.Windows.Forms.Label()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -148,21 +148,12 @@ Partial Class FrmDbUpdate
         '
         'BtnOk
         '
-        Me.BtnOk.Location = New System.Drawing.Point(706, 510)
+        Me.BtnOk.Location = New System.Drawing.Point(685, 512)
         Me.BtnOk.Name = "BtnOk"
         Me.BtnOk.Size = New System.Drawing.Size(91, 38)
         Me.BtnOk.TabIndex = 7
-        Me.BtnOk.Text = "OK"
+        Me.BtnOk.Text = "Done"
         Me.BtnOk.UseVisualStyleBackColor = True
-        '
-        'BtnClose
-        '
-        Me.BtnClose.Location = New System.Drawing.Point(601, 510)
-        Me.BtnClose.Name = "BtnClose"
-        Me.BtnClose.Size = New System.Drawing.Size(87, 38)
-        Me.BtnClose.TabIndex = 6
-        Me.BtnClose.Text = "Cancel"
-        Me.BtnClose.UseVisualStyleBackColor = True
         '
         'TxtAge
         '
@@ -250,6 +241,7 @@ Partial Class FrmDbUpdate
         '
         'TxtId
         '
+        Me.TxtId.Enabled = False
         Me.TxtId.Location = New System.Drawing.Point(90, 23)
         Me.TxtId.Name = "TxtId"
         Me.TxtId.Size = New System.Drawing.Size(100, 24)
@@ -564,85 +556,85 @@ Partial Class FrmDbUpdate
         '
         Me.MnuBkUp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuBkUpGroups, Me.MnuBkUpButtons, Me.MnuBkUpSenders, Me.MnuBkUpSenderButtons, Me.MnuBkUpAll})
         Me.MnuBkUp.Name = "MnuBkUp"
-        Me.MnuBkUp.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUp.Size = New System.Drawing.Size(113, 22)
         Me.MnuBkUp.Text = "Backup"
-        '
-        'MnuBkUpSenders
-        '
-        Me.MnuBkUpSenders.Name = "MnuBkUpSenders"
-        Me.MnuBkUpSenders.Size = New System.Drawing.Size(180, 22)
-        Me.MnuBkUpSenders.Text = "Senders"
-        '
-        'MnuBkUpButtons
-        '
-        Me.MnuBkUpButtons.Name = "MnuBkUpButtons"
-        Me.MnuBkUpButtons.Size = New System.Drawing.Size(180, 22)
-        Me.MnuBkUpButtons.Text = "Group Buttons"
         '
         'MnuBkUpGroups
         '
         Me.MnuBkUpGroups.Name = "MnuBkUpGroups"
-        Me.MnuBkUpGroups.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpGroups.Size = New System.Drawing.Size(154, 22)
         Me.MnuBkUpGroups.Text = "Groups"
+        '
+        'MnuBkUpButtons
+        '
+        Me.MnuBkUpButtons.Name = "MnuBkUpButtons"
+        Me.MnuBkUpButtons.Size = New System.Drawing.Size(154, 22)
+        Me.MnuBkUpButtons.Text = "Group Buttons"
+        '
+        'MnuBkUpSenders
+        '
+        Me.MnuBkUpSenders.Name = "MnuBkUpSenders"
+        Me.MnuBkUpSenders.Size = New System.Drawing.Size(154, 22)
+        Me.MnuBkUpSenders.Text = "Senders"
         '
         'MnuBkUpSenderButtons
         '
         Me.MnuBkUpSenderButtons.Name = "MnuBkUpSenderButtons"
-        Me.MnuBkUpSenderButtons.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpSenderButtons.Size = New System.Drawing.Size(154, 22)
         Me.MnuBkUpSenderButtons.Text = "Sender Buttons"
         '
         'MnuBkUpAll
         '
         Me.MnuBkUpAll.Name = "MnuBkUpAll"
-        Me.MnuBkUpAll.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpAll.Size = New System.Drawing.Size(154, 22)
         Me.MnuBkUpAll.Text = "All"
         '
         'MnuRest
         '
         Me.MnuRest.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuRestGroups, Me.MnuRestButtons, Me.MnuRestSenders, Me.MnuRestSenderButtons, Me.MnuRestAll})
         Me.MnuRest.Name = "MnuRest"
-        Me.MnuRest.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRest.Size = New System.Drawing.Size(113, 22)
         Me.MnuRest.Text = "Restore"
-        '
-        'MnuRestSenders
-        '
-        Me.MnuRestSenders.Name = "MnuRestSenders"
-        Me.MnuRestSenders.Size = New System.Drawing.Size(180, 22)
-        Me.MnuRestSenders.Text = "Senders"
-        '
-        'MnuRestButtons
-        '
-        Me.MnuRestButtons.Name = "MnuRestButtons"
-        Me.MnuRestButtons.Size = New System.Drawing.Size(180, 22)
-        Me.MnuRestButtons.Text = "Group Buttons"
         '
         'MnuRestGroups
         '
         Me.MnuRestGroups.Name = "MnuRestGroups"
-        Me.MnuRestGroups.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestGroups.Size = New System.Drawing.Size(154, 22)
         Me.MnuRestGroups.Text = "Groups"
+        '
+        'MnuRestButtons
+        '
+        Me.MnuRestButtons.Name = "MnuRestButtons"
+        Me.MnuRestButtons.Size = New System.Drawing.Size(154, 22)
+        Me.MnuRestButtons.Text = "Group Buttons"
+        '
+        'MnuRestSenders
+        '
+        Me.MnuRestSenders.Name = "MnuRestSenders"
+        Me.MnuRestSenders.Size = New System.Drawing.Size(154, 22)
+        Me.MnuRestSenders.Text = "Senders"
         '
         'MnuRestSenderButtons
         '
         Me.MnuRestSenderButtons.Name = "MnuRestSenderButtons"
-        Me.MnuRestSenderButtons.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestSenderButtons.Size = New System.Drawing.Size(154, 22)
         Me.MnuRestSenderButtons.Text = "Sender Buttons"
         '
         'MnuRestAll
         '
         Me.MnuRestAll.Name = "MnuRestAll"
-        Me.MnuRestAll.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestAll.Size = New System.Drawing.Size(154, 22)
         Me.MnuRestAll.Text = "All"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(110, 6)
         '
         'MnuClose
         '
         Me.MnuClose.Name = "MnuClose"
-        Me.MnuClose.Size = New System.Drawing.Size(180, 22)
+        Me.MnuClose.Size = New System.Drawing.Size(113, 22)
         Me.MnuClose.Text = "Close"
         '
         'TxtSWord
@@ -782,11 +774,22 @@ Partial Class FrmDbUpdate
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Action"
         '
+        'LblId
+        '
+        Me.LblId.AutoSize = True
+        Me.LblId.Location = New System.Drawing.Point(588, 53)
+        Me.LblId.Name = "LblId"
+        Me.LblId.Size = New System.Drawing.Size(21, 17)
+        Me.LblId.TabIndex = 10
+        Me.LblId.Text = "-1"
+        Me.LblId.Visible = False
+        '
         'FrmDbUpdate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(809, 585)
+        Me.Controls.Add(Me.LblId)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
@@ -795,7 +798,6 @@ Partial Class FrmDbUpdate
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)
-        Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.BtnOk)
         Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
@@ -830,7 +832,6 @@ Partial Class FrmDbUpdate
     Friend WithEvents CbGender As Windows.Forms.ComboBox
     Friend WithEvents CbTitle As Windows.Forms.ComboBox
     Friend WithEvents BtnOk As Windows.Forms.Button
-    Friend WithEvents BtnClose As Windows.Forms.Button
     Friend WithEvents TxtAge As Windows.Forms.TextBox
     Friend WithEvents DtpDob As Windows.Forms.DateTimePicker
     Friend WithEvents TxtEmail As Windows.Forms.TextBox
@@ -902,4 +903,5 @@ Partial Class FrmDbUpdate
     Friend WithEvents BtnClear As Windows.Forms.Button
     Friend WithEvents MnuBkUpSenderButtons As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuRestSenderButtons As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LblId As Windows.Forms.Label
 End Class

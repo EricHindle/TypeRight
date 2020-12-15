@@ -8,6 +8,7 @@ Public Class FrmDbUpdate
     Private iCurrSnd As Integer
     Private ReadOnly sDbFullPath As String
     Private isLoadingForm As Boolean = False
+    Private isDataChanged As Boolean
 #End Region
 #Region "database"
     Dim oSndTable As New TypeRight.TypeRightDataSet.sendersDataTable
@@ -33,8 +34,9 @@ Public Class FrmDbUpdate
         LogUtil.Info("Loading", MyBase.Name)
         GetFormPos(Me, My.Settings.DBUpdatePos)
         LoadSenderTable()
+        isDataChanged = False
     End Sub
-    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
     Private Sub FrmDbUpdate_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -43,13 +45,17 @@ Public Class FrmDbUpdate
         My.Settings.Save()
     End Sub
     Private Sub BtnOk_Click(sender As Object, e As EventArgs) Handles BtnOk.Click
-        Me.DialogResult = Windows.Forms.DialogResult.OK
-        Me.Close()
+        If isDataChanged = False OrElse
+            MsgBox("There are unsaved changes. Do you wish to continue (changes will be lost)?",
+                    MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            Me.Close()
+        End If
     End Sub
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         If IsValid() Then
             ShowStatus("Inserting new sender", True)
             InsertSender(StoreSenderValues())
+            isDataChanged = False
             LoadSenderTable()
             ShowStatus("Inserted new sender", True)
         End If
@@ -62,6 +68,7 @@ Public Class FrmDbUpdate
         If IsValid() Then
             ShowStatus("Updating sender", True)
             UpdateSender(StoreSenderValues())
+            isDataChanged = False
             LoadSenderTable()
             ShowStatus("Updated sender", True)
         End If
@@ -70,6 +77,7 @@ Public Class FrmDbUpdate
         If Not String.IsNullOrEmpty(TxtId.Text) Then
             ShowStatus("Deleting sender", True)
             DeleteSender(CInt(TxtId.Text))
+            isDataChanged = False
             LoadSenderTable()
             ShowStatus("Deleted sender", True)
             ShowRecord(0, "first")
@@ -95,14 +103,31 @@ Public Class FrmDbUpdate
     End Sub
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
         TxtId.Text = -1
-        ClearForm()
     End Sub
     Private Sub TxtId_TextChanged(sender As Object, e As EventArgs) Handles TxtId.TextChanged
         If Not isLoadingForm Then
-            If CInt(TxtId.Text) > -1 Then
-                Display_Sender()
+            If isDataChanged Then
+                If MsgBox("There are unsaved changes. Do you wish to continue (changes will be lost)?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                    isLoadingForm = True
+                    TxtId.Text = LblId.Text
+                    isLoadingForm = False
+                    Exit Sub
+                End If
             End If
+            If IsNumeric(TxtId.Text) Then
+                isLoadingForm = True
+                If CInt(TxtId.Text) > -1 Then
+                    Display_Sender()
+                Else
+                    ClearForm()
+                End If
+                isLoadingForm = False
+            Else
+                Exit Sub
+            End If
+            isDataChanged = False
         End If
+
     End Sub
     Private Sub MnuClose_Click(sender As Object, e As EventArgs) Handles MnuClose.Click
         Me.Close()
@@ -156,7 +181,8 @@ Public Class FrmDbUpdate
             End If
             iCurrSnd += 1
         Next
-        If oSndRow IsNot Nothing Then
+        If oSndRow IsNot Nothing  Then
+            LblId.Text = CStr(oSndRow.SenderId)
             TxtId.Text = CStr(oSndRow.SenderId)
         End If
     End Sub
@@ -207,11 +233,11 @@ Public Class FrmDbUpdate
         Return isOK
     End Function
     Private Sub Display_Sender()
-        isLoadingForm = True
         Dim IntAge As Integer
         With oSndRow
             ClearForm()
             TxtId.Text = CStr(.SenderId)
+            LblId.Text = TxtId.Text
             CbTitle.SelectedIndex = If(.IsTitleNull, -1, CbTitle.FindString(.Title))
             TxtForename.Text = .FirstName
             TxtSurname.Text = .LastName
@@ -259,16 +285,13 @@ Public Class FrmDbUpdate
             If Not .IsgenderNull Then
                 CbGender.SelectedIndex = CbGender.FindString(.gender)
             End If
-
             If Not .IsOccupationNull Then
                 CbOcc.SelectedIndex = CbOcc.FindString(.Occupation)
             End If
-
             If Not .IsMaritalStatusNull Then
                 CbMarStat.SelectedIndex = CbMarStat.FindString(.MaritalStatus)
             End If
         End With
-        isLoadingForm = False
     End Sub
     Private Sub SetAllowUpdate()
         If Not isPro And oSndTable.Rows.Count > 0 Then
@@ -307,11 +330,13 @@ Public Class FrmDbUpdate
         TxtMobile.Text = ""
         TxtPassword.Text = ""
         TxtId.Text = ""
+        LblId.Text = ""
         TxtSWord.Text = ""
         TxtUsername.Text = ""
     End Sub
     Private Function StoreSenderValues() As Sender
-        Return SenderBuilder.NewSender.StartingWith(CInt(TxtId.Text), TxtForename.Text,
+        Dim senderId As Integer = If(IsNumeric(TxtId.Text), CInt(TxtId.Text), -1)
+        Return SenderBuilder.NewSender.StartingWith(senderId, TxtForename.Text,
                                                     TxtSurname.Text, TxtAdd2.Text,
                                                     TxtTown.Text, TxtCounty.Text,
                                                     TxtPostCode.Text, DtpDob.Value,
@@ -429,5 +454,28 @@ Public Class FrmDbUpdate
             TxtId.Text = CStr(oSndRow.SenderId)
         End If
     End Sub
+
+    Private Sub DataChanged(sender As Object, e As EventArgs) Handles CbTitle.SelectedIndexChanged,
+                                                                        TxtAdd1.TextChanged,
+                                                                        TxtAdd2.TextChanged,
+                                                                        TxtCountry.TextChanged,
+                                                                        TxtCounty.TextChanged,
+                                                                        TxtPostCode.TextChanged,
+                                                                        TxtEmail.TextChanged,
+                                                                        TxtForename.TextChanged,
+                                                                        TxtMobile.TextChanged,
+                                                                        TxtPassword.TextChanged,
+                                                                        TxtPhone.TextChanged,
+                                                                        TxtSurname.TextChanged,
+                                                                        TxtSWord.TextChanged,
+                                                                        TxtTown.TextChanged,
+                                                                        TxtUsername.TextChanged,
+                                                                        DtpDob.ValueChanged,
+                                                                        CbGender.SelectedIndexChanged,
+                                                                        CbMarStat.SelectedIndexChanged,
+                                                                        CbOcc.SelectedIndexChanged
+        isDataChanged = True
+    End Sub
+
 #End Region
 End Class
