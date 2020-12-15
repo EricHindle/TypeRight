@@ -1,6 +1,5 @@
-﻿Imports System.Diagnostics
+﻿Imports System.Security.Cryptography
 Imports System.Text
-Imports System.Security.Cryptography
 Public NotInheritable Class NRegisterApp
     Private Const VALID_CHARS As String = "ABCDEFGHJKLM0123456789NPQRTUVWXY"
     Public Shared Function GenerateKey(strRegisteredName As String,

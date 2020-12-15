@@ -78,6 +78,7 @@
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
+    <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

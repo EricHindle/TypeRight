@@ -1,7 +1,6 @@
 ﻿Imports System.Data
-Imports System.Diagnostics
-Imports System.Windows.Forms
 Imports System.Drawing
+Imports System.Windows.Forms
 
 Public Class FrmSenderButtonFormat
 #Region "database variables"

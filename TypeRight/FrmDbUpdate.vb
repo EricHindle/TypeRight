@@ -1,6 +1,5 @@
 ﻿Imports System.Data
 Imports System.IO
-Imports System.Text
 Imports System.Windows.Forms
 
 Public Class FrmDbUpdate

@@ -1,5 +1,4 @@
-﻿Imports System.Diagnostics
-Imports System.Drawing
+﻿Imports System.Drawing
 Imports System.Globalization
 Imports System.Reflection
 Imports System.Windows.Forms
@@ -15,7 +14,6 @@ Module TypeRightMain
     Public lpVariable As String
     Public lpDefault As String
     Public lpReturnedString As String
-    '    Public lpReturnedString As String * 100
     Public strFName As String
     ' Option values
     Public iButtonWidth As Long
@@ -33,14 +31,11 @@ Module TypeRightMain
     Public iDfltFontSize As Integer
     Public bDfltFontItalic As Boolean
     Public bDfltFontBold As Boolean
-
     Public strButtonCaption As String
-    ' Public strButtonText(60) As String
     Public iCurrBtn As Long
     Public iCurrGrp As Long
     Public iCurrSender As Long
     Public strApplication As String
-    '    Public oRegistry As NRegistry
     Public oNCrypter As NCrypt
     Public lBtnListHandle As Long
     Public bNewWidth As Boolean
@@ -55,39 +50,15 @@ Module TypeRightMain
         GRP_TRANS = 2
         GRP_RMV = 3
     End Enum
-
 #End Region
 #Region "public constants"
-    Public Const APP_STRING = "skRywTenYbtHgiRepYt"
-
-    'Public Const VK_3 = &H33
-    'Public Const VK_BACK = &H8
-    'Public Const VK_TAB = &H9
-    'Public Const VK_CLEAR = &HC
-    'Public Const VK_RETURN = &HD
     Public Const VK_SHIFT = &H10
     Public Const VK_CONTROL = &H11
-    'Public Const VK_MENU = &H12
-    'Public Const VK_PAUSE = &H13
-    'Public Const VK_CAPITAL = &H14
-    'Public Const VK_ESCAPE = &H1B
     Public Const VK_SPACE = &H20
-    'Public Const VK_PRIOR = &H21
-    'Public Const VK_NEXT = &H22
     Public Const VK_END = &H23
     Public Const VK_HOME = &H24
-    'Public Const VK_LEFT = &H25
-    'Public Const VK_UP = &H26
-    'Public Const VK_RIGHT = &H27
-    'Public Const VK_DOWN = &H28
     Public Const VK_INSERT = &H2D
     Public Const VK_DELETE = &H2E
-    'Public Const VK_MULTIPLY = &H6A
-    'Public Const VK_ADD = &H6B
-    'Public Const VK_SEPARATOR = &H6C
-    'Public Const VK_SUBTRACT = &H6D
-    'Public Const VK_DECIMAL = &H6E
-    'Public Const VK_DIVIDE = &H6F
     Public Const VK_LCONTROL = &HA2    'Left Control key code
     Public Const VK_OEM_1 = &HBA
     Public Const VK_OEM_PLUS = &HBB
@@ -95,21 +66,14 @@ Module TypeRightMain
     Public Const VK_OEM_MINUS = &HBD
     Public Const VK_OEM_PERIOD = &HBE
     Public Const VK_OEM_2 = &HBF
-    'Public Const VK_OEM_3 = &HC0
     Public Const VK_OEM_4 = &HDB
     Public Const VK_OEM_5 = &HDC
     Public Const VK_OEM_6 = &HDD
     Public Const VK_OEM_7 = &HDE
     Public Const VK_OEM_8 = &HDF
-    'Window message values
-    ' Public Const WM_LBUTTONDBLCLK = &H203
-    ' Public Const WM_LBUTTONDOWN = &H201
     Public Const WM_LBUTTONUP = &H202
     Public Const WM_MOUSEMOVE = &H200
-    ' Public Const WM_RBUTTONDBLCLK = &H206
-    ' Public Const WM_RBUTTONDOWN = &H204
     Public Const WM_RBUTTONUP = &H205
-
 #End Region
 #Region "common subroutines"
     Public Sub InitialiseApplication()
@@ -134,12 +98,12 @@ Module TypeRightMain
         isPro = False
         strApplication = "TypeRight"
         ' Set an encryption object
-        oNCrypter = New NCrypt(APP_STRING)
+        oNCrypter = New NCrypt(My.Resources.APP_STRING)
         ' Get the registered name and licence code
         sLicName = My.Settings.RegName
         sLicCode = My.Settings.RegCode
-        ' Set a registration object
-        If NRegisterApp.IsValidKey(sLicCode, sLicName, APP_STRING) Then
+        ' Check licence
+        If NRegisterApp.IsValidKey(sLicCode, sLicName, My.Resources.APP_STRING) Then
             ' Running pro version
             isPro = True
         Else
@@ -184,7 +148,6 @@ Module TypeRightMain
         My.Settings.FontItalic = bDfltFontItalic
         My.Settings.Save()
     End Sub
-
     Public Sub GetFormPos(ByRef oForm As Form, ByVal sPos As String)
         Dim thisScreen As Screen = My.Computer.Screen
         Dim workingArea As Rectangle = thisScreen.WorkingArea
@@ -205,7 +168,6 @@ Module TypeRightMain
             End If
         End If
     End Sub
-
 #End Region
 #Region "common functions"
     Public Function SetFormPos(ByRef oForm As Form) As String
@@ -229,7 +191,6 @@ Module TypeRightMain
         Dim newFont As Font = New Font(p_FontName, p_FontSize, newStyle)
         Return newFont
     End Function
-
     Public Function GetValueBetweenBrackets(sKeyText As String, Optional marker1 As String = "(", Optional marker2 As String = ")")
         Dim value As String = ""
         Dim parts1 As String() = Split(sKeyText, marker1)

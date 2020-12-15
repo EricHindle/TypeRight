@@ -1,5 +1,4 @@
 ﻿Imports System.Windows.Forms
-
 Public NotInheritable Class NTextUtil
     Public Shared Function ConvertSelectedTextToLowercase(ByRef _control As Object) As String
         Dim oText As String = ""

@@ -1,6 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 
 Public Class FrmOptions
 #Region "form control handlers"
@@ -33,7 +31,7 @@ Public Class FrmOptions
             sLicName = TxtLicName.Text
             sLicCode = ""
             sLicCode = sLicCode & TxtLic1.Text & TxtLic2.Text & TxtLic3.Text & TxtLic4.Text
-            If NRegisterApp.IsValidKey(sLicCode, sLicName, APP_STRING) Then
+            If NRegisterApp.IsValidKey(sLicCode, sLicName, My.Resources.APP_STRING) Then
                 My.Settings.RegName = sLicName
                 My.Settings.RegCode = sLicCode
                 isPro = True

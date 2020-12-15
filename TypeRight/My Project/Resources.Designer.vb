@@ -61,6 +61,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to skRywTenYbtHgiRepYt.
+        '''</summary>
+        Friend ReadOnly Property APP_STRING() As String
+            Get
+                Return ResourceManager.GetString("APP_STRING", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property cancel() As System.Drawing.Bitmap
