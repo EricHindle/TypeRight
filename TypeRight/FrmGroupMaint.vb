@@ -48,7 +48,12 @@ Public Class FrmGroupMaint
                     Exit Sub
                 End If
                 Dim selectedGroup As Integer = cmbGroups.SelectedValue
-                UpdateButtonGroupOnButton(selectedGroup, _button.Id)
+                If ChkCopyBtn.Checked Then
+                    Dim newbuttonId As Integer = InsertButton(_button)
+                    UpdateButtonGroupOnButton(selectedGroup, newbuttonId)
+                Else
+                    UpdateButtonGroupOnButton(selectedGroup, _button.Id)
+                End If
                 ResequenceButtons(_button.Group)
                 ResequenceButtons(selectedGroup)
             Case GroupAction.GRP_ADD
@@ -100,6 +105,7 @@ Public Class FrmGroupMaint
                 LblTrans.Visible = True
                 cmbGroups.Visible = True
                 LblThisBtn.Visible = True
+                ChkCopyBtn.Visible = True
                 BtnUpdate.Text = "Transfer"
         End Select
     End Sub
@@ -120,9 +126,13 @@ Public Class FrmGroupMaint
         cmbGroups.Visible = False
         TxtGrpNumber.Text = ""
         TxtGrpName.Text = ""
+        ChkCopyBtn.Visible = False
     End Sub
     Private Sub BtnCopy_Click(sender As Object, e As EventArgs) Handles BtnCopy.Click
         TxtNewGroup.Text = TxtGrpName.Text
+    End Sub
+    Private Sub ChkCopyBtn_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCopyBtn.CheckedChanged
+        LblTrans.Text = If(ChkCopyBtn.Checked, "Copy ", "Move ") & "button to group"
     End Sub
 
 #End Region

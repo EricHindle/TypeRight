@@ -1,6 +1,7 @@
 ﻿Imports System.Diagnostics
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Reflection
 Imports System.Windows.Forms
 
 Module TypeRightMain
@@ -147,6 +148,7 @@ Module TypeRightMain
         End If
         ' Load the options from the registry
         LoadOptions()
+        TestDatabase()
     End Sub
     Public Sub LoadOptions()
         iButtonWidth = My.Settings.ButtonWidth          ' Button width
@@ -237,6 +239,15 @@ Module TypeRightMain
             value = parts2(0)
         End If
         Return value
+    End Function
+    Public Function DisplayException(pMethodBase As MethodBase, pException As Exception, pExceptionType As String) As MsgBoxResult
+        LogUtil.Exception(pExceptionType, pException, pMethodBase.Name)
+        Return MsgBox(pMethodBase.Name & " : Database exception" & vbCrLf _
+            & pException.Message & vbCrLf _
+            & If(pException.InnerException Is Nothing, "", pException.InnerException.Message) _
+            & vbCrLf & "OK to continue?",
+                      MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation,
+                      pExceptionType)
     End Function
 #End Region
 End Module

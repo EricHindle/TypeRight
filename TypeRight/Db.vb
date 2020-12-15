@@ -1,4 +1,11 @@
-﻿Module Db
+﻿Imports System.Data.Common
+Imports System.Diagnostics
+Imports System.Reflection
+
+Module Db
+#Region "constants"
+    Private Const MODULE_NAME As String = "Db"
+#End Region
 #Region "dB"
     Private ReadOnly oBgTa As New TypeRightDataSetTableAdapters.buttongroupsTableAdapter
     Private ReadOnly oBgTable As New TypeRightDataSet.buttongroupsDataTable
@@ -10,6 +17,37 @@
     Private ReadOnly oSndBtnTable As New TypeRightDataSet.senderButtonDataTable
 #End Region
 #Region "buttons"
+    Public Function TestDatabase() As Boolean
+        Dim isOK As Boolean = True
+        Try
+            oBtnTa.GetData()
+        Catch ex As DbException
+            StartSqlService()
+            Try
+                oBtnTa.GetData()
+            Catch ex1 As DbException
+                isOK = False
+            End Try
+        End Try
+        Return isOK
+    End Function
+    Private Sub StartSqlService()
+        LogUtil.Info("Starting SQL Server", MODULE_NAME)
+        Try
+            Dim procStartInfo As New ProcessStartInfo
+            With procStartInfo
+                .UseShellExecute = True
+                .FileName = "net.exe"
+                .Arguments = " start ""SQL Server (SQLEXPRESS)"""
+                .WindowStyle = ProcessWindowStyle.Normal
+                .Verb = "runas"
+            End With
+            Dim thisProcess As Process = Process.Start(procStartInfo)
+            thisProcess.WaitForExit(120000)
+        Catch ex As System.ComponentModel.Win32Exception
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Win32")
+        End Try
+    End Sub
     Public Function GetButtons()
         LogUtil.Info("Getting button table", "Db")
         Return oBtnTa.GetData()
@@ -42,9 +80,9 @@
         Return oBtnTa.UpdateGroup(_buttonGrpId, _buttonId)
     End Function
     Public Function InsertButton(_button As NbuttonControlLibrary.Nbutton) As Integer
-        LogUtil.Info("Inserting button row for Grp " & CStr(_button.Group) & " Seq " & CStr(_button.Sequence), "Db")
+        LogUtil.Info("Inserting button for Grp " & CStr(_button.Group) & " Seq " & CStr(_button.Sequence), "Db")
         Return oBtnTa.InsertButton(_button.Group, _button.Sequence,
-                                   _button.Text, _button.Hint,
+                                   _button.Caption, _button.Hint,
                                    _button.Value, _button.FontName,
                                    _button.FontBold, _button.FontSize,
                                    _button.FontItalic, _button.Encrypt)
@@ -52,7 +90,7 @@
     Public Function UpdateButton(_button As NbuttonControlLibrary.Nbutton) As Integer
         LogUtil.Info("Updating button " & CStr(_button.Id), "Db")
         Return oBtnTa.UpdateButton(_button.Group, _button.Sequence,
-                                   _button.Text, _button.Hint,
+                                   _button.Caption, _button.Hint,
                                    _button.Value, _button.FontName,
                                    _button.FontBold, _button.FontSize,
                                    _button.FontItalic, _button.Encrypt, _button.Id)

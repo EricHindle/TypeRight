@@ -115,6 +115,7 @@ Public Class Nbutton
         Set(ByVal value As String)
             m_Caption = value
             Button1.Text = m_Caption
+            Me.Text = m_Caption
         End Set
     End Property
     Public Property Hint() As String
@@ -167,9 +168,8 @@ Public Class Nbutton
         m_Fontsize = m_def_Size
         m_Bold = m_def_Bold
         m_Italic = m_def_Italic
-        m_Typeface = MakeTypeface(m_Fontname, m_Fontsize, m_Bold, m_Italic)
-        Button1.Text = m_def_Caption
-        Button1.Font = MakeFont(m_Typeface)
+        Caption = m_def_Caption
+        UpdateFont()
         Value = m_def_Value
         Hint = m_def_Hint
         Group = m_def_Grp

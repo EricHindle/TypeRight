@@ -165,6 +165,7 @@ Public Class FrmButtonList
             Dim _btn As Nbutton = CType(sourceControl, Nbutton)
             If _btn.DataType = Nbutton.DataSource.Group Then
                 DeleteButton(_btn.Id)
+                ResequenceButtons(_btn.Group)
                 LoadGroupButtons(_btn.Group)
                 DrawButtons()
             End If

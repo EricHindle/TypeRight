@@ -42,6 +42,7 @@ Partial Class FrmGroupMaint
         Me.LblNewGroupName = New System.Windows.Forms.Label()
         Me.BtnCopy = New System.Windows.Forms.Button()
         Me.Nbutton1 = New NbuttonControlLibrary.Nbutton()
+        Me.ChkCopyBtn = New System.Windows.Forms.CheckBox()
         CType(Me.ButtongroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -211,11 +212,22 @@ Partial Class FrmGroupMaint
         Me.Nbutton1.TabIndex = 18
         Me.Nbutton1.Value = "?"
         '
+        'chkCopyBtn
+        '
+        Me.ChkCopyBtn.AutoSize = True
+        Me.ChkCopyBtn.Location = New System.Drawing.Point(495, 68)
+        Me.ChkCopyBtn.Name = "chkCopyBtn"
+        Me.ChkCopyBtn.Size = New System.Drawing.Size(106, 21)
+        Me.ChkCopyBtn.TabIndex = 19
+        Me.ChkCopyBtn.Text = "Copy Button"
+        Me.ChkCopyBtn.UseVisualStyleBackColor = True
+        '
         'FrmGroupMaint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(629, 221)
+        Me.Controls.Add(Me.ChkCopyBtn)
         Me.Controls.Add(Me.Nbutton1)
         Me.Controls.Add(Me.BtnCopy)
         Me.Controls.Add(Me.LblNewGroupName)
@@ -265,4 +277,5 @@ Partial Class FrmGroupMaint
     Friend WithEvents LblNewGroupName As Windows.Forms.Label
     Friend WithEvents BtnCopy As Windows.Forms.Button
     Friend WithEvents Nbutton1 As NbuttonControlLibrary.Nbutton
+    Friend WithEvents ChkCopyBtn As Windows.Forms.CheckBox
 End Class
