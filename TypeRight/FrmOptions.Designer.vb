@@ -428,6 +428,7 @@ Partial Class FrmOptions
         '
         'BtnViewLog
         '
+        Me.BtnViewLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnViewLog.Location = New System.Drawing.Point(270, 351)
         Me.BtnViewLog.Name = "BtnViewLog"
         Me.BtnViewLog.Size = New System.Drawing.Size(94, 31)
