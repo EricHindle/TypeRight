@@ -84,19 +84,19 @@ Public Class FrmGroupMaint
 
         Select Case _action
             Case GroupAction.GRP_ADD
-                LogUtil.Info("Adding new group")
+                LogUtil.Info("Adding new group", MyBase.Name)
                 BtnUpdate.Text = "Add"
                 BtnCopy.Visible = True
                 LblNewGroupName.Visible = True
                 TxtNewGroup.Visible = True
             Case GroupAction.GRP_CHG
-                LogUtil.Info("Amending group name")
+                LogUtil.Info("Amending group name", MyBase.Name)
                 BtnUpdate.Text = "Update"
             Case GroupAction.GRP_RMV
-                LogUtil.Info("Removing group")
+                LogUtil.Info("Removing group", MyBase.Name)
                 BtnUpdate.Text = "Remove"
             Case GroupAction.GRP_TRANS
-                LogUtil.Info("Transferring button")
+                LogUtil.Info("Transferring button", MyBase.Name)
                 If _button IsNot Nothing Then
                     Nbutton1.Caption = _button.Caption
                     Nbutton1.Font = _button.Font

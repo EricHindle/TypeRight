@@ -363,6 +363,18 @@ Partial Friend NotInheritable Class Settings
             Me("SndrBtnFormPos") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property LogViewerPos() As String
+        Get
+            Return CType(Me("LogViewerPos"),String)
+        End Get
+        Set
+            Me("LogViewerPos") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

@@ -61,6 +61,7 @@ Partial Class FrmOptions
         Me.LblVersion = New System.Windows.Forms.Label()
         Me.Image1 = New System.Windows.Forms.PictureBox()
         Me.Image2 = New System.Windows.Forms.PictureBox()
+        Me.BtnViewLog = New System.Windows.Forms.Button()
         Me.GrpLicence.SuspendLayout()
         CType(Me.Slider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -425,11 +426,21 @@ Partial Class FrmOptions
         Me.Image2.TabIndex = 21
         Me.Image2.TabStop = False
         '
+        'BtnViewLog
+        '
+        Me.BtnViewLog.Location = New System.Drawing.Point(270, 351)
+        Me.BtnViewLog.Name = "BtnViewLog"
+        Me.BtnViewLog.Size = New System.Drawing.Size(94, 31)
+        Me.BtnViewLog.TabIndex = 22
+        Me.BtnViewLog.Text = "View Log"
+        Me.BtnViewLog.UseVisualStyleBackColor = True
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(654, 417)
+        Me.Controls.Add(Me.BtnViewLog)
         Me.Controls.Add(Me.Image2)
         Me.Controls.Add(Me.Image1)
         Me.Controls.Add(Me.LblVersion)
@@ -513,4 +524,5 @@ Partial Class FrmOptions
     Friend WithEvents CbDebug As Windows.Forms.CheckBox
     Friend WithEvents Image1 As Windows.Forms.PictureBox
     Friend WithEvents Image2 As Windows.Forms.PictureBox
+    Friend WithEvents BtnViewLog As Windows.Forms.Button
 End Class

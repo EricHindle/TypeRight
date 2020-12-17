@@ -6,21 +6,20 @@
 ' Created June 2020
 
 Imports System.Windows.Forms
-Imports System.IO
 
 Public Class frmLogViewer
+#Region "variables"
     Dim currentDate As Date
+#End Region
+#Region "form control handlers"
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
     Private Sub LogViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LogUtil.Info("Loading", MyBase.Name)
+        GetFormPos(Me, My.Settings.LogViewerPos)
         LoadTodaysLog()
-    End Sub
-    Private Sub ClearLog()
-        LogUtil.ClearLogFile()
-        rtbLog.Text = ""
     End Sub
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNoZoom.Click
         TrackBar1.Value = 10
@@ -51,17 +50,22 @@ Public Class frmLogViewer
         ClearLog()
         rtbLog.Text = LogUtil.GetLogContents()
     End Sub
-
     Private Sub FrmLogViewer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
+        My.Settings.LogViewerPos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
-
     Private Sub BtnNextFile_Click(sender As Object, e As EventArgs) Handles BtnNextFile.Click
         ShowNewFile(1)
     End Sub
     Private Sub BtnPrevFile_Click(sender As Object, e As EventArgs) Handles BtnPrevFile.Click
         ShowNewFile(-1)
     End Sub
+    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
+        LoadTodaysLog()
+    End Sub
+#End Region
+#Region "subroutines"
     Private Sub ShowNewFile(interval As Integer)
         Dim newDate As Date = DateAdd(DateInterval.Day, interval, currentDate)
         Dim newLogFileName As String = LogUtil.GetLogfileName(newDate)
@@ -79,13 +83,15 @@ Public Class frmLogViewer
             currentDate = newDate
         End If
     End Sub
-    Private Sub BtnToday_Click(sender As Object, e As EventArgs) Handles BtnToday.Click
-        LoadTodaysLog()
-    End Sub
     Private Sub LoadTodaysLog()
         currentDate = Today
         Me.Text = "Log: " & LogUtil.GetLogfileName
         rtbLog.Text = LogUtil.GetLogContents()
         BtnClearLog.Enabled = True
     End Sub
+    Private Sub ClearLog()
+        LogUtil.ClearLogFile()
+        rtbLog.Text = ""
+    End Sub
+#End Region
 End Class

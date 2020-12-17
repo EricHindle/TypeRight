@@ -48,11 +48,11 @@ Module Db
         End Try
     End Sub
     Public Function GetButtons()
-        LogUtil.Info("Getting button table", "Db")
+        LogUtil.Info("Getting button table", MODULE_NAME)
         Return oBtnTa.GetData()
     End Function
     Public Function GetButtonByGroupAndSeq(_buttonGrpId As Integer, _buttonSeq As Integer) As TypeRightDataSet.buttonRow
-        LogUtil.Info("Getting button row for Grp " & CStr(_buttonGrpId) & " Seq " & CStr(_buttonSeq), "Db")
+        LogUtil.Info("Getting button row for Grp " & CStr(_buttonGrpId) & " Seq " & CStr(_buttonSeq), MODULE_NAME)
         Dim oBtnRow As TypeRightDataSet.buttonRow = Nothing
         oBtnTa.FillByGroupSeq(oBtnTable, _buttonGrpId, _buttonSeq)
         If oBtnTable.Rows.Count = 1 Then
@@ -61,12 +61,12 @@ Module Db
         Return oBtnRow
     End Function
     Public Function GetButtonsByGroup(_buttonGrpId As Integer) As TypeRightDataSet.buttonDataTable
-        LogUtil.Info("Getting button table for Grp " & CStr(_buttonGrpId), "Db")
+        LogUtil.Info("Getting button table for Grp " & CStr(_buttonGrpId), MODULE_NAME)
         oBtnTa.FillByGroup(oBtnTable, _buttonGrpId)
         Return oBtnTable
     End Function
     Public Function GetButtonById(_buttonId As Integer) As TypeRightDataSet.buttonRow
-        LogUtil.Info("Getting button row " & CStr(_buttonId), "Db")
+        LogUtil.Info("Getting button row " & CStr(_buttonId), MODULE_NAME)
         Dim oBtnRow As TypeRightDataSet.buttonRow = Nothing
         oBtnTa.FillById(oBtnTable, _buttonId)
         If oBtnTable.Rows.Count = 1 Then
@@ -75,11 +75,11 @@ Module Db
         Return oBtnRow
     End Function
     Public Function UpdateButtonGroupOnButton(_buttonGrpId As Integer, _buttonId As Integer) As Integer
-        LogUtil.Info("Updating Grp " & CStr(_buttonGrpId), "Db")
+        LogUtil.Info("Updating Grp " & CStr(_buttonGrpId), MODULE_NAME)
         Return oBtnTa.UpdateGroup(_buttonGrpId, _buttonId)
     End Function
     Public Function InsertButton(_button As NbuttonControlLibrary.Nbutton) As Integer
-        LogUtil.Info("Inserting button for Grp " & CStr(_button.Group) & " Seq " & CStr(_button.Sequence), "Db")
+        LogUtil.Info("Inserting button for Grp " & CStr(_button.Group) & " Seq " & CStr(_button.Sequence), MODULE_NAME)
         Return oBtnTa.InsertButton(_button.Group, _button.Sequence,
                                    _button.Caption, _button.Hint,
                                    _button.Value, _button.FontName,
@@ -87,7 +87,7 @@ Module Db
                                    _button.FontItalic, _button.Encrypt)
     End Function
     Public Function UpdateButton(_button As NbuttonControlLibrary.Nbutton) As Integer
-        LogUtil.Info("Updating button " & CStr(_button.Id), "Db")
+        LogUtil.Info("Updating button " & CStr(_button.Id), MODULE_NAME)
         Return oBtnTa.UpdateButton(_button.Group, _button.Sequence,
                                    _button.Caption, _button.Hint,
                                    _button.Value, _button.FontName,
@@ -95,7 +95,7 @@ Module Db
                                    _button.FontItalic, _button.Encrypt, _button.Id)
     End Function
     Public Function InsertButton(_buttonGrp As Integer, _buttonSeq As Integer, _buttontext As String, _buttonHint As String, _buttonValue As String, _buttonFont As String, _buttonBold As Boolean, _buttonFontSize As Integer, _buttonItalic As Boolean, _buttonEncrypt As Boolean) As Integer
-        LogUtil.Info("Inserting button row for Grp " & CStr(_buttonGrp) & " Seq " & CStr(_buttonSeq), "Db")
+        LogUtil.Info("Inserting button row for Grp " & CStr(_buttonGrp) & " Seq " & CStr(_buttonSeq), MODULE_NAME)
         Return oBtnTa.InsertButton(_buttonGrp, _buttonSeq,
                                    _buttontext, _buttonHint,
                                    _buttonValue, _buttonFont,
@@ -103,7 +103,7 @@ Module Db
                                    _buttonItalic, _buttonEncrypt)
     End Function
     Public Function UpdateButton(_buttonGrp As Integer, _buttonSeq As Integer, _buttontext As String, _buttonHint As String, _buttonValue As String, _buttonFont As String, _buttonBold As Boolean, _buttonFontSize As Integer, _buttonItalic As Boolean, _buttonEncrypt As Boolean, _buttonId As Integer) As Integer
-        LogUtil.Info("Updating button " & CStr(_buttonId), "Db")
+        LogUtil.Info("Updating button " & CStr(_buttonId), MODULE_NAME)
         Return oBtnTa.UpdateButton(_buttonGrp, _buttonSeq,
                                    _buttontext, _buttonHint,
                                    _buttonValue, _buttonFont,
@@ -114,7 +114,7 @@ Module Db
         Return oBtnTa.UpdateSeq(_seq, _id)
     End Function
     Public Function DeleteButton(_Id As Integer) As Integer
-        LogUtil.Info("Deleting button " & CStr(_Id), "Db")
+        LogUtil.Info("Deleting button " & CStr(_Id), MODULE_NAME)
         Return oBtnTa.DeleteButton(_Id)
     End Function
     Public Sub ResequenceButtons(_grp As Integer)
@@ -128,7 +128,7 @@ Module Db
 #End Region
 #Region "groups"
     Public Function GetButtonGroup(_buttonGrpId As Integer) As TypeRightDataSet.buttongroupsRow
-        LogUtil.Info("Getting group " & CStr(_buttonGrpId), "Db")
+        LogUtil.Info("Getting group " & CStr(_buttonGrpId), MODULE_NAME)
         Dim oBgRow As TypeRightDataSet.buttongroupsRow = Nothing
         oBgTa.FillById(oBgTable, _buttonGrpId)
         If oBgTable.Rows.Count = 1 Then
@@ -137,40 +137,40 @@ Module Db
         Return oBgRow
     End Function
     Public Function GetButtonGroups() As TypeRightDataSet.buttongroupsDataTable
-        LogUtil.Info("Getting group table", "Db")
+        LogUtil.Info("Getting group table", MODULE_NAME)
         Return oBgTa.GetData
     End Function
     Public Function DeleteButtonGroup(_buttonGrpId As Integer) As Integer
-        LogUtil.Info("Deleting group " & CStr(_buttonGrpId), "Db")
+        LogUtil.Info("Deleting group " & CStr(_buttonGrpId), MODULE_NAME)
         Return oBgTa.DeleteButtonGroup(_buttonGrpId)
     End Function
     Public Function InsertButtonGroup(_groupname As String) As Integer
-        LogUtil.Info("Inserting group " & _groupname, "Db")
+        LogUtil.Info("Inserting group " & _groupname, MODULE_NAME)
         Return oBgTa.InsertButtonGroup(_groupname)
     End Function
     Public Function UpdateButtonGroupName(_groupname As String, _groupId As Integer) As Integer
-        LogUtil.Info("Updating group " & CStr(_groupId), "Db")
+        LogUtil.Info("Updating group " & CStr(_groupId), MODULE_NAME)
         Return oBgTa.UpdateGroupName(_groupname, _groupId)
     End Function
 #End Region
 #Region "senders"
     Public Function GetSenders() As TypeRightDataSet.sendersDataTable
-        LogUtil.Info("Getting sender table", "Db")
+        LogUtil.Info("Getting sender table", MODULE_NAME)
         Return oSndTa.GetData()
     End Function
     Public Function GetSenderById(_id As Integer) As TypeRightDataSet.sendersRow
-        LogUtil.Info("Getting sender row " & CStr(_id), "Db")
+        LogUtil.Info("Getting sender row " & CStr(_id), MODULE_NAME)
         oSndTa.FillById(oSndTable, _id)
         Dim oSndRow As TypeRightDataSet.sendersRow = Nothing
         If oSndTable.Rows.Count > 0 Then
             oSndRow = oSndTable.Rows(0)
         Else
-            LogUtil.Info("Row not found ", "Db")
+            LogUtil.Info("Row not found ", MODULE_NAME)
         End If
         Return oSndRow
     End Function
     Public Function InsertSender(ByRef oSender As Sender) As Integer
-        LogUtil.Info("Inserting sender " & oSender.FirstName & " " & oSender.LastName, "Db")
+        LogUtil.Info("Inserting sender " & oSender.FirstName & " " & oSender.LastName, MODULE_NAME)
         Return oSndTa.InsertSender(oSender.Title, oSender.FirstName,
                                    oSender.LastName, oSender.Address1,
                                    oSender.Address2, oSender.Town,
@@ -182,7 +182,7 @@ Module Db
                                    oSender.Occupation, oSender.MaritalStatus, oSender.Username)
     End Function
     Public Function UpdateSender(ByRef oSender As Sender) As Integer
-        LogUtil.Info("Updating sender " & oSender.SenderId, "Db")
+        LogUtil.Info("Updating sender " & oSender.SenderId, MODULE_NAME)
         Return oSndTa.UpdateSender(oSender.Title, oSender.FirstName,
                                    oSender.LastName, oSender.Address1,
                                    oSender.Address2, oSender.Town,
@@ -196,17 +196,17 @@ Module Db
 
     End Function
     Public Function DeleteSender(_id As Integer) As Integer
-        LogUtil.Info("Deleting sender " & _id, "Db")
+        LogUtil.Info("Deleting sender " & _id, MODULE_NAME)
         Return oSndTa.DeleteSender(_id)
     End Function
 #End Region
 #Region "senderbuttons"
     Public Function GetSenderButtons() As TypeRightDataSet.senderButtonDataTable
-        LogUtil.Info("Getting sender button table", "Db")
+        LogUtil.Info("Getting sender button table", MODULE_NAME)
         Return oSndBtnTa.GetData()
     End Function
     Public Function GetSenderButton(columnName As String) As TypeRight.TypeRightDataSet.senderButtonRow
-        '      LogUtil.Info("Getting sender button row for " & columnName, "Db")
+        '      LogUtil.Info("Getting sender button row for " & columnName, MODULE_NAME)
         Dim oRow As TypeRight.TypeRightDataSet.senderButtonRow = Nothing
         oSndBtnTa.FillByColName(oSndBtnTable, columnName)
         If oSndBtnTable.Rows.Count = 1 Then
@@ -215,17 +215,17 @@ Module Db
         Return oRow
     End Function
     Public Function DeleteSenderButton(columnName As String) As Integer
-        LogUtil.Info("Deleting sender button for " & columnName, "Db")
+        LogUtil.Info("Deleting sender button for " & columnName, MODULE_NAME)
         Return oSndBtnTa.DeleteSenderButton(columnName)
     End Function
     Public Function InsertSenderButton(ColumnName As String, buttonFontName As String, buttonFontSize As Decimal, buttonItalic As Boolean, buttonBold As Boolean, buttonEncrypted As Boolean) As Integer
-        LogUtil.Info("Insering sender button row for " & ColumnName, "Db")
+        LogUtil.Info("Insering sender button row for " & ColumnName, MODULE_NAME)
         Return oSndBtnTa.InsertSenderButton(ColumnName, CByte(buttonBold),
                                             CByte(buttonItalic), buttonFontName,
                                             buttonFontSize, CByte(buttonEncrypted))
     End Function
     Public Function UpdateSenderButton(ColumnName As String, buttonFontName As String, buttonFontSize As Decimal, buttonItalic As Boolean, buttonBold As Boolean, buttonEncrypted As Boolean) As Integer
-        LogUtil.Info("Updating sender button row for " & ColumnName, "Db")
+        LogUtil.Info("Updating sender button row for " & ColumnName, MODULE_NAME)
         Return oSndBtnTa.UpdateSenderButton(CByte(buttonBold), CByte(buttonItalic),
                                             buttonFontName, buttonFontSize,
                                             CByte(buttonEncrypted), ColumnName)

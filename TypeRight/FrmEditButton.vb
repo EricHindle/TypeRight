@@ -30,7 +30,7 @@ Public Class FrmEditButton
         grpOpts.Visible = isPro
         chkEncrypt.Checked = False
         If _button IsNot Nothing Then
-            LogUtil.Info("Editing button " & _button.Caption)
+            LogUtil.Info("Editing button " & _button.Caption, MyBase.Name)
             iSeq = _button.Sequence
             iGrp = _button.Group
             iId = _button.Id

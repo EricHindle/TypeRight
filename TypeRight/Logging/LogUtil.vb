@@ -8,6 +8,9 @@ Imports System.IO
 Imports System.Threading
 Imports System.Diagnostics
 Public NotInheritable Class LogUtil
+#Region "constants"
+    Private Const MODULE_NAME As String = "LogUtil"
+#End Region
 #Region "properties"
     Private Shared _LogFolder As String
     Private Shared isConfigured As Boolean = False
@@ -120,7 +123,7 @@ Public NotInheritable Class LogUtil
             sr.Write("")
         End Using
         StartLogging()
-        LogUtil.Info("Log file cleared by " & My.User.Name & " on " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
+        LogUtil.Info("Log file cleared by " & My.User.Name & " on " & Format(Now, "dd/MM/yyyy HH:mm:ss"), MODULE_NAME)
     End Sub
     Public Shared Function GetLogContents() As String
         Dim sLogFile As String = GetLogfileName()
@@ -128,6 +131,5 @@ Public NotInheritable Class LogUtil
         GetLogContents = My.Computer.FileSystem.ReadAllText(sLogFile)
         My.Application.Log.DefaultFileLogWriter.Write("")
     End Function
-
 #End Region
 End Class

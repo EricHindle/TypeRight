@@ -122,6 +122,11 @@ Public Class FrmOptions
         My.Settings.Save()
         ShowStatus("Form screen positions reset",, True)
     End Sub
+    Private Sub BtnViewLog_Click(sender As Object, e As EventArgs) Handles BtnViewLog.Click
+        Using _logView As New frmLogViewer
+            _logView.ShowDialog()
+        End Using
+    End Sub
     Private Sub FrmOptions_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info("Closing", MyBase.Name)
         My.Settings.OptionsPos = SetFormPos(Me)
@@ -150,5 +155,7 @@ Public Class FrmOptions
         End If
         Return isOK
     End Function
+
+
 #End Region
 End Class

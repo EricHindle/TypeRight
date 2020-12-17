@@ -46,7 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E0DBD08DF8350F3F7DFF42B57258CBB5"
+        "OwnerKey" = "8:_573022E4AE0E420CACD42A7CEB74A2B7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -64,7 +64,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_573022E4AE0E420CACD42A7CEB74A2B7"
+        "OwnerKey" = "8:_E0DBD08DF8350F3F7DFF42B57258CBB5"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -85,6 +85,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -101,6 +109,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -227,6 +243,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_69835DEEAD1B429E8C7732A60E949CD9"
+                    {
+                    "Name" = "8:netWYrks"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_F33908B097D5493A8ADC62D2D2C21717"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_6A4887A235FA4DD0B4E362B47EE9FCFA"
@@ -398,7 +425,7 @@
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_573022E4AE0E420CACD42A7CEB74A2B7"
-            "Folder" = "8:_5228735FD1E14FE38F30D16E1B18A4A9"
+            "Folder" = "8:_69835DEEAD1B429E8C7732A60E949CD9"
             "WorkingFolder" = "8:_AB721D1CC9CA4397A51BA9591C0F1254"
             "Icon" = "8:_884DB3FB6CC3477280DFB89BEF011F36"
             "Feature" = "8:"

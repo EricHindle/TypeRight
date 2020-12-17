@@ -74,6 +74,7 @@ Module TypeRightMain
     Public Const WM_LBUTTONUP = &H202
     Public Const WM_MOUSEMOVE = &H200
     Public Const WM_RBUTTONUP = &H205
+    Private Const MODULE_NAME As String = "TypeRightMain"
 #End Region
 #Region "common subroutines"
     Public Sub InitialiseApplication()
@@ -90,8 +91,8 @@ Module TypeRightMain
         LogUtil.LogFolder = My.Settings.LogFolder
         LogUtil.StartLogging()
         If isVersionChange Then
-            LogUtil.Info("Version change " & oldVersion & " >> " & My.Settings.Version)
-            LogUtil.Info("Upgrading settings")
+            LogUtil.Info("Version change " & oldVersion & " >> " & My.Settings.Version, MODULE_NAME)
+            LogUtil.Info("Upgrading settings", MODULE_NAME)
         End If
         sLicName = ""
         sLicCode = ""

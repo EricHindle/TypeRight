@@ -197,17 +197,17 @@ Public Class FrmButtonList
         Me.WindowState = FormWindowState.Minimized
     End Sub
     Private Sub ResetPositionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetPositionToolStripMenuItem.Click
-        LogUtil.Info("Resetting button list position")
+        LogUtil.Info("Resetting button list position", MyBase.Name)
         Me.Top = 50
         Me.Left = 50
     End Sub
     Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing")
+        LogUtil.Info("Closing", MyBase.Name)
         SavePosition()
         NotifyIcon1.Visible = False
     End Sub
     Private Sub PicDatabase_Click(sender As Object, e As EventArgs) Handles PicDatabase.Click
-        LogUtil.Info("Updating Database")
+        LogUtil.Info("Updating Database", MyBase.Name)
         Using _dbUpdate As New FrmDbUpdate
             _dbUpdate.SenderId = iCurrSender
             _dbUpdate.ShowDialog()
@@ -224,7 +224,7 @@ Public Class FrmButtonList
         End If
     End Sub
     Private Sub PicLock_Click(sender As Object, e As EventArgs) Handles PicLock.Click
-        LogUtil.Info("Lock timer on")
+        LogUtil.Info("Lock timer on", MyBase.Name)
         GreenClock.Visible = True
         WhiteClock.Visible = False
         RedClock.Visible = False
@@ -232,13 +232,13 @@ Public Class FrmButtonList
         bLockClock = True
     End Sub
     Private Sub DelayTimer_Tick(sender As Object, e As EventArgs) Handles DelayTimer.Tick
-        LogUtil.Info("Clock tick")
+        LogUtil.Info("Clock tick", MyBase.Name)
         ProgressTimer.Enabled = False
         DelayTimer.Enabled = False
         ProgressBar1.Visible = False
         ProgressBar1.SendToBack()
         If RedClock.Visible Then
-            LogUtil.Info("Red clock - posting keys")
+            LogUtil.Info("Red clock - posting keys", MyBase.Name)
             SendKeys.Send("%{ESC}")
             SendKeys.Send(redClockText)
             RedClock.Visible = False
@@ -250,14 +250,14 @@ Public Class FrmButtonList
         End If
     End Sub
     Private Sub Clock_Click(sender As Object, e As EventArgs) Handles WhiteClock.Click, GreenClock.Click, RedClock.Click
-        LogUtil.Info("Clock click")
+        LogUtil.Info("Clock click", MyBase.Name)
         If WhiteClock.Visible Then
-            LogUtil.Info("White clock")
+            LogUtil.Info("White clock", MyBase.Name)
             GreenClock.Visible = True
             WhiteClock.Visible = False
         Else
             If GreenClock.Visible Then
-                LogUtil.Info("Green clock")
+                LogUtil.Info("Green clock", MyBase.Name)
                 WhiteClock.Visible = True
                 GreenClock.Visible = False
                 DelayTimer.Enabled = False
@@ -268,7 +268,7 @@ Public Class FrmButtonList
     End Sub
     Private Sub BtnRmvCol_Click(sender As Object, e As EventArgs) Handles BtnRmvCol.Click
         If iColCt > 1 Then
-            LogUtil.Info("Remove a button list column")
+            LogUtil.Info("Remove a button list column", MyBase.Name)
             iColCt -= 1
             DrawButtons()
         End If
@@ -277,7 +277,7 @@ Public Class FrmButtonList
     Private Sub BtnAddCol_Click(sender As Object, e As EventArgs) Handles BtnAddCol.Click
 
         If (groupButtonList.Count / (iColCt + 1) > 1) Or (senderButtonList.Count / (iColCt + 1) > 1) Then
-            LogUtil.Info("Add a button list column")
+            LogUtil.Info("Add a button list column", MyBase.Name)
             iColCt += 1
             DrawButtons()
         End If
@@ -560,7 +560,7 @@ Public Class FrmButtonList
         Me.TopMost = bOnTop
     End Sub
     Private Sub ShowGroupMaint(_action As GroupAction, _button As Nbutton)
-        LogUtil.Info("Showing group maintenance")
+        LogUtil.Info("Showing group maintenance", MyBase.Name)
         Dim result As DialogResult = DialogResult.None
         Using _grpMaint As New FrmGroupMaint
             _grpMaint.SenderButton = _button
@@ -573,7 +573,7 @@ Public Class FrmButtonList
         End If
     End Sub
     Private Sub ShowOptions()
-        LogUtil.Info("Showing options")
+        LogUtil.Info("Showing options", MyBase.Name)
         Using _options As New FrmOptions
             _options.Owner = Me
             _options.ShowDialog()
@@ -597,7 +597,7 @@ Public Class FrmButtonList
         Calc_age = age
     End Function
     Private Sub SavePosition()
-        LogUtil.Info("Saved screen position")
+        LogUtil.Info("Saved screen position", MyBase.Name)
         My.Settings.ButtonListPos = SetFormPos(Me)
     End Sub
     Private Function GetDBFields(ByVal sKeyText As String) As String
