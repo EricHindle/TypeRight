@@ -674,8 +674,6 @@ Partial Public Class TypeRightDataSet
         
         Private columnbuttonSeq As Global.System.Data.DataColumn
         
-        Private columnbuttonText As Global.System.Data.DataColumn
-        
         Private columnbuttonHint As Global.System.Data.DataColumn
         
         Private columnbuttonValue As Global.System.Data.DataColumn
@@ -689,6 +687,8 @@ Partial Public Class TypeRightDataSet
         Private columnbuttonItalic As Global.System.Data.DataColumn
         
         Private columnbuttonEncrypt As Global.System.Data.DataColumn
+        
+        Private columnbuttonText As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
@@ -751,14 +751,6 @@ Partial Public Class TypeRightDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property buttonTextColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnbuttonText
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public ReadOnly Property buttonHintColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnbuttonHint
@@ -814,6 +806,14 @@ Partial Public Class TypeRightDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property buttonTextColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnbuttonText
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -850,9 +850,9 @@ Partial Public Class TypeRightDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddbuttonRow(ByVal buttonId As Integer, ByVal buttonGroup As Integer, ByVal buttonSeq As Integer, ByVal buttonText As String, ByVal buttonHint As String, ByVal buttonValue As String, ByVal buttonFont As String, ByVal buttonBold As Byte, ByVal buttonFontSize As Decimal, ByVal buttonItalic As Byte, ByVal buttonEncrypt As Byte) As buttonRow
+        Public Overloads Function AddbuttonRow(ByVal buttonId As Integer, ByVal buttonGroup As Integer, ByVal buttonSeq As Integer, ByVal buttonHint As String, ByVal buttonValue As String, ByVal buttonFont As String, ByVal buttonBold As Byte, ByVal buttonFontSize As Decimal, ByVal buttonItalic As Byte, ByVal buttonEncrypt As Byte, ByVal buttonText As String) As buttonRow
             Dim rowbuttonRow As buttonRow = CType(Me.NewRow,buttonRow)
-            Dim columnValuesArray() As Object = New Object() {buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, buttonFont, buttonBold, buttonFontSize, buttonItalic, buttonEncrypt}
+            Dim columnValuesArray() As Object = New Object() {buttonId, buttonGroup, buttonSeq, buttonHint, buttonValue, buttonFont, buttonBold, buttonFontSize, buttonItalic, buttonEncrypt, buttonText}
             rowbuttonRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowbuttonRow)
             Return rowbuttonRow
@@ -884,7 +884,6 @@ Partial Public Class TypeRightDataSet
             Me.columnbuttonId = MyBase.Columns("buttonId")
             Me.columnbuttonGroup = MyBase.Columns("buttonGroup")
             Me.columnbuttonSeq = MyBase.Columns("buttonSeq")
-            Me.columnbuttonText = MyBase.Columns("buttonText")
             Me.columnbuttonHint = MyBase.Columns("buttonHint")
             Me.columnbuttonValue = MyBase.Columns("buttonValue")
             Me.columnbuttonFont = MyBase.Columns("buttonFont")
@@ -892,6 +891,7 @@ Partial Public Class TypeRightDataSet
             Me.columnbuttonFontSize = MyBase.Columns("buttonFontSize")
             Me.columnbuttonItalic = MyBase.Columns("buttonItalic")
             Me.columnbuttonEncrypt = MyBase.Columns("buttonEncrypt")
+            Me.columnbuttonText = MyBase.Columns("buttonText")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -903,8 +903,6 @@ Partial Public Class TypeRightDataSet
             MyBase.Columns.Add(Me.columnbuttonGroup)
             Me.columnbuttonSeq = New Global.System.Data.DataColumn("buttonSeq", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnbuttonSeq)
-            Me.columnbuttonText = New Global.System.Data.DataColumn("buttonText", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnbuttonText)
             Me.columnbuttonHint = New Global.System.Data.DataColumn("buttonHint", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnbuttonHint)
             Me.columnbuttonValue = New Global.System.Data.DataColumn("buttonValue", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -919,13 +917,13 @@ Partial Public Class TypeRightDataSet
             MyBase.Columns.Add(Me.columnbuttonItalic)
             Me.columnbuttonEncrypt = New Global.System.Data.DataColumn("buttonEncrypt", GetType(Byte), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnbuttonEncrypt)
+            Me.columnbuttonText = New Global.System.Data.DataColumn("buttonText", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnbuttonText)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnbuttonId}, true))
             Me.columnbuttonId.AllowDBNull = false
             Me.columnbuttonId.Unique = true
             Me.columnbuttonGroup.AllowDBNull = false
             Me.columnbuttonSeq.AllowDBNull = false
-            Me.columnbuttonText.AllowDBNull = false
-            Me.columnbuttonText.MaxLength = 10
             Me.columnbuttonHint.MaxLength = 100
             Me.columnbuttonValue.MaxLength = 200
             Me.columnbuttonFont.AllowDBNull = false
@@ -934,6 +932,8 @@ Partial Public Class TypeRightDataSet
             Me.columnbuttonFontSize.AllowDBNull = false
             Me.columnbuttonItalic.AllowDBNull = false
             Me.columnbuttonEncrypt.AllowDBNull = false
+            Me.columnbuttonText.AllowDBNull = false
+            Me.columnbuttonText.MaxLength = 20
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2035,17 +2035,6 @@ Partial Public Class TypeRightDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property buttonText() As String
-            Get
-                Return CType(Me(Me.tablebutton.buttonTextColumn),String)
-            End Get
-            Set
-                Me(Me.tablebutton.buttonTextColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property buttonHint() As String
             Get
                 Try 
@@ -2126,6 +2115,17 @@ Partial Public Class TypeRightDataSet
             End Get
             Set
                 Me(Me.tablebutton.buttonEncryptColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property buttonText() As String
+            Get
+                Return CType(Me(Me.tablebutton.buttonTextColumn),String)
+            End Get
+            Set
+                Me(Me.tablebutton.buttonTextColumn) = value
             End Set
         End Property
         
@@ -3459,7 +3459,6 @@ Namespace TypeRightDataSetTableAdapters
             tableMapping.ColumnMappings.Add("buttonId", "buttonId")
             tableMapping.ColumnMappings.Add("buttonGroup", "buttonGroup")
             tableMapping.ColumnMappings.Add("buttonSeq", "buttonSeq")
-            tableMapping.ColumnMappings.Add("buttonText", "buttonText")
             tableMapping.ColumnMappings.Add("buttonHint", "buttonHint")
             tableMapping.ColumnMappings.Add("buttonValue", "buttonValue")
             tableMapping.ColumnMappings.Add("buttonFont", "buttonFont")
@@ -3467,21 +3466,21 @@ Namespace TypeRightDataSetTableAdapters
             tableMapping.ColumnMappings.Add("buttonFontSize", "buttonFontSize")
             tableMapping.ColumnMappings.Add("buttonItalic", "buttonItalic")
             tableMapping.ColumnMappings.Add("buttonEncrypt", "buttonEncrypt")
+            tableMapping.ColumnMappings.Add("buttonText", "buttonText")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
             Me._adapter.DeleteCommand.CommandText = "DELETE FROM [button] WHERE (([buttonId] = @Original_buttonId) AND ([buttonGroup] "& _ 
-                "= @Original_buttonGroup) AND ([buttonSeq] = @Original_buttonSeq) AND ([buttonTex"& _ 
-                "t] = @Original_buttonText) AND ((@IsNull_buttonHint = 1 AND [buttonHint] IS NULL"& _ 
-                ") OR ([buttonHint] = @Original_buttonHint)) AND ([buttonValue] = @Original_butto"& _ 
-                "nValue) AND ([buttonFont] = @Original_buttonFont) AND ([buttonBold] = @Original_"& _ 
-                "buttonBold) AND ([buttonFontSize] = @Original_buttonFontSize) AND ([buttonItalic"& _ 
-                "] = @Original_buttonItalic) AND ([buttonEncrypt] = @Original_buttonEncrypt))"
+                "= @Original_buttonGroup) AND ([buttonSeq] = @Original_buttonSeq) AND ((@IsNull_b"& _ 
+                "uttonHint = 1 AND [buttonHint] IS NULL) OR ([buttonHint] = @Original_buttonHint)"& _ 
+                ") AND ([buttonValue] = @Original_buttonValue) AND ([buttonFont] = @Original_butt"& _ 
+                "onFont) AND ([buttonBold] = @Original_buttonBold) AND ([buttonFontSize] = @Origi"& _ 
+                "nal_buttonFontSize) AND ([buttonItalic] = @Original_buttonItalic) AND ([buttonEn"& _ 
+                "crypt] = @Original_buttonEncrypt) AND ([buttonText] = @Original_buttonText))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonGroup", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonGroup", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonSeq", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonSeq", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_buttonHint", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonHint", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonHint", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonHint", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonValue", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonValue", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -3490,20 +3489,18 @@ Namespace TypeRightDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonFontSize", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "buttonFontSize", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonItalic", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonItalic", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonEncrypt", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonEncrypt", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [button] ([buttonId], [buttonGroup], [buttonSeq], [buttonText], [butt"& _ 
-                "onHint], [buttonValue], [buttonFont], [buttonBold], [buttonFontSize], [buttonIta"& _ 
-                "lic], [buttonEncrypt]) VALUES (@buttonId, @buttonGroup, @buttonSeq, @buttonText,"& _ 
-                " @buttonHint, @buttonValue, @buttonFont, @buttonBold, @buttonFontSize, @buttonIt"& _ 
-                "alic, @buttonEncrypt);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT buttonId, buttonGroup, buttonSeq, buttonText, but"& _ 
-                "tonHint, buttonValue, buttonFont, buttonBold, buttonFontSize, buttonItalic, butt"& _ 
-                "onEncrypt FROM button WHERE (buttonId = @buttonId)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [button] ([buttonGroup], [buttonSeq], [buttonHint], [buttonValue], [b"& _ 
+                "uttonFont], [buttonBold], [buttonFontSize], [buttonItalic], [buttonEncrypt], [bu"& _ 
+                "ttonText]) VALUES (@buttonGroup, @buttonSeq, @buttonHint, @buttonValue, @buttonF"& _ 
+                "ont, @buttonBold, @buttonFontSize, @buttonItalic, @buttonEncrypt, @buttonText);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT buttonId, buttonGroup, buttonSeq, buttonHint, buttonValue, buttonFont, b"& _ 
+                "uttonBold, buttonFontSize, buttonItalic, buttonEncrypt, buttonText FROM button W"& _ 
+                "HERE (buttonId = SCOPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonGroup", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonGroup", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonSeq", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonSeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonHint", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonHint", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonValue", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonValue", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonFont", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonFont", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -3511,26 +3508,26 @@ Namespace TypeRightDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonFontSize", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "buttonFontSize", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonItalic", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonItalic", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonEncrypt", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonEncrypt", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [button] SET [buttonId] = @buttonId, [buttonGroup] = @buttonGroup, [button"& _ 
-                "Seq] = @buttonSeq, [buttonText] = @buttonText, [buttonHint] = @buttonHint, [butt"& _ 
-                "onValue] = @buttonValue, [buttonFont] = @buttonFont, [buttonBold] = @buttonBold,"& _ 
-                " [buttonFontSize] = @buttonFontSize, [buttonItalic] = @buttonItalic, [buttonEncr"& _ 
-                "ypt] = @buttonEncrypt WHERE (([buttonId] = @Original_buttonId) AND ([buttonGroup"& _ 
-                "] = @Original_buttonGroup) AND ([buttonSeq] = @Original_buttonSeq) AND ([buttonT"& _ 
-                "ext] = @Original_buttonText) AND ((@IsNull_buttonHint = 1 AND [buttonHint] IS NU"& _ 
-                "LL) OR ([buttonHint] = @Original_buttonHint)) AND ([buttonValue] = @Original_but"& _ 
-                "tonValue) AND ([buttonFont] = @Original_buttonFont) AND ([buttonBold] = @Origina"& _ 
-                "l_buttonBold) AND ([buttonFontSize] = @Original_buttonFontSize) AND ([buttonItal"& _ 
-                "ic] = @Original_buttonItalic) AND ([buttonEncrypt] = @Original_buttonEncrypt));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, b"& _ 
-                "uttonFont, buttonBold, buttonFontSize, buttonItalic, buttonEncrypt FROM button W"& _ 
-                "HERE (buttonId = @buttonId)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [button] SET [buttonGroup] = @buttonGroup, [buttonSeq] = @buttonSeq, [butt"& _ 
+                "onHint] = @buttonHint, [buttonValue] = @buttonValue, [buttonFont] = @buttonFont,"& _ 
+                " [buttonBold] = @buttonBold, [buttonFontSize] = @buttonFontSize, [buttonItalic] "& _ 
+                "= @buttonItalic, [buttonEncrypt] = @buttonEncrypt, [buttonText] = @buttonText WH"& _ 
+                "ERE (([buttonId] = @Original_buttonId) AND ([buttonGroup] = @Original_buttonGrou"& _ 
+                "p) AND ([buttonSeq] = @Original_buttonSeq) AND ((@IsNull_buttonHint = 1 AND [but"& _ 
+                "tonHint] IS NULL) OR ([buttonHint] = @Original_buttonHint)) AND ([buttonValue] ="& _ 
+                " @Original_buttonValue) AND ([buttonFont] = @Original_buttonFont) AND ([buttonBo"& _ 
+                "ld] = @Original_buttonBold) AND ([buttonFontSize] = @Original_buttonFontSize) AN"& _ 
+                "D ([buttonItalic] = @Original_buttonItalic) AND ([buttonEncrypt] = @Original_but"& _ 
+                "tonEncrypt) AND ([buttonText] = @Original_buttonText));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT buttonId, button"& _ 
+                "Group, buttonSeq, buttonHint, buttonValue, buttonFont, buttonBold, buttonFontSiz"& _ 
+                "e, buttonItalic, buttonEncrypt, buttonText FROM button WHERE (buttonId = @button"& _ 
+                "Id)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonGroup", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonGroup", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonSeq", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonSeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonHint", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonHint", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonValue", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonValue", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonFont", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonFont", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -3538,10 +3535,10 @@ Namespace TypeRightDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonFontSize", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "buttonFontSize", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonItalic", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonItalic", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonEncrypt", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonEncrypt", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonGroup", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonGroup", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonSeq", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonSeq", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_buttonHint", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonHint", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonHint", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonHint", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonValue", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonValue", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -3550,6 +3547,8 @@ Namespace TypeRightDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonFontSize", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 5, 2, "buttonFontSize", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonItalic", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonItalic", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonEncrypt", Global.System.Data.SqlDbType.TinyInt, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonEncrypt", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_buttonText", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3565,8 +3564,8 @@ Namespace TypeRightDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(8) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, but"& _ 
-                "tonFont, buttonBold, buttonFontSize, buttonItalic, buttonEncrypt FROM button"
+            Me._commandCollection(0).CommandText = "SELECT buttonId, buttonGroup, buttonSeq, buttonHint, buttonValue, buttonFont, but"& _ 
+                "tonBold, buttonFontSize, buttonItalic, buttonEncrypt, buttonText FROM button"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -3575,23 +3574,23 @@ Namespace TypeRightDataSetTableAdapters
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT        buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonVal"& _ 
-                "ue, buttonFont, buttonBold, buttonFontSize, buttonItalic, buttonEncrypt"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM   "& _ 
-                "         button"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (buttonGroup = @grp)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY buttonSeq"
+            Me._commandCollection(2).CommandText = "SELECT buttonId, buttonGroup, buttonSeq, buttonHint, buttonValue, buttonFont, but"& _ 
+                "tonBold, buttonFontSize, buttonItalic, buttonEncrypt, buttonText FROM button WHE"& _ 
+                "RE (buttonGroup = @grp) ORDER BY buttonSeq"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@grp", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonGroup", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, but"& _ 
-                "tonFont, buttonBold, buttonFontSize, buttonItalic, buttonEncrypt FROM button WHE"& _ 
+            Me._commandCollection(3).CommandText = "SELECT buttonId, buttonGroup, buttonSeq, buttonHint, buttonValue, buttonFont, but"& _ 
+                "tonBold, buttonFontSize, buttonItalic, buttonEncrypt, buttonText FROM button WHE"& _ 
                 "RE (buttonGroup = @grp) AND (buttonSeq = @seq)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@grp", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonGroup", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@seq", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonSeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, but"& _ 
-                "tonFont, buttonBold, buttonFontSize, buttonItalic, buttonEncrypt FROM button WHE"& _ 
+            Me._commandCollection(4).CommandText = "SELECT buttonId, buttonGroup, buttonSeq, buttonHint, buttonValue, buttonFont, but"& _ 
+                "tonBold, buttonFontSize, buttonItalic, buttonEncrypt, buttonText FROM button WHE"& _ 
                 "RE (buttonId = @Id)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -3619,13 +3618,13 @@ Namespace TypeRightDataSetTableAdapters
                 "buttonSeq, buttonText = @buttonText, buttonHint = @buttonHint, buttonValue = @bu"& _ 
                 "ttonValue, buttonFont = @buttonFont, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         buttonBold = @bu"& _ 
                 "ttonBold, buttonFontSize = @buttonFontSize, buttonItalic = @buttonItalic, button"& _ 
-                "Encrypt = @buttonEncrypt"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (buttonId = @buttonId);    "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT butto"& _ 
-                "nId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, buttonFont, bu"& _ 
-                "ttonBold FROM button WHERE (buttonId = @buttonId)"
+                "Encrypt = @buttonEncrypt"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (buttonId = @buttonId);     "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT butt"& _ 
+                "onId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, buttonFont, b"& _ 
+                "uttonBold FROM button WHERE (buttonId = @buttonId)"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonGroup", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonGroup", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonSeq", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonSeq", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonText", Global.System.Data.SqlDbType.NVarChar, 10, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonText", Global.System.Data.SqlDbType.NVarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonText", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonHint", Global.System.Data.SqlDbType.NVarChar, 100, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonHint", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonValue", Global.System.Data.SqlDbType.NVarChar, 200, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonValue", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@buttonFont", Global.System.Data.SqlDbType.NVarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "buttonFont", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -3752,36 +3751,36 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_buttonId As Integer, ByVal Original_buttonGroup As Integer, ByVal Original_buttonSeq As Integer, ByVal Original_buttonText As String, ByVal Original_buttonHint As String, ByVal Original_buttonValue As String, ByVal Original_buttonFont As String, ByVal Original_buttonBold As Byte, ByVal Original_buttonFontSize As Decimal, ByVal Original_buttonItalic As Byte, ByVal Original_buttonEncrypt As Byte) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_buttonId As Integer, ByVal Original_buttonGroup As Integer, ByVal Original_buttonSeq As Integer, ByVal Original_buttonHint As String, ByVal Original_buttonValue As String, ByVal Original_buttonFont As String, ByVal Original_buttonBold As Byte, ByVal Original_buttonFontSize As Decimal, ByVal Original_buttonItalic As Byte, ByVal Original_buttonEncrypt As Byte, ByVal Original_buttonText As String) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_buttonId,Integer)
             Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_buttonGroup,Integer)
             Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_buttonSeq,Integer)
-            If (Original_buttonText Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_buttonText")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_buttonText,String)
-            End If
             If (Original_buttonHint Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(5).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_buttonHint,String)
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_buttonHint,String)
             End If
             If (Original_buttonValue Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_buttonValue")
             Else
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_buttonValue,String)
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_buttonValue,String)
             End If
             If (Original_buttonFont Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_buttonFont")
             Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_buttonFont,String)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_buttonFont,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_buttonBold,Byte)
-            Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_buttonFontSize,Decimal)
-            Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_buttonItalic,Byte)
-            Me.Adapter.DeleteCommand.Parameters(11).Value = CType(Original_buttonEncrypt,Byte)
+            Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_buttonBold,Byte)
+            Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_buttonFontSize,Decimal)
+            Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_buttonItalic,Byte)
+            Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_buttonEncrypt,Byte)
+            If (Original_buttonText Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_buttonText")
+            Else
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(Original_buttonText,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -3801,34 +3800,33 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal buttonId As Integer, ByVal buttonGroup As Integer, ByVal buttonSeq As Integer, ByVal buttonText As String, ByVal buttonHint As String, ByVal buttonValue As String, ByVal buttonFont As String, ByVal buttonBold As Byte, ByVal buttonFontSize As Decimal, ByVal buttonItalic As Byte, ByVal buttonEncrypt As Byte) As Integer
-            Me.Adapter.InsertCommand.Parameters(0).Value = CType(buttonId,Integer)
-            Me.Adapter.InsertCommand.Parameters(1).Value = CType(buttonGroup,Integer)
-            Me.Adapter.InsertCommand.Parameters(2).Value = CType(buttonSeq,Integer)
-            If (buttonText Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("buttonText")
-            Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(buttonText,String)
-            End If
+        Public Overloads Overridable Function Insert(ByVal buttonGroup As Integer, ByVal buttonSeq As Integer, ByVal buttonHint As String, ByVal buttonValue As String, ByVal buttonFont As String, ByVal buttonBold As Byte, ByVal buttonFontSize As Decimal, ByVal buttonItalic As Byte, ByVal buttonEncrypt As Byte, ByVal buttonText As String) As Integer
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(buttonGroup,Integer)
+            Me.Adapter.InsertCommand.Parameters(1).Value = CType(buttonSeq,Integer)
             If (buttonHint Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(buttonHint,String)
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(buttonHint,String)
             End If
             If (buttonValue Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("buttonValue")
             Else
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(buttonValue,String)
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(buttonValue,String)
             End If
             If (buttonFont Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("buttonFont")
             Else
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(buttonFont,String)
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(buttonFont,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(7).Value = CType(buttonBold,Byte)
-            Me.Adapter.InsertCommand.Parameters(8).Value = CType(buttonFontSize,Decimal)
-            Me.Adapter.InsertCommand.Parameters(9).Value = CType(buttonItalic,Byte)
-            Me.Adapter.InsertCommand.Parameters(10).Value = CType(buttonEncrypt,Byte)
+            Me.Adapter.InsertCommand.Parameters(5).Value = CType(buttonBold,Byte)
+            Me.Adapter.InsertCommand.Parameters(6).Value = CType(buttonFontSize,Decimal)
+            Me.Adapter.InsertCommand.Parameters(7).Value = CType(buttonItalic,Byte)
+            Me.Adapter.InsertCommand.Parameters(8).Value = CType(buttonEncrypt,Byte)
+            If (buttonText Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("buttonText")
+            Else
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(buttonText,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -3849,10 +3847,8 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
         Public Overloads Overridable Function Update( _
-                    ByVal buttonId As Integer,  _
                     ByVal buttonGroup As Integer,  _
                     ByVal buttonSeq As Integer,  _
-                    ByVal buttonText As String,  _
                     ByVal buttonHint As String,  _
                     ByVal buttonValue As String,  _
                     ByVal buttonFont As String,  _
@@ -3860,73 +3856,75 @@ Namespace TypeRightDataSetTableAdapters
                     ByVal buttonFontSize As Decimal,  _
                     ByVal buttonItalic As Byte,  _
                     ByVal buttonEncrypt As Byte,  _
+                    ByVal buttonText As String,  _
                     ByVal Original_buttonId As Integer,  _
                     ByVal Original_buttonGroup As Integer,  _
                     ByVal Original_buttonSeq As Integer,  _
-                    ByVal Original_buttonText As String,  _
                     ByVal Original_buttonHint As String,  _
                     ByVal Original_buttonValue As String,  _
                     ByVal Original_buttonFont As String,  _
                     ByVal Original_buttonBold As Byte,  _
                     ByVal Original_buttonFontSize As Decimal,  _
                     ByVal Original_buttonItalic As Byte,  _
-                    ByVal Original_buttonEncrypt As Byte) As Integer
-            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(buttonId,Integer)
-            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(buttonGroup,Integer)
-            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(buttonSeq,Integer)
-            If (buttonText Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("buttonText")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(buttonText,String)
-            End If
+                    ByVal Original_buttonEncrypt As Byte,  _
+                    ByVal Original_buttonText As String,  _
+                    ByVal buttonId As Integer) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(buttonGroup,Integer)
+            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(buttonSeq,Integer)
             If (buttonHint Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(buttonHint,String)
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(buttonHint,String)
             End If
             If (buttonValue Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("buttonValue")
             Else
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(buttonValue,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(buttonValue,String)
             End If
             If (buttonFont Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("buttonFont")
             Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(buttonFont,String)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(buttonFont,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(buttonBold,Byte)
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(buttonFontSize,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(buttonItalic,Byte)
-            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(buttonEncrypt,Byte)
-            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_buttonId,Integer)
-            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_buttonGroup,Integer)
-            Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_buttonSeq,Integer)
-            If (Original_buttonText Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_buttonText")
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(buttonBold,Byte)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(buttonFontSize,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(buttonItalic,Byte)
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(buttonEncrypt,Byte)
+            If (buttonText Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("buttonText")
             Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_buttonText,String)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(buttonText,String)
             End If
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_buttonId,Integer)
+            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_buttonGroup,Integer)
+            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_buttonSeq,Integer)
             If (Original_buttonHint Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_buttonHint,String)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_buttonHint,String)
             End If
             If (Original_buttonValue Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_buttonValue")
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_buttonValue,String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_buttonValue,String)
             End If
             If (Original_buttonFont Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_buttonFont")
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_buttonFont,String)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_buttonFont,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_buttonBold,Byte)
-            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_buttonFontSize,Decimal)
-            Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_buttonItalic,Byte)
-            Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_buttonEncrypt,Byte)
+            Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_buttonBold,Byte)
+            Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_buttonFontSize,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_buttonItalic,Byte)
+            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_buttonEncrypt,Byte)
+            If (Original_buttonText Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_buttonText")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_buttonText,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(22).Value = CType(buttonId,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -3949,7 +3947,6 @@ Namespace TypeRightDataSetTableAdapters
         Public Overloads Overridable Function Update( _
                     ByVal buttonGroup As Integer,  _
                     ByVal buttonSeq As Integer,  _
-                    ByVal buttonText As String,  _
                     ByVal buttonHint As String,  _
                     ByVal buttonValue As String,  _
                     ByVal buttonFont As String,  _
@@ -3957,18 +3954,19 @@ Namespace TypeRightDataSetTableAdapters
                     ByVal buttonFontSize As Decimal,  _
                     ByVal buttonItalic As Byte,  _
                     ByVal buttonEncrypt As Byte,  _
+                    ByVal buttonText As String,  _
                     ByVal Original_buttonId As Integer,  _
                     ByVal Original_buttonGroup As Integer,  _
                     ByVal Original_buttonSeq As Integer,  _
-                    ByVal Original_buttonText As String,  _
                     ByVal Original_buttonHint As String,  _
                     ByVal Original_buttonValue As String,  _
                     ByVal Original_buttonFont As String,  _
                     ByVal Original_buttonBold As Byte,  _
                     ByVal Original_buttonFontSize As Decimal,  _
                     ByVal Original_buttonItalic As Byte,  _
-                    ByVal Original_buttonEncrypt As Byte) As Integer
-            Return Me.Update(Original_buttonId, buttonGroup, buttonSeq, buttonText, buttonHint, buttonValue, buttonFont, buttonBold, buttonFontSize, buttonItalic, buttonEncrypt, Original_buttonId, Original_buttonGroup, Original_buttonSeq, Original_buttonText, Original_buttonHint, Original_buttonValue, Original_buttonFont, Original_buttonBold, Original_buttonFontSize, Original_buttonItalic, Original_buttonEncrypt)
+                    ByVal Original_buttonEncrypt As Byte,  _
+                    ByVal Original_buttonText As String) As Integer
+            Return Me.Update(buttonGroup, buttonSeq, buttonHint, buttonValue, buttonFont, buttonBold, buttonFontSize, buttonItalic, buttonEncrypt, buttonText, Original_buttonId, Original_buttonGroup, Original_buttonSeq, Original_buttonHint, Original_buttonValue, Original_buttonFont, Original_buttonBold, Original_buttonFontSize, Original_buttonItalic, Original_buttonEncrypt, Original_buttonText, Original_buttonId)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

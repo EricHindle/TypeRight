@@ -1,10 +1,8 @@
-﻿Partial Class TypeRightDataSet
+﻿
+
+Partial Public Class TypeRightDataSet
 End Class
 
-Namespace TypeRightDataSetTableAdapters
-    Partial Public Class buttongroupsTableAdapter
-    End Class
 
-    Partial Public Class sendersTableAdapter
-    End Class
-End Namespace
+Partial Public Class TypeRightDataSet
+End Class

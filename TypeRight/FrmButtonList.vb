@@ -418,7 +418,7 @@ Public Class FrmButtonList
                 strButtonValue = oNCrypter.DecryptData(strButtonValue)
             End If
             strButtonTxt = _col.ColumnName
-            strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 10))
+            strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 20))
             strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
             AddSenderButton(iBct, senderButton, strButtonCaption, strButtonValue, strButtonHint)
             iBct += 1
