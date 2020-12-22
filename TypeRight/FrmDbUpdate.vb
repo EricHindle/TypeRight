@@ -3,6 +3,25 @@ Imports System.IO
 Imports System.Windows.Forms
 
 Public Class FrmDbUpdate
+#Region "constants"
+    Private Const COMPLETE As String = " - complete"
+    Private Const INSERT_NEW_SENDER As String = "Inserting new sender"
+    Private Const UPDATE_SENDER As String = "Updating sender"
+    Private Const DELETE_SENDER As String = "Deleting sender"
+    Private Const FULL_BACKUP As String = "Full backup"
+    Private Const FULL_RESTORE As String = "Full restore"
+    Private Const LIMIT_REACHED As String = "** Record Limit Reached **"
+    Private Const BKUP_GRP_BUTTONS As String = "Backing up group buttons"
+    Private Const REST_GRP_BUTTONS As String = "Restoring group buttons"
+    Private Const BKUP_GROUPS As String = "Backing up groups"
+    Private Const REST_GROUPS As String = "Restoring groups"
+    Private Const BKUP_SNDR_BUTTONS As String = "Backing up sender buttons"
+    Private Const REST_SNDR_BUTTONS As String = "Restoring sender buttons"
+    Private Const BKUP_SENDERS As String = "Backing up senders"
+    Private Const REST_SENDERS As String = "Restoring senders"
+    Private Const LOADING_FROM As String = "Loading from "
+    Private Const UNSAVED_CHANGES_WARNING As String = "There are unsaved changes. Do you wish to continue (changes will be lost)?"
+#End Region
 #Region "variables"
     Private ReadOnly bAdd As Boolean
     Private iCurrSnd As Integer
@@ -31,7 +50,7 @@ Public Class FrmDbUpdate
 #End Region
 #Region "form handlers"
     Private Sub FrmDbUpdate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
+        LogUtil.Info(My.Resources.LOADING, MyBase.Name)
         GetFormPos(Me, My.Settings.DBUpdatePos)
         LoadSenderTable()
         isDataChanged = False
@@ -40,46 +59,42 @@ Public Class FrmDbUpdate
         Me.Close()
     End Sub
     Private Sub FrmDbUpdate_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing", MyBase.Name)
+        LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
         My.Settings.DBUpdatePos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
     Private Sub BtnOk_Click(sender As Object, e As EventArgs) Handles BtnOk.Click
         If isDataChanged = False OrElse
-            MsgBox("There are unsaved changes. Do you wish to continue (changes will be lost)?",
+            MsgBox(UNSAVED_CHANGES_WARNING,
                     MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             Me.Close()
         End If
     End Sub
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         If IsValid() Then
-            ShowStatus("Inserting new sender", True)
+            DisplayProgress(INSERT_NEW_SENDER)
             InsertSender(StoreSenderValues())
             isDataChanged = False
             LoadSenderTable()
-            ShowStatus("Inserted new sender", True)
+            DisplayProgress(INSERT_NEW_SENDER & COMPLETE)
         End If
-    End Sub
-    Private Sub ShowStatus(sText As String, isLogged As Boolean)
-        LblStatus.Text = sText
-        If isLogged Then LogUtil.Info(sText, MyBase.Name)
     End Sub
     Private Sub BtnUpd_Click(sender As Object, e As EventArgs) Handles BtnUpd.Click
         If IsValid() Then
-            ShowStatus("Updating sender", True)
+            DisplayProgress(UPDATE_SENDER)
             UpdateSender(StoreSenderValues())
             isDataChanged = False
             LoadSenderTable()
-            ShowStatus("Updated sender", True)
+            DisplayProgress(UPDATE_SENDER & COMPLETE)
         End If
     End Sub
     Private Sub BtnDel_Click(sender As Object, e As EventArgs) Handles BtnDel.Click
         If Not String.IsNullOrEmpty(TxtId.Text) Then
-            ShowStatus("Deleting sender", True)
+            DisplayProgress(DELETE_SENDER)
             DeleteSender(CInt(TxtId.Text))
             isDataChanged = False
             LoadSenderTable()
-            ShowStatus("Deleted sender", True)
+            DisplayProgress(DELETE_SENDER & COMPLETE)
             ShowRecord(0, "first")
         End If
     End Sub
@@ -107,7 +122,7 @@ Public Class FrmDbUpdate
     Private Sub TxtId_TextChanged(sender As Object, e As EventArgs) Handles TxtId.TextChanged
         If Not isLoadingForm Then
             If isDataChanged Then
-                If MsgBox("There are unsaved changes. Do you wish to continue (changes will be lost)?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                If MsgBox(TypeRight.FrmDbUpdate.UNSAVED_CHANGES_WARNING, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.No Then
                     isLoadingForm = True
                     TxtId.Text = LblId.Text
                     isLoadingForm = False
@@ -145,10 +160,12 @@ Public Class FrmDbUpdate
         DataBackupSenderButtons()
     End Sub
     Private Sub MnuBkUpAll_Click(sender As Object, e As EventArgs) Handles MnuBkUpAll.Click
+        DisplayProgress(FULL_BACKUP)
         DataBackupButtons()
         DataBackupGroups()
         DataBackupSenders()
         DataBackupSenderButtons()
+        DisplayProgress(FULL_BACKUP & COMPLETE)
     End Sub
     Private Sub MnuRestDatabase_Click(sender As Object, e As EventArgs) Handles MnuRestSenders.Click
         DataRestoreSenders()
@@ -160,10 +177,12 @@ Public Class FrmDbUpdate
         DataRestoreGroups()
     End Sub
     Private Sub MnuRestAll_Click(sender As Object, e As EventArgs) Handles MnuRestAll.Click
+        DisplayProgress(FULL_RESTORE)
         DataRestoreGroups()
         DataRestoreButtons()
         DataRestoreSenders()
         DataRestoreSenderButtons()
+        DisplayProgress(FULL_RESTORE & COMPLETE)
     End Sub
     Private Sub MnuRestSenderButtons_Click(sender As Object, e As EventArgs) Handles MnuRestSenderButtons.Click
         DataRestoreSenderButtons()
@@ -181,7 +200,7 @@ Public Class FrmDbUpdate
             End If
             iCurrSnd += 1
         Next
-        If oSndRow IsNot Nothing  Then
+        If oSndRow IsNot Nothing Then
             LblId.Text = CStr(oSndRow.SenderId)
             TxtId.Text = CStr(oSndRow.SenderId)
         End If
@@ -297,11 +316,11 @@ Public Class FrmDbUpdate
         If Not isPro And oSndTable.Rows.Count > 0 Then
             BtnAdd.Enabled = False
             BtnUpd.Enabled = False
-            LblStatus.Text = "** Record Limit Reached **"
+            DisplayProgress(LIMIT_REACHED)
         Else
             BtnAdd.Enabled = True
             BtnUpd.Enabled = True
-            LblStatus.Text = ""
+            DisplayProgress(String.Empty)
         End If
     End Sub
     Public Shared Function Calc_age(dtDob) As Integer
@@ -351,11 +370,12 @@ Public Class FrmDbUpdate
 
     End Function
     Private Sub DataBackupButtons()
-        LogUtil.Info("Backup buttons", MyBase.Name)
+        DisplayProgress(BKUP_GRP_BUTTONS)
         BackupTable(GetButtons())
+        DisplayProgress(BKUP_GRP_BUTTONS & COMPLETE)
     End Sub
     Private Sub DataRestoreButtons()
-        LogUtil.Info("Restoring buttons", MyBase.Name)
+        DisplayProgress(REST_GRP_BUTTONS)
         RestoreTable(oBtnTable)
         For Each oRow As TypeRightDataSet.buttonRow In oBtnTable.Rows
             If GetButtonById(oRow.buttonId) Is Nothing Then
@@ -372,13 +392,15 @@ Public Class FrmDbUpdate
                              oRow.buttonItalic, oRow.buttonEncrypt, oRow.buttonId)
             End If
         Next
+        DisplayProgress(REST_GRP_BUTTONS & COMPLETE)
     End Sub
     Private Sub DataBackupGroups()
-        LogUtil.Info("Backup groups", MyBase.Name)
+        DisplayProgress(BKUP_GROUPS)
         BackupTable(GetButtonGroups())
+        DisplayProgress(BKUP_GROUPS & COMPLETE)
     End Sub
     Private Sub DataRestoreGroups()
-        LogUtil.Info("Restoring groups", MyBase.Name)
+        DisplayProgress(REST_GROUPS)
         RestoreTable(oGrpTable)
         For Each oRow As TypeRightDataSet.buttongroupsRow In oGrpTable.Rows
             If GetButtonGroup(oRow.buttongroupid) Is Nothing Then
@@ -387,13 +409,15 @@ Public Class FrmDbUpdate
                 UpdateButtonGroupName(oRow.groupname, oRow.buttongroupid)
             End If
         Next
+        DisplayProgress(REST_GROUPS & COMPLETE)
     End Sub
     Private Sub DataBackupSenders()
-        LogUtil.Info("Backup senders", MyBase.Name)
+        DisplayProgress(BKUP_SENDERS)
         BackupTable(GetSenders())
+        DisplayProgress(BKUP_SENDERS & COMPLETE)
     End Sub
     Private Sub DataRestoreSenders()
-        LogUtil.Info("Restoring senders", MyBase.Name)
+        DisplayProgress(REST_SENDERS)
         RestoreTable(oSndTable)
         For Each oRow As TypeRightDataSet.sendersRow In oSndTable.Rows
             Dim oRestoredSender As Sender = SenderBuilder.NewSender().StartingWith(oRow).Build
@@ -403,13 +427,15 @@ Public Class FrmDbUpdate
                 UpdateSender(oRestoredSender)
             End If
         Next
+        DisplayProgress(REST_SENDERS & COMPLETE)
     End Sub
     Private Sub DataBackupSenderButtons()
-        LogUtil.Info("Backup sender buttons", MyBase.Name)
+        DisplayProgress(BKUP_SNDR_BUTTONS)
         BackupTable(GetSenderButtons())
+        DisplayProgress(BKUP_SNDR_BUTTONS & COMPLETE)
     End Sub
     Private Sub DataRestoreSenderButtons()
-        LogUtil.Info("Restore sender buttons", MyBase.Name)
+        DisplayProgress(REST_SNDR_BUTTONS)
         RestoreTable(oSndrBtnTable)
         For Each oRow As TypeRightDataSet.senderButtonRow In oSndrBtnTable.Rows
             If GetSenderButton(oRow.ColumnName) Is Nothing Then
@@ -418,13 +444,15 @@ Public Class FrmDbUpdate
                 UpdateSenderButton(oRow.ColumnName, oRow.buttonFontName, oRow.buttonFontSize, oRow.buttonItalic, oRow.buttonBold, oRow.buttonEncrypted)
             End If
         Next
+        DisplayProgress(REST_SNDR_BUTTONS & COMPLETE)
     End Sub
     Private Sub BackupTable(backupDataTable As DataTable)
         Dim sTableName As String = backupDataTable.TableName
         Dim sDbFullPath As String = GetBackupFolder(True)
         Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".xml")
-        LogUtil.Info("Writing " & sBackupFile, MyBase.Name)
+        DisplayProgress("Writing " & sBackupFile)
         backupDataTable.WriteXml(sBackupFile)
+        DisplayProgress("Writing " & sBackupFile & COMPLETE)
     End Sub
     Private Sub RestoreTable(ByRef restoreDataTable As DataTable)
         restoreDataTable.Rows.Clear()
@@ -432,10 +460,11 @@ Public Class FrmDbUpdate
         Dim sDbFullPath As String = GetBackupFolder(False)
         Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".xml")
         If My.Computer.FileSystem.FileExists(sBackupFile) Then
-            LogUtil.Info("Using " & sBackupFile, MyBase.Name)
+            DisplayProgress(LOADING_FROM & sBackupFile)
             restoreDataTable.ReadXml(sBackupFile)
+            DisplayProgress(LOADING_FROM & sBackupFile & COMPLETE)
         Else
-            LogUtil.Info("Backup file " & sBackupFile & " missing. Table NOT restored", MyBase.Name)
+            DisplayProgress("Backup file " & sBackupFile & " missing. Table NOT restored")
         End If
     End Sub
     Private Function GetBackupFolder(isCreateOnMissing As Boolean) As String
@@ -454,7 +483,6 @@ Public Class FrmDbUpdate
             TxtId.Text = CStr(oSndRow.SenderId)
         End If
     End Sub
-
     Private Sub DataChanged(sender As Object, e As EventArgs) Handles CbTitle.SelectedIndexChanged,
                                                                         TxtAdd1.TextChanged,
                                                                         TxtAdd2.TextChanged,
@@ -476,6 +504,10 @@ Public Class FrmDbUpdate
                                                                         CbOcc.SelectedIndexChanged
         isDataChanged = True
     End Sub
-
+    Private Sub DisplayProgress(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = True)
+        LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
+        StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(LblStatus.Text, MyBase.Name)
+    End Sub
 #End Region
 End Class

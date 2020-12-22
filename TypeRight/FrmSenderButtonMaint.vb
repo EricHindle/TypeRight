@@ -20,7 +20,7 @@ Public Class FrmSenderButtonFormat
 #End Region
 #Region "form control handlers"
     Private Sub FrmSenderButtonMaint_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
+        LogUtil.Info(My.Resources.LOADING, MyBase.Name)
         GetFormPos(Me, My.Settings.SndrBtnFormPos)
         For Each _col As DataColumn In oTable.Columns
             CbDbValue.Items.Add(_col.ColumnName)
@@ -84,7 +84,7 @@ Public Class FrmSenderButtonFormat
     Private Sub FrmSenderButtonMaint_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.SndrBtnFormPos = SetFormPos(Me)
         My.Settings.Save()
-        LogUtil.Info("Closing", MyBase.Name)
+        LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
     End Sub
 #End Region
 #Region "subroutine"

@@ -33,6 +33,8 @@ Public Class FrmButtonList
 #Region "form control handlers"
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
+        LogUtil.LogFolder = My.Settings.LogFolder
+        LogUtil.StartLogging()
         InitialiseApplication()
         GetFormPos(Me, My.Settings.ButtonListPos)
         ' Set window width based on number of columns and button width
@@ -54,7 +56,6 @@ Public Class FrmButtonList
         mnuSep3.Visible = isPro
         Me.Opacity = iTransPerc / 100
         GrpBottom.Visible = bToolBar
-        ImgTack_Click()
         iButtonCt = 0
         If isPro Then
             GroupButtonPanel.Top = GrpTop.Height
@@ -82,11 +83,11 @@ Public Class FrmButtonList
             Me.WindowState = FormWindowState.Normal
         End If
         isLoading = False
+        SetTopMost()
     End Sub
     Private Sub BtnReDraw_Click(sender As Object, e As EventArgs) Handles BtnReDraw.Click
         RedrawButtons()
     End Sub
-
     Private Sub RedrawButtons()
         If cbNames.SelectedIndex > -1 Then
             iButtonCt = 0
@@ -106,7 +107,7 @@ Public Class FrmButtonList
 
     Private Sub ImgTack_Click(sender As Object, e As EventArgs) Handles ImgTack.Click
         bOnTop = Not (bOnTop)
-        ImgTack_Click()
+        SetTopMost()
         SaveOptions()
     End Sub
     Private Sub MnuOptions1_Click(sender As Object, e As EventArgs) Handles mnuOptions1.Click
@@ -202,7 +203,7 @@ Public Class FrmButtonList
         Me.Left = 50
     End Sub
     Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing", MyBase.Name)
+        LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
         SavePosition()
         NotifyIcon1.Visible = False
     End Sub
@@ -551,13 +552,16 @@ Public Class FrmButtonList
             AddHandler _btn.Button1.Click, AddressOf Button_Click
         Next
     End Sub
-    Private Sub ImgTack_Click()
+    Private Sub SetTopMost()
         If bOnTop Then
             ImgTack.Image = My.Resources.tackdown
         Else
             ImgTack.Image = My.Resources.tackup
         End If
         Me.TopMost = bOnTop
+        If bOnTop Then
+            Me.BringToFront()
+        End If
     End Sub
     Private Sub ShowGroupMaint(_action As GroupAction, _button As Nbutton)
         LogUtil.Info("Showing group maintenance", MyBase.Name)
@@ -577,9 +581,13 @@ Public Class FrmButtonList
         Using _options As New FrmOptions
             _options.Owner = Me
             _options.ShowDialog()
-            LoadOptions()
+            '       LoadOptions()
             Me.Opacity = iTransPerc / 100
             GrpBottom.Visible = bToolBar
+            SetTopMost()
+            If Me.Width <> (iColCt * iButtonWidth) + FRAME_WIDTH Then
+                DrawButtons()
+            End If
         End Using
     End Sub
 #End Region
@@ -620,6 +628,17 @@ Public Class FrmButtonList
         Loop
         Return newText
     End Function
+    'Private Sub ShowDebug(part As Integer)
+    '    LogUtil.Debug("--- " & CStr(part) & " ---")
+    '    LogUtil.Debug(My.Settings.ButtonListPos)
+    '    LogUtil.Debug("Top:" & CStr(Me.Top))
+    '    LogUtil.Debug("Left:" & CStr(Me.Left))
+    '    LogUtil.Debug("Width:" & CStr(Me.Width))
+    '    LogUtil.Debug("Height:" & CStr(Me.Height))
+    '    LogUtil.Debug("Button Width:" & CStr(iButtonWidth))
+    '    LogUtil.Debug("On Top:" & CStr(bOnTop) & " " & CStr(Me.TopMost))
+    '    LogUtil.Debug("--- *** ---")
+    'End Sub
 
 #End Region
 End Class

@@ -72,7 +72,7 @@ Public Class FrmGroupMaint
         Me.Close()
     End Sub
     Private Sub FrmGroupMaint_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
+        LogUtil.Info(My.Resources.LOADING, MyBase.Name)
         GetFormPos(Me, My.Settings.GroupMaintPos)
         Me.ButtongroupsTableAdapter.Fill(Me.TypeRightDataSet.buttongroups)
         ClearForm()
@@ -110,7 +110,7 @@ Public Class FrmGroupMaint
         End Select
     End Sub
     Private Sub FrmGroupMaint_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing", MyBase.Name)
+        LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
         My.Settings.GroupMaintPos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
@@ -134,6 +134,10 @@ Public Class FrmGroupMaint
     Private Sub ChkCopyBtn_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCopyBtn.CheckedChanged
         LblTrans.Text = If(ChkCopyBtn.Checked, "Copy ", "Move ") & "button to group"
     End Sub
-
+    Private Sub DisplayProgress(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
+        LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
+        StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(pText, MyBase.Name)
+    End Sub
 #End Region
 End Class

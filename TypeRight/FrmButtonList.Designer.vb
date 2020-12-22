@@ -51,6 +51,7 @@ Partial Class FrmButtonList
         Me.AddToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeNameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSep3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOptions1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
@@ -66,10 +67,10 @@ Partial Class FrmButtonList
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.GroupButtonPanel = New System.Windows.Forms.Panel()
         Me.DelayTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
         Me.SenderButtonPanel = New System.Windows.Forms.Panel()
         Me.ProgressTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.RemoveGroupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
         Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuPopup.SuspendLayout()
@@ -115,6 +116,7 @@ Partial Class FrmButtonList
         Me.BtnMinimise.Name = "BtnMinimise"
         Me.BtnMinimise.Size = New System.Drawing.Size(20, 20)
         Me.BtnMinimise.TabIndex = 9
+        Me.ToolTip1.SetToolTip(Me.BtnMinimise, "Minimise")
         Me.BtnMinimise.UseVisualStyleBackColor = True
         '
         'BtnAddCol
@@ -125,6 +127,7 @@ Partial Class FrmButtonList
         Me.BtnAddCol.Name = "BtnAddCol"
         Me.BtnAddCol.Size = New System.Drawing.Size(20, 20)
         Me.BtnAddCol.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.BtnAddCol, "Add a column")
         Me.BtnAddCol.UseVisualStyleBackColor = True
         '
         'BtnRmvCol
@@ -135,6 +138,7 @@ Partial Class FrmButtonList
         Me.BtnRmvCol.Name = "BtnRmvCol"
         Me.BtnRmvCol.Size = New System.Drawing.Size(20, 20)
         Me.BtnRmvCol.TabIndex = 3
+        Me.ToolTip1.SetToolTip(Me.BtnRmvCol, "Remove a column")
         Me.BtnRmvCol.UseVisualStyleBackColor = True
         '
         'ImgTack
@@ -145,6 +149,7 @@ Partial Class FrmButtonList
         Me.ImgTack.Size = New System.Drawing.Size(16, 16)
         Me.ImgTack.TabIndex = 2
         Me.ImgTack.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.ImgTack, "Pin on top")
         '
         'cbNames
         '
@@ -164,6 +169,7 @@ Partial Class FrmButtonList
         Me.BtnReDraw.Size = New System.Drawing.Size(31, 20)
         Me.BtnReDraw.TabIndex = 0
         Me.BtnReDraw.Text = "Go"
+        Me.ToolTip1.SetToolTip(Me.BtnReDraw, "Update buttons")
         Me.BtnReDraw.UseVisualStyleBackColor = True
         '
         'ProgressBar1
@@ -224,47 +230,47 @@ Partial Class FrmButtonList
         '
         Me.mnuButtons.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToClipboardToolStripMenuItem, Me.ToolStripSeparator1, Me.mnuNew, Me.mnuEdit, Me.mnuDelete, Me.ToolStripSeparator2, Me.mnuGroups, Me.mnuSep3, Me.mnuOptions1, Me.ToolStripSeparator5, Me.MnuMinimise1})
         Me.mnuButtons.Name = "mnuButtons"
-        Me.mnuButtons.Size = New System.Drawing.Size(181, 204)
+        Me.mnuButtons.Size = New System.Drawing.Size(172, 182)
         '
         'CopyToClipboardToolStripMenuItem
         '
         Me.CopyToClipboardToolStripMenuItem.Name = "CopyToClipboardToolStripMenuItem"
-        Me.CopyToClipboardToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CopyToClipboardToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.CopyToClipboardToolStripMenuItem.Text = "Copy to Clipboard"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(168, 6)
         '
         'mnuNew
         '
         Me.mnuNew.Name = "mnuNew"
-        Me.mnuNew.Size = New System.Drawing.Size(180, 22)
+        Me.mnuNew.Size = New System.Drawing.Size(171, 22)
         Me.mnuNew.Text = "&New Button"
         '
         'mnuEdit
         '
         Me.mnuEdit.Name = "mnuEdit"
-        Me.mnuEdit.Size = New System.Drawing.Size(180, 22)
+        Me.mnuEdit.Size = New System.Drawing.Size(171, 22)
         Me.mnuEdit.Text = "&Edit Button"
         '
         'mnuDelete
         '
         Me.mnuDelete.Name = "mnuDelete"
-        Me.mnuDelete.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDelete.Size = New System.Drawing.Size(171, 22)
         Me.mnuDelete.Text = "&Delete Button"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(168, 6)
         '
         'mnuGroups
         '
         Me.mnuGroups.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddToolStripMenuItem, Me.ChangeNameToolStripMenuItem, Me.TransferToolStripMenuItem, Me.RemoveGroupToolStripMenuItem})
         Me.mnuGroups.Name = "mnuGroups"
-        Me.mnuGroups.Size = New System.Drawing.Size(180, 22)
+        Me.mnuGroups.Size = New System.Drawing.Size(171, 22)
         Me.mnuGroups.Text = "&Groups"
         '
         'AddToolStripMenuItem
@@ -285,26 +291,32 @@ Partial Class FrmButtonList
         Me.TransferToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.TransferToolStripMenuItem.Text = "&Transfer Button"
         '
+        'RemoveGroupToolStripMenuItem
+        '
+        Me.RemoveGroupToolStripMenuItem.Name = "RemoveGroupToolStripMenuItem"
+        Me.RemoveGroupToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.RemoveGroupToolStripMenuItem.Text = "&Remove Group"
+        '
         'mnuSep3
         '
         Me.mnuSep3.Name = "mnuSep3"
-        Me.mnuSep3.Size = New System.Drawing.Size(177, 6)
+        Me.mnuSep3.Size = New System.Drawing.Size(168, 6)
         '
         'mnuOptions1
         '
         Me.mnuOptions1.Name = "mnuOptions1"
-        Me.mnuOptions1.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptions1.Size = New System.Drawing.Size(171, 22)
         Me.mnuOptions1.Text = "&Options"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(168, 6)
         '
         'MnuMinimise1
         '
         Me.MnuMinimise1.Name = "MnuMinimise1"
-        Me.MnuMinimise1.Size = New System.Drawing.Size(180, 22)
+        Me.MnuMinimise1.Size = New System.Drawing.Size(171, 22)
         Me.MnuMinimise1.Text = "Minimise"
         '
         'GrpBottom
@@ -320,7 +332,7 @@ Partial Class FrmButtonList
         Me.GrpBottom.Controls.Add(Me.PicOptions)
         Me.GrpBottom.Controls.Add(Me.PicLock)
         Me.GrpBottom.Controls.Add(Me.RedClock)
-        Me.GrpBottom.Location = New System.Drawing.Point(0, 387)
+        Me.GrpBottom.Location = New System.Drawing.Point(1, 564)
         Me.GrpBottom.Margin = New System.Windows.Forms.Padding(0)
         Me.GrpBottom.Name = "GrpBottom"
         Me.GrpBottom.Padding = New System.Windows.Forms.Padding(0)
@@ -359,6 +371,7 @@ Partial Class FrmButtonList
         Me.PicExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicExit.TabIndex = 4
         Me.PicExit.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PicExit, "Close")
         '
         'PicDatabase
         '
@@ -369,6 +382,7 @@ Partial Class FrmButtonList
         Me.PicDatabase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicDatabase.TabIndex = 3
         Me.PicDatabase.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PicDatabase, "Sender maintenance")
         '
         'PicOptions
         '
@@ -379,6 +393,7 @@ Partial Class FrmButtonList
         Me.PicOptions.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicOptions.TabIndex = 2
         Me.PicOptions.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PicOptions, "Options")
         '
         'PicLock
         '
@@ -422,11 +437,6 @@ Partial Class FrmButtonList
         'DelayTimer
         '
         '
-        'TypeRightDataSet
-        '
-        Me.TypeRightDataSet.DataSetName = "TypeRightDataSet"
-        Me.TypeRightDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'SenderButtonPanel
         '
         Me.SenderButtonPanel.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -434,21 +444,20 @@ Partial Class FrmButtonList
         Me.SenderButtonPanel.BackColor = System.Drawing.SystemColors.ControlLight
         Me.SenderButtonPanel.Location = New System.Drawing.Point(0, 228)
         Me.SenderButtonPanel.Name = "SenderButtonPanel"
-        Me.SenderButtonPanel.Size = New System.Drawing.Size(120, 161)
+        Me.SenderButtonPanel.Size = New System.Drawing.Size(120, 333)
         Me.SenderButtonPanel.TabIndex = 5
         '
         'ProgressTimer
         '
         '
-        'RemoveGroupToolStripMenuItem
+        'TypeRightDataSet
         '
-        Me.RemoveGroupToolStripMenuItem.Name = "RemoveGroupToolStripMenuItem"
-        Me.RemoveGroupToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
-        Me.RemoveGroupToolStripMenuItem.Text = "&Remove Group"
+        Me.TypeRightDataSet.DataSetName = "TypeRightDataSet"
+        Me.TypeRightDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'FrmButtonList
         '
-        Me.ClientSize = New System.Drawing.Size(122, 421)
+        Me.ClientSize = New System.Drawing.Size(122, 598)
         Me.ControlBox = False
         Me.Controls.Add(Me.SenderButtonPanel)
         Me.Controls.Add(Me.GroupButtonPanel)
@@ -461,7 +470,7 @@ Partial Class FrmButtonList
         Me.Name = "FrmButtonList"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
+        Me.Text = "Button List"
         Me.GrpTop.ResumeLayout(False)
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mnuPopup.ResumeLayout(False)
@@ -526,4 +535,5 @@ Partial Class FrmButtonList
     Friend WithEvents MnuMinimise1 As Windows.Forms.ToolStripMenuItem
     Friend WithEvents BtnMinimise As Windows.Forms.Button
     Friend WithEvents RemoveGroupToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolTip1 As Windows.Forms.ToolTip
 End Class

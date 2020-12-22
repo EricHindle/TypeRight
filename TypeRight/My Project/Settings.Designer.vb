@@ -330,7 +330,7 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+     Global.System.Configuration.DefaultSettingValueAttribute("10~10~600~136")>  _
     Public Property ButtonListPos() As String
         Get
             Return CType(Me("ButtonListPos"),String)

@@ -17,7 +17,7 @@ Public Class frmLogViewer
         Me.Close()
     End Sub
     Private Sub LogViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
+        LogUtil.Info(My.Resources.LOADING, MyBase.Name)
         GetFormPos(Me, My.Settings.LogViewerPos)
         LoadTodaysLog()
     End Sub
@@ -51,7 +51,7 @@ Public Class frmLogViewer
         rtbLog.Text = LogUtil.GetLogContents()
     End Sub
     Private Sub FrmLogViewer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing", MyBase.Name)
+        LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
         My.Settings.LogViewerPos = SetFormPos(Me)
         My.Settings.Save()
     End Sub

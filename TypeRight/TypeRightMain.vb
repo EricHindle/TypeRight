@@ -80,20 +80,14 @@ Module TypeRightMain
     Public Sub InitialiseApplication()
         Dim thisVersion As String = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
         ' Preserve previous version user application settings
-        Dim isVersionChange As Boolean = False
         Dim oldVersion As String = My.Settings.Version
         If oldVersion <> thisVersion Then
-            isVersionChange = True
             My.Settings.Upgrade()
+            LogUtil.Info("Version change to " & thisVersion, MODULE_NAME)
+            LogUtil.Info("Upgrading settings", MODULE_NAME)
         End If
         My.Settings.Version = thisVersion
         My.Settings.Save()
-        LogUtil.LogFolder = My.Settings.LogFolder
-        LogUtil.StartLogging()
-        If isVersionChange Then
-            LogUtil.Info("Version change to " & My.Settings.Version, MODULE_NAME)
-            LogUtil.Info("Upgrading settings", MODULE_NAME)
-        End If
         sLicName = ""
         sLicCode = ""
         isPro = False

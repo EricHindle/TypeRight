@@ -77,7 +77,7 @@
       <Value Profile="(Default)">F:\TypeRight\Backups</Value>
     </Setting>
     <Setting Name="ButtonListPos" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">10~10~600~136</Value>
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="User">
       <Value Profile="(Default)">2.0.4</Value>

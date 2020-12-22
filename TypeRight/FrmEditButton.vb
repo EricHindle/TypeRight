@@ -2,6 +2,10 @@
 Imports System.Windows.Forms
 
 Public Class FrmEditButton
+#Region "constants"
+
+#End Region
+
 #Region "variables"
     Private iId As Integer
     Private iSeq As Integer
@@ -22,7 +26,7 @@ Public Class FrmEditButton
 #End Region
 #Region "form control handlers"
     Private Sub FrmEditButton_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
+        LogUtil.Info(My.Resources.LOADING, MyBase.Name)
         GetFormPos(Me, My.Settings.EditButtonPos)
         For Each _col As DataColumn In oTable.Columns
             CbDbValue.Items.Add(_col.ColumnName)
@@ -275,7 +279,7 @@ Public Class FrmEditButton
     Private Sub FrmEditButton_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         My.Settings.EditButtonPos = SetFormPos(Me)
         My.Settings.Save()
-        LogUtil.Info("Closing", MyBase.Name)
+        LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
     End Sub
     Private Sub BtnField_Click(sender As Object, e As EventArgs) Handles BtnField.Click
         If CbDbValue.SelectedIndex >= 0 Then
@@ -299,5 +303,10 @@ Public Class FrmEditButton
         End If
         Return isOK
     End Function
+    Private Sub DisplayProgress(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
+        LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
+        StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(pText, MyBase.Name)
+    End Sub
 #End Region
 End Class

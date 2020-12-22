@@ -120,6 +120,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to ...Closing.
+        '''</summary>
+        Friend ReadOnly Property CLOSING() As String
+            Get
+                Return ResourceManager.GetString("CLOSING", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property greenclock() As System.Drawing.Bitmap
@@ -156,6 +165,15 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("KEYS03", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Loading....
+        '''</summary>
+        Friend ReadOnly Property LOADING() As String
+            Get
+                Return ResourceManager.GetString("LOADING", resourceCulture)
             End Get
         End Property
         

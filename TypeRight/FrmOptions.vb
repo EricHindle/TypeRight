@@ -7,7 +7,7 @@ Public Class FrmOptions
         Me.Close()
     End Sub
     Private Sub BtnDfltFont_Click(sender As Object, e As EventArgs) Handles BtnDfltFont.Click
-        LogUtil.Info("Selecting font", MyBase.Name)
+        DisplayProgress("Selecting font")
         Dim dlogResult As DialogResult = DialogResult.Cancel
         With FontDialog1
             .FontMustExist = True
@@ -18,9 +18,9 @@ Public Class FrmOptions
             If dlogResult = DialogResult.OK Then
                 .Text = FontDialog1.Font.Name & " " & Format(FontDialog1.Font.Size)
                 .Font = MakeFont(FontDialog1.Font.Name, FontDialog1.Font.Size, FontDialog1.Font.Bold, FontDialog1.Font.Italic)
-                LogUtil.Info("Font selected", MyBase.Name)
+                DisplayProgress("Font selected")
             Else
-                LogUtil.Info("Font not selected", MyBase.Name)
+                DisplayProgress("Font not selected")
             End If
         End With
     End Sub
@@ -73,7 +73,7 @@ Public Class FrmOptions
         Me.Close()
     End Sub
     Private Sub FrmOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LogUtil.Info("Loading", MyBase.Name)
+        LogUtil.Info(My.Resources.LOADING, MyBase.Name)
         GetFormPos(Me, My.Settings.OptionsPos)
         CbToolBar.Checked = bToolBar
         cbMinimise.Checked = bMinimise
@@ -95,6 +95,8 @@ Public Class FrmOptions
         TxtLic3.Text = Mid(sLicCode, 9, 4)
         TxtLic4.Text = Mid(sLicCode, 13, 4)
         Slider1.Value = iTransPerc
+        HScroll1.Value = iButtonWidth
+        BtnSample.Width = iButtonWidth
         cbOnTop.Checked = bOnTop
         nudDelay.Text = Format(iDelay)
         BtnDfltFont.Text = sDfltFontName & " " & Format(iDfltFontSize)
@@ -105,10 +107,15 @@ Public Class FrmOptions
         LblVersion.Text = System.String.Format(LblVersion.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
     End Sub
     Private Sub HScroll1_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles HScroll1.Scroll
+        ScrollValueChanged()
+    End Sub
+
+    Private Sub ScrollValueChanged()
         BtnSample.Text = Format(HScroll1.Value)
         BtnSample.Width = HScroll1.Value
         iButtonWidth = HScroll1.Value
     End Sub
+
     Private Sub Slider1_Scroll(sender As Object, e As EventArgs) Handles Slider1.Scroll
         Me.Owner.Opacity = Slider1.Value / 100
     End Sub
@@ -117,10 +124,11 @@ Public Class FrmOptions
         My.Settings.DBUpdatePos = "10~10~627~829"
         My.Settings.GroupMaintPos = "10~10~263~649"
         My.Settings.OptionsPos = "10~10~459~674"
-        My.Settings.ButtonListPos = "10~10~423~124"
+        My.Settings.ButtonListPos = "10~10~600~124"
         My.Settings.SndrBtnFormPos = "10~10~286~393"
+        My.Settings.LogViewerPos = "10~10~876~588"
         My.Settings.Save()
-        ShowStatus("Form screen positions reset",, True)
+        DisplayProgress("Form screen positions reset")
     End Sub
     Private Sub BtnViewLog_Click(sender As Object, e As EventArgs) Handles BtnViewLog.Click
         Using _logView As New frmLogViewer
@@ -128,17 +136,22 @@ Public Class FrmOptions
         End Using
     End Sub
     Private Sub FrmOptions_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        LogUtil.Info("Closing", MyBase.Name)
+        LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
         My.Settings.OptionsPos = SetFormPos(Me)
         My.Settings.Save()
     End Sub
 #End Region
 #Region "subroutines"
-    Private Sub ShowStatus(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
+    Private Sub DisplayProgress(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = True)
         lblStatus.Text = If(isAppend, lblStatus.Text, "") & pText
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
+
+    Private Sub HScroll1_ValueChanged(sender As Object, e As EventArgs) Handles HScroll1.ValueChanged
+        ScrollValueChanged()
+    End Sub
+
     Private Function MissingFolderResolved(folderName As String, folderType As String) As Boolean
         Dim isOK As Boolean = False
         If My.Computer.FileSystem.DirectoryExists(folderName) Then
@@ -147,7 +160,7 @@ Public Class FrmOptions
             If MsgBox(folderType & " folder does not exist. Create?", vbExclamation Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 My.Computer.FileSystem.CreateDirectory(folderName)
                 isOK = True
-                LogUtil.Info("Created log folder " & folderName, MyBase.Name)
+                DisplayProgress("Created log folder " & folderName)
             Else
                 LogUtil.Info("Invalid " & folderType & " folder name", MyBase.Name)
                 isOK = False
