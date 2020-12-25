@@ -431,7 +431,7 @@ Partial Class FrmButtonList
         Me.GroupButtonPanel.BackColor = System.Drawing.SystemColors.ControlLight
         Me.GroupButtonPanel.Location = New System.Drawing.Point(0, 65)
         Me.GroupButtonPanel.Name = "GroupButtonPanel"
-        Me.GroupButtonPanel.Size = New System.Drawing.Size(120, 161)
+        Me.GroupButtonPanel.Size = New System.Drawing.Size(120, 157)
         Me.GroupButtonPanel.TabIndex = 4
         '
         'DelayTimer
@@ -457,6 +457,7 @@ Partial Class FrmButtonList
         '
         'FrmButtonList
         '
+        Me.BackColor = System.Drawing.SystemColors.ControlDark
         Me.ClientSize = New System.Drawing.Size(122, 598)
         Me.ControlBox = False
         Me.Controls.Add(Me.SenderButtonPanel)

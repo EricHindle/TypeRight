@@ -503,8 +503,8 @@ Public Class FrmButtonList
         lResizeActive = False
         RemoveGroupButtons()
         FillButtonPanel(GroupButtonPanel, groupButtonList)
-        SenderButtonPanel.Top = GroupButtonPanel.Top + GroupButtonPanel.Height
-        Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 36
+        SenderButtonPanel.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + 4
+        Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
         GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height
         lResizeActive = True
     End Sub
@@ -513,8 +513,8 @@ Public Class FrmButtonList
         lResizeActive = False
         RemoveSenderButtons()
         FillButtonPanel(SenderButtonPanel, senderButtonList)
-        Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 36
-        GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height
+        Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
+        GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height + 4
         lResizeActive = True
     End Sub
     Private Sub RemoveGroupButtons()
@@ -548,8 +548,8 @@ Public Class FrmButtonList
         For Each oBtn In oList
             AddHandler oBtn.Click, AddressOf Button_Click
             oPanel.Controls.Add(oBtn)
-            oBtn.Top = 1 + (iBtnRow * 27)
-            oBtn.Left = 1 + (iBtnCol * iButtonWidth)
+            oBtn.Top = 0 + (iBtnRow * 27)
+            oBtn.Left = 0 + (iBtnCol * iButtonWidth)
             oBtn.Size = New Drawing.Size(iButtonWidth, 27)
             oBtn.Visible = True
             oBtn.ContextMenuStrip = mnuButtons
