@@ -4,7 +4,6 @@ Public Class FrmGroupMaint
     Private oBtnGrpRow As TypeRightDataSet.buttongroupsRow
 #End Region
 #Region "properties"
-    Private _action As GroupAction
     Private _button As NbuttonControlLibrary.Nbutton
     Public Property SenderButton() As NbuttonControlLibrary.Nbutton
         Get
@@ -14,6 +13,7 @@ Public Class FrmGroupMaint
             _button = value
         End Set
     End Property
+    Private _action As Integer
     Public Property Action() As Integer
         Get
             Return _action
@@ -33,7 +33,7 @@ Public Class FrmGroupMaint
         iActGrp = iCurrGrp
         Me.DialogResult = DialogResult.OK
         Dim btnGrpRow As TypeRightDataSet.buttongroupsRow = GetButtonGroup(iActGrp)
-        Select Case _action
+        Select Case _Action
             Case GroupAction.GRP_TRANS
                 If cmbGroups.SelectedIndex = -1 Then
                     MsgBox("Select group to transfer to", vbExclamation, "Missing Information")
@@ -82,7 +82,7 @@ Public Class FrmGroupMaint
             TxtGrpName.Text = oBtnGrpRow.groupname
         End If
 
-        Select Case _action
+        Select Case _Action
             Case GroupAction.GRP_ADD
                 LogUtil.Info("Adding new group", MyBase.Name)
                 BtnUpdate.Text = "Add"

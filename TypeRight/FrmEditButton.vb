@@ -12,9 +12,19 @@ Public Class FrmEditButton
     Private iGrp As Integer
     Private ReadOnly oTextUtil As NTextUtil
     Private ReadOnly oTable As New TypeRight.TypeRightDataSet.sendersDataTable
+    Private actionString As String = "Editing"
 #End Region
 #Region "properties"
     Private _button As NbuttonControlLibrary.Nbutton
+    Private _action As Integer
+    Public Property Action() As Integer
+        Get
+            Return _action
+        End Get
+        Set(ByVal value As Integer)
+            _action = value
+        End Set
+    End Property
     Public Property Button() As NbuttonControlLibrary.Nbutton
         Get
             Return _button
@@ -34,7 +44,10 @@ Public Class FrmEditButton
         grpOpts.Visible = isPro
         chkEncrypt.Checked = False
         If _button IsNot Nothing Then
-            LogUtil.Info("Editing button " & _button.Caption, MyBase.Name)
+            If _action = ButtonAction.BTN_ADD Then
+                actionString = "Adding"
+            End If
+            DisplayProgress(actionString & " button " & _button.Caption)
             iSeq = _button.Sequence
             iGrp = _button.Group
             iId = _button.Id
@@ -52,10 +65,9 @@ Public Class FrmEditButton
         Else
 
         End If
-        Dim oTextUtil As New NTextUtil
     End Sub
     Private Sub BtnFont_Click(sender As Object, e As EventArgs) Handles BtnFont.Click
-        LogUtil.Info("Selecting font", MyBase.Name)
+        DisplayProgress("Selecting font")
         Dim dlogResult As DialogResult = DialogResult.Cancel
         With FontDialog1
             .FontMustExist = True
@@ -66,19 +78,19 @@ Public Class FrmEditButton
             If dlogResult = DialogResult.OK Then
                 .Text = FontDialog1.Font.Name & " " & Format(FontDialog1.Font.Size)
                 .Font = MakeFont(FontDialog1.Font.Name, FontDialog1.Font.Size, FontDialog1.Font.Bold, FontDialog1.Font.Italic)
-                LogUtil.Info("Font selected", MyBase.Name)
+                DisplayProgress("Font selected")
             Else
-                LogUtil.Info("Font not selected", MyBase.Name)
+                DisplayProgress("Font not selected")
             End If
         End With
     End Sub
     Private Sub BtnCancel_Click() Handles BtnCancel.Click
-        LogUtil.Info("Button not updated", MyBase.Name)
+        DisplayProgress("Button not updated")
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
     End Sub
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles BtnOK.Click
-        LogUtil.Info("Updating button", MyBase.Name)
+        DisplayProgress(actionString & " button")
         Dim isEncrypted As Boolean
         Dim strNewText As String
         If IsValidated() Then
@@ -99,6 +111,9 @@ Public Class FrmEditButton
                 .Value = strNewText
                 .Encrypt = isEncrypted
             End With
+            If _action = ButtonAction.BTN_ADD Then
+                Dim newId As Integer = InsertButton(_button)
+            End If
             Dim oBtn As TypeRightDataSet.buttonRow = GetButtonByGroupAndSeq(iGrp, iSeq)
             If oBtn IsNot Nothing Then
                 UpdateButton(oBtn.buttonGroup, oBtn.buttonSeq, txtCaption.Text, TxtHint.Text, strNewText, BtnFont.Font.Name, BtnFont.Font.Bold, BtnFont.Font.Size, BtnFont.Font.Italic, isEncrypted, oBtn.buttonId)
@@ -285,7 +300,9 @@ Public Class FrmEditButton
         If CbDbValue.SelectedIndex >= 0 Then
             Dim pos As Long
             pos = TxtValue.SelectionStart
-            TxtValue.Text = TxtValue.Text.Substring(0, pos) + "?=" + CbDbValue.SelectedItem + "=?" + Mid(TxtValue.Text, pos + 1)
+            Dim subStart As String = If(cbSub.Checked, "$=", "")
+            Dim subEnd As String = If(cbSub.Checked, "$$s,l=$", "")
+            TxtValue.Text = TxtValue.Text.Substring(0, pos) & subStart & "?=" & CbDbValue.SelectedItem & "=?" & subEnd & Mid(TxtValue.Text, pos + 1)
             TxtValue.SelectionStart = pos + Len(CbDbValue.SelectedItem) + 2
         End If
     End Sub

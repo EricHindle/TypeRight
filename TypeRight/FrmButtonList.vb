@@ -1,11 +1,17 @@
 ﻿Imports System.Collections.Generic
 Imports System.Data
+Imports System.Data.Common
 Imports System.Text
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
 Public Class FrmButtonList
 #Region "constants"
     Private Const FRAME_WIDTH As Integer = 18
+    Private Const SUB_START_MARKER As String = "$="
+    Private Const SUB_MID_MARKER As String = "$$"
+    Private Const SUB_END_MARKER As String = "=$"
+    Private Const FIELD_START_MARKER As String = "?="
+    Private Const FIELD_END_MARKER As String = "=?"
 #End Region
 #Region "private variables"
     Private strKeyText As String
@@ -138,37 +144,51 @@ Public Class FrmButtonList
         If iCurrGrp <> 0 Then
             Dim lastSeq As Integer = groupButtonList(groupButtonList.Count - 1).Sequence
             Dim newBtn As Nbutton = NButtonBuilder.NewButton.StartingWithNothing.WithGroup(iCurrGrp).WithSeq(lastSeq + 1).Build
-            Dim newId As Integer = InsertButton(newBtn)
-            newBtn.Id = newId
-            EditButton(newBtn)
-            LoadGroupButtons(iCurrGrp)
-            DrawButtons()
+            Try
+                EditButton(newBtn, ButtonAction.BTN_ADD)
+                LoadGroupButtons(iCurrGrp)
+                DrawButtons()
+                LogUtil.Info("Button added", MyBase.Name)
+            Catch ex As DbException
+                LogUtil.Exception("Exception adding new button", ex, MyBase.Name)
+            End Try
         End If
     End Sub
     Private Sub MnuEdit_Click(menuItem As Object, e As EventArgs) Handles mnuEdit.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf (sourceControl) Is Nbutton Then
             Dim _btn As Nbutton = CType(sourceControl, Nbutton)
-            If _btn.DataType = Nbutton.DataSource.Group Then
-                EditButton(_btn)
-                LoadGroupButtons(_btn.Group)
-                DrawButtons()
-            Else
-                EditSenderButton(_btn)
-                LoadSenderButtons(iCurrSender)
-                DrawButtons()
-            End If
+            Try
+                If _btn.DataType = Nbutton.DataSource.Group Then
+                    EditButton(_btn, ButtonAction.BTN_CHG)
+                    LoadGroupButtons(_btn.Group)
+                    DrawButtons()
+                Else
+                    EditSenderButton(_btn)
+                    LoadSenderButtons(iCurrSender)
+                    DrawButtons()
+                End If
+                LogUtil.Info("Button edited", MyBase.Name)
+            Catch ex As DbException
+                LogUtil.Exception("Exception editing button", ex, MyBase.Name)
+            End Try
         End If
     End Sub
     Private Sub MnuDelete_Click(menuItem As Object, e As EventArgs) Handles mnuDelete.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf (sourceControl) Is Nbutton Then
             Dim _btn As Nbutton = CType(sourceControl, Nbutton)
+            LogUtil.Info("Deleting button " & CStr(_btn.Id), MyBase.Name)
             If _btn.DataType = Nbutton.DataSource.Group Then
-                DeleteButton(_btn.Id)
-                ResequenceButtons(_btn.Group)
-                LoadGroupButtons(_btn.Group)
-                DrawButtons()
+                Try
+                    DeleteButton(_btn.Id)
+                    ResequenceButtons(_btn.Group)
+                    LoadGroupButtons(_btn.Group)
+                    DrawButtons()
+                    LogUtil.Info("Button deleted", MyBase.Name)
+                Catch ex As DbException
+                    LogUtil.Exception("Exception deleting button", ex, MyBase.Name)
+                End Try
             End If
         End If
     End Sub
@@ -289,11 +309,11 @@ Public Class FrmButtonList
     End Sub
 #End Region
 #Region "subroutines"
-    Private Sub EditButton(_btn As Nbutton)
+    Private Sub EditButton(_btn As Nbutton, _action As Integer)
         Using _editForm As New FrmEditButton
-            Dim buttonbuilder = New NButtonBuilder
-            Dim _editButton As Nbutton = buttonbuilder.StartingWith(_btn).Build
+            Dim _editButton As Nbutton = NButtonBuilder.NewButton().StartingWith(_btn).Build
             _editForm.Button = _editButton
+            _editForm.Action = _action
             Dim rtnValue As DialogResult = _editForm.ShowDialog
             If rtnValue = DialogResult.OK Then
                 _btn = _editButton
@@ -331,6 +351,7 @@ Public Class FrmButtonList
                 strKeyText = oNCrypter.DecryptData(strKeyText)
             End If
             strKeyText = GetDBFields(strKeyText)
+            strKeyText = ApplySubstrings(strKeyText)
             Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
             If GreenClock.Visible = True Then
                 RedClock.Visible = True
@@ -466,13 +487,13 @@ Public Class FrmButtonList
     Private Sub LoadGroupButtons(grpNo As Long)
         groupButtonList.Clear()
         Dim _nbb As New NButtonBuilder
+        LogUtil.Info("Loading group buttons", MyBase.Name)
         Dim undoButton As Nbutton = _nbb.StartingWith(0, grpNo, 0, "Undo", "", "^z", "Tahoma", 10, False, False, False, Nbutton.DataSource.Undefined).Build
         groupButtonList.Add(undoButton)
         Dim btnTable As TypeRightDataSet.buttonDataTable = GetButtonsByGroup(grpNo)
         For Each btnRow As TypeRightDataSet.buttonRow In btnTable.Rows
             If Not btnRow.IsbuttonValueNull AndAlso Not String.IsNullOrEmpty(btnRow.buttonValue) Then
                 Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(btnRow.buttonId).Build()
-
                 groupButtonList.Add(_nbutton)
             End If
         Next
@@ -610,12 +631,10 @@ Public Class FrmButtonList
     End Sub
     Private Function GetDBFields(ByVal sKeyText As String) As String
         Dim fieldName As String
-        Dim fieldStartMarker As String = "?="
-        Dim fieldEndMarker As String = "=?"
         Dim fieldValue As String
         Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(iCurrSender)
         Dim newText As String = sKeyText
-        fieldName = GetValueBetweenBrackets(newText, fieldStartMarker, fieldEndMarker)
+        fieldName = GetValueBetweenBrackets(newText, FIELD_START_MARKER, FIELD_END_MARKER)
         Dim fieldRow As TypeRightDataSet.senderButtonRow
         Do Until String.IsNullOrEmpty(fieldName)
             fieldRow = GetSenderButton(fieldName)
@@ -623,22 +642,38 @@ Public Class FrmButtonList
             If fieldRow IsNot Nothing AndAlso CBool(fieldRow.buttonEncrypted) Then
                 fieldValue = oNCrypter.DecryptData(fieldValue)
             End If
-            newText = newText.Replace(fieldStartMarker & fieldName & fieldEndMarker, fieldValue)
-            fieldName = GetValueBetweenBrackets(newText, fieldStartMarker, fieldEndMarker)
+            newText = newText.Replace(FIELD_START_MARKER & fieldName & FIELD_END_MARKER, fieldValue)
+            fieldName = GetValueBetweenBrackets(newText, FIELD_START_MARKER, FIELD_END_MARKER)
         Loop
         Return newText
     End Function
-    'Private Sub ShowDebug(part As Integer)
-    '    LogUtil.Debug("--- " & CStr(part) & " ---")
-    '    LogUtil.Debug(My.Settings.ButtonListPos)
-    '    LogUtil.Debug("Top:" & CStr(Me.Top))
-    '    LogUtil.Debug("Left:" & CStr(Me.Left))
-    '    LogUtil.Debug("Width:" & CStr(Me.Width))
-    '    LogUtil.Debug("Height:" & CStr(Me.Height))
-    '    LogUtil.Debug("Button Width:" & CStr(iButtonWidth))
-    '    LogUtil.Debug("On Top:" & CStr(bOnTop) & " " & CStr(Me.TopMost))
-    '    LogUtil.Debug("--- *** ---")
-    'End Sub
+    Private Function ApplySubstrings(ByVal sKeyText As String) As String
+        Dim newText As String = sKeyText
+        Try
+            Dim subText As String = GetValueBetweenBrackets(newText, SUB_START_MARKER, SUB_END_MARKER)
+            Do Until String.IsNullOrEmpty(subText)
+                Dim subparts As String() = Split(subText, SUB_MID_MARKER)
+                Dim subValue As String
+                If subparts.Length = 2 Then
+                    Dim subInts As String() = Split(subparts(1), ",")
+                    If subInts.Length = 2 Then
+                        subValue = subparts(0).Substring(CInt(subInts(0)), CInt(subInts(1)))
+                    Else
+                        subValue = subparts(0).Substring(CInt(subInts(0)))
+                    End If
+                    newText = newText.Replace(SUB_START_MARKER & subText & SUB_END_MARKER, subValue)
+                    subText = GetValueBetweenBrackets(newText, SUB_START_MARKER, SUB_END_MARKER)
+                Else
+                    newText = newText.Replace(SUB_START_MARKER, "!!").Replace(SUB_END_MARKER, "!!")
+                    subText = ""
+                End If
+            Loop
+        Catch ex As ArgumentOutOfRangeException
+            LogUtil.Exception("Substring Exception", ex, MyBase.Name)
+        End Try
+
+        Return newText
+    End Function
 
 #End Region
 End Class

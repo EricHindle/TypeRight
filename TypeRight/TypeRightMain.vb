@@ -50,6 +50,12 @@ Module TypeRightMain
         GRP_TRANS = 2
         GRP_RMV = 3
     End Enum
+    Public Enum ButtonAction
+        BTN_ADD = 0
+        BTN_CHG = 1
+        BTN_RMV = 3
+    End Enum
+
 #End Region
 #Region "public constants"
     Public Const VK_SHIFT = &H10

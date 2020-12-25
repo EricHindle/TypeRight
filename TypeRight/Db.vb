@@ -118,6 +118,7 @@ Module Db
         Return oBtnTa.DeleteButton(_Id)
     End Function
     Public Sub ResequenceButtons(_grp As Integer)
+        LogUtil.Info("Resequencing buttons", MODULE_NAME)
         oBtnTable = GetButtonsByGroup(_grp)
         Dim iSeq As Integer = 1
         For Each oRow As TypeRightDataSet.buttonRow In oBtnTable.Rows
