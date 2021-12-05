@@ -132,6 +132,7 @@ Module TypeRightMain
         If Not isPro Then
             bToolBar = False
         End If
+        bToolBar = True
     End Sub
     Public Sub SaveOptions()
         My.Settings.ButtonWidth = iButtonWidth

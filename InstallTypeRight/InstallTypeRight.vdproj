@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_1AA56A0EC5E650E8E71A7CDCCC35E107"
+        "OwnerKey" = "8:_573022E4AE0E420CACD42A7CEB74A2B7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_46B7D14A478318869AC90E799FA91317"
         "OwnerKey" = "8:_CD6FA538B0E140468A0D1AC38B311B76"
         "MsmSig" = "8:_UNDEFINED"
@@ -39,12 +45,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E0DBD08DF8350F3F7DFF42B57258CBB5"
-        "OwnerKey" = "8:_573022E4AE0E420CACD42A7CEB74A2B7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_573022E4AE0E420CACD42A7CEB74A2B7"
         "MsmSig" = "8:_UNDEFINED"
@@ -64,7 +64,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E0DBD08DF8350F3F7DFF42B57258CBB5"
+        "OwnerKey" = "8:_1AA56A0EC5E650E8E71A7CDCCC35E107"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -92,6 +92,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -116,6 +124,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -146,6 +162,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1AA56A0EC5E650E8E71A7CDCCC35E107"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:NbuttonControlLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_1AA56A0EC5E650E8E71A7CDCCC35E107"
+                    {
+                    "Name" = "8:NbuttonControlLibrary.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:NbuttonControlLibrary.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_AB721D1CC9CA4397A51BA9591C0F1254"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_46B7D14A478318869AC90E799FA91317"
             {
             "AssemblyRegister" = "3:1"
@@ -197,37 +244,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E0DBD08DF8350F3F7DFF42B57258CBB5"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NbuttonControlLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_E0DBD08DF8350F3F7DFF42B57258CBB5"
-                    {
-                    "Name" = "8:NbuttonControlLibrary.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:NbuttonControlLibrary.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_AB721D1CC9CA4397A51BA9591C0F1254"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -269,7 +285,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_AB721D1CC9CA4397A51BA9591C0F1254"
             {
-            "DefaultLocation" = "8:F:\\[ProductName]"
+            "DefaultLocation" = "8:D:\\netwyrks\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -296,7 +312,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TypeRight"
         "ProductCode" = "8:{F29AE927-A854-4105-B737-D434F06F243F}"
-        "PackageCode" = "8:{F660DDD3-CBB3-4737-88DE-E904EC04FDD9}"
+        "PackageCode" = "8:{09F10330-1CC7-4204-A001-AA652DAD4B57}"
         "UpgradeCode" = "8:{7A7447F7-CCA9-4D34-90D1-F8D3FD83FAD5}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

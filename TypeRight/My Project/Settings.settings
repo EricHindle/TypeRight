@@ -68,13 +68,13 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LogFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F:\TypeRight\Logs</Value>
+      <Value Profile="(Default)">D:\netwyrks\TypeRight\Logs</Value>
     </Setting>
     <Setting Name="DebugOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="BackupFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F:\TypeRight\Backups</Value>
+      <Value Profile="(Default)">D:\netwyrks\TypeRight\Backups</Value>
     </Setting>
     <Setting Name="ButtonListPos" Type="System.String" Scope="User">
       <Value Profile="(Default)">10~10~600~136</Value>

@@ -162,11 +162,11 @@ Public Class FrmButtonList
                 If _btn.DataType = Nbutton.DataSource.Group Then
                     EditButton(_btn, ButtonAction.BTN_CHG)
                     LoadGroupButtons(_btn.Group)
-                    DrawButtons()
+                    DrawGroupButtons()
                 Else
                     EditSenderButton(_btn)
                     LoadSenderButtons(iCurrSender)
-                    DrawButtons()
+                    DrawSenderButtons()
                 End If
                 LogUtil.Info("Button edited", MyBase.Name)
             Catch ex As DbException
@@ -294,15 +294,18 @@ Public Class FrmButtonList
             DrawButtons()
         End If
         Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
+        My.Settings.Columns = iColCt
+        My.Settings.Save()
     End Sub
     Private Sub BtnAddCol_Click(sender As Object, e As EventArgs) Handles BtnAddCol.Click
-
         If (groupButtonList.Count / (iColCt + 1) > 1) Or (senderButtonList.Count / (iColCt + 1) > 1) Then
             LogUtil.Info("Add a button list column", MyBase.Name)
             iColCt += 1
             DrawButtons()
         End If
         Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
+        My.Settings.Columns = iColCt
+        My.Settings.Save()
     End Sub
     Private Sub ImgExit_Click(sender As Object, e As EventArgs) Handles PicExit.Click
         Me.Close()
@@ -546,7 +549,7 @@ Public Class FrmButtonList
         Dim iBtnRow As Integer = 0
         Dim iBtnCol As Integer = 0
         For Each oBtn In oList
-            AddHandler oBtn.Click, AddressOf Button_Click
+            'AddHandler oBtn.Click, AddressOf Button_Click
             oPanel.Controls.Add(oBtn)
             oBtn.Top = 0 + (iBtnRow * 27)
             oBtn.Left = 0 + (iBtnCol * iButtonWidth)
@@ -570,6 +573,7 @@ Public Class FrmButtonList
 
         Next
         For Each _btn As Nbutton In oPanel.Controls
+            RemoveHandler _btn.Button1.Click, AddressOf Button_Click
             AddHandler _btn.Button1.Click, AddressOf Button_Click
         Next
     End Sub
