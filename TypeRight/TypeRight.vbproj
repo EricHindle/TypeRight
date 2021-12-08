@@ -145,10 +145,10 @@
     <Compile Include="FrmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSenderButtonMaint.Designer.vb">
-      <DependentUpon>FrmSenderButtonMaint.vb</DependentUpon>
+    <Compile Include="FrmSenderButtonFormat.Designer.vb">
+      <DependentUpon>FrmSenderButtonFormat.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSenderButtonMaint.vb">
+    <Compile Include="FrmSenderButtonFormat.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmSplash.Designer.vb">
@@ -218,8 +218,8 @@
     <EmbeddedResource Include="FrmOptions.resx">
       <DependentUpon>FrmOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSenderButtonMaint.resx">
-      <DependentUpon>FrmSenderButtonMaint.vb</DependentUpon>
+    <EmbeddedResource Include="FrmSenderButtonFormat.resx">
+      <DependentUpon>FrmSenderButtonFormat.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSplash.resx">
       <DependentUpon>FrmSplash.vb</DependentUpon>

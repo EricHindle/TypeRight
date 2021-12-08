@@ -448,11 +448,14 @@ Public Class FrmButtonList
             AddSenderButton(iBct, senderButton, strButtonCaption, strButtonValue, strButtonHint)
             iBct += 1
         Next
-        AddSenderButton(iBct, Nothing, "Full Name", fullname, fullname.Substring(0, Math.Min(fullname.Length, 50)))
+        Dim caption As String = "Full Name"
+        AddSenderButton(iBct, GetSenderButton(caption), caption, fullname, fullname.Substring(0, Math.Min(fullname.Length, 50)))
         iBct += 1
-        AddSenderButton(iBct, Nothing, "Full Addr", fulladdr, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)))
+        caption = "Full Addr"
+        AddSenderButton(iBct, GetSenderButton(caption), caption, fulladdr, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)))
         iBct += 1
-        AddSenderButton(iBct, Nothing, "Age", strAge, strAge)
+        caption = "Age"
+        AddSenderButton(iBct, GetSenderButton(caption), caption, strAge, strAge)
     End Sub
     Private Sub AddSenderButton(btnSeq As Integer, oSenderButton As TypeRightDataSet.senderButtonRow, btnCaption As String, btnValue As String, btnHint As String)
         Dim isButtonBold As Boolean

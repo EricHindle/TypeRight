@@ -29,6 +29,10 @@ Public Class FrmSenderButtonFormat
             CbDbValue.SelectedIndex = -1
         Else
             CbDbValue.SelectedIndex = CbDbValue.FindString(_startField)
+            If CbDbValue.SelectedIndex < 0 Then
+                CbDbValue.Items.Add(_startField)
+                CbDbValue.SelectedIndex = CbDbValue.Items.Count - 1
+            End If
         End If
     End Sub
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
