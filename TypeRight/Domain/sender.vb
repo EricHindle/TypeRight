@@ -244,4 +244,29 @@
         Username = pUsername
 
     End Sub
+    Public Sub New(pId As Integer)
+        Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(pId)
+        SenderId = pId
+        FirstName = oRow.FirstName
+        LastName = oRow.LastName
+        Address2 = If(oRow.IsAddress2Null, "", oRow.Address2)
+        Town = If(oRow.IsTownNull, "", oRow.Town)
+        County = If(oRow.IsCountyNull, "", oRow.County)
+        PostCode = If(oRow.IsPostCodeNull, "", oRow.PostCode)
+        DateOfBirth = If(oRow.IsdobNull, New Date(), oRow.dob)
+        Title = If(oRow.IsTitleNull, "", oRow.Title)
+        Address1 = If(oRow.IsAddress1Null, "", oRow.Address1)
+        Country = If(oRow.IsCountryNull, "", oRow.Country)
+        Email = If(oRow.IsEmailNull, "", oRow.Email)
+        Phone = If(oRow.IsPhoneNull, "", oRow.Phone)
+        Mobile = If(oRow.IsMobileNull, "", oRow.Mobile)
+        Password = If(oRow.IsPasswdNull, "", oRow.Passwd)
+        SecretWord = If(oRow.IsSecretWordNull, "", oRow.SecretWord)
+        Gender = If(oRow.IsgenderNull, "", oRow.gender)
+        Occupation = If(oRow.IsOccupationNull, "", oRow.Occupation)
+        MaritalStatus = If(oRow.IsMaritalStatusNull, "", oRow.MaritalStatus)
+        Username = If(oRow.IsUsernameNull, "", oRow.Username)
+
+    End Sub
+
 End Class

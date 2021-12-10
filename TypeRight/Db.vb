@@ -14,6 +14,7 @@ Module Db
     Private ReadOnly oSndTable As New TypeRightDataSet.sendersDataTable
     Private ReadOnly oSndBtnTa As New TypeRightDataSetTableAdapters.senderButtonTableAdapter
     Private ReadOnly oSndBtnTable As New TypeRightDataSet.senderButtonDataTable
+    Private oSndRow As TypeRightDataSet.sendersRow
 #End Region
 #Region "buttons"
     Public Function TestDatabase() As Boolean
@@ -162,13 +163,15 @@ Module Db
     Public Function GetSenderById(_id As Integer) As TypeRightDataSet.sendersRow
         LogUtil.Info("Getting sender row " & CStr(_id), MODULE_NAME)
         oSndTa.FillById(oSndTable, _id)
-        Dim oSndRow As TypeRightDataSet.sendersRow = Nothing
+        Dim oSenderRow As TypeRightDataSet.sendersRow = Nothing
         If oSndTable.Rows.Count > 0 Then
-            oSndRow = oSndTable.Rows(0)
+            Dim osendertable As TypeRightDataSet.sendersDataTable = oSndTable.Clone()
+            osendertable.ImportRow(oSndTable.Rows(0))
+            oSenderRow = osendertable.Rows(0)
         Else
             LogUtil.Info("Row not found ", MODULE_NAME)
         End If
-        Return oSndRow
+        Return oSenderRow
     End Function
     Public Function InsertSender(ByRef oSender As Sender) As Integer
         LogUtil.Info("Inserting sender " & oSender.FirstName & " " & oSender.LastName, MODULE_NAME)

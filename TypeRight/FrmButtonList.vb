@@ -34,6 +34,8 @@ Public Class FrmButtonList
     Private bLockClock As Boolean
     Private ReadOnly bDrag As Boolean
     Private ReadOnly iDragBtnIndex As Integer
+    Private oCurrentSenderRow As TypeRightDataSet.sendersRow
+
     Dim redClockText As String
 #End Region
 #Region "form control handlers"
@@ -640,13 +642,15 @@ Public Class FrmButtonList
     Private Function GetDBFields(ByVal sKeyText As String) As String
         Dim fieldName As String
         Dim fieldValue As String
-        Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(iCurrSender)
+        If oCurrentSenderRow Is Nothing OrElse oCurrentSenderRow.SenderId <> iCurrSender Then
+            oCurrentSenderRow = GetSenderById(iCurrSender)
+        End If
         Dim newText As String = sKeyText
         fieldName = GetValueBetweenBrackets(newText, FIELD_START_MARKER, FIELD_END_MARKER)
         Dim fieldRow As TypeRightDataSet.senderButtonRow
         Do Until String.IsNullOrEmpty(fieldName)
             fieldRow = GetSenderButton(fieldName)
-            fieldValue = If(IsDBNull(oRow(fieldName)), "", CStr(oRow(fieldName)))
+            fieldValue = If(IsDBNull(oCurrentSenderRow(fieldName)), "", CStr(oCurrentSenderRow(fieldName)))
             If fieldRow IsNot Nothing AndAlso CBool(fieldRow.buttonEncrypted) Then
                 fieldValue = oNCrypter.DecryptData(fieldValue)
             End If

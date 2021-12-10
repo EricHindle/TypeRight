@@ -190,7 +190,7 @@ Module TypeRightMain
     End Function
     Public Function MakeFont(p_FontName As String, p_FontSize As Integer, isFontBold As Boolean, isFontItalic As Boolean) As Font
         Dim newStyle As FontStyle = If(isFontBold, FontStyle.Bold, FontStyle.Regular) Or If(isFontItalic, FontStyle.Italic, FontStyle.Regular)
-        Dim newFont As Font = New Font(p_FontName, p_FontSize, newStyle)
+        Dim newFont As New Font(p_FontName, p_FontSize, newStyle)
         Return newFont
     End Function
     Public Function GetValueBetweenBrackets(sKeyText As String, Optional marker1 As String = "(", Optional marker2 As String = ")")
