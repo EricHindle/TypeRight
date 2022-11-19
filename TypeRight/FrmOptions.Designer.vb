@@ -22,6 +22,7 @@ Partial Class FrmOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmOptions))
         Me.GrpLicence = New System.Windows.Forms.GroupBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -62,6 +63,7 @@ Partial Class FrmOptions
         Me.Image1 = New System.Windows.Forms.PictureBox()
         Me.Image2 = New System.Windows.Forms.PictureBox()
         Me.BtnViewLog = New System.Windows.Forms.Button()
+        Me.ToolTip6 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GrpLicence.SuspendLayout()
         CType(Me.Slider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -525,4 +527,5 @@ Partial Class FrmOptions
     Friend WithEvents Image1 As Windows.Forms.PictureBox
     Friend WithEvents Image2 As Windows.Forms.PictureBox
     Friend WithEvents BtnViewLog As Windows.Forms.Button
+    Friend WithEvents ToolTip6 As Windows.Forms.ToolTip
 End Class

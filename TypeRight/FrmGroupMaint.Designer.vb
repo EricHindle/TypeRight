@@ -43,6 +43,7 @@ Partial Class FrmGroupMaint
         Me.BtnCopy = New System.Windows.Forms.Button()
         Me.Nbutton1 = New NbuttonControlLibrary.Nbutton()
         Me.ChkCopyBtn = New System.Windows.Forms.CheckBox()
+        Me.ToolTip5 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.ButtongroupsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
@@ -190,6 +191,7 @@ Partial Class FrmGroupMaint
         Me.BtnCopy.Name = "BtnCopy"
         Me.BtnCopy.Size = New System.Drawing.Size(26, 23)
         Me.BtnCopy.TabIndex = 17
+        Me.ToolTip5.SetToolTip(Me.BtnCopy, "Load existing name")
         Me.BtnCopy.UseVisualStyleBackColor = True
         '
         'Nbutton1
@@ -212,11 +214,11 @@ Partial Class FrmGroupMaint
         Me.Nbutton1.TabIndex = 18
         Me.Nbutton1.Value = "?"
         '
-        'chkCopyBtn
+        'ChkCopyBtn
         '
         Me.ChkCopyBtn.AutoSize = True
         Me.ChkCopyBtn.Location = New System.Drawing.Point(495, 68)
-        Me.ChkCopyBtn.Name = "chkCopyBtn"
+        Me.ChkCopyBtn.Name = "ChkCopyBtn"
         Me.ChkCopyBtn.Size = New System.Drawing.Size(106, 21)
         Me.ChkCopyBtn.TabIndex = 19
         Me.ChkCopyBtn.Text = "Copy Button"
@@ -278,4 +280,5 @@ Partial Class FrmGroupMaint
     Friend WithEvents BtnCopy As Windows.Forms.Button
     Friend WithEvents Nbutton1 As NbuttonControlLibrary.Nbutton
     Friend WithEvents ChkCopyBtn As Windows.Forms.CheckBox
+    Friend WithEvents ToolTip5 As Windows.Forms.ToolTip
 End Class

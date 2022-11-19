@@ -22,6 +22,7 @@ Partial Class FrmDbUpdate
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDbUpdate))
         Me.CbOcc = New System.Windows.Forms.ComboBox()
         Me.CbMarStat = New System.Windows.Forms.ComboBox()
@@ -100,6 +101,7 @@ Partial Class FrmDbUpdate
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.LblId = New System.Windows.Forms.Label()
+        Me.ToolTip4 = New System.Windows.Forms.ToolTip(Me.components)
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -268,6 +270,7 @@ Partial Class FrmDbUpdate
         Me.BtnTop.Size = New System.Drawing.Size(41, 34)
         Me.BtnTop.TabIndex = 1
         Me.BtnTop.Text = "Top"
+        Me.ToolTip4.SetToolTip(Me.BtnTop, "Go to first database record")
         Me.BtnTop.UseVisualStyleBackColor = True
         '
         'BtnPrev
@@ -277,6 +280,7 @@ Partial Class FrmDbUpdate
         Me.BtnPrev.Size = New System.Drawing.Size(47, 34)
         Me.BtnPrev.TabIndex = 2
         Me.BtnPrev.Text = "Prev"
+        Me.ToolTip4.SetToolTip(Me.BtnPrev, "Go to previous record")
         Me.BtnPrev.UseVisualStyleBackColor = True
         '
         'BtnNext
@@ -286,6 +290,7 @@ Partial Class FrmDbUpdate
         Me.BtnNext.Size = New System.Drawing.Size(47, 34)
         Me.BtnNext.TabIndex = 3
         Me.BtnNext.Text = "Next"
+        Me.ToolTip4.SetToolTip(Me.BtnNext, "Go to next record")
         Me.BtnNext.UseVisualStyleBackColor = True
         '
         'BtnEnd
@@ -295,6 +300,7 @@ Partial Class FrmDbUpdate
         Me.BtnEnd.Size = New System.Drawing.Size(41, 34)
         Me.BtnEnd.TabIndex = 4
         Me.BtnEnd.Text = "End"
+        Me.ToolTip4.SetToolTip(Me.BtnEnd, "Go to last database record")
         Me.BtnEnd.UseVisualStyleBackColor = True
         '
         'BtnDel
@@ -304,6 +310,7 @@ Partial Class FrmDbUpdate
         Me.BtnDel.Size = New System.Drawing.Size(41, 34)
         Me.BtnDel.TabIndex = 2
         Me.BtnDel.Text = "Del"
+        Me.ToolTip4.SetToolTip(Me.BtnDel, "Delete current sender")
         Me.BtnDel.UseVisualStyleBackColor = True
         '
         'BtnAdd
@@ -313,6 +320,7 @@ Partial Class FrmDbUpdate
         Me.BtnAdd.Size = New System.Drawing.Size(41, 34)
         Me.BtnAdd.TabIndex = 0
         Me.BtnAdd.Text = "Add"
+        Me.ToolTip4.SetToolTip(Me.BtnAdd, "Add a new sender")
         Me.BtnAdd.UseVisualStyleBackColor = True
         '
         'BtnUpd
@@ -322,6 +330,7 @@ Partial Class FrmDbUpdate
         Me.BtnUpd.Size = New System.Drawing.Size(41, 34)
         Me.BtnUpd.TabIndex = 1
         Me.BtnUpd.Text = "Upd"
+        Me.ToolTip4.SetToolTip(Me.BtnUpd, "Update selected sender")
         Me.BtnUpd.UseVisualStyleBackColor = True
         '
         'StatusStrip1
@@ -556,85 +565,85 @@ Partial Class FrmDbUpdate
         '
         Me.MnuBkUp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuBkUpGroups, Me.MnuBkUpButtons, Me.MnuBkUpSenders, Me.MnuBkUpSenderButtons, Me.MnuBkUpAll})
         Me.MnuBkUp.Name = "MnuBkUp"
-        Me.MnuBkUp.Size = New System.Drawing.Size(113, 22)
+        Me.MnuBkUp.Size = New System.Drawing.Size(180, 22)
         Me.MnuBkUp.Text = "Backup"
         '
         'MnuBkUpGroups
         '
         Me.MnuBkUpGroups.Name = "MnuBkUpGroups"
-        Me.MnuBkUpGroups.Size = New System.Drawing.Size(154, 22)
+        Me.MnuBkUpGroups.Size = New System.Drawing.Size(180, 22)
         Me.MnuBkUpGroups.Text = "Groups"
         '
         'MnuBkUpButtons
         '
         Me.MnuBkUpButtons.Name = "MnuBkUpButtons"
-        Me.MnuBkUpButtons.Size = New System.Drawing.Size(154, 22)
+        Me.MnuBkUpButtons.Size = New System.Drawing.Size(180, 22)
         Me.MnuBkUpButtons.Text = "Group Buttons"
         '
         'MnuBkUpSenders
         '
         Me.MnuBkUpSenders.Name = "MnuBkUpSenders"
-        Me.MnuBkUpSenders.Size = New System.Drawing.Size(154, 22)
+        Me.MnuBkUpSenders.Size = New System.Drawing.Size(180, 22)
         Me.MnuBkUpSenders.Text = "Senders"
         '
         'MnuBkUpSenderButtons
         '
         Me.MnuBkUpSenderButtons.Name = "MnuBkUpSenderButtons"
-        Me.MnuBkUpSenderButtons.Size = New System.Drawing.Size(154, 22)
+        Me.MnuBkUpSenderButtons.Size = New System.Drawing.Size(180, 22)
         Me.MnuBkUpSenderButtons.Text = "Sender Buttons"
         '
         'MnuBkUpAll
         '
         Me.MnuBkUpAll.Name = "MnuBkUpAll"
-        Me.MnuBkUpAll.Size = New System.Drawing.Size(154, 22)
+        Me.MnuBkUpAll.Size = New System.Drawing.Size(180, 22)
         Me.MnuBkUpAll.Text = "All"
         '
         'MnuRest
         '
         Me.MnuRest.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuRestGroups, Me.MnuRestButtons, Me.MnuRestSenders, Me.MnuRestSenderButtons, Me.MnuRestAll})
         Me.MnuRest.Name = "MnuRest"
-        Me.MnuRest.Size = New System.Drawing.Size(113, 22)
+        Me.MnuRest.Size = New System.Drawing.Size(180, 22)
         Me.MnuRest.Text = "Restore"
         '
         'MnuRestGroups
         '
         Me.MnuRestGroups.Name = "MnuRestGroups"
-        Me.MnuRestGroups.Size = New System.Drawing.Size(154, 22)
+        Me.MnuRestGroups.Size = New System.Drawing.Size(180, 22)
         Me.MnuRestGroups.Text = "Groups"
         '
         'MnuRestButtons
         '
         Me.MnuRestButtons.Name = "MnuRestButtons"
-        Me.MnuRestButtons.Size = New System.Drawing.Size(154, 22)
+        Me.MnuRestButtons.Size = New System.Drawing.Size(180, 22)
         Me.MnuRestButtons.Text = "Group Buttons"
         '
         'MnuRestSenders
         '
         Me.MnuRestSenders.Name = "MnuRestSenders"
-        Me.MnuRestSenders.Size = New System.Drawing.Size(154, 22)
+        Me.MnuRestSenders.Size = New System.Drawing.Size(180, 22)
         Me.MnuRestSenders.Text = "Senders"
         '
         'MnuRestSenderButtons
         '
         Me.MnuRestSenderButtons.Name = "MnuRestSenderButtons"
-        Me.MnuRestSenderButtons.Size = New System.Drawing.Size(154, 22)
+        Me.MnuRestSenderButtons.Size = New System.Drawing.Size(180, 22)
         Me.MnuRestSenderButtons.Text = "Sender Buttons"
         '
         'MnuRestAll
         '
         Me.MnuRestAll.Name = "MnuRestAll"
-        Me.MnuRestAll.Size = New System.Drawing.Size(154, 22)
+        Me.MnuRestAll.Size = New System.Drawing.Size(180, 22)
         Me.MnuRestAll.Text = "All"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(110, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'MnuClose
         '
         Me.MnuClose.Name = "MnuClose"
-        Me.MnuClose.Size = New System.Drawing.Size(113, 22)
+        Me.MnuClose.Size = New System.Drawing.Size(180, 22)
         Me.MnuClose.Text = "Close"
         '
         'TxtSWord
@@ -760,6 +769,7 @@ Partial Class FrmDbUpdate
         Me.BtnClear.Size = New System.Drawing.Size(47, 34)
         Me.BtnClear.TabIndex = 6
         Me.BtnClear.Text = "Clear"
+        Me.ToolTip4.SetToolTip(Me.BtnClear, "No selected record")
         Me.BtnClear.UseVisualStyleBackColor = True
         '
         'GroupBox6
@@ -904,4 +914,5 @@ Partial Class FrmDbUpdate
     Friend WithEvents MnuBkUpSenderButtons As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuRestSenderButtons As Windows.Forms.ToolStripMenuItem
     Friend WithEvents LblId As Windows.Forms.Label
+    Friend WithEvents ToolTip4 As Windows.Forms.ToolTip
 End Class

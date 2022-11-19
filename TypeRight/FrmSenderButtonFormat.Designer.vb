@@ -22,6 +22,7 @@ Partial Class FrmSenderButtonFormat
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSenderButtonFormat))
         Me.BtnOK = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
@@ -32,6 +33,7 @@ Partial Class FrmSenderButtonFormat
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.chkEncrypted = New System.Windows.Forms.CheckBox()
+        Me.ToolTip7 = New System.Windows.Forms.ToolTip(Me.components)
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -43,6 +45,7 @@ Partial Class FrmSenderButtonFormat
         Me.BtnOK.Size = New System.Drawing.Size(70, 39)
         Me.BtnOK.TabIndex = 8
         Me.BtnOK.Text = "Update"
+        Me.ToolTip7.SetToolTip(Me.BtnOK, "Update format details")
         Me.BtnOK.UseVisualStyleBackColor = True
         '
         'BtnCancel
@@ -88,6 +91,7 @@ Partial Class FrmSenderButtonFormat
         Me.BtnFont.Size = New System.Drawing.Size(252, 39)
         Me.BtnFont.TabIndex = 27
         Me.BtnFont.Text = "Caption Font"
+        Me.ToolTip7.SetToolTip(Me.BtnFont, "Set caption font for the field")
         Me.BtnFont.UseVisualStyleBackColor = True
         '
         'StatusStrip1
@@ -158,4 +162,5 @@ Partial Class FrmSenderButtonFormat
     Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
     Friend WithEvents LblStatus As Windows.Forms.ToolStripStatusLabel
     Friend WithEvents chkEncrypted As Windows.Forms.CheckBox
+    Friend WithEvents ToolTip7 As Windows.Forms.ToolTip
 End Class

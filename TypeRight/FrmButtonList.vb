@@ -556,7 +556,7 @@ Public Class FrmButtonList
         For Each oBtn In oList
             'AddHandler oBtn.Click, AddressOf Button_Click
             oPanel.Controls.Add(oBtn)
-            ToolTip1.SetToolTip(oBtn.Button1, oBtn.Value)
+            ToolTip2.SetToolTip(oBtn.Button1, oBtn.Value)
             oBtn.Top = 0 + (iBtnRow * 27)
             oBtn.Left = 0 + (iBtnCol * iButtonWidth)
             oBtn.Size = New Drawing.Size(iButtonWidth, 27)

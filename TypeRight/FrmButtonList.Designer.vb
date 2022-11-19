@@ -69,7 +69,7 @@ Partial Class FrmButtonList
         Me.DelayTimer = New System.Windows.Forms.Timer(Me.components)
         Me.SenderButtonPanel = New System.Windows.Forms.Panel()
         Me.ProgressTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
         Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,7 +116,7 @@ Partial Class FrmButtonList
         Me.BtnMinimise.Name = "BtnMinimise"
         Me.BtnMinimise.Size = New System.Drawing.Size(20, 20)
         Me.BtnMinimise.TabIndex = 9
-        Me.ToolTip1.SetToolTip(Me.BtnMinimise, "Minimise")
+        Me.ToolTip2.SetToolTip(Me.BtnMinimise, "Minimise")
         Me.BtnMinimise.UseVisualStyleBackColor = True
         '
         'BtnAddCol
@@ -127,7 +127,7 @@ Partial Class FrmButtonList
         Me.BtnAddCol.Name = "BtnAddCol"
         Me.BtnAddCol.Size = New System.Drawing.Size(20, 20)
         Me.BtnAddCol.TabIndex = 4
-        Me.ToolTip1.SetToolTip(Me.BtnAddCol, "Add a column")
+        Me.ToolTip2.SetToolTip(Me.BtnAddCol, "Add a column")
         Me.BtnAddCol.UseVisualStyleBackColor = True
         '
         'BtnRmvCol
@@ -138,7 +138,7 @@ Partial Class FrmButtonList
         Me.BtnRmvCol.Name = "BtnRmvCol"
         Me.BtnRmvCol.Size = New System.Drawing.Size(20, 20)
         Me.BtnRmvCol.TabIndex = 3
-        Me.ToolTip1.SetToolTip(Me.BtnRmvCol, "Remove a column")
+        Me.ToolTip2.SetToolTip(Me.BtnRmvCol, "Remove a column")
         Me.BtnRmvCol.UseVisualStyleBackColor = True
         '
         'ImgTack
@@ -149,7 +149,7 @@ Partial Class FrmButtonList
         Me.ImgTack.Size = New System.Drawing.Size(16, 16)
         Me.ImgTack.TabIndex = 2
         Me.ImgTack.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.ImgTack, "Pin on top")
+        Me.ToolTip2.SetToolTip(Me.ImgTack, "Pin on top")
         '
         'cbNames
         '
@@ -169,7 +169,7 @@ Partial Class FrmButtonList
         Me.BtnReDraw.Size = New System.Drawing.Size(31, 20)
         Me.BtnReDraw.TabIndex = 0
         Me.BtnReDraw.Text = "Go"
-        Me.ToolTip1.SetToolTip(Me.BtnReDraw, "Update buttons")
+        Me.ToolTip2.SetToolTip(Me.BtnReDraw, "Update buttons")
         Me.BtnReDraw.UseVisualStyleBackColor = True
         '
         'ProgressBar1
@@ -349,7 +349,7 @@ Partial Class FrmButtonList
         Me.WhiteClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.WhiteClock.TabIndex = 6
         Me.WhiteClock.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.WhiteClock, "Switch timer on")
+        Me.ToolTip2.SetToolTip(Me.WhiteClock, "Switch timer on")
         '
         'GreenClock
         '
@@ -360,7 +360,7 @@ Partial Class FrmButtonList
         Me.GreenClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.GreenClock.TabIndex = 5
         Me.GreenClock.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GreenClock, "Switch timer off")
+        Me.ToolTip2.SetToolTip(Me.GreenClock, "Switch timer off")
         Me.GreenClock.Visible = False
         '
         'PicExit
@@ -373,7 +373,7 @@ Partial Class FrmButtonList
         Me.PicExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicExit.TabIndex = 4
         Me.PicExit.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PicExit, "Close")
+        Me.ToolTip2.SetToolTip(Me.PicExit, "Close")
         '
         'PicDatabase
         '
@@ -384,7 +384,7 @@ Partial Class FrmButtonList
         Me.PicDatabase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicDatabase.TabIndex = 3
         Me.PicDatabase.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PicDatabase, "Sender database maintenance")
+        Me.ToolTip2.SetToolTip(Me.PicDatabase, "Sender database maintenance")
         '
         'PicOptions
         '
@@ -395,7 +395,7 @@ Partial Class FrmButtonList
         Me.PicOptions.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicOptions.TabIndex = 2
         Me.PicOptions.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PicOptions, "Options")
+        Me.ToolTip2.SetToolTip(Me.PicOptions, "Options")
         '
         'PicLock
         '
@@ -406,7 +406,7 @@ Partial Class FrmButtonList
         Me.PicLock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicLock.TabIndex = 1
         Me.PicLock.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PicLock, "Lock timer on")
+        Me.ToolTip2.SetToolTip(Me.PicLock, "Lock timer on")
         '
         'RedClock
         '
@@ -417,7 +417,7 @@ Partial Class FrmButtonList
         Me.RedClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.RedClock.TabIndex = 0
         Me.RedClock.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.RedClock, "Timer running")
+        Me.ToolTip2.SetToolTip(Me.RedClock, "Timer running")
         Me.RedClock.Visible = False
         '
         'NotifyIcon1
@@ -540,5 +540,5 @@ Partial Class FrmButtonList
     Friend WithEvents MnuMinimise1 As Windows.Forms.ToolStripMenuItem
     Friend WithEvents BtnMinimise As Windows.Forms.Button
     Friend WithEvents RemoveGroupToolStripMenuItem As Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolTip1 As Windows.Forms.ToolTip
+    Friend WithEvents ToolTip2 As Windows.Forms.ToolTip
 End Class

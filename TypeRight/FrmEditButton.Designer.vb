@@ -88,7 +88,7 @@ Partial Class FrmEditButton
         Me.LblErrs = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip3 = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpOpts.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -117,7 +117,7 @@ Partial Class FrmEditButton
         Me.chkEncrypt.Size = New System.Drawing.Size(76, 21)
         Me.chkEncrypt.TabIndex = 0
         Me.chkEncrypt.Text = "Encrypt"
-        Me.ToolTip1.SetToolTip(Me.chkEncrypt, "Encrypt button value in database")
+        Me.ToolTip3.SetToolTip(Me.chkEncrypt, "Encrypt button value in database")
         Me.chkEncrypt.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -166,7 +166,7 @@ Partial Class FrmEditButton
         Me.cbSub.Size = New System.Drawing.Size(162, 21)
         Me.cbSub.TabIndex = 27
         Me.cbSub.Text = "Substring (replace  s,l)"
-        Me.ToolTip1.SetToolTip(Me.cbSub, "Check to use substring of field")
+        Me.ToolTip3.SetToolTip(Me.cbSub, "Check to use substring of field")
         Me.cbSub.UseVisualStyleBackColor = True
         '
         'BtnField
@@ -176,7 +176,7 @@ Partial Class FrmEditButton
         Me.BtnField.Size = New System.Drawing.Size(71, 23)
         Me.BtnField.TabIndex = 26
         Me.BtnField.Text = "<Insert"
-        Me.ToolTip1.SetToolTip(Me.BtnField, "Insert field marker")
+        Me.ToolTip3.SetToolTip(Me.BtnField, "Insert field marker")
         Me.BtnField.UseVisualStyleBackColor = True
         '
         'BtnCloseBracket
@@ -259,7 +259,7 @@ Partial Class FrmEditButton
         Me.BtnAlt.Size = New System.Drawing.Size(55, 46)
         Me.BtnAlt.TabIndex = 24
         Me.BtnAlt.Text = "Alt"
-        Me.ToolTip1.SetToolTip(Me.BtnAlt, "Alt key")
+        Me.ToolTip3.SetToolTip(Me.BtnAlt, "Alt key")
         Me.BtnAlt.UseVisualStyleBackColor = True
         '
         'BtnCtrl
@@ -271,7 +271,7 @@ Partial Class FrmEditButton
         Me.BtnCtrl.Size = New System.Drawing.Size(55, 46)
         Me.BtnCtrl.TabIndex = 22
         Me.BtnCtrl.Text = "Ctrl"
-        Me.ToolTip1.SetToolTip(Me.BtnCtrl, "Ctrl key")
+        Me.ToolTip3.SetToolTip(Me.BtnCtrl, "Ctrl key")
         Me.BtnCtrl.UseVisualStyleBackColor = True
         '
         'BtnRightArrow
@@ -283,7 +283,7 @@ Partial Class FrmEditButton
         Me.BtnRightArrow.Size = New System.Drawing.Size(55, 46)
         Me.BtnRightArrow.TabIndex = 21
         Me.BtnRightArrow.Text = "g"
-        Me.ToolTip1.SetToolTip(Me.BtnRightArrow, "Right key")
+        Me.ToolTip3.SetToolTip(Me.BtnRightArrow, "Right key")
         Me.BtnRightArrow.UseVisualStyleBackColor = True
         '
         'BtnDownArrow
@@ -295,7 +295,7 @@ Partial Class FrmEditButton
         Me.BtnDownArrow.Size = New System.Drawing.Size(55, 46)
         Me.BtnDownArrow.TabIndex = 23
         Me.BtnDownArrow.Text = "i"
-        Me.ToolTip1.SetToolTip(Me.BtnDownArrow, "Down key")
+        Me.ToolTip3.SetToolTip(Me.BtnDownArrow, "Down key")
         Me.BtnDownArrow.UseVisualStyleBackColor = True
         '
         'BtnLeftArrow
@@ -307,7 +307,7 @@ Partial Class FrmEditButton
         Me.BtnLeftArrow.Size = New System.Drawing.Size(55, 46)
         Me.BtnLeftArrow.TabIndex = 19
         Me.BtnLeftArrow.Text = "f"
-        Me.ToolTip1.SetToolTip(Me.BtnLeftArrow, "Left key")
+        Me.ToolTip3.SetToolTip(Me.BtnLeftArrow, "Left key")
         Me.BtnLeftArrow.UseVisualStyleBackColor = True
         '
         'BtnUpArrow
@@ -319,7 +319,7 @@ Partial Class FrmEditButton
         Me.BtnUpArrow.Size = New System.Drawing.Size(55, 46)
         Me.BtnUpArrow.TabIndex = 20
         Me.BtnUpArrow.Text = "h"
-        Me.ToolTip1.SetToolTip(Me.BtnUpArrow, "Up key")
+        Me.ToolTip3.SetToolTip(Me.BtnUpArrow, "Up key")
         Me.BtnUpArrow.UseVisualStyleBackColor = True
         '
         'BtnReturn
@@ -331,7 +331,7 @@ Partial Class FrmEditButton
         Me.BtnReturn.Size = New System.Drawing.Size(55, 81)
         Me.BtnReturn.TabIndex = 18
         Me.BtnReturn.Text = "8"
-        Me.ToolTip1.SetToolTip(Me.BtnReturn, "Return key")
+        Me.ToolTip3.SetToolTip(Me.BtnReturn, "Return key")
         Me.BtnReturn.UseVisualStyleBackColor = True
         '
         'BtnBackspace
@@ -343,7 +343,7 @@ Partial Class FrmEditButton
         Me.BtnBackspace.Size = New System.Drawing.Size(71, 46)
         Me.BtnBackspace.TabIndex = 5
         Me.BtnBackspace.Text = "!"
-        Me.ToolTip1.SetToolTip(Me.BtnBackspace, "Backspace key")
+        Me.ToolTip3.SetToolTip(Me.BtnBackspace, "Backspace key")
         Me.BtnBackspace.UseVisualStyleBackColor = True
         '
         'BtnPageDown
@@ -355,7 +355,7 @@ Partial Class FrmEditButton
         Me.BtnPageDown.Size = New System.Drawing.Size(55, 46)
         Me.BtnPageDown.TabIndex = 17
         Me.BtnPageDown.Text = "Page Down"
-        Me.ToolTip1.SetToolTip(Me.BtnPageDown, "PgDn key")
+        Me.ToolTip3.SetToolTip(Me.BtnPageDown, "PgDn key")
         Me.BtnPageDown.UseVisualStyleBackColor = True
         '
         'BtnEnd
@@ -367,7 +367,7 @@ Partial Class FrmEditButton
         Me.BtnEnd.Size = New System.Drawing.Size(55, 46)
         Me.BtnEnd.TabIndex = 16
         Me.BtnEnd.Text = "End"
-        Me.ToolTip1.SetToolTip(Me.BtnEnd, "End key")
+        Me.ToolTip3.SetToolTip(Me.BtnEnd, "End key")
         Me.BtnEnd.UseVisualStyleBackColor = True
         '
         'BtnDelete
@@ -379,7 +379,7 @@ Partial Class FrmEditButton
         Me.BtnDelete.Size = New System.Drawing.Size(55, 46)
         Me.BtnDelete.TabIndex = 15
         Me.BtnDelete.Text = "Delete"
-        Me.ToolTip1.SetToolTip(Me.BtnDelete, "Delete key")
+        Me.ToolTip3.SetToolTip(Me.BtnDelete, "Delete key")
         Me.BtnDelete.UseVisualStyleBackColor = True
         '
         'BtnBacktab
@@ -391,7 +391,7 @@ Partial Class FrmEditButton
         Me.BtnBacktab.Size = New System.Drawing.Size(55, 46)
         Me.BtnBacktab.TabIndex = 14
         Me.BtnBacktab.Text = ")"
-        Me.ToolTip1.SetToolTip(Me.BtnBacktab, "Back tab key")
+        Me.ToolTip3.SetToolTip(Me.BtnBacktab, "Back tab key")
         Me.BtnBacktab.UseVisualStyleBackColor = True
         '
         'BtnPageUp
@@ -403,7 +403,7 @@ Partial Class FrmEditButton
         Me.BtnPageUp.Size = New System.Drawing.Size(55, 46)
         Me.BtnPageUp.TabIndex = 13
         Me.BtnPageUp.Text = "Page Up"
-        Me.ToolTip1.SetToolTip(Me.BtnPageUp, "PgUp key")
+        Me.ToolTip3.SetToolTip(Me.BtnPageUp, "PgUp key")
         Me.BtnPageUp.UseVisualStyleBackColor = True
         '
         'BtnHome
@@ -415,7 +415,7 @@ Partial Class FrmEditButton
         Me.BtnHome.Size = New System.Drawing.Size(55, 46)
         Me.BtnHome.TabIndex = 12
         Me.BtnHome.Text = "Home"
-        Me.ToolTip1.SetToolTip(Me.BtnHome, "Home key")
+        Me.ToolTip3.SetToolTip(Me.BtnHome, "Home key")
         Me.BtnHome.UseVisualStyleBackColor = True
         '
         'BtnInsert
@@ -427,7 +427,7 @@ Partial Class FrmEditButton
         Me.BtnInsert.Size = New System.Drawing.Size(55, 46)
         Me.BtnInsert.TabIndex = 11
         Me.BtnInsert.Text = "Insert"
-        Me.ToolTip1.SetToolTip(Me.BtnInsert, "Insert key")
+        Me.ToolTip3.SetToolTip(Me.BtnInsert, "Insert key")
         Me.BtnInsert.UseVisualStyleBackColor = True
         '
         'BtnTab
@@ -439,7 +439,7 @@ Partial Class FrmEditButton
         Me.BtnTab.Size = New System.Drawing.Size(55, 46)
         Me.BtnTab.TabIndex = 10
         Me.BtnTab.Text = "*"
-        Me.ToolTip1.SetToolTip(Me.BtnTab, "Tab key")
+        Me.ToolTip3.SetToolTip(Me.BtnTab, "Tab key")
         Me.BtnTab.UseVisualStyleBackColor = True
         '
         'BtnCloseCurlyBracket
@@ -585,7 +585,7 @@ Partial Class FrmEditButton
         Me.BtnFont.Size = New System.Drawing.Size(323, 46)
         Me.BtnFont.TabIndex = 3
         Me.BtnFont.Text = "Caption Font"
-        Me.ToolTip1.SetToolTip(Me.BtnFont, "Change button caption font")
+        Me.ToolTip3.SetToolTip(Me.BtnFont, "Change button caption font")
         Me.BtnFont.UseVisualStyleBackColor = True
         '
         'TxtHint
@@ -595,7 +595,7 @@ Partial Class FrmEditButton
         Me.TxtHint.Name = "TxtHint"
         Me.TxtHint.Size = New System.Drawing.Size(391, 24)
         Me.TxtHint.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.TxtHint, "Tooltip hint for button")
+        Me.ToolTip3.SetToolTip(Me.TxtHint, "Tooltip hint for button")
         '
         'BtnCancel
         '
@@ -848,5 +848,5 @@ Partial Class FrmEditButton
     Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
     Friend WithEvents LblStatus As Windows.Forms.ToolStripStatusLabel
     Friend WithEvents cbSub As Windows.Forms.CheckBox
-    Friend WithEvents ToolTip1 As Windows.Forms.ToolTip
+    Friend WithEvents ToolTip3 As Windows.Forms.ToolTip
 End Class

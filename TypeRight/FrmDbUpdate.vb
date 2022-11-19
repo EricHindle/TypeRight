@@ -509,5 +509,6 @@ Public Class FrmDbUpdate
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(LblStatus.Text, MyBase.Name)
     End Sub
+
 #End Region
 End Class
