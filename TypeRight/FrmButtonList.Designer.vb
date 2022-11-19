@@ -349,6 +349,7 @@ Partial Class FrmButtonList
         Me.WhiteClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.WhiteClock.TabIndex = 6
         Me.WhiteClock.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.WhiteClock, "Switch timer on")
         '
         'GreenClock
         '
@@ -359,6 +360,7 @@ Partial Class FrmButtonList
         Me.GreenClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.GreenClock.TabIndex = 5
         Me.GreenClock.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GreenClock, "Switch timer off")
         Me.GreenClock.Visible = False
         '
         'PicExit
@@ -382,7 +384,7 @@ Partial Class FrmButtonList
         Me.PicDatabase.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicDatabase.TabIndex = 3
         Me.PicDatabase.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PicDatabase, "Sender maintenance")
+        Me.ToolTip1.SetToolTip(Me.PicDatabase, "Sender database maintenance")
         '
         'PicOptions
         '
@@ -404,6 +406,7 @@ Partial Class FrmButtonList
         Me.PicLock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicLock.TabIndex = 1
         Me.PicLock.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PicLock, "Lock timer on")
         '
         'RedClock
         '
@@ -414,6 +417,7 @@ Partial Class FrmButtonList
         Me.RedClock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.RedClock.TabIndex = 0
         Me.RedClock.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.RedClock, "Timer running")
         Me.RedClock.Visible = False
         '
         'NotifyIcon1

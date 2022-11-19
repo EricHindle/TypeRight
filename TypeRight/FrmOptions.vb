@@ -169,6 +169,5 @@ Public Class FrmOptions
         Return isOK
     End Function
 
-
 #End Region
 End Class

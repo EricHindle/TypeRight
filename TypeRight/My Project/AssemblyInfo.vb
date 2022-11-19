@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("TypeRight")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyDescription("Automatic keyboard")>
 <Assembly: AssemblyCompany("netWYrks")>
 <Assembly: AssemblyProduct("")>
-<Assembly: AssemblyCopyright("(c) Eric Hindle 2020")>
+<Assembly: AssemblyCopyright("(c) Eric Hindle 2021")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -30,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("2.5.6.*")>
-<Assembly: AssemblyFileVersion("2.5.6.0")>
+<Assembly: AssemblyVersion("2.5.10.*")>
+<Assembly: AssemblyFileVersion("2.5.10.0")>

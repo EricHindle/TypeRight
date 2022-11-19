@@ -421,7 +421,7 @@ Public Class FrmDbUpdate
         RestoreTable(oSndTable)
         For Each oRow As TypeRightDataSet.sendersRow In oSndTable.Rows
             Dim oRestoredSender As Sender = SenderBuilder.NewSender().StartingWith(oRow).Build
-            If GetSenderById(oRow.SenderId) Is Nothing Then
+            If GetSenderRowById(oRow.SenderId) Is Nothing Then
                 InsertSender(oRestoredSender)
             Else
                 UpdateSender(oRestoredSender)

@@ -242,11 +242,16 @@
         Occupation = pOccupation
         MaritalStatus = pMaritalStatus
         Username = pUsername
-
     End Sub
     Public Sub New(pId As Integer)
-        Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(pId)
-        SenderId = pId
+        Dim oRow As TypeRightDataSet.sendersRow = GetSenderRowById(pId)
+        LoadFromRow(oRow)
+    End Sub
+    Public Sub New(pRow As TypeRightDataSet.sendersRow)
+        LoadFromRow(pRow)
+    End Sub
+    Private Sub LoadFromRow(oRow As TypeRightDataSet.sendersRow)
+        SenderId = oRow.SenderId
         FirstName = oRow.FirstName
         LastName = oRow.LastName
         Address2 = If(oRow.IsAddress2Null, "", oRow.Address2)
@@ -266,7 +271,5 @@
         Occupation = If(oRow.IsOccupationNull, "", oRow.Occupation)
         MaritalStatus = If(oRow.IsMaritalStatusNull, "", oRow.MaritalStatus)
         Username = If(oRow.IsUsernameNull, "", oRow.Username)
-
     End Sub
-
 End Class

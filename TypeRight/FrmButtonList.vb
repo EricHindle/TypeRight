@@ -393,7 +393,7 @@ Public Class FrmButtonList
         Dim fulladdr As String
         Dim dtDob As Date
         Dim strAge As String
-        Dim oRow As TypeRightDataSet.sendersRow = GetSenderById(sndKey)
+        Dim oRow As TypeRightDataSet.sendersRow = GetSenderRowById(sndKey)
         Dim oTable As New TypeRightDataSet.sendersDataTable
         fname = oRow.FirstName
         lname = oRow.LastName
@@ -556,7 +556,7 @@ Public Class FrmButtonList
         For Each oBtn In oList
             'AddHandler oBtn.Click, AddressOf Button_Click
             oPanel.Controls.Add(oBtn)
-            ToolTip1.SetToolTip(oBtn.button1, oBtn.Value)
+            ToolTip1.SetToolTip(oBtn.Button1, oBtn.Value)
             oBtn.Top = 0 + (iBtnRow * 27)
             oBtn.Left = 0 + (iBtnCol * iButtonWidth)
             oBtn.Size = New Drawing.Size(iButtonWidth, 27)
@@ -643,7 +643,7 @@ Public Class FrmButtonList
         Dim fieldName As String
         Dim fieldValue As String
         If oCurrentSenderRow Is Nothing OrElse oCurrentSenderRow.SenderId <> iCurrSender Then
-            oCurrentSenderRow = GetSenderById(iCurrSender)
+            oCurrentSenderRow = GetSenderRowById(iCurrSender)
         End If
         Dim newText As String = sKeyText
         fieldName = GetValueBetweenBrackets(newText, FIELD_START_MARKER, FIELD_END_MARKER)
