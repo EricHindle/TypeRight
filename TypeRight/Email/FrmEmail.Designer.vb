@@ -41,9 +41,10 @@ Partial Class FrmEmail
         Me.BtnPasteSubject = New System.Windows.Forms.Button()
         Me.BtnPasteText = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.cbEmailUsername = New System.Windows.Forms.ComboBox()
+        Me.cbSmtpAccounts = New System.Windows.Forms.ComboBox()
         Me.TxtFromName = New System.Windows.Forms.TextBox()
         Me.BtnClear = New System.Windows.Forms.Button()
+        Me.BtnSmtp = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -157,6 +158,7 @@ Partial Class FrmEmail
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.Location = New System.Drawing.Point(847, 440)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 41)
@@ -167,12 +169,16 @@ Partial Class FrmEmail
         'BtnSend
         '
         Me.BtnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnSend.BackColor = System.Drawing.Color.Honeydew
+        Me.BtnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnSend.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSend.ForeColor = System.Drawing.Color.DarkGreen
         Me.BtnSend.Location = New System.Drawing.Point(13, 439)
         Me.BtnSend.Name = "BtnSend"
         Me.BtnSend.Size = New System.Drawing.Size(75, 41)
         Me.BtnSend.TabIndex = 29
         Me.BtnSend.Text = "Send"
-        Me.BtnSend.UseVisualStyleBackColor = True
+        Me.BtnSend.UseVisualStyleBackColor = False
         '
         'BtnPasteTo
         '
@@ -217,7 +223,7 @@ Partial Class FrmEmail
         '
         'SplitContainer1.Panel1
         '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.cbEmailUsername)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.cbSmtpAccounts)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TxtFromName)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TxtText)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnPasteText)
@@ -239,13 +245,13 @@ Partial Class FrmEmail
         '
         'cbEmailUsername
         '
-        Me.cbEmailUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.cbSmtpAccounts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbEmailUsername.FormattingEnabled = True
-        Me.cbEmailUsername.Location = New System.Drawing.Point(95, 3)
-        Me.cbEmailUsername.Name = "cbEmailUsername"
-        Me.cbEmailUsername.Size = New System.Drawing.Size(341, 26)
-        Me.cbEmailUsername.TabIndex = 35
+        Me.cbSmtpAccounts.FormattingEnabled = True
+        Me.cbSmtpAccounts.Location = New System.Drawing.Point(95, 3)
+        Me.cbSmtpAccounts.Name = "cbEmailUsername"
+        Me.cbSmtpAccounts.Size = New System.Drawing.Size(341, 26)
+        Me.cbSmtpAccounts.TabIndex = 35
         '
         'TxtFromName
         '
@@ -259,19 +265,36 @@ Partial Class FrmEmail
         '
         'BtnClear
         '
-        Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.BtnClear.Location = New System.Drawing.Point(700, 441)
+        Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnClear.ForeColor = System.Drawing.Color.DimGray
+        Me.BtnClear.Location = New System.Drawing.Point(700, 440)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(75, 41)
         Me.BtnClear.TabIndex = 34
         Me.BtnClear.Text = "Clear"
         Me.BtnClear.UseVisualStyleBackColor = True
         '
+        'BtnSmtp
+        '
+        Me.BtnSmtp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnSmtp.BackColor = System.Drawing.Color.AliceBlue
+        Me.BtnSmtp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnSmtp.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSmtp.ForeColor = System.Drawing.Color.Blue
+        Me.BtnSmtp.Location = New System.Drawing.Point(566, 440)
+        Me.BtnSmtp.Name = "BtnSmtp"
+        Me.BtnSmtp.Size = New System.Drawing.Size(75, 41)
+        Me.BtnSmtp.TabIndex = 35
+        Me.BtnSmtp.Text = "SMTP accounts"
+        Me.BtnSmtp.UseVisualStyleBackColor = False
+        '
         'FrmEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(938, 507)
+        Me.Controls.Add(Me.BtnSmtp)
         Me.Controls.Add(Me.BtnClear)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.BtnSend)
@@ -312,6 +335,7 @@ Partial Class FrmEmail
     Friend WithEvents BtnPasteText As Windows.Forms.Button
     Friend WithEvents SplitContainer1 As Windows.Forms.SplitContainer
     Friend WithEvents TxtFromName As Windows.Forms.TextBox
-    Friend WithEvents cbEmailUsername As Windows.Forms.ComboBox
+    Friend WithEvents cbSmtpAccounts As Windows.Forms.ComboBox
     Friend WithEvents BtnClear As Windows.Forms.Button
+    Friend WithEvents BtnSmtp As Windows.Forms.Button
 End Class

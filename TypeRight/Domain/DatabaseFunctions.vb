@@ -1,7 +1,6 @@
 ﻿Imports System.Collections.Generic
 Imports System.Data.Common
 Imports System.Reflection
-Imports TypeRight.TypeRightDataSetTableAdapters
 
 Module DatabaseFunctions
 
@@ -244,7 +243,6 @@ Module DatabaseFunctions
         LogUtil.Info("Getting SMTP table", MODULE_NAME)
         Return oSmtpTa.GetData
     End Function
-
     Public Function GetSmtpList() As List(Of Smtp)
         LogUtil.Info("Getting SMTP list", MODULE_NAME)
         Dim _smtpList As New List(Of Smtp)
@@ -263,22 +261,24 @@ Module DatabaseFunctions
         End If
         Return _smtp
     End Function
-
     Public Function InsertSmtp(pSmtp As Smtp) As Boolean
         LogUtil.Info("Inserting SMTP", MODULE_NAME)
         Dim isOk As Boolean = False
         Try
-            isOk = oSmtpTa.InsertSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, pSmtp.IsEnableSsl, pSmtp.IsCredentialsRequired)
+            Dim _isSsl As Integer = If(pSmtp.IsEnableSsl, 1, 0)
+            Dim _isCred As Integer = If(pSmtp.IsCredentialsRequired, 1, 0)
+            isOk = oSmtpTa.InsertSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, _isSsl, _isCred)
         Catch ex As DbException
         End Try
         Return isOk
     End Function
-
     Public Function UpdateSmtp(pSmtp As Smtp) As Boolean
         LogUtil.Info("Updating SMTP", MODULE_NAME)
         Dim isOk As Boolean = False
         Try
-            isOk = oSmtpTa.UpdateSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, pSmtp.IsEnableSsl, pSmtp.IsCredentialsRequired, pSmtp.SmtpId)
+            Dim _isSsl As Integer = If(pSmtp.IsEnableSsl, 1, 0)
+            Dim _isCred As Integer = If(pSmtp.IsCredentialsRequired, 1, 0)
+            isOk = oSmtpTa.UpdateSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, _isSsl, _isCred, pSmtp.SmtpId)
         Catch ex As DbException
         End Try
         Return isOk

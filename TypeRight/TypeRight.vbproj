@@ -161,6 +161,12 @@
     <Compile Include="FrmSenderButtonFormat.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Email\FrmSmtpAccounts.Designer.vb">
+      <DependentUpon>FrmSmtpAccounts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Email\FrmSmtpAccounts.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmSplash.Designer.vb">
       <DependentUpon>FrmSplash.vb</DependentUpon>
     </Compile>
@@ -214,6 +220,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Email\FrmSmtpAccounts.resx">
+      <DependentUpon>FrmSmtpAccounts.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmButtonList.resx">
       <DependentUpon>FrmButtonList.vb</DependentUpon>
       <SubType>Designer</SubType>

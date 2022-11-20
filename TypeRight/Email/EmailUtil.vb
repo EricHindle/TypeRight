@@ -16,16 +16,7 @@ Imports System.Collections
 ''' <remarks></remarks>
 Public NotInheritable Class EmailUtil
     Private Const className As String = "EmailUtil"
-    Private Const USE_SMTP As String = "UseSMTP"
-    'Private Const SMTP_USERNAME As String = "SMTPAltUsername"
-    'Private Const SMTP_PASSWORD As String = "SMTPAltPassword"
-    'Private Const SMTP_HOST As String = "SMTPHost"
-    'Private Const SMTP_REQ_CRED As String = "SMTPRequiresCredentials"
-    'Private Const SMTP_PORT As String = "SMTPPort"
-    'Private Const SMTP_SSL As String = "SMTPEnableSSL"
     Private Const SEND_VIA As String = "SendMailViaSMTP"
-    Public Shared sOutlookSender As String = ""
-
     ''' <summary>
     ''' Send an email
     ''' </summary>

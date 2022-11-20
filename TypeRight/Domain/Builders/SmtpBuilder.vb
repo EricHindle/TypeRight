@@ -24,6 +24,7 @@ Public Class SmtpBuilder
         _reqCred = pSmtp.IsCredentialsRequired
         Return Me
     End Function
+
     Public Function StartingWith(ByVal pSmtpRow As TypeRightDataSet.smtpRow) As SmtpBuilder
         _smtpId = pSmtpRow.smtpId
         _host = pSmtpRow.smtpHost

@@ -14,7 +14,7 @@ Option Explicit On
 
 
 <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
- Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
+ Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0"),  _
  Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
 Partial Friend NotInheritable Class Settings
     Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -373,6 +373,30 @@ Partial Friend NotInheritable Class Settings
         End Get
         Set
             Me("LogViewerPos") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property EmailFormPos() As String
+        Get
+            Return CType(Me("EmailFormPos"),String)
+        End Get
+        Set
+            Me("EmailFormPos") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property SmtpFormPos() As String
+        Get
+            Return CType(Me("SmtpFormPos"),String)
+        End Get
+        Set
+            Me("SmtpFormPos") = value
         End Set
     End Property
 End Class

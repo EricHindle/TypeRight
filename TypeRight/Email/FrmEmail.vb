@@ -32,10 +32,9 @@ Public Class FrmEmail
 #Region "form control handlers"
     Private Sub FrmEmail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
-        _smtpTable = GetSmtp()
-        cbEmailUsername.DataSource = _smtpTable
-        cbEmailUsername.DisplayMember = "smtpUsername"
-        cbEmailUsername.ValueMember = "smtpId"
+        GetFormPos(Me, My.Settings.EmailFormPos)
+
+        SetAccountsDatasource()
         _senderRow = GetSenderRowById(_senderId)
         TxtFromName.Text = _senderRow.FirstName & " " & _senderRow.LastName
         SplitContainer1.SplitterDistance = SplitContainer1.Width - (iColCt * iButtonWidth) - SplitContainer1.SplitterWidth
@@ -50,11 +49,21 @@ Public Class FrmEmail
         Next
         isLoading = False
     End Sub
+
+    Private Sub SetAccountsDatasource()
+        _smtpTable = GetSmtp()
+        cbSmtpAccounts.DataSource = _smtpTable
+        cbSmtpAccounts.DisplayMember = "smtpUsername"
+        cbSmtpAccounts.ValueMember = "smtpId"
+    End Sub
+
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
     End Sub
     Private Sub FrmEmail_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-
+        LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
+        My.Settings.EmailFormPos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
     Private Sub FrmEmail_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         If Not isLoading Then
@@ -86,17 +95,18 @@ Public Class FrmEmail
         End If
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
+        DisplayProgress("Sending Email",, True)
         Dim _smtp As Smtp
-        If cbEmailUsername.SelectedIndex >= 0 Then
-            Dim _smtpId As Integer = cbEmailUsername.SelectedValue
+        If cbSmtpAccounts.SelectedIndex >= 0 Then
+            Dim _smtpId As Integer = cbSmtpAccounts.SelectedValue
             _smtp = GetSmtpById(_smtpId)
             If String.IsNullOrWhiteSpace(TxtTo.Text) Or String.IsNullOrWhiteSpace(TxtSubject.Text) Or String.IsNullOrWhiteSpace(TxtText.Text) Then
-                MsgBox("Missing value(s). Mail not sent.", MsgBoxStyle.Exclamation, "Error")
+                DisplayProgress("Missing value(s). Mail not sent.",, True)
             Else
                 If EmailUtil.SendMailViaSMTP(_smtp, TxtTo.Text, {}, TxtSubject.Text, TxtText.Text, TxtFromName.Text) Then
-                    MsgBox("Mail sent OK.", MsgBoxStyle.Information, "OK")
+                    DisplayProgress("Mail sent OK.", , True)
                 Else
-                    MsgBox("Mail failed.", MsgBoxStyle.Exclamation, "Error")
+                    DisplayProgress("Mail failed.", , True)
                 End If
             End If
         Else
@@ -104,21 +114,22 @@ Public Class FrmEmail
         End If
     End Sub
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
-        cbEmailUsername.SelectedIndex = -1
+        cbSmtpAccounts.SelectedIndex = -1
         TxtFromName.Text = ""
         TxtSubject.Text = ""
         TxtText.Text = ""
         TxtTo.Text = ""
     End Sub
-
-
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtTo.DragDrop,
-                                                                                            TxtSubject.DragDrop,
-                                                                                            TxtFromName.DragDrop,
-                                                                                            TxtText.DragDrop
+                                                                                        TxtSubject.DragDrop,
+                                                                                        TxtFromName.DragDrop,
+                                                                                        TxtText.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            If item.StartsWith("mailto:") Then
+                item = item.Substring(7)
+            End If
             Dim textlen As Integer = oBox.TextLength
             Dim startpos As Integer = oBox.SelectionStart
             If textlen = 0 Then
@@ -133,9 +144,9 @@ Public Class FrmEmail
         End If
     End Sub
     Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtTo.DragEnter,
-                                                                                                                            TxtSubject.DragEnter,
-                                                                                                                            TxtFromName.DragEnter,
-                                                                                                                            TxtText.DragEnter
+                                                                                                                TxtSubject.DragEnter,
+                                                                                                                TxtFromName.DragEnter,
+                                                                                                                TxtText.DragEnter
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             e.Effect = DragDropEffects.Copy
         Else
@@ -146,7 +157,15 @@ Public Class FrmEmail
             End If
         End If
     End Sub
+    Private Sub BtnSmtp_Click(sender As Object, e As EventArgs) Handles BtnSmtp.Click
+        Me.Hide()
 
+        Using _smtpForm As New FrmSmtpAccounts
+            _smtpForm.ShowDialog()
+        End Using
+        SetAccountsDatasource()
+        Me.Show()
+    End Sub
 #End Region
 #Region "subroutines"
     Private Sub DisplayProgress(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
