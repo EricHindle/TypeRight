@@ -71,6 +71,7 @@ Partial Class FrmButtonList
         Me.ProgressTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
+        Me.PicEmail = New System.Windows.Forms.PictureBox()
         Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuPopup.SuspendLayout()
@@ -84,6 +85,7 @@ Partial Class FrmButtonList
         CType(Me.PicLock, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RedClock, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PicEmail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GrpTop
@@ -103,7 +105,7 @@ Partial Class FrmButtonList
         Me.GrpTop.Margin = New System.Windows.Forms.Padding(0)
         Me.GrpTop.Name = "GrpTop"
         Me.GrpTop.Padding = New System.Windows.Forms.Padding(0)
-        Me.GrpTop.Size = New System.Drawing.Size(120, 62)
+        Me.GrpTop.Size = New System.Drawing.Size(138, 62)
         Me.GrpTop.TabIndex = 0
         Me.GrpTop.TabStop = False
         '
@@ -158,13 +160,13 @@ Partial Class FrmButtonList
         Me.cbNames.FormattingEnabled = True
         Me.cbNames.Location = New System.Drawing.Point(7, 37)
         Me.cbNames.Name = "cbNames"
-        Me.cbNames.Size = New System.Drawing.Size(106, 21)
+        Me.cbNames.Size = New System.Drawing.Size(124, 21)
         Me.cbNames.TabIndex = 1
         '
         'BtnReDraw
         '
         Me.BtnReDraw.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnReDraw.Location = New System.Drawing.Point(87, 12)
+        Me.BtnReDraw.Location = New System.Drawing.Point(105, 12)
         Me.BtnReDraw.Name = "BtnReDraw"
         Me.BtnReDraw.Size = New System.Drawing.Size(31, 20)
         Me.BtnReDraw.TabIndex = 0
@@ -325,6 +327,7 @@ Partial Class FrmButtonList
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GrpBottom.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
         Me.GrpBottom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.GrpBottom.Controls.Add(Me.PicEmail)
         Me.GrpBottom.Controls.Add(Me.WhiteClock)
         Me.GrpBottom.Controls.Add(Me.GreenClock)
         Me.GrpBottom.Controls.Add(Me.PicExit)
@@ -336,7 +339,7 @@ Partial Class FrmButtonList
         Me.GrpBottom.Margin = New System.Windows.Forms.Padding(0)
         Me.GrpBottom.Name = "GrpBottom"
         Me.GrpBottom.Padding = New System.Windows.Forms.Padding(0)
-        Me.GrpBottom.Size = New System.Drawing.Size(120, 32)
+        Me.GrpBottom.Size = New System.Drawing.Size(138, 32)
         Me.GrpBottom.TabIndex = 3
         Me.GrpBottom.TabStop = False
         '
@@ -367,7 +370,7 @@ Partial Class FrmButtonList
         '
         Me.PicExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PicExit.Image = Global.TypeRight.My.Resources.Resources.cancel
-        Me.PicExit.Location = New System.Drawing.Point(97, 11)
+        Me.PicExit.Location = New System.Drawing.Point(115, 11)
         Me.PicExit.Name = "PicExit"
         Me.PicExit.Size = New System.Drawing.Size(16, 16)
         Me.PicExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -435,7 +438,7 @@ Partial Class FrmButtonList
         Me.GroupButtonPanel.BackColor = System.Drawing.SystemColors.ControlLight
         Me.GroupButtonPanel.Location = New System.Drawing.Point(0, 65)
         Me.GroupButtonPanel.Name = "GroupButtonPanel"
-        Me.GroupButtonPanel.Size = New System.Drawing.Size(120, 157)
+        Me.GroupButtonPanel.Size = New System.Drawing.Size(138, 157)
         Me.GroupButtonPanel.TabIndex = 4
         '
         'DelayTimer
@@ -448,7 +451,7 @@ Partial Class FrmButtonList
         Me.SenderButtonPanel.BackColor = System.Drawing.SystemColors.ControlLight
         Me.SenderButtonPanel.Location = New System.Drawing.Point(0, 228)
         Me.SenderButtonPanel.Name = "SenderButtonPanel"
-        Me.SenderButtonPanel.Size = New System.Drawing.Size(120, 333)
+        Me.SenderButtonPanel.Size = New System.Drawing.Size(138, 333)
         Me.SenderButtonPanel.TabIndex = 5
         '
         'ProgressTimer
@@ -459,10 +462,21 @@ Partial Class FrmButtonList
         Me.TypeRightDataSet.DataSetName = "TypeRightDataSet"
         Me.TypeRightDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'PicEmail
+        '
+        Me.PicEmail.Image = Global.TypeRight.My.Resources.Resources.email
+        Me.PicEmail.Location = New System.Drawing.Point(94, 11)
+        Me.PicEmail.Name = "PicEmail"
+        Me.PicEmail.Size = New System.Drawing.Size(15, 16)
+        Me.PicEmail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PicEmail.TabIndex = 7
+        Me.PicEmail.TabStop = False
+        Me.ToolTip2.SetToolTip(Me.PicEmail, "Sender database maintenance")
+        '
         'FrmButtonList
         '
         Me.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.ClientSize = New System.Drawing.Size(122, 598)
+        Me.ClientSize = New System.Drawing.Size(140, 598)
         Me.ControlBox = False
         Me.Controls.Add(Me.SenderButtonPanel)
         Me.Controls.Add(Me.GroupButtonPanel)
@@ -489,6 +503,7 @@ Partial Class FrmButtonList
         CType(Me.PicLock, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RedClock, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PicEmail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -541,4 +556,5 @@ Partial Class FrmButtonList
     Friend WithEvents BtnMinimise As Windows.Forms.Button
     Friend WithEvents RemoveGroupToolStripMenuItem As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolTip2 As Windows.Forms.ToolTip
+    Friend WithEvents PicEmail As Windows.Forms.PictureBox
 End Class

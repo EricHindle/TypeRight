@@ -139,6 +139,9 @@
   <data name="CLOSING" xml:space="preserve">
     <value>...Closing</value>
   </data>
+  <data name="email" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\email.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="greenclock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\greenclock.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

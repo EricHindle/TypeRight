@@ -687,5 +687,14 @@ Public Class FrmButtonList
         Return newText
     End Function
 
+    Private Sub PicEmail_Click(sender As Object, e As EventArgs) Handles PicEmail.Click
+        LogUtil.Info("Sending Email", MyBase.Name)
+        Using _emailForm As New FrmEmail
+            _emailForm.SenderId = iCurrSender
+            _emailForm.GroupId = iCurrGrp
+            _emailForm.ShowDialog()
+        End Using
+    End Sub
+
 #End Region
 End Class
