@@ -113,11 +113,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buttons\ButtonUtil.vb" />
-    <Compile Include="Db.vb" />
+    <Compile Include="Domain\DatabaseFunctions.vb" />
     <Compile Include="Domain\Sender.vb" />
-    <Compile Include="Domain\SenderBuilder.vb" />
+    <Compile Include="Domain\Builders\SenderBuilder.vb" />
     <Compile Include="Domain\Smtp.vb" />
-    <Compile Include="Domain\SmtpBuilder.vb" />
+    <Compile Include="Domain\Builders\SmtpBuilder.vb" />
     <Compile Include="Email\EmailUtil.vb" />
     <Compile Include="FrmButtonList.Designer.vb">
       <DependentUpon>FrmButtonList.vb</DependentUpon>

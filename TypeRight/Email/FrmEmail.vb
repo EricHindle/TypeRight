@@ -1,16 +1,17 @@
 ﻿Imports System.Collections.Generic
-Imports System.ComponentModel
-Imports System.Security.Cryptography
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
-Imports TypeRight.TypeRightDataSetTableAdapters
 
 Public Class FrmEmail
+#Region "variables"
     Private senderButtonList As New List(Of Nbutton)
-    Private _senderId As Integer
     Private isLoading As Boolean = True
     Private _senderRow As TypeRightDataSet.sendersRow
     Private _smtpTable As TypeRightDataSet.smtpDataTable
+#End Region
+#Region "properties"
+    Private _groupId As Integer
+    Private _senderId As Integer
     Public Property SenderId() As Integer
         Get
             Return _senderId
@@ -19,7 +20,6 @@ Public Class FrmEmail
             _senderId = value
         End Set
     End Property
-    Private _groupId As Integer
     Public Property GroupId() As Integer
         Get
             Return _groupId
@@ -28,6 +28,8 @@ Public Class FrmEmail
             _groupId = value
         End Set
     End Property
+#End Region
+#Region "form control handlers"
     Private Sub FrmEmail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
         _smtpTable = GetSmtp()
@@ -48,34 +50,23 @@ Public Class FrmEmail
         Next
         isLoading = False
     End Sub
-
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
     End Sub
-
     Private Sub FrmEmail_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
     End Sub
-    Private Sub DisplayProgress(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
-        LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
-        StatusStrip1.Refresh()
-        If isLogged Then LogUtil.Info(pText, MyBase.Name)
-    End Sub
-
     Private Sub FrmEmail_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         If Not isLoading Then
             SplitContainer1.SplitterDistance = SplitContainer1.Width - (iColCt * iButtonWidth) - SplitContainer1.SplitterWidth
         End If
     End Sub
-
     Private Sub BtnPasteTo_Click(sender As Object, e As EventArgs) Handles BtnPasteTo.Click
         TxtTo.SelectedText = Clipboard.GetText
     End Sub
-
     Private Sub BtnPasteSubject_Click(sender As Object, e As EventArgs) Handles BtnPasteSubject.Click
         TxtSubject.SelectedText = Clipboard.GetText
     End Sub
-
     Private Sub BtnPasteText_Click(sender As Object, e As EventArgs) Handles BtnPasteText.Click
         TxtText.SelectedText = Clipboard.GetText
     End Sub
@@ -94,9 +85,8 @@ Public Class FrmEmail
             TxtText.SelectedText = strKeyText.Replace("{ENTER}", vbCrLf)
         End If
     End Sub
-
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
-        Dim _smtp As New Smtp
+        Dim _smtp As Smtp
         If cbEmailUsername.SelectedIndex >= 0 Then
             Dim _smtpId As Integer = cbEmailUsername.SelectedValue
             _smtp = GetSmtpById(_smtpId)
@@ -113,6 +103,56 @@ Public Class FrmEmail
             MsgBox("From account not selected. Mail not sent.", MsgBoxStyle.Exclamation, "Error")
         End If
     End Sub
+    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        cbEmailUsername.SelectedIndex = -1
+        TxtFromName.Text = ""
+        TxtSubject.Text = ""
+        TxtText.Text = ""
+        TxtTo.Text = ""
+    End Sub
 
 
+    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtTo.DragDrop,
+                                                                                            TxtSubject.DragDrop,
+                                                                                            TxtFromName.DragDrop,
+                                                                                            TxtText.DragDrop
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim oBox As TextBox = CType(sender, TextBox)
+            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
+            Dim textlen As Integer = oBox.TextLength
+            Dim startpos As Integer = oBox.SelectionStart
+            If textlen = 0 Then
+                oBox.Text = item.Trim
+            Else
+                If startpos = 0 Then
+                    oBox.SelectedText = item.TrimStart
+                Else
+                    oBox.SelectedText = item
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtTo.DragEnter,
+                                                                                                                            TxtSubject.DragEnter,
+                                                                                                                            TxtFromName.DragEnter,
+                                                                                                                            TxtText.DragEnter
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            e.Effect = DragDropEffects.Copy
+        Else
+            If e.Data.GetDataPresent(DataFormats.Text) Then
+                e.Effect = DragDropEffects.Copy
+            Else
+                e.Effect = DragDropEffects.None
+            End If
+        End If
+    End Sub
+
+#End Region
+#Region "subroutines"
+    Private Sub DisplayProgress(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
+        LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
+        StatusStrip1.Refresh()
+        If isLogged Then LogUtil.Info(pText, MyBase.Name)
+    End Sub
+#End Region
 End Class

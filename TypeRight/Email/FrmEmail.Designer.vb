@@ -41,8 +41,9 @@ Partial Class FrmEmail
         Me.BtnPasteSubject = New System.Windows.Forms.Button()
         Me.BtnPasteText = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.TxtFromName = New System.Windows.Forms.TextBox()
         Me.cbEmailUsername = New System.Windows.Forms.ComboBox()
+        Me.TxtFromName = New System.Windows.Forms.TextBox()
+        Me.BtnClear = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -236,16 +237,6 @@ Partial Class FrmEmail
         Me.SplitContainer1.SplitterDistance = 768
         Me.SplitContainer1.TabIndex = 33
         '
-        'TxtFromName
-        '
-        Me.TxtFromName.AllowDrop = True
-        Me.TxtFromName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtFromName.Location = New System.Drawing.Point(452, 3)
-        Me.TxtFromName.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtFromName.Name = "TxtFromName"
-        Me.TxtFromName.Size = New System.Drawing.Size(298, 25)
-        Me.TxtFromName.TabIndex = 34
-        '
         'cbEmailUsername
         '
         Me.cbEmailUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -256,11 +247,32 @@ Partial Class FrmEmail
         Me.cbEmailUsername.Size = New System.Drawing.Size(341, 26)
         Me.cbEmailUsername.TabIndex = 35
         '
+        'TxtFromName
+        '
+        Me.TxtFromName.AllowDrop = True
+        Me.TxtFromName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtFromName.Location = New System.Drawing.Point(452, 3)
+        Me.TxtFromName.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtFromName.Name = "TxtFromName"
+        Me.TxtFromName.Size = New System.Drawing.Size(298, 25)
+        Me.TxtFromName.TabIndex = 34
+        '
+        'BtnClear
+        '
+        Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnClear.Location = New System.Drawing.Point(700, 441)
+        Me.BtnClear.Name = "BtnClear"
+        Me.BtnClear.Size = New System.Drawing.Size(75, 41)
+        Me.BtnClear.TabIndex = 34
+        Me.BtnClear.Text = "Clear"
+        Me.BtnClear.UseVisualStyleBackColor = True
+        '
         'FrmEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(938, 507)
+        Me.Controls.Add(Me.BtnClear)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.BtnSend)
         Me.Controls.Add(Me.BtnClose)
@@ -301,4 +313,5 @@ Partial Class FrmEmail
     Friend WithEvents SplitContainer1 As Windows.Forms.SplitContainer
     Friend WithEvents TxtFromName As Windows.Forms.TextBox
     Friend WithEvents cbEmailUsername As Windows.Forms.ComboBox
+    Friend WithEvents BtnClear As Windows.Forms.Button
 End Class

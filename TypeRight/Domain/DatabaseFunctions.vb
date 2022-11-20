@@ -3,7 +3,8 @@ Imports System.Data.Common
 Imports System.Reflection
 Imports TypeRight.TypeRightDataSetTableAdapters
 
-Module Db
+Module DatabaseFunctions
+
 #Region "constants"
     Private Const MODULE_NAME As String = "Db"
 #End Region
@@ -267,7 +268,7 @@ Module Db
         LogUtil.Info("Inserting SMTP", MODULE_NAME)
         Dim isOk As Boolean = False
         Try
-          isOk = oSmtpTa.InsertSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, pSmtp.IsEnableSsl, pSmtp.IsCredentialsRequired)
+            isOk = oSmtpTa.InsertSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, pSmtp.IsEnableSsl, pSmtp.IsCredentialsRequired)
         Catch ex As DbException
         End Try
         Return isOk
