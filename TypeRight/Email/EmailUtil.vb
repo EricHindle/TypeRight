@@ -17,12 +17,12 @@ Imports System.Collections
 Public NotInheritable Class EmailUtil
     Private Const className As String = "EmailUtil"
     Private Const USE_SMTP As String = "UseSMTP"
-    Private Const SMTP_USERNAME As String = "SMTPAltUsername"
-    Private Const SMTP_PASSWORD As String = "SMTPAltPassword"
-    Private Const SMTP_HOST As String = "SMTPHost"
-    Private Const SMTP_REQ_CRED As String = "SMTPRequiresCredentials"
-    Private Const SMTP_PORT As String = "SMTPPort"
-    Private Const SMTP_SSL As String = "SMTPEnableSSL"
+    'Private Const SMTP_USERNAME As String = "SMTPAltUsername"
+    'Private Const SMTP_PASSWORD As String = "SMTPAltPassword"
+    'Private Const SMTP_HOST As String = "SMTPHost"
+    'Private Const SMTP_REQ_CRED As String = "SMTPRequiresCredentials"
+    'Private Const SMTP_PORT As String = "SMTPPort"
+    'Private Const SMTP_SSL As String = "SMTPEnableSSL"
     Private Const SEND_VIA As String = "SendMailViaSMTP"
     Public Shared sOutlookSender As String = ""
 
@@ -39,7 +39,7 @@ Public NotInheritable Class EmailUtil
     ''' <param name="deleteAfterSubmit">Indicator to show if email should be retained in the outbox (and sent mail table)</param>
     ''' <returns>True if email sent OK</returns>
     ''' <remarks></remarks>
-    Public Shared Function SendMail(ByVal strFromAddr As String,
+    Public Shared Function SendMail(ByVal oSmtp As Smtp,
                                     ByVal strToName As String,
                                       ByVal strCC As String(),
                                       ByVal strSubject As String,
@@ -51,7 +51,7 @@ Public NotInheritable Class EmailUtil
                                       Optional ByVal deleteAfterSubmit As Boolean = False,
                                       Optional ByVal readReceiptRequired As Boolean = False,
                                       Optional ByVal deliveryReportRequired As Boolean = False) As Boolean
-        Return SendMailViaSMTP(strFromAddr,
+        Return SendMailViaSMTP(oSmtp,
                                strToName,
                                strCC,
                                strSubject,
@@ -67,7 +67,7 @@ Public NotInheritable Class EmailUtil
     '
     ' Sends an email via SMTP
     '    
-    Public Shared Function SendMailViaSMTP(ByVal strFromAddress As String,
+    Public Shared Function SendMailViaSMTP(ByVal oSmtp As Smtp,
                                            ByVal strToAddress As String,
                                           ByVal strCC As String(),
                                           ByVal strSubject As String,
@@ -87,12 +87,12 @@ Public NotInheritable Class EmailUtil
                 LogUtil.Problem("No 'To' email address specified", SEND_VIA)
                 Throw New ApplicationException("Error: No To address")
             End If
-            objMessage = New Mail.MailMessage(strFromAddress, strToAddress, strSubject, strBody)
+            objMessage = New Mail.MailMessage(oSmtp.Username, strToAddress, strSubject, strBody)
             If Not String.IsNullOrEmpty(strFromName) Then
-                objMessage.From = New Mail.MailAddress(strFromAddress, strFromName)
+                objMessage.From = New Mail.MailAddress(oSmtp.Username, strFromName)
             End If
-            Dim smtpUserName As String = GlobalSettings.GetSetting(SMTP_USERNAME)
-            Dim smtpPassword As String = GlobalSettings.GetSetting(SMTP_PASSWORD)
+            Dim smtpUserName As String = oSmtp.Username
+            Dim smtpPassword As String = oSmtp.Password
             Dim bodyformat As Integer = bodyType
             If bodyformat = 0 Then
                 ConvertBodyToHtml(strBody, oFont, objMessage)
@@ -102,7 +102,7 @@ Public NotInheritable Class EmailUtil
             '
             ' Validate the parameters
             '
-            Dim strSmtpHost As String = GlobalSettings.GetSetting(SMTP_HOST)
+            Dim strSmtpHost As String = oSmtp.Host
             If String.IsNullOrEmpty(strSmtpHost) Then
                 LogUtil.Problem("No smtp host specified", SEND_VIA)
                 Throw New ApplicationException("Error: No Mail Host")
@@ -130,14 +130,14 @@ Public NotInheritable Class EmailUtil
             ' Connect to the host
             '
             objEmailClient.Host = strSmtpHost
-            If GlobalSettings.GetBooleanSetting(SMTP_REQ_CRED) Then
+            If oSmtp.IsCredentialsRequired Then
                 objEmailClient.Credentials = New NetworkCredential(smtpUserName, smtpPassword)
             End If
-            Dim strSmtpPort As Integer = GlobalSettings.GetIntegerSetting(SMTP_PORT)
+            Dim strSmtpPort As Integer = oSmtp.Port
             If strSmtpPort > 0 Then
                 objEmailClient.Port = strSmtpPort
             End If
-            objEmailClient.EnableSsl = GlobalSettings.GetBooleanSetting(SMTP_SSL)
+            objEmailClient.EnableSsl = oSmtp.IsEnableSsl
             '
             ' Send the email
             '

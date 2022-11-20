@@ -3,11 +3,14 @@ Imports System.ComponentModel
 Imports System.Security.Cryptography
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
+Imports TypeRight.TypeRightDataSetTableAdapters
+
 Public Class FrmEmail
     Private senderButtonList As New List(Of Nbutton)
     Private _senderId As Integer
     Private isLoading As Boolean = True
     Private _senderRow As TypeRightDataSet.sendersRow
+    Private _smtpTable As TypeRightDataSet.smtpDataTable
     Public Property SenderId() As Integer
         Get
             Return _senderId
@@ -27,8 +30,11 @@ Public Class FrmEmail
     End Property
     Private Sub FrmEmail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
+        _smtpTable = GetSmtp()
+        cbEmailUsername.DataSource = _smtpTable
+        cbEmailUsername.DisplayMember = "smtpUsername"
+        cbEmailUsername.ValueMember = "smtpId"
         _senderRow = GetSenderRowById(_senderId)
-        TxtFrom.Text = If(_senderRow.IsEmailNull, "", _senderRow.Email)
         TxtFromName.Text = _senderRow.FirstName & " " & _senderRow.LastName
         SplitContainer1.SplitterDistance = SplitContainer1.Width - (iColCt * iButtonWidth) - SplitContainer1.SplitterWidth
         ButtonUtil.RemovePanelButtons(SenderButtonPanel)
@@ -90,14 +96,21 @@ Public Class FrmEmail
     End Sub
 
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
-        If String.IsNullOrWhiteSpace(TxtFrom.Text) Or String.IsNullOrWhiteSpace(TxtTo.Text) Or String.IsNullOrWhiteSpace(TxtSubject.Text) Or String.IsNullOrWhiteSpace(TxtText.Text) Then
-            MsgBox("Missing value(s). Mail not sent.", MsgBoxStyle.Exclamation, "Error")
-        Else
-            If EmailUtil.SendMailViaSMTP(TxtFrom.Text, TxtTo.Text, {}, TxtSubject.Text, TxtText.Text, TxtFromName.Text) Then
-                MsgBox("Mail sent OK.", MsgBoxStyle.Information, "OK")
+        Dim _smtp As New Smtp
+        If cbEmailUsername.SelectedIndex >= 0 Then
+            Dim _smtpId As Integer = cbEmailUsername.SelectedValue
+            _smtp = GetSmtpById(_smtpId)
+            If String.IsNullOrWhiteSpace(TxtTo.Text) Or String.IsNullOrWhiteSpace(TxtSubject.Text) Or String.IsNullOrWhiteSpace(TxtText.Text) Then
+                MsgBox("Missing value(s). Mail not sent.", MsgBoxStyle.Exclamation, "Error")
             Else
-                MsgBox("Mail failed.", MsgBoxStyle.Exclamation, "Error")
+                If EmailUtil.SendMailViaSMTP(_smtp, TxtTo.Text, {}, TxtSubject.Text, TxtText.Text, TxtFromName.Text) Then
+                    MsgBox("Mail sent OK.", MsgBoxStyle.Information, "OK")
+                Else
+                    MsgBox("Mail failed.", MsgBoxStyle.Exclamation, "Error")
+                End If
             End If
+        Else
+            MsgBox("From account not selected. Mail not sent.", MsgBoxStyle.Exclamation, "Error")
         End If
     End Sub
 

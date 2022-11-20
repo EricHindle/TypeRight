@@ -500,7 +500,7 @@ Public Class FrmButtonList
         groupButtonList.Add(undoButton)
         Dim btnTable As TypeRightDataSet.buttonDataTable = GetButtonsByGroup(grpNo)
         For Each btnRow As TypeRightDataSet.buttonRow In btnTable.Rows
-            If Not btnRow.IsbuttonValueNull AndAlso Not String.IsNullOrEmpty(btnRow.buttonValue) Then
+            If Not String.IsNullOrEmpty(btnRow.buttonValue) Then
                 Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(btnRow.buttonId).Build()
                 groupButtonList.Add(_nbutton)
             End If

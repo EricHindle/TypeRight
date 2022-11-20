@@ -42,7 +42,7 @@ Partial Class FrmEmail
         Me.BtnPasteText = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.TxtFromName = New System.Windows.Forms.TextBox()
-        Me.TxtFrom = New System.Windows.Forms.TextBox()
+        Me.cbEmailUsername = New System.Windows.Forms.ComboBox()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -57,7 +57,7 @@ Partial Class FrmEmail
         Me.SenderButtonPanel.Location = New System.Drawing.Point(0, 0)
         Me.SenderButtonPanel.Margin = New System.Windows.Forms.Padding(4)
         Me.SenderButtonPanel.Name = "SenderButtonPanel"
-        Me.SenderButtonPanel.Size = New System.Drawing.Size(145, 430)
+        Me.SenderButtonPanel.Size = New System.Drawing.Size(154, 430)
         Me.SenderButtonPanel.TabIndex = 6
         '
         'StatusStrip1
@@ -68,7 +68,7 @@ Partial Class FrmEmail
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 485)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(890, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(938, 22)
         Me.StatusStrip1.TabIndex = 19
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -90,7 +90,7 @@ Partial Class FrmEmail
         Me.TxtTo.Location = New System.Drawing.Point(95, 51)
         Me.TxtTo.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtTo.Name = "TxtTo"
-        Me.TxtTo.Size = New System.Drawing.Size(583, 25)
+        Me.TxtTo.Size = New System.Drawing.Size(622, 25)
         Me.TxtTo.TabIndex = 20
         '
         'Label1
@@ -137,7 +137,7 @@ Partial Class FrmEmail
         Me.TxtSubject.Location = New System.Drawing.Point(95, 99)
         Me.TxtSubject.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtSubject.Name = "TxtSubject"
-        Me.TxtSubject.Size = New System.Drawing.Size(583, 25)
+        Me.TxtSubject.Size = New System.Drawing.Size(622, 25)
         Me.TxtSubject.TabIndex = 25
         '
         'TxtText
@@ -150,13 +150,13 @@ Partial Class FrmEmail
         Me.TxtText.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtText.Multiline = True
         Me.TxtText.Name = "TxtText"
-        Me.TxtText.Size = New System.Drawing.Size(720, 254)
+        Me.TxtText.Size = New System.Drawing.Size(759, 254)
         Me.TxtText.TabIndex = 26
         '
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClose.Location = New System.Drawing.Point(799, 440)
+        Me.BtnClose.Location = New System.Drawing.Point(847, 440)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 41)
         Me.BtnClose.TabIndex = 28
@@ -178,7 +178,7 @@ Partial Class FrmEmail
         Me.BtnPasteTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPasteTo.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
         Me.BtnPasteTo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnPasteTo.Location = New System.Drawing.Point(685, 53)
+        Me.BtnPasteTo.Location = New System.Drawing.Point(724, 53)
         Me.BtnPasteTo.Name = "BtnPasteTo"
         Me.BtnPasteTo.Size = New System.Drawing.Size(26, 23)
         Me.BtnPasteTo.TabIndex = 30
@@ -189,7 +189,7 @@ Partial Class FrmEmail
         Me.BtnPasteSubject.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPasteSubject.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
         Me.BtnPasteSubject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnPasteSubject.Location = New System.Drawing.Point(685, 100)
+        Me.BtnPasteSubject.Location = New System.Drawing.Point(724, 100)
         Me.BtnPasteSubject.Name = "BtnPasteSubject"
         Me.BtnPasteSubject.Size = New System.Drawing.Size(26, 23)
         Me.BtnPasteSubject.TabIndex = 31
@@ -200,7 +200,7 @@ Partial Class FrmEmail
         Me.BtnPasteText.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPasteText.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
         Me.BtnPasteText.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnPasteText.Location = New System.Drawing.Point(685, 145)
+        Me.BtnPasteText.Location = New System.Drawing.Point(724, 145)
         Me.BtnPasteText.Name = "BtnPasteText"
         Me.BtnPasteText.Size = New System.Drawing.Size(26, 23)
         Me.BtnPasteText.TabIndex = 32
@@ -216,8 +216,8 @@ Partial Class FrmEmail
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.cbEmailUsername)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TxtFromName)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.TxtFrom)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TxtText)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnPasteText)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TxtTo)
@@ -232,36 +232,35 @@ Partial Class FrmEmail
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.SenderButtonPanel)
-        Me.SplitContainer1.Size = New System.Drawing.Size(878, 430)
-        Me.SplitContainer1.SplitterDistance = 729
+        Me.SplitContainer1.Size = New System.Drawing.Size(926, 430)
+        Me.SplitContainer1.SplitterDistance = 768
         Me.SplitContainer1.TabIndex = 33
         '
         'TxtFromName
         '
         Me.TxtFromName.AllowDrop = True
         Me.TxtFromName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtFromName.Location = New System.Drawing.Point(413, 3)
+        Me.TxtFromName.Location = New System.Drawing.Point(452, 3)
         Me.TxtFromName.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtFromName.Name = "TxtFromName"
         Me.TxtFromName.Size = New System.Drawing.Size(298, 25)
         Me.TxtFromName.TabIndex = 34
         '
-        'TxtFrom
+        'cbEmailUsername
         '
-        Me.TxtFrom.AllowDrop = True
-        Me.TxtFrom.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.cbEmailUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtFrom.Location = New System.Drawing.Point(95, 3)
-        Me.TxtFrom.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtFrom.Name = "TxtFrom"
-        Me.TxtFrom.Size = New System.Drawing.Size(298, 25)
-        Me.TxtFrom.TabIndex = 33
+        Me.cbEmailUsername.FormattingEnabled = True
+        Me.cbEmailUsername.Location = New System.Drawing.Point(95, 3)
+        Me.cbEmailUsername.Name = "cbEmailUsername"
+        Me.cbEmailUsername.Size = New System.Drawing.Size(341, 26)
+        Me.cbEmailUsername.TabIndex = 35
         '
         'FrmEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(890, 507)
+        Me.ClientSize = New System.Drawing.Size(938, 507)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.BtnSend)
         Me.Controls.Add(Me.BtnClose)
@@ -300,6 +299,6 @@ Partial Class FrmEmail
     Friend WithEvents BtnPasteSubject As Windows.Forms.Button
     Friend WithEvents BtnPasteText As Windows.Forms.Button
     Friend WithEvents SplitContainer1 As Windows.Forms.SplitContainer
-    Friend WithEvents TxtFrom As Windows.Forms.TextBox
     Friend WithEvents TxtFromName As Windows.Forms.TextBox
+    Friend WithEvents cbEmailUsername As Windows.Forms.ComboBox
 End Class
