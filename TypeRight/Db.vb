@@ -1,5 +1,7 @@
-﻿Imports System.Data.Common
+﻿Imports System.Collections.Generic
+Imports System.Data.Common
 Imports System.Reflection
+Imports TypeRight.TypeRightDataSetTableAdapters
 
 Module Db
 #Region "constants"
@@ -14,6 +16,8 @@ Module Db
     Private ReadOnly oSndTable As New TypeRightDataSet.sendersDataTable
     Private ReadOnly oSndBtnTa As New TypeRightDataSetTableAdapters.senderButtonTableAdapter
     Private ReadOnly oSndBtnTable As New TypeRightDataSet.senderButtonDataTable
+    Private ReadOnly oSmtpTa As New TypeRightDataSetTableAdapters.smtpTableAdapter
+    Private ReadOnly oSmtpTable As New TypeRightDataSet.smtpDataTable
 #End Region
 #Region "buttons"
     Public Function TestDatabase() As Boolean
@@ -166,7 +170,7 @@ Module Db
         If oSndTable.Rows.Count > 0 Then
             Dim oSendertable As New TypeRightDataSet.sendersDataTable
             oSendertable.ImportRow(oSndTable.Rows(0))
-            oSenderRow = osendertable.Rows(0)
+            oSenderRow = oSendertable.Rows(0)
         Else
             LogUtil.Info("Row not found ", MODULE_NAME)
         End If
@@ -232,6 +236,55 @@ Module Db
         Return oSndBtnTa.UpdateSenderButton(CByte(buttonBold), CByte(buttonItalic),
                                             buttonFontName, buttonFontSize,
                                             CByte(buttonEncrypted), ColumnName)
+    End Function
+#End Region
+#Region "smtp"
+    Public Function GetSmtp() As TypeRightDataSet.smtpDataTable
+        LogUtil.Info("Getting SMTP table", MODULE_NAME)
+        Return oSmtpTa.GetData
+    End Function
+
+    Public Function GetSmtpList() As List(Of Smtp)
+        LogUtil.Info("Getting SMTP list", MODULE_NAME)
+        Dim _smtpList As New List(Of Smtp)
+        oSmtpTa.Fill(oSmtpTable)
+        For Each _row As TypeRightDataSet.smtpRow In oSmtpTable.Rows
+            _smtpList.Add(SmtpBuilder.NewSmtp.StartingWith(_row).Build)
+        Next
+        Return _smtpList
+    End Function
+    Public Function GetSmtpById(pId As Integer) As Smtp
+        LogUtil.Info("Getting SMTP by Id", MODULE_NAME)
+        Dim _smtp As New Smtp
+        oSmtpTa.FillById(oSmtpTable, pId)
+        If oSmtpTable.Rows.Count > 0 Then
+            _smtp = SmtpBuilder.NewSmtp.StartingWith(oSmtpTable.Rows(0)).Build
+        End If
+        Return _smtp
+    End Function
+
+    Public Function InsertSmtp(pSmtp As Smtp) As Boolean
+        LogUtil.Info("Inserting SMTP", MODULE_NAME)
+        Dim isOk As Boolean = False
+        Try
+          isOk = oSmtpTa.InsertSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, pSmtp.IsEnableSsl, pSmtp.IsCredentialsRequired)
+        Catch ex As DbException
+        End Try
+        Return isOk
+    End Function
+
+    Public Function UpdateSmtp(pSmtp As Smtp) As Boolean
+        LogUtil.Info("Updating SMTP", MODULE_NAME)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oSmtpTa.UpdateSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, pSmtp.IsEnableSsl, pSmtp.IsCredentialsRequired, pSmtp.SmtpId)
+        Catch ex As DbException
+        End Try
+        Return isOk
+    End Function
+    Public Function DeleteSmtp(_id As Integer) As Integer
+        LogUtil.Info("Deleting SMTP " & _id, MODULE_NAME)
+        Return oSmtpTa.DeleteSmtp(_id)
     End Function
 #End Region
 
