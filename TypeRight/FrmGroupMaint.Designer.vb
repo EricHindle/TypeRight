@@ -55,7 +55,7 @@ Partial Class FrmGroupMaint
         Me.BtnCancel.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(85, 37)
-        Me.BtnCancel.TabIndex = 0
+        Me.BtnCancel.TabIndex = 8
         Me.BtnCancel.Text = "Cancel"
         Me.BtnCancel.UseVisualStyleBackColor = True
         '
@@ -65,7 +65,7 @@ Partial Class FrmGroupMaint
         Me.BtnUpdate.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnUpdate.Name = "BtnUpdate"
         Me.BtnUpdate.Size = New System.Drawing.Size(85, 37)
-        Me.BtnUpdate.TabIndex = 1
+        Me.BtnUpdate.TabIndex = 7
         Me.BtnUpdate.Text = "Update"
         Me.BtnUpdate.UseVisualStyleBackColor = True
         '
@@ -77,7 +77,7 @@ Partial Class FrmGroupMaint
         Me.cmbGroups.Location = New System.Drawing.Point(180, 156)
         Me.cmbGroups.Name = "cmbGroups"
         Me.cmbGroups.Size = New System.Drawing.Size(253, 24)
-        Me.cmbGroups.TabIndex = 2
+        Me.cmbGroups.TabIndex = 6
         Me.cmbGroups.ValueMember = "buttongroupid"
         '
         'ButtongroupsBindingSource
@@ -104,7 +104,7 @@ Partial Class FrmGroupMaint
         Me.LblTrans.Location = New System.Drawing.Point(24, 156)
         Me.LblTrans.Name = "LblTrans"
         Me.LblTrans.Size = New System.Drawing.Size(145, 17)
-        Me.LblTrans.TabIndex = 5
+        Me.LblTrans.TabIndex = 12
         Me.LblTrans.Text = "Move button to group"
         Me.LblTrans.Visible = False
         '
@@ -114,7 +114,7 @@ Partial Class FrmGroupMaint
         Me.LblThisBtn.Location = New System.Drawing.Point(286, 30)
         Me.LblThisBtn.Name = "LblThisBtn"
         Me.LblThisBtn.Size = New System.Drawing.Size(161, 17)
-        Me.LblThisBtn.TabIndex = 7
+        Me.LblThisBtn.TabIndex = 13
         Me.LblThisBtn.Text = "Transferring this Button :"
         '
         'TxtGrpName
@@ -122,14 +122,14 @@ Partial Class FrmGroupMaint
         Me.TxtGrpName.Location = New System.Drawing.Point(180, 73)
         Me.TxtGrpName.Name = "TxtGrpName"
         Me.TxtGrpName.Size = New System.Drawing.Size(253, 24)
-        Me.TxtGrpName.TabIndex = 9
+        Me.TxtGrpName.TabIndex = 3
         '
         'TxtGrpNumber
         '
         Me.TxtGrpNumber.Location = New System.Drawing.Point(180, 24)
         Me.TxtGrpNumber.Name = "TxtGrpNumber"
         Me.TxtGrpNumber.Size = New System.Drawing.Size(61, 24)
-        Me.TxtGrpNumber.TabIndex = 10
+        Me.TxtGrpNumber.TabIndex = 0
         '
         'ButtongroupsTableAdapter
         '
@@ -141,7 +141,7 @@ Partial Class FrmGroupMaint
         Me.Label1.Location = New System.Drawing.Point(24, 30)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(99, 17)
-        Me.Label1.TabIndex = 12
+        Me.Label1.TabIndex = 9
         Me.Label1.Text = "Group Number"
         '
         'LblGroupName
@@ -150,7 +150,7 @@ Partial Class FrmGroupMaint
         Me.LblGroupName.Location = New System.Drawing.Point(24, 76)
         Me.LblGroupName.Name = "LblGroupName"
         Me.LblGroupName.Size = New System.Drawing.Size(84, 17)
-        Me.LblGroupName.TabIndex = 13
+        Me.LblGroupName.TabIndex = 10
         Me.LblGroupName.Text = "Group name"
         '
         'StatusStrip1
@@ -161,7 +161,7 @@ Partial Class FrmGroupMaint
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 199)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(629, 22)
-        Me.StatusStrip1.TabIndex = 15
+        Me.StatusStrip1.TabIndex = 14
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'LblStatus
@@ -180,7 +180,7 @@ Partial Class FrmGroupMaint
         Me.LblNewGroupName.Location = New System.Drawing.Point(24, 121)
         Me.LblNewGroupName.Name = "LblNewGroupName"
         Me.LblNewGroupName.Size = New System.Drawing.Size(115, 17)
-        Me.LblNewGroupName.TabIndex = 16
+        Me.LblNewGroupName.TabIndex = 11
         Me.LblNewGroupName.Text = "New Group Name"
         '
         'BtnCopy
@@ -190,7 +190,7 @@ Partial Class FrmGroupMaint
         Me.BtnCopy.Location = New System.Drawing.Point(439, 118)
         Me.BtnCopy.Name = "BtnCopy"
         Me.BtnCopy.Size = New System.Drawing.Size(26, 23)
-        Me.BtnCopy.TabIndex = 17
+        Me.BtnCopy.TabIndex = 5
         Me.ToolTip5.SetToolTip(Me.BtnCopy, "Load existing name")
         Me.BtnCopy.UseVisualStyleBackColor = True
         '
@@ -211,7 +211,7 @@ Partial Class FrmGroupMaint
         Me.Nbutton1.Name = "Nbutton1"
         Me.Nbutton1.Sequence = 999
         Me.Nbutton1.Size = New System.Drawing.Size(130, 38)
-        Me.Nbutton1.TabIndex = 18
+        Me.Nbutton1.TabIndex = 1
         Me.Nbutton1.Value = "?"
         '
         'ChkCopyBtn
@@ -220,7 +220,7 @@ Partial Class FrmGroupMaint
         Me.ChkCopyBtn.Location = New System.Drawing.Point(495, 68)
         Me.ChkCopyBtn.Name = "ChkCopyBtn"
         Me.ChkCopyBtn.Size = New System.Drawing.Size(106, 21)
-        Me.ChkCopyBtn.TabIndex = 19
+        Me.ChkCopyBtn.TabIndex = 2
         Me.ChkCopyBtn.Text = "Copy Button"
         Me.ChkCopyBtn.UseVisualStyleBackColor = True
         '

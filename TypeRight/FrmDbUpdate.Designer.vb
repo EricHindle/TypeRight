@@ -183,7 +183,7 @@ Partial Class FrmDbUpdate
         Me.TxtCountry.Location = New System.Drawing.Point(100, 204)
         Me.TxtCountry.Name = "TxtCountry"
         Me.TxtCountry.Size = New System.Drawing.Size(218, 24)
-        Me.TxtCountry.TabIndex = 8
+        Me.TxtCountry.TabIndex = 7
         '
         'TxtPhone
         '
@@ -197,35 +197,35 @@ Partial Class FrmDbUpdate
         Me.TxtPostCode.Location = New System.Drawing.Point(100, 234)
         Me.TxtPostCode.Name = "TxtPostCode"
         Me.TxtPostCode.Size = New System.Drawing.Size(100, 24)
-        Me.TxtPostCode.TabIndex = 9
+        Me.TxtPostCode.TabIndex = 8
         '
         'TxtCounty
         '
         Me.TxtCounty.Location = New System.Drawing.Point(100, 174)
         Me.TxtCounty.Name = "TxtCounty"
         Me.TxtCounty.Size = New System.Drawing.Size(345, 24)
-        Me.TxtCounty.TabIndex = 7
+        Me.TxtCounty.TabIndex = 6
         '
         'TxtTown
         '
         Me.TxtTown.Location = New System.Drawing.Point(100, 144)
         Me.TxtTown.Name = "TxtTown"
         Me.TxtTown.Size = New System.Drawing.Size(345, 24)
-        Me.TxtTown.TabIndex = 6
+        Me.TxtTown.TabIndex = 5
         '
         'TxtAdd2
         '
         Me.TxtAdd2.Location = New System.Drawing.Point(100, 114)
         Me.TxtAdd2.Name = "TxtAdd2"
         Me.TxtAdd2.Size = New System.Drawing.Size(348, 24)
-        Me.TxtAdd2.TabIndex = 5
+        Me.TxtAdd2.TabIndex = 4
         '
         'TxtAdd1
         '
         Me.TxtAdd1.Location = New System.Drawing.Point(100, 83)
         Me.TxtAdd1.Name = "TxtAdd1"
         Me.TxtAdd1.Size = New System.Drawing.Size(345, 24)
-        Me.TxtAdd1.TabIndex = 4
+        Me.TxtAdd1.TabIndex = 3
         '
         'TxtSurname
         '
@@ -360,7 +360,7 @@ Partial Class FrmDbUpdate
         Me.Label1.Location = New System.Drawing.Point(356, 33)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(72, 17)
-        Me.Label1.TabIndex = 12
+        Me.Label1.TabIndex = 11
         Me.Label1.Text = "Last Name"
         '
         'Label2
@@ -369,7 +369,7 @@ Partial Class FrmDbUpdate
         Me.Label2.Location = New System.Drawing.Point(209, 33)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(72, 17)
-        Me.Label2.TabIndex = 11
+        Me.Label2.TabIndex = 10
         Me.Label2.Text = "First Name"
         '
         'Label3
@@ -405,7 +405,7 @@ Partial Class FrmDbUpdate
         Me.Label6.Location = New System.Drawing.Point(100, 33)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(32, 17)
-        Me.Label6.TabIndex = 10
+        Me.Label6.TabIndex = 9
         Me.Label6.Text = "Title"
         '
         'Label7
@@ -477,7 +477,7 @@ Partial Class FrmDbUpdate
         Me.Label14.Location = New System.Drawing.Point(12, 237)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(72, 17)
-        Me.Label14.TabIndex = 19
+        Me.Label14.TabIndex = 18
         Me.Label14.Text = "PostCode:"
         '
         'Label15
@@ -486,7 +486,7 @@ Partial Class FrmDbUpdate
         Me.Label15.Location = New System.Drawing.Point(12, 207)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(64, 17)
-        Me.Label15.TabIndex = 18
+        Me.Label15.TabIndex = 17
         Me.Label15.Text = "Country:"
         '
         'Label16
@@ -495,7 +495,7 @@ Partial Class FrmDbUpdate
         Me.Label16.Location = New System.Drawing.Point(12, 149)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(47, 17)
-        Me.Label16.TabIndex = 16
+        Me.Label16.TabIndex = 15
         Me.Label16.Text = "Town:"
         '
         'Label17
@@ -504,7 +504,7 @@ Partial Class FrmDbUpdate
         Me.Label17.Location = New System.Drawing.Point(12, 119)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(69, 17)
-        Me.Label17.TabIndex = 15
+        Me.Label17.TabIndex = 14
         Me.Label17.Text = "Address2:"
         '
         'Label18
@@ -513,7 +513,7 @@ Partial Class FrmDbUpdate
         Me.Label18.Location = New System.Drawing.Point(12, 86)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(69, 17)
-        Me.Label18.TabIndex = 14
+        Me.Label18.TabIndex = 13
         Me.Label18.Text = "Address1:"
         '
         'Label19
@@ -522,7 +522,7 @@ Partial Class FrmDbUpdate
         Me.Label19.Location = New System.Drawing.Point(12, 56)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(48, 17)
-        Me.Label19.TabIndex = 13
+        Me.Label19.TabIndex = 12
         Me.Label19.Text = "Name:"
         '
         'Label20
@@ -531,7 +531,7 @@ Partial Class FrmDbUpdate
         Me.Label20.Location = New System.Drawing.Point(9, 26)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(75, 17)
-        Me.Label20.TabIndex = 5
+        Me.Label20.TabIndex = 6
         Me.Label20.Text = "AddressID:"
         '
         'Label21
@@ -565,85 +565,85 @@ Partial Class FrmDbUpdate
         '
         Me.MnuBkUp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuBkUpGroups, Me.MnuBkUpButtons, Me.MnuBkUpSenders, Me.MnuBkUpSenderButtons, Me.MnuBkUpAll})
         Me.MnuBkUp.Name = "MnuBkUp"
-        Me.MnuBkUp.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUp.Size = New System.Drawing.Size(113, 22)
         Me.MnuBkUp.Text = "Backup"
         '
         'MnuBkUpGroups
         '
         Me.MnuBkUpGroups.Name = "MnuBkUpGroups"
-        Me.MnuBkUpGroups.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpGroups.Size = New System.Drawing.Size(154, 22)
         Me.MnuBkUpGroups.Text = "Groups"
         '
         'MnuBkUpButtons
         '
         Me.MnuBkUpButtons.Name = "MnuBkUpButtons"
-        Me.MnuBkUpButtons.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpButtons.Size = New System.Drawing.Size(154, 22)
         Me.MnuBkUpButtons.Text = "Group Buttons"
         '
         'MnuBkUpSenders
         '
         Me.MnuBkUpSenders.Name = "MnuBkUpSenders"
-        Me.MnuBkUpSenders.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpSenders.Size = New System.Drawing.Size(154, 22)
         Me.MnuBkUpSenders.Text = "Senders"
         '
         'MnuBkUpSenderButtons
         '
         Me.MnuBkUpSenderButtons.Name = "MnuBkUpSenderButtons"
-        Me.MnuBkUpSenderButtons.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpSenderButtons.Size = New System.Drawing.Size(154, 22)
         Me.MnuBkUpSenderButtons.Text = "Sender Buttons"
         '
         'MnuBkUpAll
         '
         Me.MnuBkUpAll.Name = "MnuBkUpAll"
-        Me.MnuBkUpAll.Size = New System.Drawing.Size(180, 22)
+        Me.MnuBkUpAll.Size = New System.Drawing.Size(154, 22)
         Me.MnuBkUpAll.Text = "All"
         '
         'MnuRest
         '
         Me.MnuRest.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuRestGroups, Me.MnuRestButtons, Me.MnuRestSenders, Me.MnuRestSenderButtons, Me.MnuRestAll})
         Me.MnuRest.Name = "MnuRest"
-        Me.MnuRest.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRest.Size = New System.Drawing.Size(113, 22)
         Me.MnuRest.Text = "Restore"
         '
         'MnuRestGroups
         '
         Me.MnuRestGroups.Name = "MnuRestGroups"
-        Me.MnuRestGroups.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestGroups.Size = New System.Drawing.Size(154, 22)
         Me.MnuRestGroups.Text = "Groups"
         '
         'MnuRestButtons
         '
         Me.MnuRestButtons.Name = "MnuRestButtons"
-        Me.MnuRestButtons.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestButtons.Size = New System.Drawing.Size(154, 22)
         Me.MnuRestButtons.Text = "Group Buttons"
         '
         'MnuRestSenders
         '
         Me.MnuRestSenders.Name = "MnuRestSenders"
-        Me.MnuRestSenders.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestSenders.Size = New System.Drawing.Size(154, 22)
         Me.MnuRestSenders.Text = "Senders"
         '
         'MnuRestSenderButtons
         '
         Me.MnuRestSenderButtons.Name = "MnuRestSenderButtons"
-        Me.MnuRestSenderButtons.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestSenderButtons.Size = New System.Drawing.Size(154, 22)
         Me.MnuRestSenderButtons.Text = "Sender Buttons"
         '
         'MnuRestAll
         '
         Me.MnuRestAll.Name = "MnuRestAll"
-        Me.MnuRestAll.Size = New System.Drawing.Size(180, 22)
+        Me.MnuRestAll.Size = New System.Drawing.Size(154, 22)
         Me.MnuRestAll.Text = "All"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(110, 6)
         '
         'MnuClose
         '
         Me.MnuClose.Name = "MnuClose"
-        Me.MnuClose.Size = New System.Drawing.Size(180, 22)
+        Me.MnuClose.Size = New System.Drawing.Size(113, 22)
         Me.MnuClose.Text = "Close"
         '
         'TxtSWord
@@ -666,7 +666,7 @@ Partial Class FrmDbUpdate
         Me.Label22.Location = New System.Drawing.Point(12, 179)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(59, 17)
-        Me.Label22.TabIndex = 17
+        Me.Label22.TabIndex = 16
         Me.Label22.Text = "County:"
         '
         'GroupBox1
@@ -767,7 +767,7 @@ Partial Class FrmDbUpdate
         Me.BtnClear.Location = New System.Drawing.Point(462, 17)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(47, 34)
-        Me.BtnClear.TabIndex = 6
+        Me.BtnClear.TabIndex = 5
         Me.BtnClear.Text = "Clear"
         Me.ToolTip4.SetToolTip(Me.BtnClear, "No selected record")
         Me.BtnClear.UseVisualStyleBackColor = True
@@ -790,7 +790,7 @@ Partial Class FrmDbUpdate
         Me.LblId.Location = New System.Drawing.Point(588, 53)
         Me.LblId.Name = "LblId"
         Me.LblId.Size = New System.Drawing.Size(21, 17)
-        Me.LblId.TabIndex = 10
+        Me.LblId.TabIndex = 6
         Me.LblId.Text = "-1"
         Me.LblId.Visible = False
         '

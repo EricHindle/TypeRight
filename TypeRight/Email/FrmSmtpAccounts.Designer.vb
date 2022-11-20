@@ -54,7 +54,7 @@ Partial Class FrmSmtpAccounts
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(584, 22)
-        Me.StatusStrip1.TabIndex = 0
+        Me.StatusStrip1.TabIndex = 15
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'LblStatus
@@ -74,7 +74,7 @@ Partial Class FrmSmtpAccounts
         Me.BtnClose.Location = New System.Drawing.Point(497, 209)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 41)
-        Me.BtnClose.TabIndex = 31
+        Me.BtnClose.TabIndex = 10
         Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
@@ -86,7 +86,7 @@ Partial Class FrmSmtpAccounts
         Me.TxtPassword.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtPassword.Name = "TxtPassword"
         Me.TxtPassword.Size = New System.Drawing.Size(371, 25)
-        Me.TxtPassword.TabIndex = 32
+        Me.TxtPassword.TabIndex = 1
         '
         'TxtHost
         '
@@ -96,7 +96,7 @@ Partial Class FrmSmtpAccounts
         Me.TxtHost.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtHost.Name = "TxtHost"
         Me.TxtHost.Size = New System.Drawing.Size(371, 25)
-        Me.TxtHost.TabIndex = 33
+        Me.TxtHost.TabIndex = 2
         '
         'TxtPort
         '
@@ -104,7 +104,7 @@ Partial Class FrmSmtpAccounts
         Me.TxtPort.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtPort.Name = "TxtPort"
         Me.TxtPort.Size = New System.Drawing.Size(117, 25)
-        Me.TxtPort.TabIndex = 34
+        Me.TxtPort.TabIndex = 3
         '
         'chkSsl
         '
@@ -112,7 +112,7 @@ Partial Class FrmSmtpAccounts
         Me.chkSsl.Location = New System.Drawing.Point(108, 188)
         Me.chkSsl.Name = "chkSsl"
         Me.chkSsl.Size = New System.Drawing.Size(105, 22)
-        Me.chkSsl.TabIndex = 35
+        Me.chkSsl.TabIndex = 4
         Me.chkSsl.Text = "SSL Enabled"
         Me.chkSsl.UseVisualStyleBackColor = True
         '
@@ -122,7 +122,7 @@ Partial Class FrmSmtpAccounts
         Me.chkCredReq.Location = New System.Drawing.Point(108, 228)
         Me.chkCredReq.Name = "chkCredReq"
         Me.chkCredReq.Size = New System.Drawing.Size(158, 22)
-        Me.chkCredReq.TabIndex = 36
+        Me.chkCredReq.TabIndex = 5
         Me.chkCredReq.Text = "Credentials Required"
         Me.chkCredReq.UseVisualStyleBackColor = True
         '
@@ -134,7 +134,7 @@ Partial Class FrmSmtpAccounts
         Me.BtnClear.Location = New System.Drawing.Point(360, 209)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(75, 41)
-        Me.BtnClear.TabIndex = 37
+        Me.BtnClear.TabIndex = 6
         Me.BtnClear.Text = "Clear"
         Me.BtnClear.UseVisualStyleBackColor = True
         '
@@ -148,7 +148,7 @@ Partial Class FrmSmtpAccounts
         Me.BtnAdd.Location = New System.Drawing.Point(497, 20)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(75, 41)
-        Me.BtnAdd.TabIndex = 38
+        Me.BtnAdd.TabIndex = 7
         Me.BtnAdd.Text = "Add"
         Me.BtnAdd.UseVisualStyleBackColor = False
         '
@@ -162,7 +162,7 @@ Partial Class FrmSmtpAccounts
         Me.BtnUpdate.Location = New System.Drawing.Point(497, 75)
         Me.BtnUpdate.Name = "BtnUpdate"
         Me.BtnUpdate.Size = New System.Drawing.Size(75, 41)
-        Me.BtnUpdate.TabIndex = 39
+        Me.BtnUpdate.TabIndex = 8
         Me.BtnUpdate.Text = "Update"
         Me.BtnUpdate.UseVisualStyleBackColor = False
         '
@@ -176,7 +176,7 @@ Partial Class FrmSmtpAccounts
         Me.BtnDelete.Location = New System.Drawing.Point(497, 131)
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(75, 41)
-        Me.BtnDelete.TabIndex = 40
+        Me.BtnDelete.TabIndex = 9
         Me.BtnDelete.Text = "Delete"
         Me.BtnDelete.UseVisualStyleBackColor = False
         '
@@ -186,7 +186,7 @@ Partial Class FrmSmtpAccounts
         Me.Label1.Location = New System.Drawing.Point(12, 19)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(60, 18)
-        Me.Label1.TabIndex = 41
+        Me.Label1.TabIndex = 11
         Me.Label1.Text = "Account"
         '
         'Label2
@@ -195,7 +195,7 @@ Partial Class FrmSmtpAccounts
         Me.Label2.Location = New System.Drawing.Point(12, 62)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(69, 18)
-        Me.Label2.TabIndex = 42
+        Me.Label2.TabIndex = 12
         Me.Label2.Text = "Password"
         '
         'Label3
@@ -204,7 +204,7 @@ Partial Class FrmSmtpAccounts
         Me.Label3.Location = New System.Drawing.Point(12, 105)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(38, 18)
-        Me.Label3.TabIndex = 43
+        Me.Label3.TabIndex = 13
         Me.Label3.Text = "Host"
         '
         'Label4
@@ -213,7 +213,7 @@ Partial Class FrmSmtpAccounts
         Me.Label4.Location = New System.Drawing.Point(12, 148)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(34, 18)
-        Me.Label4.TabIndex = 44
+        Me.Label4.TabIndex = 14
         Me.Label4.Text = "Port"
         '
         'CbSmtpAccount
@@ -224,7 +224,7 @@ Partial Class FrmSmtpAccounts
         Me.CbSmtpAccount.Location = New System.Drawing.Point(108, 16)
         Me.CbSmtpAccount.Name = "CbSmtpAccount"
         Me.CbSmtpAccount.Size = New System.Drawing.Size(371, 26)
-        Me.CbSmtpAccount.TabIndex = 45
+        Me.CbSmtpAccount.TabIndex = 0
         '
         'FrmSmtpAccounts
         '

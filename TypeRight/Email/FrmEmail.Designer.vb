@@ -60,7 +60,7 @@ Partial Class FrmEmail
         Me.SenderButtonPanel.Margin = New System.Windows.Forms.Padding(4)
         Me.SenderButtonPanel.Name = "SenderButtonPanel"
         Me.SenderButtonPanel.Size = New System.Drawing.Size(154, 430)
-        Me.SenderButtonPanel.TabIndex = 6
+        Me.SenderButtonPanel.TabIndex = 0
         '
         'StatusStrip1
         '
@@ -71,7 +71,7 @@ Partial Class FrmEmail
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(938, 22)
-        Me.StatusStrip1.TabIndex = 19
+        Me.StatusStrip1.TabIndex = 5
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'LblStatus
@@ -93,7 +93,7 @@ Partial Class FrmEmail
         Me.TxtTo.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtTo.Name = "TxtTo"
         Me.TxtTo.Size = New System.Drawing.Size(622, 25)
-        Me.TxtTo.TabIndex = 20
+        Me.TxtTo.TabIndex = 2
         '
         'Label1
         '
@@ -101,7 +101,7 @@ Partial Class FrmEmail
         Me.Label1.Location = New System.Drawing.Point(13, 54)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(31, 18)
-        Me.Label1.TabIndex = 21
+        Me.Label1.TabIndex = 6
         Me.Label1.Text = "To:"
         '
         'Label2
@@ -110,7 +110,7 @@ Partial Class FrmEmail
         Me.Label2.Location = New System.Drawing.Point(13, 6)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(47, 18)
-        Me.Label2.TabIndex = 22
+        Me.Label2.TabIndex = 5
         Me.Label2.Text = "From:"
         '
         'Label3
@@ -119,7 +119,7 @@ Partial Class FrmEmail
         Me.Label3.Location = New System.Drawing.Point(13, 102)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(61, 18)
-        Me.Label3.TabIndex = 23
+        Me.Label3.TabIndex = 7
         Me.Label3.Text = "Subject:"
         '
         'Label4
@@ -128,7 +128,7 @@ Partial Class FrmEmail
         Me.Label4.Location = New System.Drawing.Point(13, 150)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(44, 18)
-        Me.Label4.TabIndex = 24
+        Me.Label4.TabIndex = 8
         Me.Label4.Text = "Text:"
         '
         'TxtSubject
@@ -140,7 +140,7 @@ Partial Class FrmEmail
         Me.TxtSubject.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtSubject.Name = "TxtSubject"
         Me.TxtSubject.Size = New System.Drawing.Size(622, 25)
-        Me.TxtSubject.TabIndex = 25
+        Me.TxtSubject.TabIndex = 3
         '
         'TxtText
         '
@@ -153,7 +153,7 @@ Partial Class FrmEmail
         Me.TxtText.Multiline = True
         Me.TxtText.Name = "TxtText"
         Me.TxtText.Size = New System.Drawing.Size(759, 254)
-        Me.TxtText.TabIndex = 26
+        Me.TxtText.TabIndex = 4
         '
         'BtnClose
         '
@@ -162,7 +162,7 @@ Partial Class FrmEmail
         Me.BtnClose.Location = New System.Drawing.Point(847, 440)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 41)
-        Me.BtnClose.TabIndex = 28
+        Me.BtnClose.TabIndex = 4
         Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
@@ -176,7 +176,7 @@ Partial Class FrmEmail
         Me.BtnSend.Location = New System.Drawing.Point(13, 439)
         Me.BtnSend.Name = "BtnSend"
         Me.BtnSend.Size = New System.Drawing.Size(75, 41)
-        Me.BtnSend.TabIndex = 29
+        Me.BtnSend.TabIndex = 1
         Me.BtnSend.Text = "Send"
         Me.BtnSend.UseVisualStyleBackColor = False
         '
@@ -188,7 +188,7 @@ Partial Class FrmEmail
         Me.BtnPasteTo.Location = New System.Drawing.Point(724, 53)
         Me.BtnPasteTo.Name = "BtnPasteTo"
         Me.BtnPasteTo.Size = New System.Drawing.Size(26, 23)
-        Me.BtnPasteTo.TabIndex = 30
+        Me.BtnPasteTo.TabIndex = 9
         Me.BtnPasteTo.UseVisualStyleBackColor = True
         '
         'BtnPasteSubject
@@ -199,7 +199,7 @@ Partial Class FrmEmail
         Me.BtnPasteSubject.Location = New System.Drawing.Point(724, 100)
         Me.BtnPasteSubject.Name = "BtnPasteSubject"
         Me.BtnPasteSubject.Size = New System.Drawing.Size(26, 23)
-        Me.BtnPasteSubject.TabIndex = 31
+        Me.BtnPasteSubject.TabIndex = 10
         Me.BtnPasteSubject.UseVisualStyleBackColor = True
         '
         'BtnPasteText
@@ -210,7 +210,7 @@ Partial Class FrmEmail
         Me.BtnPasteText.Location = New System.Drawing.Point(724, 145)
         Me.BtnPasteText.Name = "BtnPasteText"
         Me.BtnPasteText.Size = New System.Drawing.Size(26, 23)
-        Me.BtnPasteText.TabIndex = 32
+        Me.BtnPasteText.TabIndex = 11
         Me.BtnPasteText.UseVisualStyleBackColor = True
         '
         'SplitContainer1
@@ -241,17 +241,17 @@ Partial Class FrmEmail
         Me.SplitContainer1.Panel2.Controls.Add(Me.SenderButtonPanel)
         Me.SplitContainer1.Size = New System.Drawing.Size(926, 430)
         Me.SplitContainer1.SplitterDistance = 768
-        Me.SplitContainer1.TabIndex = 33
+        Me.SplitContainer1.TabIndex = 0
         '
-        'cbEmailUsername
+        'cbSmtpAccounts
         '
         Me.cbSmtpAccounts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbSmtpAccounts.FormattingEnabled = True
         Me.cbSmtpAccounts.Location = New System.Drawing.Point(95, 3)
-        Me.cbSmtpAccounts.Name = "cbEmailUsername"
+        Me.cbSmtpAccounts.Name = "cbSmtpAccounts"
         Me.cbSmtpAccounts.Size = New System.Drawing.Size(341, 26)
-        Me.cbSmtpAccounts.TabIndex = 35
+        Me.cbSmtpAccounts.TabIndex = 0
         '
         'TxtFromName
         '
@@ -261,7 +261,7 @@ Partial Class FrmEmail
         Me.TxtFromName.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtFromName.Name = "TxtFromName"
         Me.TxtFromName.Size = New System.Drawing.Size(298, 25)
-        Me.TxtFromName.TabIndex = 34
+        Me.TxtFromName.TabIndex = 1
         '
         'BtnClear
         '
@@ -271,7 +271,7 @@ Partial Class FrmEmail
         Me.BtnClear.Location = New System.Drawing.Point(700, 440)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(75, 41)
-        Me.BtnClear.TabIndex = 34
+        Me.BtnClear.TabIndex = 3
         Me.BtnClear.Text = "Clear"
         Me.BtnClear.UseVisualStyleBackColor = True
         '
@@ -285,7 +285,7 @@ Partial Class FrmEmail
         Me.BtnSmtp.Location = New System.Drawing.Point(566, 440)
         Me.BtnSmtp.Name = "BtnSmtp"
         Me.BtnSmtp.Size = New System.Drawing.Size(75, 41)
-        Me.BtnSmtp.TabIndex = 35
+        Me.BtnSmtp.TabIndex = 2
         Me.BtnSmtp.Text = "SMTP accounts"
         Me.BtnSmtp.UseVisualStyleBackColor = False
         '
