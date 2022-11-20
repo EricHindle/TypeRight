@@ -14,14 +14,42 @@ Public Class ButtonUtil
     Public Const FIELD_START_MARKER As String = "?="
     Public Const FIELD_END_MARKER As String = "=?"
 #End Region
-    Private Shared strKeyText As String
+#Region "variables"
     Public Shared tooltipcommon As New Windows.Forms.ToolTip
     Private Shared strButtonHint As String
-    Private Shared SenderButtonList As List(Of Nbutton)
+    Private Shared oButtonList As List(Of Nbutton)
     Private Shared oCurrentSenderRow As TypeRightDataSet.sendersRow
     Private Shared ReadOnly oTable As New TypeRightDataSet.sendersDataTable
+#End Region
+#Region "subroutines"
+    Private Shared Sub AddButtonToList(btnSeq As Integer, oButton As TypeRightDataSet.senderButtonRow, btnCaption As String, btnValue As String, btnHint As String)
+        Dim isButtonBold As Boolean
+        Dim isButtonItalic As Boolean
+        Dim strButtonFontName As String
+        Dim dButtonFontSize As Decimal
+        If oButton IsNot Nothing Then
+            isButtonBold = oButton.buttonBold
+            isButtonItalic = oButton.buttonItalic
+            strButtonFontName = oButton.buttonFontName
+            dButtonFontSize = oButton.buttonFontSize
+        Else
+            strButtonFontName = "Tahoma"
+            isButtonBold = False
+            isButtonItalic = False
+            dButtonFontSize = 9.0
+        End If
+        If btnValue IsNot Nothing AndAlso Not String.IsNullOrEmpty(btnValue) Then
+            Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(-1, -1, btnSeq, btnCaption, btnHint, btnValue, strButtonFontName, dButtonFontSize, isButtonBold, isButtonItalic, False, Nbutton.DataSource.Sender).Build
+            oButtonList.Add(_nbutton)
+        End If
+    End Sub
+    Public Shared Sub RemovePanelButtons(ByRef ButtonPanel As Panel)
+        ButtonPanel.Controls.Clear()
+    End Sub
+#End Region
+#Region "functions"
     Public Shared Function LoadSenderButtons(sndKey As Integer) As List(Of Nbutton)
-        SenderButtonList = New List(Of Nbutton)
+        oButtonList = New List(Of Nbutton)
         Dim strButtonTxt As String
         Dim strButtonValue As String
         Dim fname As String
@@ -93,52 +121,19 @@ Public Class ButtonUtil
             strButtonTxt = _col.ColumnName
             strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 20))
             strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
-            AddSenderButton(iBct, senderButton, strButtonCaption, strButtonValue, strButtonHint)
+            AddButtonToList(iBct, senderButton, strButtonCaption, strButtonValue, strButtonHint)
             iBct += 1
         Next
         Dim caption As String = "Full Name"
-        AddSenderButton(iBct, GetSenderButton(caption), caption, fullname, fullname.Substring(0, Math.Min(fullname.Length, 50)))
+        AddButtonToList(iBct, GetSenderButton(caption), caption, fullname, fullname.Substring(0, Math.Min(fullname.Length, 50)))
         iBct += 1
         caption = "Full Addr"
-        AddSenderButton(iBct, GetSenderButton(caption), caption, fulladdr, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)))
+        AddButtonToList(iBct, GetSenderButton(caption), caption, fulladdr, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)))
         iBct += 1
         caption = "Age"
-        AddSenderButton(iBct, GetSenderButton(caption), caption, strAge, strAge)
-        Return SenderButtonList
+        AddButtonToList(iBct, GetSenderButton(caption), caption, strAge, strAge)
+        Return oButtonList
     End Function
-    Private Shared Sub AddSenderButton(btnSeq As Integer, oSenderButton As TypeRightDataSet.senderButtonRow, btnCaption As String, btnValue As String, btnHint As String)
-        Dim isButtonBold As Boolean
-        Dim isButtonItalic As Boolean
-        Dim strButtonFontName As String
-        Dim dButtonFontSize As Decimal
-        If oSenderButton IsNot Nothing Then
-            isButtonBold = oSenderButton.buttonBold
-            isButtonItalic = oSenderButton.buttonItalic
-            strButtonFontName = oSenderButton.buttonFontName
-            dButtonFontSize = oSenderButton.buttonFontSize
-        Else
-            strButtonFontName = "Tahoma"
-            isButtonBold = False
-            isButtonItalic = False
-            dButtonFontSize = 9.0
-        End If
-        If btnValue IsNot Nothing AndAlso Not String.IsNullOrEmpty(btnValue) Then
-            Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(-1, -1, btnSeq, btnCaption, btnHint, btnValue, strButtonFontName, dButtonFontSize, isButtonBold, isButtonItalic, False, Nbutton.DataSource.Sender).Build
-            SenderButtonList.Add(_nbutton)
-        End If
-    End Sub
-    Private Sub AddButton(btnId As Integer, btnSeq As Integer,
-                          btnCaption As String, btnValue As String, btnFontname As String, btnSize As Single,
-                          btnHint As String, isBold As Boolean, isItalic As Boolean, isEncrypt As Boolean,
-                           iActGrpNo As Integer)
-        'If btnValue IsNot Nothing AndAlso Not String.IsNullOrEmpty(btnValue) Then
-        '    Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(btnId, iActGrpNo, btnSeq,
-        '                                                                    btnCaption, btnHint, btnValue,
-        '                                                                    btnFontname, btnSize, isBold,
-        '                                                                    isItalic, isEncrypt, Nbutton.DataSource.Group).Build
-        '    groupButtonList.Add(_nbutton)
-        'End If
-    End Sub
     Public Shared Function LoadGroupButtons(grpNo As Long) As List(Of Nbutton)
         Dim groupButtonList As New List(Of Nbutton)
         Dim _nbb As New NButtonBuilder
@@ -153,13 +148,6 @@ Public Class ButtonUtil
         Next
         Return groupButtonList
     End Function
-    Public Shared Sub DrawButtonsInPanel(ByRef SenderButtonPanel As Panel, senderButtonList As List(Of Nbutton))
-        RemovePanelButtons(SenderButtonPanel)
-        FillButtonPanel(SenderButtonPanel, senderButtonList)
-    End Sub
-    Public Shared Sub RemovePanelButtons(ByRef ButtonPanel As Panel)
-        ButtonPanel.Controls.Clear()
-    End Sub
     Public Shared Function FillButtonPanel(ByRef oPanel As Panel, ByRef oList As List(Of Nbutton), Optional rowOffset As Integer = 0, ByRef Optional buttonMenu As ContextMenuStrip = Nothing) As Integer
         iButtonCt = oList.Count
         Dim iRowCt As Integer = CInt(iButtonCt / iColCt)
@@ -201,7 +189,6 @@ Public Class ButtonUtil
         Next
         Return iMaxRow
     End Function
-
     Public Shared Function Calc_age(dtDob As DateTime) As Integer
         Dim fmm As Integer
         Dim tmm As Integer
@@ -212,7 +199,7 @@ Public Class ButtonUtil
         If fmm > tmm Or (fmm = tmm And dtDob.Day > Now.Day) Then
             age -= 1
         End If
-        Calc_age = age
+        Return age
     End Function
     Public Shared Function GetDBFields(ByVal sKeyText As String) As String
         Dim fieldName As String
@@ -256,10 +243,11 @@ Public Class ButtonUtil
                 End If
             Loop
         Catch ex As ArgumentOutOfRangeException
-
+            LogUtil.Exception("Substring Exception", ex, "ApplySubstrings")
         End Try
 
         Return newText
     End Function
+#End Region
 
 End Class

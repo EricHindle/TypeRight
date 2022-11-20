@@ -5,14 +5,6 @@ Imports System.Text
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
 Public Class FrmButtonList
-#Region "constants"
-    Private Const FRAME_WIDTH As Integer = 18
-    Private Const SUB_START_MARKER As String = "$="
-    Private Const SUB_MID_MARKER As String = "$$"
-    Private Const SUB_END_MARKER As String = "=$"
-    Private Const FIELD_START_MARKER As String = "?="
-    Private Const FIELD_END_MARKER As String = "=?"
-#End Region
 #Region "private variables"
     Private strKeyText As String
     Private ReadOnly iChar As Integer
@@ -34,7 +26,7 @@ Public Class FrmButtonList
     Private bLockClock As Boolean
     Private ReadOnly bDrag As Boolean
     Private ReadOnly iDragBtnIndex As Integer
-    Private oCurrentSenderRow As TypeRightDataSet.sendersRow
+    Private ReadOnly oCurrentSenderRow As TypeRightDataSet.sendersRow
 
     Dim redClockText As String
 #End Region
@@ -46,7 +38,7 @@ Public Class FrmButtonList
         InitialiseApplication()
         GetFormPos(Me, My.Settings.ButtonListPos)
         ' Set window width based on number of columns and button width
-        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
+        Me.Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
         FillNamesList()
         For Each cmbItem As KeyValuePair(Of Integer, String) In cbNames.Items
             Dim key As Integer = cmbItem.Key
@@ -118,15 +110,10 @@ Public Class FrmButtonList
         SetTopMost()
         SaveOptions()
     End Sub
-    Private Sub MnuOptions1_Click(sender As Object, e As EventArgs) Handles mnuOptions1.Click
+    Private Sub MnuOptions1_Click(sender As Object, e As EventArgs) Handles mnuOptions1.Click, mnuOptions.Click, PicOptions.Click
         ShowOptions()
     End Sub
-    Private Sub MnuOptions_Click(sender As Object, e As EventArgs) Handles mnuOptions.Click
-        ShowOptions()
-    End Sub
-    Private Sub ImgOptions_Click(sender As Object, e As EventArgs) Handles PicOptions.Click
-        ShowOptions()
-    End Sub
+
     Private Sub ShowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowToolStripMenuItem.Click
         Me.WindowState = FormWindowState.Normal
     End Sub
@@ -295,7 +282,7 @@ Public Class FrmButtonList
             iColCt -= 1
             DrawButtons()
         End If
-        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
+        Me.Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
         My.Settings.Columns = iColCt
         My.Settings.Save()
     End Sub
@@ -305,7 +292,7 @@ Public Class FrmButtonList
             iColCt += 1
             DrawButtons()
         End If
-        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
+        Me.Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
         My.Settings.Columns = iColCt
         My.Settings.Save()
     End Sub
@@ -355,8 +342,8 @@ Public Class FrmButtonList
             If isPro And _nButton.Encrypt Then
                 strKeyText = oNCrypter.DecryptData(strKeyText)
             End If
-            strKeyText = GetDBFields(strKeyText)
-            strKeyText = ApplySubstrings(strKeyText)
+            strKeyText = ButtonUtil.GetDBFields(strKeyText)
+            strKeyText = ButtonUtil.ApplySubstrings(strKeyText)
             Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
             If GreenClock.Visible = True Then
                 RedClock.Visible = True
@@ -435,7 +422,7 @@ Public Class FrmButtonList
             addBuilder.Append(pcode)
         End If
         fulladdr = addBuilder.ToString
-        strAge = Format(Calc_age(dtDob))
+        strAge = Format(ButtonUtil.Calc_age(dtDob))
         iBct = 0
         Dim senderButton As TypeRightDataSet.senderButtonRow
         For Each _col As DataColumn In oTable.Columns
@@ -509,8 +496,8 @@ Public Class FrmButtonList
     Private Sub DrawGroupButtons()
         LogUtil.Info("Draw group buttons", MyBase.Name)
         lResizeActive = False
-        RemoveGroupButtons()
-        FillButtonPanel(GroupButtonPanel, groupButtonList)
+        ButtonUtil.RemovePanelButtons(GroupButtonPanel)
+        ButtonUtil.FillButtonPanel(GroupButtonPanel, groupButtonList, 0, mnuButtons)
         SenderButtonPanel.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + 4
         Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
         GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height
@@ -519,69 +506,20 @@ Public Class FrmButtonList
     Private Sub DrawSenderButtons()
         LogUtil.Info("Draw sender buttons", MyBase.Name)
         lResizeActive = False
-        RemoveSenderButtons()
-        FillButtonPanel(SenderButtonPanel, senderButtonList)
+        ButtonUtil.RemovePanelButtons(SenderButtonPanel)
+        ButtonUtil.FillButtonPanel(SenderButtonPanel, senderButtonList, 0, mnuButtons)
         Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
         GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height + 4
         lResizeActive = True
-    End Sub
-    Private Sub RemoveGroupButtons()
-        GroupButtonPanel.Controls.Clear()
-    End Sub
-    Private Sub RemoveSenderButtons()
-        SenderButtonPanel.Controls.Clear()
     End Sub
     Friend Sub DrawButtons()
         LogUtil.Info("Draw all buttons", MyBase.Name)
         lResizeActive = False
         ' Size of window
-        Me.Width = (iColCt * iButtonWidth) + FRAME_WIDTH
+        Me.Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
         DrawGroupButtons()
         DrawSenderButtons()
         lResizeActive = True
-    End Sub
-    Private Sub FillButtonPanel(ByRef oPanel As Panel, ByRef oList As List(Of Nbutton))
-        LogUtil.Info("Fill button panel " & oPanel.Name, MyBase.Name)
-        iButtonCt = oList.Count
-        oPanel.Width = Me.Width - FRAME_WIDTH
-        Dim iRowCt As Integer = CInt(iButtonCt / iColCt)
-        ' Any left over ? Then add a row
-        Dim iMod As Integer = (iButtonCt) Mod iColCt
-        If iMod > 0 Then
-            iRowCt += 1
-        End If
-        oPanel.Height = iRowCt * 27
-        Dim iBtnRow As Integer = 0
-        Dim iBtnCol As Integer = 0
-        For Each oBtn In oList
-            'AddHandler oBtn.Click, AddressOf Button_Click
-            oPanel.Controls.Add(oBtn)
-            ToolTip2.SetToolTip(oBtn.Button1, oBtn.Value)
-            oBtn.Top = 0 + (iBtnRow * 27)
-            oBtn.Left = 0 + (iBtnCol * iButtonWidth)
-            oBtn.Size = New Drawing.Size(iButtonWidth, 27)
-            oBtn.Visible = True
-            oBtn.ContextMenuStrip = mnuButtons
-            oBtn.Name = oPanel.Name & CStr(iBtnRow) & CStr(iBtnCol)
-            iBtnRow += 1
-            If iBtnRow > iRowCt - 2 Then
-                If iBtnCol > iMod - 1 And iMod > 0 Then
-                    iBtnCol += 1
-                    iBtnRow = 0
-                    Continue For
-                Else
-                    If iBtnRow > iRowCt - 1 Then
-                        iBtnCol += 1
-                        iBtnRow = 0
-                    End If
-                End If
-            End If
-
-        Next
-        For Each _btn As Nbutton In oPanel.Controls
-            RemoveHandler _btn.Button1.Click, AddressOf Button_Click
-            AddHandler _btn.Button1.Click, AddressOf Button_Click
-        Next
     End Sub
     Private Sub SetTopMost()
         If bOnTop Then
@@ -616,84 +554,27 @@ Public Class FrmButtonList
             Me.Opacity = iTransPerc / 100
             GrpBottom.Visible = bToolBar
             SetTopMost()
-            If Me.Width <> (iColCt * iButtonWidth) + FRAME_WIDTH Then
+            If Me.Width <> (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH Then
                 DrawButtons()
             End If
         End Using
     End Sub
 #End Region
 #Region "functions"
-    Public Shared Function Calc_age(dtDob As DateTime) As Integer
-        Dim fmm As Integer
-        Dim tmm As Integer
-        Dim age As Integer
-        fmm = Month(dtDob)
-        tmm = Month(Now)
-        age = Year(Now) - Year(dtDob)
-        If fmm > tmm Or (fmm = tmm And dtDob.Day > Now.Day) Then
-            age -= 1
-        End If
-        Calc_age = age
-    End Function
     Private Sub SavePosition()
         LogUtil.Info("Saved screen position", MyBase.Name)
         My.Settings.ButtonListPos = SetFormPos(Me)
+        My.Settings.Save()
     End Sub
-    Private Function GetDBFields(ByVal sKeyText As String) As String
-        Dim fieldName As String
-        Dim fieldValue As String
-        If oCurrentSenderRow Is Nothing OrElse oCurrentSenderRow.SenderId <> iCurrSender Then
-            oCurrentSenderRow = GetSenderRowById(iCurrSender)
-        End If
-        Dim newText As String = sKeyText
-        fieldName = GetValueBetweenBrackets(newText, FIELD_START_MARKER, FIELD_END_MARKER)
-        Dim fieldRow As TypeRightDataSet.senderButtonRow
-        Do Until String.IsNullOrEmpty(fieldName)
-            fieldRow = GetSenderButton(fieldName)
-            fieldValue = If(IsDBNull(oCurrentSenderRow(fieldName)), "", CStr(oCurrentSenderRow(fieldName)))
-            If fieldRow IsNot Nothing AndAlso CBool(fieldRow.buttonEncrypted) Then
-                fieldValue = oNCrypter.DecryptData(fieldValue)
-            End If
-            newText = newText.Replace(FIELD_START_MARKER & fieldName & FIELD_END_MARKER, fieldValue)
-            fieldName = GetValueBetweenBrackets(newText, FIELD_START_MARKER, FIELD_END_MARKER)
-        Loop
-        Return newText
-    End Function
-    Private Function ApplySubstrings(ByVal sKeyText As String) As String
-        Dim newText As String = sKeyText
-        Try
-            Dim subText As String = GetValueBetweenBrackets(newText, SUB_START_MARKER, SUB_END_MARKER)
-            Do Until String.IsNullOrEmpty(subText)
-                Dim subparts As String() = Split(subText, SUB_MID_MARKER)
-                Dim subValue As String
-                If subparts.Length = 2 Then
-                    Dim subInts As String() = Split(subparts(1), ",")
-                    If subInts.Length = 2 Then
-                        subValue = subparts(0).Substring(CInt(subInts(0)), CInt(subInts(1)))
-                    Else
-                        subValue = subparts(0).Substring(CInt(subInts(0)))
-                    End If
-                    newText = newText.Replace(SUB_START_MARKER & subText & SUB_END_MARKER, subValue)
-                    subText = GetValueBetweenBrackets(newText, SUB_START_MARKER, SUB_END_MARKER)
-                Else
-                    newText = newText.Replace(SUB_START_MARKER, "!!").Replace(SUB_END_MARKER, "!!")
-                    subText = ""
-                End If
-            Loop
-        Catch ex As ArgumentOutOfRangeException
-            LogUtil.Exception("Substring Exception", ex, MyBase.Name)
-        End Try
-
-        Return newText
-    End Function
-
     Private Sub PicEmail_Click(sender As Object, e As EventArgs) Handles PicEmail.Click
         LogUtil.Info("Sending Email", MyBase.Name)
+        Me.Hide()
         Using _emailForm As New FrmEmail
             _emailForm.SenderId = iCurrSender
             _emailForm.GroupId = iCurrGrp
             _emailForm.ShowDialog()
         End Using
+        Me.Show()
     End Sub
 
 #End Region

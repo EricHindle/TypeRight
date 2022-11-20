@@ -195,7 +195,7 @@ Partial Class FrmOptions
         'BtnCancel
         '
         Me.BtnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCancel.Location = New System.Drawing.Point(421, 421)
+        Me.BtnCancel.Location = New System.Drawing.Point(424, 420)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(94, 31)
         Me.BtnCancel.TabIndex = 10
@@ -205,7 +205,7 @@ Partial Class FrmOptions
         'BtnOK
         '
         Me.BtnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnOK.Location = New System.Drawing.Point(541, 421)
+        Me.BtnOK.Location = New System.Drawing.Point(544, 420)
         Me.BtnOK.Name = "BtnOK"
         Me.BtnOK.Size = New System.Drawing.Size(94, 31)
         Me.BtnOK.TabIndex = 11
@@ -339,9 +339,9 @@ Partial Class FrmOptions
         Me.StatusStrip1.BackgroundImage = Global.TypeRight.My.Resources.Resources.statusstrip
         Me.StatusStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 458)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 457)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(647, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(650, 22)
         Me.StatusStrip1.TabIndex = 19
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -400,7 +400,7 @@ Partial Class FrmOptions
         '
         Me.LblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LblVersion.AutoSize = True
-        Me.LblVersion.Location = New System.Drawing.Point(15, 428)
+        Me.LblVersion.Location = New System.Drawing.Point(15, 427)
         Me.LblVersion.Name = "LblVersion"
         Me.LblVersion.Size = New System.Drawing.Size(156, 17)
         Me.LblVersion.TabIndex = 18
@@ -410,7 +410,7 @@ Partial Class FrmOptions
         '
         Me.Image1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Image1.Image = Global.TypeRight.My.Resources.Resources.TypeRight1
-        Me.Image1.Location = New System.Drawing.Point(15, 393)
+        Me.Image1.Location = New System.Drawing.Point(15, 392)
         Me.Image1.Name = "Image1"
         Me.Image1.Size = New System.Drawing.Size(150, 32)
         Me.Image1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -421,7 +421,7 @@ Partial Class FrmOptions
         '
         Me.Image2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Image2.Image = Global.TypeRight.My.Resources.Resources.TypeRight2
-        Me.Image2.Location = New System.Drawing.Point(15, 393)
+        Me.Image2.Location = New System.Drawing.Point(15, 392)
         Me.Image2.Name = "Image2"
         Me.Image2.Size = New System.Drawing.Size(200, 32)
         Me.Image2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -430,7 +430,8 @@ Partial Class FrmOptions
         '
         'BtnViewLog
         '
-        Me.BtnViewLog.Location = New System.Drawing.Point(15, 339)
+        Me.BtnViewLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnViewLog.Location = New System.Drawing.Point(15, 338)
         Me.BtnViewLog.Name = "BtnViewLog"
         Me.BtnViewLog.Size = New System.Drawing.Size(94, 31)
         Me.BtnViewLog.TabIndex = 22
@@ -441,7 +442,7 @@ Partial Class FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(647, 480)
+        Me.ClientSize = New System.Drawing.Size(650, 479)
         Me.Controls.Add(Me.BtnViewLog)
         Me.Controls.Add(Me.Image2)
         Me.Controls.Add(Me.Image1)
