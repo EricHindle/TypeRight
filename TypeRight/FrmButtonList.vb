@@ -498,6 +498,10 @@ Public Class FrmButtonList
         lResizeActive = False
         ButtonUtil.RemovePanelButtons(GroupButtonPanel)
         ButtonUtil.FillButtonPanel(GroupButtonPanel, groupButtonList, 0, mnuButtons)
+        For Each _btn As Nbutton In GroupButtonPanel.Controls
+            RemoveHandler _btn.Button1.Click, AddressOf Button_Click
+            AddHandler _btn.Button1.Click, AddressOf Button_Click
+        Next
         SenderButtonPanel.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + 4
         Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
         GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height
@@ -508,6 +512,10 @@ Public Class FrmButtonList
         lResizeActive = False
         ButtonUtil.RemovePanelButtons(SenderButtonPanel)
         ButtonUtil.FillButtonPanel(SenderButtonPanel, senderButtonList, 0, mnuButtons)
+        For Each _btn As Nbutton In SenderButtonPanel.Controls
+            RemoveHandler _btn.Button1.Click, AddressOf Button_Click
+            AddHandler _btn.Button1.Click, AddressOf Button_Click
+        Next
         Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
         GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height + 4
         lResizeActive = True
