@@ -80,9 +80,21 @@ Public NotInheritable Class LogUtil
     End Sub
     Public Shared Sub AddExceptionLog(ByVal ex As Exception, ByVal sText As String, Optional ByVal eventType As TraceEventType = TraceEventType.Error, Optional ByVal sSub As String = "", Optional ByVal errorCode As String = Nothing, Optional ByRef padCt As Integer = 0)
         InitialiseLogging()
-        Dim exMessage As String = If(ex Is Nothing, "no excepion message", ex.Message)
+        Dim exMessage As String
+        Dim innerMsg As String = ""
+        If ex Is Nothing Then
+            exMessage = "no excepion message"
+        Else
+            exMessage = ex.Message
+            If ex.InnerException IsNot Nothing Then
+                innerMsg = ex.InnerException.Message
+            End If
+        End If
         Dim sErrorText = sText & " : Exception - " & exMessage
         AddLog(sErrorText, eventType, sSub, errorCode, padCt)
+        If Not String.IsNullOrWhiteSpace(innerMsg) Then
+            AddLog(innerMsg, eventType, sSub, errorCode, padCt)
+        End If
     End Sub
     Public Shared Sub Info(ByVal pStr As String, Optional ByVal psub As String = "")
         AddLog(pStr, TraceEventType.Information, psub)

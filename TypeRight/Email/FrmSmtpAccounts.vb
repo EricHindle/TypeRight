@@ -11,6 +11,7 @@ Public Class FrmSmtpAccounts
 #Region "form control handlers"
     Private Sub FrmSmtpAccounts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
+        LogUtil.Info("SMTP Account Maint ----", MyBase.Name)
         GetFormPos(Me, My.Settings.SmtpFormPos)
         ClearForm()
         isLoading = False
@@ -21,8 +22,12 @@ Public Class FrmSmtpAccounts
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         DisplayProgress("Adding SMTP Account details", , True)
         Dim _username As String = CbSmtpAccount.Text
-        Dim _smtp As Smtp = SmtpBuilder.NewSmtp.StartingWith(-1, _username, TxtPassword.Text, TxtHost.Text, CInt(TxtPort.Text), chkSsl.Checked, chkCredReq.Checked).Build
-        InsertSmtp(_smtp)
+        Dim _smtp As Smtp = SmtpBuilder.anSmtp.StartingWith(-1, _username, TxtPassword.Text, TxtHost.Text, CInt(TxtPort.Text), chkSsl.Checked, chkCredReq.Checked).Build
+        If InsertSmtp(_smtp) Then
+            DisplayProgress("Added OK",, True)
+        Else
+            DisplayProgress("Insert failed.",, True)
+        End If
         SetAccountsDatasource()
     End Sub
     Private Sub FrmSmtpAccounts_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -52,14 +57,17 @@ Public Class FrmSmtpAccounts
         Dim _id As Integer = CbSmtpAccount.SelectedValue
         If MsgBox("Confirm deleting SMTP account details", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
             If GetSmtpById(_id).SmtpId >= 0 Then
-                DeleteSmtp(_id)
-                DisplayProgress("SMTP Account details deleted", , True)
+                If DeleteSmtp(_id) Then
+                    DisplayProgress("SMTP Account details deleted", , True)
+                Else
+                    DisplayProgress("Delete failed.",, True)
+                End If
                 ClearForm()
             Else
                 DisplayProgress("SMTP Account details not found",, True)
             End If
         Else
-            DisplayProgress("SMTP Account details NOT deleted", , True)
+            DisplayProgress("Delete NOT confirmed", , True)
         End If
     End Sub
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnUpdate.Click
@@ -67,16 +75,19 @@ Public Class FrmSmtpAccounts
         Dim _id As Integer = CbSmtpAccount.SelectedValue
         Dim _smtp As Smtp = GetSmtpById(_id)
         If _smtp.SmtpId >= 0 Then
-            _smtp = SmtpBuilder.NewSmtp.StartingWith(_smtp) _
+            _smtp = SmtpBuilder.anSmtp.StartingWith(_smtp) _
                                 .WithPassword(TxtPassword.Text) _
                                 .WithHost(TxtHost.Text) _
                                 .WithPort(CInt(TxtPort.Text)) _
                                 .WithEnableSsl(chkSsl.Checked) _
                                 .WithRequireCredentials(chkCredReq.Checked) _
                                 .Build
-            UpdateSmtp(_smtp)
+            If UpdateSmtp(_smtp) Then
+                DisplayProgress("SMTP Account details updated",, True)
+            Else
+                DisplayProgress("Update failed.",, True)
+            End If
             SetAccountsDatasource()
-            DisplayProgress("SMTP Account details updated",, True)
         Else
             DisplayProgress("SMTP Account details not found", , True)
         End If

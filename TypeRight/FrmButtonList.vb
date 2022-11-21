@@ -425,17 +425,17 @@ Public Class FrmButtonList
         fulladdr = addBuilder.ToString
         strAge = Format(ButtonUtil.Calc_age(dtDob))
         iBct = 0
-        Dim senderButton As TypeRightDataSet.senderButtonRow
+        Dim _senderButton As SenderButton
         For Each _col As DataColumn In oTable.Columns
-            senderButton = GetSenderButton(_col.ColumnName)
+            _senderButton = GetSenderButton(_col.ColumnName)
             strButtonValue = If(IsDBNull(oRow(_col.ColumnName)), "", oRow(_col.ColumnName))
-            If senderButton IsNot Nothing AndAlso CBool(senderButton.buttonEncrypted) Then
+            If _senderButton IsNot Nothing AndAlso CBool(_senderButton.IsEncrypted) Then
                 strButtonValue = oNCrypter.DecryptData(strButtonValue)
             End If
             strButtonTxt = _col.ColumnName
             strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 20))
             strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
-            AddSenderButton(iBct, senderButton, strButtonCaption, strButtonValue, strButtonHint)
+            AddSenderButton(iBct, _senderButton, strButtonCaption, strButtonValue, strButtonHint)
             iBct += 1
         Next
         Dim caption As String = "Full Name"
@@ -447,21 +447,21 @@ Public Class FrmButtonList
         caption = "Age"
         AddSenderButton(iBct, GetSenderButton(caption), caption, strAge, strAge)
     End Sub
-    Private Sub AddSenderButton(btnSeq As Integer, oSenderButton As TypeRightDataSet.senderButtonRow, btnCaption As String, btnValue As String, btnHint As String)
+    Private Sub AddSenderButton(btnSeq As Integer, oSenderButton As SenderButton, btnCaption As String, btnValue As String, btnHint As String)
         Dim isButtonBold As Boolean
         Dim isButtonItalic As Boolean
         Dim strButtonFontName As String
         Dim dButtonFontSize As Decimal
-        If oSenderButton IsNot Nothing Then
-            isButtonBold = oSenderButton.buttonBold
-            isButtonItalic = oSenderButton.buttonItalic
-            strButtonFontName = oSenderButton.buttonFontName
-            dButtonFontSize = oSenderButton.buttonFontSize
+        If Not oSenderButton.IsEmpty Then
+            isButtonBold = oSenderButton.Bold
+            isButtonItalic = oSenderButton.Italic
+            strButtonFontName = oSenderButton.FontName
+            dButtonFontSize = oSenderButton.FontSize
         Else
-            strButtonFontName = "Tahoma"
-            isButtonBold = False
-            isButtonItalic = False
-            dButtonFontSize = 9.0
+            strButtonFontName = My.Settings.FontName
+            isButtonBold = My.Settings.FontBold
+            isButtonItalic = My.Settings.FontItalic
+            dButtonFontSize = My.Settings.FontSize
         End If
         If btnValue IsNot Nothing AndAlso Not String.IsNullOrEmpty(btnValue) Then
             Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(-1, -1, btnSeq, btnCaption, btnHint, btnValue, strButtonFontName, dButtonFontSize, isButtonBold, isButtonItalic, False, Nbutton.DataSource.Sender).Build

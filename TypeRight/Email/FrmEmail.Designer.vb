@@ -24,7 +24,7 @@ Partial Class FrmEmail
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEmail))
-        Me.SenderButtonPanel = New System.Windows.Forms.Panel()
+        Me.PnlButtons = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip9 = New System.Windows.Forms.ToolTip(Me.components)
@@ -45,6 +45,7 @@ Partial Class FrmEmail
         Me.TxtFromName = New System.Windows.Forms.TextBox()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.BtnSmtp = New System.Windows.Forms.Button()
+        Me.BtnClearText = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -52,15 +53,15 @@ Partial Class FrmEmail
         Me.SplitContainer1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'SenderButtonPanel
+        'PnlButtons
         '
-        Me.SenderButtonPanel.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.SenderButtonPanel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SenderButtonPanel.Location = New System.Drawing.Point(0, 0)
-        Me.SenderButtonPanel.Margin = New System.Windows.Forms.Padding(4)
-        Me.SenderButtonPanel.Name = "SenderButtonPanel"
-        Me.SenderButtonPanel.Size = New System.Drawing.Size(154, 430)
-        Me.SenderButtonPanel.TabIndex = 0
+        Me.PnlButtons.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.PnlButtons.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PnlButtons.Location = New System.Drawing.Point(0, 0)
+        Me.PnlButtons.Margin = New System.Windows.Forms.Padding(4)
+        Me.PnlButtons.Name = "PnlButtons"
+        Me.PnlButtons.Size = New System.Drawing.Size(154, 430)
+        Me.PnlButtons.TabIndex = 0
         '
         'StatusStrip1
         '
@@ -152,14 +153,14 @@ Partial Class FrmEmail
         Me.TxtText.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtText.Multiline = True
         Me.TxtText.Name = "TxtText"
-        Me.TxtText.Size = New System.Drawing.Size(759, 254)
+        Me.TxtText.Size = New System.Drawing.Size(659, 254)
         Me.TxtText.TabIndex = 4
         '
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnClose.Location = New System.Drawing.Point(847, 440)
+        Me.BtnClose.Location = New System.Drawing.Point(847, 439)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 41)
         Me.BtnClose.TabIndex = 4
@@ -207,7 +208,7 @@ Partial Class FrmEmail
         Me.BtnPasteText.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPasteText.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
         Me.BtnPasteText.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnPasteText.Location = New System.Drawing.Point(724, 145)
+        Me.BtnPasteText.Location = New System.Drawing.Point(670, 173)
         Me.BtnPasteText.Name = "BtnPasteText"
         Me.BtnPasteText.Size = New System.Drawing.Size(26, 23)
         Me.BtnPasteText.TabIndex = 11
@@ -223,6 +224,9 @@ Partial Class FrmEmail
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.BtnSmtp)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.BtnClearText)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.BtnClear)
         Me.SplitContainer1.Panel1.Controls.Add(Me.cbSmtpAccounts)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TxtFromName)
         Me.SplitContainer1.Panel1.Controls.Add(Me.TxtText)
@@ -238,7 +242,7 @@ Partial Class FrmEmail
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.SenderButtonPanel)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.PnlButtons)
         Me.SplitContainer1.Size = New System.Drawing.Size(926, 430)
         Me.SplitContainer1.SplitterDistance = 768
         Me.SplitContainer1.TabIndex = 0
@@ -268,11 +272,11 @@ Partial Class FrmEmail
         Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnClear.ForeColor = System.Drawing.Color.DimGray
-        Me.BtnClear.Location = New System.Drawing.Point(700, 440)
+        Me.BtnClear.Location = New System.Drawing.Point(670, 258)
         Me.BtnClear.Name = "BtnClear"
-        Me.BtnClear.Size = New System.Drawing.Size(75, 41)
+        Me.BtnClear.Size = New System.Drawing.Size(86, 41)
         Me.BtnClear.TabIndex = 3
-        Me.BtnClear.Text = "Clear"
+        Me.BtnClear.Text = "ClearForm"
         Me.BtnClear.UseVisualStyleBackColor = True
         '
         'BtnSmtp
@@ -282,20 +286,31 @@ Partial Class FrmEmail
         Me.BtnSmtp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BtnSmtp.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSmtp.ForeColor = System.Drawing.Color.Blue
-        Me.BtnSmtp.Location = New System.Drawing.Point(566, 440)
+        Me.BtnSmtp.Location = New System.Drawing.Point(670, 314)
         Me.BtnSmtp.Name = "BtnSmtp"
-        Me.BtnSmtp.Size = New System.Drawing.Size(75, 41)
+        Me.BtnSmtp.Size = New System.Drawing.Size(86, 41)
         Me.BtnSmtp.TabIndex = 2
         Me.BtnSmtp.Text = "SMTP accounts"
         Me.BtnSmtp.UseVisualStyleBackColor = False
+        '
+        'BtnClearText
+        '
+        Me.BtnClearText.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnClearText.BackColor = System.Drawing.Color.Lavender
+        Me.BtnClearText.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnClearText.ForeColor = System.Drawing.Color.Indigo
+        Me.BtnClearText.Location = New System.Drawing.Point(670, 202)
+        Me.BtnClearText.Name = "BtnClearText"
+        Me.BtnClearText.Size = New System.Drawing.Size(86, 41)
+        Me.BtnClearText.TabIndex = 6
+        Me.BtnClearText.Text = "Clear Text"
+        Me.BtnClearText.UseVisualStyleBackColor = False
         '
         'FrmEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(938, 507)
-        Me.Controls.Add(Me.BtnSmtp)
-        Me.Controls.Add(Me.BtnClear)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.BtnSend)
         Me.Controls.Add(Me.BtnClose)
@@ -317,7 +332,7 @@ Partial Class FrmEmail
 
     End Sub
 
-    Friend WithEvents SenderButtonPanel As Windows.Forms.Panel
+    Friend WithEvents PnlButtons As Windows.Forms.Panel
     Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip
     Friend WithEvents LblStatus As Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolTip9 As Windows.Forms.ToolTip
@@ -338,4 +353,5 @@ Partial Class FrmEmail
     Friend WithEvents cbSmtpAccounts As Windows.Forms.ComboBox
     Friend WithEvents BtnClear As Windows.Forms.Button
     Friend WithEvents BtnSmtp As Windows.Forms.Button
+    Friend WithEvents BtnClearText As Windows.Forms.Button
 End Class

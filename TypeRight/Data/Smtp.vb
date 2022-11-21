@@ -1,4 +1,5 @@
 ﻿Public Class Smtp
+#Region "properties"
     Private _smtpId As Integer
     Private _username As String
     Private _password As String
@@ -14,7 +15,6 @@
             _reqCred = value
         End Set
     End Property
-
     Public Property IsEnableSsl() As Boolean
         Get
             Return _ssl
@@ -23,7 +23,6 @@
             _ssl = value
         End Set
     End Property
-
     Public Property Port() As Integer
         Get
             Return _port
@@ -64,6 +63,8 @@
             _smtpId = value
         End Set
     End Property
+#End Region
+#Region "constructors"
     Public Sub New()
         _smtpId = -1
         _host = ""
@@ -88,4 +89,5 @@
         _ssl = pSsl
         _reqCred = pReqCred
     End Sub
+#End Region
 End Class

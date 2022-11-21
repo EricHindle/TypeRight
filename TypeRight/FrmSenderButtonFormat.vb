@@ -1,11 +1,12 @@
 ﻿Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports TypeRight.TypeRightDataSetTableAdapters
 
 Public Class FrmSenderButtonFormat
 #Region "database variables"
     Private ReadOnly oTable As New TypeRightDataSet.sendersDataTable
-    Private oRow As TypeRight.TypeRightDataSet.senderButtonRow
+    Private oSenderButton As SenderButton
 #End Region
 #Region "properties"
     Private _startField As String
@@ -41,16 +42,16 @@ Public Class FrmSenderButtonFormat
     Private Sub CbDbValue_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CbDbValue.SelectedIndexChanged
         If CbDbValue.SelectedIndex >= 0 Then
             Dim _colName As String = CbDbValue.SelectedItem
-            oRow = GetSenderButton(_colName)
-            If oRow IsNot Nothing Then
-                Dim _style As Drawing.FontStyle = If(CBool(oRow.buttonBold), FontStyle.Bold, FontStyle.Regular) Or If(CBool(oRow.buttonItalic), FontStyle.Italic, FontStyle.Regular)
-                BtnFont.Font = New Drawing.Font(oRow.buttonFontName, oRow.buttonFontSize, _style)
-                BtnFont.Text = oRow.buttonFontName & " (" & oRow.buttonFontSize & ")"
-                chkEncrypted.Checked = CBool(oRow.buttonEncrypted)
+            oSenderButton = GetSenderButton(_colName)
+            If Not oSenderButton.IsEmpty Then
+                Dim _style As Drawing.FontStyle = If(oSenderButton.Bold, FontStyle.Bold, FontStyle.Regular) Or If(oSenderButton.Italic, FontStyle.Italic, FontStyle.Regular)
+                BtnFont.Font = New Drawing.Font(oSenderButton.FontName, oSenderButton.FontSize, _style)
+                BtnFont.Text = oSenderButton.FontName & " (" & oSenderButton.FontSize & ")"
+                chkEncrypted.Checked = CBool(oSenderButton.IsEncrypted)
             End If
         Else
             ClearForm()
-            oRow = Nothing
+            oSenderButton = Nothing
         End If
     End Sub
     Private Sub BtnFont_Click(sender As Object, e As EventArgs) Handles BtnFont.Click
@@ -77,12 +78,18 @@ Public Class FrmSenderButtonFormat
         Dim fontBold As Boolean = BtnFont.Font.Bold
         Dim fontItalic As Boolean = BtnFont.Font.Italic
         Dim isEncrypted As Boolean = chkEncrypted.Checked
-        If oRow IsNot Nothing Then
+        Dim _senderbutton As SenderButton = SenderButtonBuilder.aSenderButton.StartingWith(CbDbValue.SelectedItem,
+                                                                                           fontBold,
+                                                                                           fontItalic,
+                                                                                           fontName,
+                                                                                           fontSize,
+                                                                                           isEncrypted).Build
+        If Not oSenderButton.IsEmpty Then
             LogUtil.Info("Updating " & CbDbValue.SelectedItem, MyBase.Name)
-            UpdateSenderButton(CbDbValue.SelectedItem, fontName, fontSize, fontItalic, fontBold, isEncrypted)
+            UpdateSenderButton(_senderbutton)
         Else
             LogUtil.Info("Inserting " & CbDbValue.SelectedItem, MyBase.Name)
-            InsertSenderButton(CbDbValue.SelectedItem, fontName, fontSize, fontItalic, fontBold, isEncrypted)
+            InsertSenderButton(_senderbutton)
         End If
     End Sub
     Private Sub FrmSenderButtonMaint_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing

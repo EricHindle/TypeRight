@@ -9,10 +9,10 @@ Public Class FrmEmail
     Private Const SUBJECT As String = "subject"
 #End Region
 #Region "variables"
-    Private senderButtonList As New List(Of Nbutton)
+    Private oButtonList As New List(Of Nbutton)
     Private isLoading As Boolean = True
-    Private _senderRow As TypeRightDataSet.sendersRow
-    Private _smtpTable As TypeRightDataSet.smtpDataTable
+    Private oSenderRow As TypeRightDataSet.sendersRow
+    Private oSmtpTable As TypeRightDataSet.smtpDataTable
 #End Region
 #Region "properties"
     Private _groupId As Integer
@@ -37,31 +37,23 @@ Public Class FrmEmail
 #Region "form control handlers"
     Private Sub FrmEmail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
+        LogUtil.Info("Email ----------", MyBase.Name)
         GetFormPos(Me, My.Settings.EmailFormPos)
-
         SetAccountsDatasource()
-        _senderRow = GetSenderRowById(_senderId)
-        TxtFromName.Text = _senderRow.FirstName & " " & _senderRow.LastName
-        SplitContainer1.SplitterDistance = SplitContainer1.Width - (iColCt * iButtonWidth) - SplitContainer1.SplitterWidth
-        ButtonUtil.RemovePanelButtons(SenderButtonPanel)
-        senderButtonList = ButtonUtil.LoadGroupButtons(_groupId)
-        Dim _lastRow As Integer = ButtonUtil.FillButtonPanel(SenderButtonPanel, senderButtonList, 0)
-        senderButtonList = ButtonUtil.LoadSenderButtons(_senderId)
-        ButtonUtil.FillButtonPanel(SenderButtonPanel, senderButtonList, _lastRow)
-        For Each _btn As Nbutton In SenderButtonPanel.Controls
+        oSenderRow = GetSenderRowById(_senderId)
+        TxtFromName.Text = oSenderRow.FirstName & " " & oSenderRow.LastName
+        SetSplitterDistance()
+        ButtonUtil.RemovePanelButtons(PnlButtons)
+        oButtonList = ButtonUtil.LoadGroupButtons(_groupId)
+        Dim _lastRow As Integer = ButtonUtil.FillButtonPanel(PnlButtons, oButtonList, 0)
+        oButtonList = ButtonUtil.LoadSenderButtons(_senderId)
+        ButtonUtil.FillButtonPanel(PnlButtons, oButtonList, _lastRow + 1)
+        For Each _btn As Nbutton In PnlButtons.Controls
             RemoveHandler _btn.Button1.Click, AddressOf Button_Click
             AddHandler _btn.Button1.Click, AddressOf Button_Click
         Next
         isLoading = False
     End Sub
-
-    Private Sub SetAccountsDatasource()
-        _smtpTable = GetSmtpTable()
-        cbSmtpAccounts.DataSource = _smtpTable
-        cbSmtpAccounts.DisplayMember = "smtpUsername"
-        cbSmtpAccounts.ValueMember = "smtpId"
-    End Sub
-
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Me.Close()
     End Sub
@@ -72,7 +64,7 @@ Public Class FrmEmail
     End Sub
     Private Sub FrmEmail_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
         If Not isLoading Then
-            SplitContainer1.SplitterDistance = SplitContainer1.Width - (iColCt * iButtonWidth) - SplitContainer1.SplitterWidth
+            SetSplitterDistance()
         End If
     End Sub
     Private Sub BtnPasteTo_Click(sender As Object, e As EventArgs) Handles BtnPasteTo.Click
@@ -90,21 +82,21 @@ Public Class FrmEmail
         If _button IsNot Nothing Then
             Dim _nButton As Nbutton = _button.Parent
             strKeyText = _nButton.Value
-            If isPro And _nButton.Encrypt Then
-                strKeyText = oNCrypter.DecryptData(strKeyText)
+            If Not String.IsNullOrWhiteSpace(strKeyText) Then
+                If isPro And _nButton.Encrypt Then
+                    strKeyText = oNCrypter.DecryptData(strKeyText)
+                End If
+                strKeyText = ButtonUtil.ApplySubstrings(ButtonUtil.GetDBFields(strKeyText)).Replace("{ENTER}", vbCrLf)
+
+                Clipboard.SetText(strKeyText)
+                TxtText.SelectedText = strKeyText
             End If
-            strKeyText = ButtonUtil.GetDBFields(strKeyText)
-            strKeyText = ButtonUtil.ApplySubstrings(strKeyText)
-            Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
-            TxtText.SelectedText = strKeyText.Replace("{ENTER}", vbCrLf)
         End If
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         DisplayProgress("Sending Email",, True)
-        Dim _smtp As Smtp
         If cbSmtpAccounts.SelectedIndex >= 0 Then
-            Dim _smtpId As Integer = cbSmtpAccounts.SelectedValue
-            _smtp = GetSmtpById(_smtpId)
+            Dim _smtp As Smtp = GetSmtpById(cbSmtpAccounts.SelectedValue)
             If String.IsNullOrWhiteSpace(TxtTo.Text) Or String.IsNullOrWhiteSpace(TxtSubject.Text) Or String.IsNullOrWhiteSpace(TxtText.Text) Then
                 DisplayProgress("Missing value(s). Mail not sent.",, True)
             Else
@@ -115,7 +107,7 @@ Public Class FrmEmail
                 End If
             End If
         Else
-            MsgBox("From account not selected. Mail not sent.", MsgBoxStyle.Exclamation, "Error")
+            DisplayProgress("From account not selected. Mail not sent.", , True)
         End If
     End Sub
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
@@ -126,8 +118,8 @@ Public Class FrmEmail
         TxtTo.Text = ""
     End Sub
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtSubject.DragDrop,
-                                                                                        TxtFromName.DragDrop,
-                                                                                        TxtText.DragDrop
+                                                                                           TxtFromName.DragDrop,
+                                                                                           TxtText.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim _string As String = e.Data.GetData(DataFormats.StringFormat)
@@ -162,9 +154,9 @@ Public Class FrmEmail
         End If
     End Sub
     Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtTo.DragEnter,
-                                                                                                                TxtSubject.DragEnter,
-                                                                                                                TxtFromName.DragEnter,
-                                                                                                                TxtText.DragEnter
+                                                                                                                 TxtSubject.DragEnter,
+                                                                                                                 TxtFromName.DragEnter,
+                                                                                                                 TxtText.DragEnter
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             e.Effect = DragDropEffects.Copy
         Else
@@ -177,7 +169,6 @@ Public Class FrmEmail
     End Sub
     Private Sub BtnSmtp_Click(sender As Object, e As EventArgs) Handles BtnSmtp.Click
         Me.Hide()
-
         Using _smtpForm As New FrmSmtpAccounts
             _smtpForm.ShowDialog()
         End Using
@@ -186,12 +177,23 @@ Public Class FrmEmail
     End Sub
 #End Region
 #Region "subroutines"
+    Private Sub SetAccountsDatasource()
+        oSmtpTable = GetSmtpTable()
+        cbSmtpAccounts.DataSource = oSmtpTable
+        cbSmtpAccounts.DisplayMember = "smtpUsername"
+        cbSmtpAccounts.ValueMember = "smtpId"
+    End Sub
     Private Sub DisplayProgress(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = False)
         LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
+    Private Sub SetSplitterDistance()
+        SplitContainer1.SplitterDistance = SplitContainer1.Width - (iColCt * iButtonWidth) - SplitContainer1.SplitterWidth
+    End Sub
 
-
+    Private Sub BtnClearText_Click(sender As Object, e As EventArgs) Handles BtnClearText.Click
+        TxtText.Text = ""
+    End Sub
 #End Region
 End Class

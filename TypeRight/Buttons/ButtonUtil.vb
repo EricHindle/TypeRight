@@ -22,21 +22,21 @@ Public Class ButtonUtil
     Private Shared ReadOnly oTable As New TypeRightDataSet.sendersDataTable
 #End Region
 #Region "subroutines"
-    Private Shared Sub AddButtonToList(btnSeq As Integer, oButton As TypeRightDataSet.senderButtonRow, btnCaption As String, btnValue As String, btnHint As String)
+    Private Shared Sub AddButtonToList(btnSeq As Integer, oButton As SenderButton, btnCaption As String, btnValue As String, btnHint As String)
         Dim isButtonBold As Boolean
         Dim isButtonItalic As Boolean
         Dim strButtonFontName As String
         Dim dButtonFontSize As Decimal
-        If oButton IsNot Nothing Then
-            isButtonBold = oButton.buttonBold
-            isButtonItalic = oButton.buttonItalic
-            strButtonFontName = oButton.buttonFontName
-            dButtonFontSize = oButton.buttonFontSize
+        If Not oButton.IsEmpty Then
+            isButtonBold = oButton.Bold
+            isButtonItalic = oButton.Italic
+            strButtonFontName = oButton.FontName
+            dButtonFontSize = oButton.FontSize
         Else
-            strButtonFontName = "Tahoma"
-            isButtonBold = False
-            isButtonItalic = False
-            dButtonFontSize = 9.0
+            strButtonFontName = My.Settings.FontName
+            isButtonBold = My.Settings.FontBold
+            isButtonItalic = My.Settings.FontItalic
+            dButtonFontSize = My.Settings.FontSize
         End If
         If btnValue IsNot Nothing AndAlso Not String.IsNullOrEmpty(btnValue) Then
             Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(-1, -1, btnSeq, btnCaption, btnHint, btnValue, strButtonFontName, dButtonFontSize, isButtonBold, isButtonItalic, False, Nbutton.DataSource.Sender).Build
@@ -111,11 +111,11 @@ Public Class ButtonUtil
         fulladdr = addBuilder.ToString
         strAge = Format(Calc_age(dtDob))
         iBct = 0
-        Dim senderButton As TypeRightDataSet.senderButtonRow
+        Dim senderButton As SenderButton
         For Each _col As DataColumn In oTable.Columns
             senderButton = GetSenderButton(_col.ColumnName)
             strButtonValue = If(IsDBNull(oCurrentSenderRow(_col.ColumnName)), "", oCurrentSenderRow(_col.ColumnName))
-            If senderButton IsNot Nothing AndAlso CBool(senderButton.buttonEncrypted) Then
+            If senderButton IsNot Nothing AndAlso CBool(senderButton.IsEncrypted) Then
                 strButtonValue = oNCrypter.DecryptData(strButtonValue)
             End If
             strButtonTxt = _col.ColumnName
@@ -146,6 +146,9 @@ Public Class ButtonUtil
                 groupButtonList.Add(_nbutton)
             End If
         Next
+        If Int(groupButtonList.Count / 2) * 2 <> groupButtonList.Count Then
+            groupButtonList.Add(NButtonBuilder.NewButton.WithValue("").WithFontSize(10).Build)
+        End If
         Return groupButtonList
     End Function
     Public Shared Function FillButtonPanel(ByRef oPanel As Panel, ByRef oList As List(Of Nbutton), Optional rowOffset As Integer = 0, ByRef Optional buttonMenu As ContextMenuStrip = Nothing) As Integer
@@ -209,11 +212,11 @@ Public Class ButtonUtil
         End If
         Dim newText As String = sKeyText
         fieldName = GetValueBetweenBrackets(newText, FIELD_START_MARKER, FIELD_END_MARKER)
-        Dim fieldRow As TypeRightDataSet.senderButtonRow
+        Dim _senderButton As SenderButton
         Do Until String.IsNullOrEmpty(fieldName)
-            fieldRow = GetSenderButton(fieldName)
+            _senderButton = GetSenderButton(fieldName)
             fieldValue = If(IsDBNull(oCurrentSenderRow(fieldName)), "", CStr(oCurrentSenderRow(fieldName)))
-            If fieldRow IsNot Nothing AndAlso CBool(fieldRow.buttonEncrypted) Then
+            If _senderButton IsNot Nothing AndAlso CBool(_senderButton.IsEncrypted) Then
                 fieldValue = oNCrypter.DecryptData(fieldValue)
             End If
             newText = newText.Replace(FIELD_START_MARKER & fieldName & FIELD_END_MARKER, fieldValue)

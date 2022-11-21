@@ -1,6 +1,5 @@
 ﻿Imports System.Security.Cryptography
 Imports System.Windows.Forms
-
 Public Class SmtpBuilder
     Private _smtpId As Integer
     Private _username As String
@@ -9,11 +8,22 @@ Public Class SmtpBuilder
     Private _port As Integer
     Private _ssl As Boolean
     Private _reqCred As Boolean
-
-    Public Shared Function NewSmtp() As SmtpBuilder
+    Public Shared Function anSmtp() As SmtpBuilder
         Return New SmtpBuilder
     End Function
-
+    Private Sub Initialise()
+        _smtpId = -1
+        _host = ""
+        _port = 0
+        _username = ""
+        _password = ""
+        _ssl = False
+        _reqCred = False
+    End Sub
+    Public Function StartingWithNothing() As SmtpBuilder
+        Initialise()
+        Return Me
+    End Function
     Public Function StartingWith(ByVal pSmtp As Smtp) As SmtpBuilder
         _smtpId = pSmtp.SmtpId
         _host = pSmtp.Host
@@ -24,7 +34,6 @@ Public Class SmtpBuilder
         _reqCred = pSmtp.IsCredentialsRequired
         Return Me
     End Function
-
     Public Function StartingWith(ByVal pSmtpRow As TypeRightDataSet.smtpRow) As SmtpBuilder
         _smtpId = pSmtpRow.smtpId
         _host = pSmtpRow.smtpHost
@@ -51,42 +60,34 @@ Public Class SmtpBuilder
         _reqCred = pReqCred
         Return Me
     End Function
-
     Public Function WithId(pId As Integer) As SmtpBuilder
         _smtpId = pId
         Return Me
     End Function
-
     Public Function WithUsername(pUsername As String) As SmtpBuilder
         _username = pUsername
         Return Me
     End Function
-
     Public Function WithPassword(pPassword As String) As SmtpBuilder
         _password = pPassword
         Return Me
     End Function
-
     Public Function WithHost(pHost As String) As SmtpBuilder
         _host = pHost
         Return Me
     End Function
-
     Public Function WithPort(pPort As Integer) As SmtpBuilder
         _port = pPort
         Return Me
     End Function
-
     Public Function WithEnableSsl(pSsl As Boolean) As SmtpBuilder
         _ssl = pSsl
         Return Me
     End Function
-
     Public Function WithRequireCredentials(pReqCred As Boolean) As SmtpBuilder
         _reqCred = pReqCred
         Return Me
     End Function
-
     Public Function Build() As Smtp
         Return New Smtp(_smtpId,
                         _username,

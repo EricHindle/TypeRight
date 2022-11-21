@@ -8,7 +8,7 @@ Imports System.Windows.Forms
 Module DatabaseFunctions
 
 #Region "constants"
-    Private Const MODULE_NAME As String = "Db"
+    Private Const MODULE_NAME As String = "DatabaseFunctions"
 #End Region
 
 #Region "dB"
@@ -19,9 +19,9 @@ Module DatabaseFunctions
     Private ReadOnly oSndTa As New TypeRightDataSetTableAdapters.sendersTableAdapter
     Private ReadOnly oSndTable As New TypeRightDataSet.sendersDataTable
     Private ReadOnly oSndBtnTa As New TypeRightDataSetTableAdapters.senderButtonTableAdapter
-    Private ReadOnly oSndBtnTable As New TypeRightDataSet.senderButtonDataTable
+    Private oSndBtnTable As New TypeRightDataSet.senderButtonDataTable
     Private ReadOnly oSmtpTa As New TypeRightDataSetTableAdapters.smtpTableAdapter
-    Private ReadOnly oSmtpTable As New TypeRightDataSet.smtpDataTable
+    Private oSmtpTable As New TypeRightDataSet.smtpDataTable
 #End Region
 #Region "backup"
     Private tableList As New List(Of String)
@@ -291,65 +291,114 @@ Module DatabaseFunctions
 #Region "senderbuttons"
     Public Function GetSenderButtonTable() As TypeRightDataSet.senderButtonDataTable
         LogUtil.Info("Getting sender button table", MODULE_NAME)
-        Return oSndBtnTa.GetData()
+        oSndBtnTable = New TypeRightDataSet.senderButtonDataTable
+        Try
+            oSndBtnTable = oSndBtnTa.GetData()
+        Catch ex As Exception
+            LogUtil.Exception("Failed: ", ex, MODULE_NAME)
+        End Try
+        Return oSndBtnTable
     End Function
-    Public Function GetSenderButton(columnName As String) As TypeRight.TypeRightDataSet.senderButtonRow
+    Public Function GetSenderButton(columnName As String) As SenderButton
         '      LogUtil.Info("Getting sender button row for " & columnName, MODULE_NAME)
-        Dim oRow As TypeRight.TypeRightDataSet.senderButtonRow = Nothing
-        oSndBtnTa.FillByColName(oSndBtnTable, columnName)
-        If oSndBtnTable.Rows.Count = 1 Then
-            oRow = oSndBtnTable.Rows(0)
-        End If
-        Return oRow
+        Dim oSenderButton As New SenderButton
+        Try
+            oSndBtnTa.FillByColName(oSndBtnTable, columnName)
+            If oSndBtnTable.Rows.Count = 1 Then
+                oSenderButton = SenderButtonBuilder.aSenderButton.StartingWith(oSndBtnTable.Rows(0)).Build
+            End If
+        Catch ex As DbException
+            LogUtil.Exception("Failed: ", ex, MODULE_NAME)
+        End Try
+        Return oSenderButton
     End Function
-    Public Function DeleteSenderButton(columnName As String) As Integer
+    Public Function DeleteSenderButton(columnName As String) As Boolean
         LogUtil.Info("Deleting sender button for " & columnName, MODULE_NAME)
-        Return oSndBtnTa.DeleteSenderButton(columnName)
+        Dim isOK As Boolean = False
+        Try
+            If oSndBtnTa.DeleteSenderButton(columnName) = 1 Then
+                isOK = True
+            End If
+        Catch ex As DbException
+            LogUtil.Exception("Delete failed: ", ex, MODULE_NAME)
+        End Try
+        Return isOK
     End Function
-    Public Function InsertSenderButton(ColumnName As String, buttonFontName As String, buttonFontSize As Decimal, buttonItalic As Boolean, buttonBold As Boolean, buttonEncrypted As Boolean) As Integer
-        LogUtil.Info("Insering sender button row for " & ColumnName, MODULE_NAME)
-        Return oSndBtnTa.InsertSenderButton(ColumnName, CByte(buttonBold),
-                                            CByte(buttonItalic), buttonFontName,
-                                            buttonFontSize, CByte(buttonEncrypted))
+    Public Function InsertSenderButton(pSenderButton As SenderButton) As Boolean
+        LogUtil.Info("Insering sender button row for " & pSenderButton.ColumnName, MODULE_NAME)
+        Dim isOK As Boolean = False
+        Try
+            If oSndBtnTa.InsertSenderButton(pSenderButton.ColumnName, pSenderButton.Bold,
+                                            pSenderButton.Italic, pSenderButton.FontName,
+                                           pSenderButton.FontSize, pSenderButton.IsEncrypted) = 1 Then
+                isOK = True
+            End If
+        Catch ex As DbException
+            LogUtil.Exception("Insert failed: ", ex, MODULE_NAME)
+        End Try
+        Return isOK
     End Function
-    Public Function UpdateSenderButton(ColumnName As String, buttonFontName As String, buttonFontSize As Decimal, buttonItalic As Boolean, buttonBold As Boolean, buttonEncrypted As Boolean) As Integer
-        LogUtil.Info("Updating sender button row for " & ColumnName, MODULE_NAME)
-        Return oSndBtnTa.UpdateSenderButton(CByte(buttonBold), CByte(buttonItalic),
-                                            buttonFontName, buttonFontSize,
-                                            CByte(buttonEncrypted), ColumnName)
+    Public Function UpdateSenderButton(pSenderButton As SenderButton) As Boolean
+        LogUtil.Info("Updating sender button row for " & pSenderButton.ColumnName, MODULE_NAME)
+        Dim isOK As Boolean = False
+        Try
+            If oSndBtnTa.UpdateSenderButton(pSenderButton.Bold, pSenderButton.Italic,
+                                            pSenderButton.FontName, pSenderButton.FontSize,
+                                            pSenderButton.IsEncrypted, pSenderButton.ColumnName) = 1 Then
+                isOK = True
+            End If
+        Catch ex As DbException
+            LogUtil.Exception("Insert failed: ", ex, MODULE_NAME)
+        End Try
+        Return isOK
     End Function
 #End Region
 #Region "smtp"
     Public Function GetSmtpTable() As TypeRightDataSet.smtpDataTable
         LogUtil.Info("Getting SMTP table", MODULE_NAME)
-        Return oSmtpTa.GetData
+        oSmtpTable = New TypeRightDataSet.smtpDataTable
+        Try
+            oSmtpTable = oSmtpTa.GetData
+        Catch ex As Exception
+            LogUtil.Exception("Failed: ", ex, MODULE_NAME)
+        End Try
+        Return oSmtpTable
     End Function
     Public Function GetSmtpList() As List(Of Smtp)
         LogUtil.Info("Getting SMTP list", MODULE_NAME)
         Dim _smtpList As New List(Of Smtp)
-        oSmtpTa.Fill(oSmtpTable)
-        For Each _row As TypeRightDataSet.smtpRow In oSmtpTable.Rows
-            _smtpList.Add(SmtpBuilder.NewSmtp.StartingWith(_row).Build)
-        Next
+        Try
+            oSmtpTa.Fill(oSmtpTable)
+            For Each _row As TypeRightDataSet.smtpRow In oSmtpTable.Rows
+                _smtpList.Add(SmtpBuilder.anSmtp.StartingWith(_row).Build)
+            Next
+        Catch ex As DbException
+            LogUtil.Exception("Failed: ", ex, MODULE_NAME)
+        End Try
         Return _smtpList
     End Function
     Public Function GetSmtpById(pId As Integer) As Smtp
         LogUtil.Info("Getting SMTP by Id", MODULE_NAME)
         Dim _smtp As New Smtp
-        oSmtpTa.FillById(oSmtpTable, pId)
-        If oSmtpTable.Rows.Count > 0 Then
-            _smtp = SmtpBuilder.NewSmtp.StartingWith(oSmtpTable.Rows(0)).Build
-        End If
+        Try
+            oSmtpTa.FillById(oSmtpTable, pId)
+            If oSmtpTable.Rows.Count > 0 Then
+                _smtp = SmtpBuilder.anSmtp.StartingWith(oSmtpTable.Rows(0)).Build
+            End If
+        Catch ex As DbException
+            LogUtil.Exception("SMTP not found: ", ex, MODULE_NAME)
+        End Try
         Return _smtp
     End Function
     Public Function InsertSmtp(pSmtp As Smtp) As Boolean
-        LogUtil.Info("Inserting SMTP", MODULE_NAME)
+        LogUtil.Info("Inserting SMTP Account", MODULE_NAME)
         Dim isOk As Boolean = False
         Try
             Dim _isSsl As Integer = If(pSmtp.IsEnableSsl, 1, 0)
             Dim _isCred As Integer = If(pSmtp.IsCredentialsRequired, 1, 0)
             isOk = oSmtpTa.InsertSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, _isSsl, _isCred)
         Catch ex As DbException
+            LogUtil.Exception("Insert failed: ", ex, MODULE_NAME)
         End Try
         Return isOk
     End Function
@@ -361,12 +410,21 @@ Module DatabaseFunctions
             Dim _isCred As Integer = If(pSmtp.IsCredentialsRequired, 1, 0)
             isOk = oSmtpTa.UpdateSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, _isSsl, _isCred, pSmtp.SmtpId)
         Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MODULE_NAME)
         End Try
         Return isOk
     End Function
-    Public Function DeleteSmtp(_id As Integer) As Integer
+    Public Function DeleteSmtp(_id As Integer) As Boolean
         LogUtil.Info("Deleting SMTP " & _id, MODULE_NAME)
-        Return oSmtpTa.DeleteSmtp(_id)
+        Dim isOK As Boolean = False
+        Try
+            If oSmtpTa.DeleteSmtp(_id) = 1 Then
+                isOK = True
+            End If
+        Catch ex As DbException
+            LogUtil.Exception("Delete failed: ", ex, MODULE_NAME)
+        End Try
+        Return isOK
     End Function
 #End Region
 
