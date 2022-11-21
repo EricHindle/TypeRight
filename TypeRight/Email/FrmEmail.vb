@@ -1,8 +1,13 @@
 ﻿Imports System.Collections.Generic
+Imports System.Linq
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
 
 Public Class FrmEmail
+#Region "constants"
+    Private Const MAILTO As String = "mailto:"
+    Private Const SUBJECT As String = "subject"
+#End Region
 #Region "variables"
     Private senderButtonList As New List(Of Nbutton)
     Private isLoading As Boolean = True
@@ -120,27 +125,40 @@ Public Class FrmEmail
         TxtText.Text = ""
         TxtTo.Text = ""
     End Sub
-    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtTo.DragDrop,
-                                                                                        TxtSubject.DragDrop,
+    Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtSubject.DragDrop,
                                                                                         TxtFromName.DragDrop,
                                                                                         TxtText.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
-            Dim item As String = e.Data.GetData(DataFormats.StringFormat)
-            If item.StartsWith("mailto:") Then
-                item = item.Substring(7)
-            End If
+            Dim _string As String = e.Data.GetData(DataFormats.StringFormat)
             Dim textlen As Integer = oBox.TextLength
             Dim startpos As Integer = oBox.SelectionStart
             If textlen = 0 Then
-                oBox.Text = item.Trim
+                oBox.Text = _string.Trim
             Else
                 If startpos = 0 Then
-                    oBox.SelectedText = item.TrimStart
+                    oBox.SelectedText = _string.TrimStart
                 Else
-                    oBox.SelectedText = item
+                    oBox.SelectedText = _string
                 End If
             End If
+        End If
+    End Sub
+    Private Sub TxtTo_DragDrop(sender As Object, e As DragEventArgs) Handles TxtTo.DragDrop
+        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            Dim _string As String = e.Data.GetData(DataFormats.StringFormat)
+            If _string.StartsWith(MAILTO) Then
+                _string = _string.Substring(MAILTO.Length)
+            End If
+            Dim _splitstring1 As String() = Split(_string, "?", 2)
+            If _splitstring1.Length > 1 Then
+                _string = _splitstring1(0)
+                Dim _splitstring2 As String() = Split(_splitstring1(1), "=", 2)
+                If _splitstring2(0).ToLower = SUBJECT Then
+                    TxtSubject.Text = _splitstring2(1).Trim
+                End If
+            End If
+            TxtTo.Text = _string.Trim
         End If
     End Sub
     Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtTo.DragEnter,
@@ -173,5 +191,7 @@ Public Class FrmEmail
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
+
+
 #End Region
 End Class
