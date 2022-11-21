@@ -97,9 +97,6 @@
     <Setting Name="BackupFormPos" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="BackupPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="RestoreFormPos" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

@@ -55,9 +55,6 @@ Public Class FrmDbUpdate
         LoadSenderTable()
         isDataChanged = False
     End Sub
-    Private Sub BtnClose_Click(sender As Object, e As EventArgs)
-        Me.Close()
-    End Sub
     Private Sub FrmDbUpdate_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
         My.Settings.DBUpdatePos = SetFormPos(Me)
@@ -144,49 +141,28 @@ Public Class FrmDbUpdate
         End If
 
     End Sub
-    Private Sub MnuClose_Click(sender As Object, e As EventArgs) Handles MnuClose.Click
-        Me.Close()
+    Private Sub DataChanged(sender As Object, e As EventArgs) Handles CbTitle.SelectedIndexChanged,
+                                                                        TxtAdd1.TextChanged,
+                                                                        TxtAdd2.TextChanged,
+                                                                        TxtCountry.TextChanged,
+                                                                        TxtCounty.TextChanged,
+                                                                        TxtPostCode.TextChanged,
+                                                                        TxtEmail.TextChanged,
+                                                                        TxtForename.TextChanged,
+                                                                        TxtMobile.TextChanged,
+                                                                        TxtPassword.TextChanged,
+                                                                        TxtPhone.TextChanged,
+                                                                        TxtSurname.TextChanged,
+                                                                        TxtSWord.TextChanged,
+                                                                        TxtTown.TextChanged,
+                                                                        TxtUsername.TextChanged,
+                                                                        DtpDob.ValueChanged,
+                                                                        CbGender.SelectedIndexChanged,
+                                                                        CbMarStat.SelectedIndexChanged,
+                                                                        CbOcc.SelectedIndexChanged
+        isDataChanged = True
     End Sub
-    Private Sub MnuBkUpDatabase_Click(sender As Object, e As EventArgs) Handles MnuBkUpSenders.Click
-        DataBackupSenders()
-    End Sub
-    Private Sub MnuBkUpButtons_Click(sender As Object, e As EventArgs) Handles MnuBkUpButtons.Click
-        DataBackupButtons()
-    End Sub
-    Private Sub MnuBkUpGroups_Click(sender As Object, e As EventArgs) Handles MnuBkUpGroups.Click
-        DataBackupGroups()
-    End Sub
-    Private Sub MnuBkUpSenderButtons_Click(sender As Object, e As EventArgs) Handles MnuBkUpSenderButtons.Click
-        DataBackupSenderButtons()
-    End Sub
-    Private Sub MnuBkUpAll_Click(sender As Object, e As EventArgs) Handles MnuBkUpAll.Click
-        DisplayProgress(FULL_BACKUP)
-        DataBackupButtons()
-        DataBackupGroups()
-        DataBackupSenders()
-        DataBackupSenderButtons()
-        DisplayProgress(FULL_BACKUP & COMPLETE)
-    End Sub
-    Private Sub MnuRestDatabase_Click(sender As Object, e As EventArgs) Handles MnuRestSenders.Click
-        DataRestoreSenders()
-    End Sub
-    Private Sub MnuRestButtons_Click(sender As Object, e As EventArgs) Handles MnuRestButtons.Click
-        DataRestoreButtons()
-    End Sub
-    Private Sub MnuRestGroups_Click(sender As Object, e As EventArgs) Handles MnuRestGroups.Click
-        DataRestoreGroups()
-    End Sub
-    Private Sub MnuRestAll_Click(sender As Object, e As EventArgs) Handles MnuRestAll.Click
-        DisplayProgress(FULL_RESTORE)
-        DataRestoreGroups()
-        DataRestoreButtons()
-        DataRestoreSenders()
-        DataRestoreSenderButtons()
-        DisplayProgress(FULL_RESTORE & COMPLETE)
-    End Sub
-    Private Sub MnuRestSenderButtons_Click(sender As Object, e As EventArgs) Handles MnuRestSenderButtons.Click
-        DataRestoreSenderButtons()
-    End Sub
+
 #End Region
 #Region "subroutines"
     Private Sub LoadSenderTable()
@@ -369,112 +345,6 @@ Public Class FrmDbUpdate
                                                     CbMarStat.SelectedItem, TxtUsername.Text).Build
 
     End Function
-    Private Sub DataBackupButtons()
-        DisplayProgress(BKUP_GRP_BUTTONS)
-        BackupTable(GetButtonTable())
-        DisplayProgress(BKUP_GRP_BUTTONS & COMPLETE)
-    End Sub
-    Private Sub DataRestoreButtons()
-        DisplayProgress(REST_GRP_BUTTONS)
-        RestoreTable(oBtnTable)
-        For Each oRow As TypeRightDataSet.buttonRow In oBtnTable.Rows
-            If GetButtonById(oRow.buttonId) Is Nothing Then
-                InsertButton(oRow.buttonGroup, oRow.buttonSeq,
-                             oRow.buttonText, oRow.buttonHint,
-                             oRow.buttonValue, oRow.buttonFont,
-                             oRow.buttonBold, oRow.buttonFontSize,
-                             oRow.buttonItalic, oRow.buttonEncrypt)
-            Else
-                UpdateButton(oRow.buttonGroup, oRow.buttonSeq,
-                             oRow.buttonText, oRow.buttonHint,
-                             oRow.buttonValue, oRow.buttonFont,
-                             oRow.buttonBold, oRow.buttonFontSize,
-                             oRow.buttonItalic, oRow.buttonEncrypt, oRow.buttonId)
-            End If
-        Next
-        DisplayProgress(REST_GRP_BUTTONS & COMPLETE)
-    End Sub
-    Private Sub DataBackupGroups()
-        DisplayProgress(BKUP_GROUPS)
-        BackupTable(GetButtonGroupTable())
-        DisplayProgress(BKUP_GROUPS & COMPLETE)
-    End Sub
-    Private Sub DataRestoreGroups()
-        DisplayProgress(REST_GROUPS)
-        RestoreTable(oGrpTable)
-        For Each oRow As TypeRightDataSet.buttongroupsRow In oGrpTable.Rows
-            If GetButtonGroup(oRow.buttongroupid) Is Nothing Then
-                InsertButtonGroup(oRow.groupname)
-            Else
-                UpdateButtonGroupName(oRow.groupname, oRow.buttongroupid)
-            End If
-        Next
-        DisplayProgress(REST_GROUPS & COMPLETE)
-    End Sub
-    Private Sub DataBackupSenders()
-        DisplayProgress(BKUP_SENDERS)
-        BackupTable(GetSenderTable())
-        DisplayProgress(BKUP_SENDERS & COMPLETE)
-    End Sub
-    Private Sub DataRestoreSenders()
-        DisplayProgress(REST_SENDERS)
-        RestoreTable(oSndTable)
-        For Each oRow As TypeRightDataSet.sendersRow In oSndTable.Rows
-            Dim oRestoredSender As Sender = SenderBuilder.NewSender().StartingWith(oRow).Build
-            If GetSenderRowById(oRow.SenderId) Is Nothing Then
-                InsertSender(oRestoredSender)
-            Else
-                UpdateSender(oRestoredSender)
-            End If
-        Next
-        DisplayProgress(REST_SENDERS & COMPLETE)
-    End Sub
-    Private Sub DataBackupSenderButtons()
-        DisplayProgress(BKUP_SNDR_BUTTONS)
-        BackupTable(GetSenderButtonTable())
-        DisplayProgress(BKUP_SNDR_BUTTONS & COMPLETE)
-    End Sub
-    Private Sub DataRestoreSenderButtons()
-        DisplayProgress(REST_SNDR_BUTTONS)
-        RestoreTable(oSndrBtnTable)
-        For Each oRow As TypeRightDataSet.senderButtonRow In oSndrBtnTable.Rows
-            If GetSenderButton(oRow.ColumnName) Is Nothing Then
-                InsertSenderButton(oRow.ColumnName, oRow.buttonFontName, oRow.buttonFontSize, oRow.buttonItalic, oRow.buttonBold, oRow.buttonEncrypted)
-            Else
-                UpdateSenderButton(oRow.ColumnName, oRow.buttonFontName, oRow.buttonFontSize, oRow.buttonItalic, oRow.buttonBold, oRow.buttonEncrypted)
-            End If
-        Next
-        DisplayProgress(REST_SNDR_BUTTONS & COMPLETE)
-    End Sub
-    Private Sub BackupTable(backupDataTable As DataTable)
-        Dim sTableName As String = backupDataTable.TableName
-        Dim sDbFullPath As String = GetBackupFolder(True)
-        Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".xml")
-        DisplayProgress("Writing " & sBackupFile)
-        backupDataTable.WriteXml(sBackupFile)
-        DisplayProgress("Writing " & sBackupFile & COMPLETE)
-    End Sub
-    Private Sub RestoreTable(ByRef restoreDataTable As DataTable)
-        restoreDataTable.Rows.Clear()
-        Dim sTableName As String = restoreDataTable.TableName
-        Dim sDbFullPath As String = GetBackupFolder(False)
-        Dim sBackupFile As String = Path.Combine(sDbFullPath, sTableName & ".xml")
-        If My.Computer.FileSystem.FileExists(sBackupFile) Then
-            DisplayProgress(LOADING_FROM & sBackupFile)
-            restoreDataTable.ReadXml(sBackupFile)
-            DisplayProgress(LOADING_FROM & sBackupFile & COMPLETE)
-        Else
-            DisplayProgress("Backup file " & sBackupFile & " missing. Table NOT restored")
-        End If
-    End Sub
-    Private Function GetBackupFolder(isCreateOnMissing As Boolean) As String
-        Dim sFolder As String = My.Settings.BackupFolder
-        If isCreateOnMissing AndAlso Not My.Computer.FileSystem.DirectoryExists(sFolder) Then
-            LogUtil.Info("Creating folder " & sFolder, MyBase.Name)
-            My.Computer.FileSystem.CreateDirectory(sFolder)
-        End If
-        Return sFolder
-    End Function
     Private Sub ShowRecord(iRecord As Integer, sText As String)
         If oSndTable.Rows.Count >= iRecord Then
             LogUtil.Info("Go to " & sText & " record", MyBase.Name)
@@ -482,27 +352,6 @@ Public Class FrmDbUpdate
             oSndRow = oSndTable.Rows(iCurrSnd)
             TxtId.Text = CStr(oSndRow.SenderId)
         End If
-    End Sub
-    Private Sub DataChanged(sender As Object, e As EventArgs) Handles CbTitle.SelectedIndexChanged,
-                                                                        TxtAdd1.TextChanged,
-                                                                        TxtAdd2.TextChanged,
-                                                                        TxtCountry.TextChanged,
-                                                                        TxtCounty.TextChanged,
-                                                                        TxtPostCode.TextChanged,
-                                                                        TxtEmail.TextChanged,
-                                                                        TxtForename.TextChanged,
-                                                                        TxtMobile.TextChanged,
-                                                                        TxtPassword.TextChanged,
-                                                                        TxtPhone.TextChanged,
-                                                                        TxtSurname.TextChanged,
-                                                                        TxtSWord.TextChanged,
-                                                                        TxtTown.TextChanged,
-                                                                        TxtUsername.TextChanged,
-                                                                        DtpDob.ValueChanged,
-                                                                        CbGender.SelectedIndexChanged,
-                                                                        CbMarStat.SelectedIndexChanged,
-                                                                        CbOcc.SelectedIndexChanged
-        isDataChanged = True
     End Sub
     Private Sub DisplayProgress(pText As String, Optional isAppend As Boolean = False, Optional isLogged As Boolean = True)
         LblStatus.Text = If(isAppend, LblStatus.Text, "") & pText

@@ -415,18 +415,6 @@ Partial Friend NotInheritable Class Settings
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-    Public Property BackupPath() As String
-        Get
-            Return CType(Me("BackupPath"),String)
-        End Get
-        Set
-            Me("BackupPath") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
     Public Property RestoreFormPos() As String
         Get
             Return CType(Me("RestoreFormPos"),String)
