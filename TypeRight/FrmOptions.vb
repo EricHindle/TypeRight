@@ -169,5 +169,17 @@ Public Class FrmOptions
         Return isOK
     End Function
 
+    Private Sub BtnBackup_Click(sender As Object, e As EventArgs) Handles BtnBackup.Click
+        Using _backup As New FrmBackup
+            _backup.ShowDialog()
+        End Using
+    End Sub
+
+    Private Sub BtnRestore_Click(sender As Object, e As EventArgs) Handles BtnRestore.Click
+        Using _restore As New FrmRestore
+            _restore.ShowDialog()
+        End Using
+    End Sub
+
 #End Region
 End Class

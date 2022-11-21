@@ -1,12 +1,16 @@
 ﻿Imports System.Collections.Generic
+Imports System.Data
 Imports System.Data.Common
+Imports System.IO
 Imports System.Reflection
+Imports System.Windows.Forms
 
 Module DatabaseFunctions
 
 #Region "constants"
     Private Const MODULE_NAME As String = "Db"
 #End Region
+
 #Region "dB"
     Private ReadOnly oBgTa As New TypeRightDataSetTableAdapters.buttongroupsTableAdapter
     Private ReadOnly oBgTable As New TypeRightDataSet.buttongroupsDataTable
@@ -18,6 +22,83 @@ Module DatabaseFunctions
     Private ReadOnly oSndBtnTable As New TypeRightDataSet.senderButtonDataTable
     Private ReadOnly oSmtpTa As New TypeRightDataSetTableAdapters.smtpTableAdapter
     Private ReadOnly oSmtpTable As New TypeRightDataSet.smtpDataTable
+#End Region
+#Region "backup"
+    Private tableList As New List(Of String)
+    Public Sub InitialiseData()
+        LogUtil.Info("Initialising data", MODULE_NAME)
+        tableList.Add("Buttons")
+        tableList.Add("ButtonGroups")
+        tableList.Add("Senders")
+        tableList.Add("SenderButtons")
+        tableList.Add("Smtp")
+
+    End Sub
+    Public Sub FillTableTree(ByRef tvtables As TreeView)
+        tvtables.Nodes.Clear()
+        tvtables.Nodes.Add("Tables")
+        For Each oTable As String In tableList
+            tvtables.Nodes(0).Nodes.Add(oTable)
+        Next
+    End Sub
+    Public Function RestoreDataTable(tableType As String, datapath As String) As Integer
+        Dim rowCount As Integer = 0
+        Try
+            Select Case tableType
+                Case "Buttons"
+                    If RecreateTable(oBtnTable, datapath) Then
+                        '   oBtnTa.TruncatePeople()
+                        oBtnTa.Update(oBtnTable)
+                        rowCount = oBtnTa.GetData().Rows.Count
+                    End If
+                Case "ButtonGroups"
+                    If RecreateTable(oBgTable, datapath) Then
+                        '   oBgTa.TruncatePeople()
+                        oBgTa.Update(oBgTable)
+                        rowCount = oBgTa.GetData().Rows.Count
+                    End If
+                Case "Senders"
+                    If RecreateTable(oSndTable, datapath) Then
+                        '   osndTa.TruncatePeople()
+                        oSndTa.Update(oSndTable)
+                        rowCount = oSndTa.GetData().Rows.Count
+                    End If
+                Case "SenderButtons"
+                    If RecreateTable(oSndBtnTable, datapath) Then
+                        '   osndBtnTa.TruncatePeople()
+                        oSndBtnTa.Update(oSndBtnTable)
+                        rowCount = oSndBtnTa.GetData().Rows.Count
+                    End If
+                Case "Smtp"
+                    If RecreateTable(oSmtpTable, datapath) Then
+                        '   osmtpTa.TruncatePeople()
+                        oSmtpTa.Update(oSmtpTable)
+                        rowCount = oSmtpTa.GetData().Rows.Count
+                    End If
+            End Select
+        Catch ex As Exception
+
+        End Try
+        Return rowCount
+    End Function
+    Private Function RecreateTable(ByRef restoredDataTable As DataTable, datapath As String) As Boolean
+        Dim isTableOK As Boolean = False
+        Dim sTableName As String = restoredDataTable.TableName
+        Dim sBackupFile As String = Path.Combine(datapath, sTableName & ".xml")
+        If My.Computer.FileSystem.FileExists(sBackupFile) Then
+            Try
+                restoredDataTable.Clear()
+                restoredDataTable.ReadXml(sBackupFile)
+                Dim rowCount As Integer = restoredDataTable.Rows.Count
+                If MsgBox(CStr(rowCount) & " records recovered. OK to continue?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Continue") = MsgBoxResult.Yes Then
+                    isTableOK = True
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+        Return isTableOK
+    End Function
 #End Region
 #Region "buttons"
     Public Function TestDatabase() As Boolean
@@ -51,7 +132,7 @@ Module DatabaseFunctions
             DisplayException(MethodBase.GetCurrentMethod, ex, "Win32")
         End Try
     End Sub
-    Public Function GetButtons()
+    Public Function GetButtonTable()
         LogUtil.Info("Getting button table", MODULE_NAME)
         Return oBtnTa.GetData()
     End Function
@@ -141,7 +222,7 @@ Module DatabaseFunctions
         End If
         Return oBgRow
     End Function
-    Public Function GetButtonGroups() As TypeRightDataSet.buttongroupsDataTable
+    Public Function GetButtonGroupTable() As TypeRightDataSet.buttongroupsDataTable
         LogUtil.Info("Getting group table", MODULE_NAME)
         Return oBgTa.GetData
     End Function
@@ -159,7 +240,7 @@ Module DatabaseFunctions
     End Function
 #End Region
 #Region "senders"
-    Public Function GetSenders() As TypeRightDataSet.sendersDataTable
+    Public Function GetSenderTable() As TypeRightDataSet.sendersDataTable
         LogUtil.Info("Getting sender table", MODULE_NAME)
         Return oSndTa.GetData()
     End Function
@@ -208,7 +289,7 @@ Module DatabaseFunctions
     End Function
 #End Region
 #Region "senderbuttons"
-    Public Function GetSenderButtons() As TypeRightDataSet.senderButtonDataTable
+    Public Function GetSenderButtonTable() As TypeRightDataSet.senderButtonDataTable
         LogUtil.Info("Getting sender button table", MODULE_NAME)
         Return oSndBtnTa.GetData()
     End Function
@@ -239,7 +320,7 @@ Module DatabaseFunctions
     End Function
 #End Region
 #Region "smtp"
-    Public Function GetSmtp() As TypeRightDataSet.smtpDataTable
+    Public Function GetSmtpTable() As TypeRightDataSet.smtpDataTable
         LogUtil.Info("Getting SMTP table", MODULE_NAME)
         Return oSmtpTa.GetData
     End Function

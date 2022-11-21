@@ -399,6 +399,42 @@ Partial Friend NotInheritable Class Settings
             Me("SmtpFormPos") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property BackupFormPos() As String
+        Get
+            Return CType(Me("BackupFormPos"),String)
+        End Get
+        Set
+            Me("BackupFormPos") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property BackupPath() As String
+        Get
+            Return CType(Me("BackupPath"),String)
+        End Get
+        Set
+            Me("BackupPath") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property RestoreFormPos() As String
+        Get
+            Return CType(Me("RestoreFormPos"),String)
+        End Get
+        Set
+            Me("RestoreFormPos") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

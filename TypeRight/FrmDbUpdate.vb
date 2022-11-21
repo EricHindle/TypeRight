@@ -190,7 +190,7 @@ Public Class FrmDbUpdate
 #End Region
 #Region "subroutines"
     Private Sub LoadSenderTable()
-        oSndTable = GetSenders()
+        oSndTable = GetSenderTable()
         oSndRow = Nothing
         iCurrSnd = 0
         For Each oRow As TypeRightDataSet.sendersRow In oSndTable.Rows
@@ -371,7 +371,7 @@ Public Class FrmDbUpdate
     End Function
     Private Sub DataBackupButtons()
         DisplayProgress(BKUP_GRP_BUTTONS)
-        BackupTable(GetButtons())
+        BackupTable(GetButtonTable())
         DisplayProgress(BKUP_GRP_BUTTONS & COMPLETE)
     End Sub
     Private Sub DataRestoreButtons()
@@ -396,7 +396,7 @@ Public Class FrmDbUpdate
     End Sub
     Private Sub DataBackupGroups()
         DisplayProgress(BKUP_GROUPS)
-        BackupTable(GetButtonGroups())
+        BackupTable(GetButtonGroupTable())
         DisplayProgress(BKUP_GROUPS & COMPLETE)
     End Sub
     Private Sub DataRestoreGroups()
@@ -413,7 +413,7 @@ Public Class FrmDbUpdate
     End Sub
     Private Sub DataBackupSenders()
         DisplayProgress(BKUP_SENDERS)
-        BackupTable(GetSenders())
+        BackupTable(GetSenderTable())
         DisplayProgress(BKUP_SENDERS & COMPLETE)
     End Sub
     Private Sub DataRestoreSenders()
@@ -431,7 +431,7 @@ Public Class FrmDbUpdate
     End Sub
     Private Sub DataBackupSenderButtons()
         DisplayProgress(BKUP_SNDR_BUTTONS)
-        BackupTable(GetSenderButtons())
+        BackupTable(GetSenderButtonTable())
         DisplayProgress(BKUP_SNDR_BUTTONS & COMPLETE)
     End Sub
     Private Sub DataRestoreSenderButtons()

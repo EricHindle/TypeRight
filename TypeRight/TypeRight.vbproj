@@ -113,11 +113,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buttons\ButtonUtil.vb" />
-    <Compile Include="Domain\DatabaseFunctions.vb" />
-    <Compile Include="Domain\Sender.vb" />
-    <Compile Include="Domain\Builders\SenderBuilder.vb" />
-    <Compile Include="Domain\Smtp.vb" />
-    <Compile Include="Domain\Builders\SmtpBuilder.vb" />
+    <Compile Include="Data\Backup\FrmBackup.Designer.vb">
+      <DependentUpon>FrmBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Backup\FrmBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Data\Backup\FrmRestore.Designer.vb">
+      <DependentUpon>FrmRestore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Backup\FrmRestore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Data\DatabaseFunctions.vb" />
+    <Compile Include="Data\Sender.vb" />
+    <Compile Include="Data\Builders\SenderBuilder.vb" />
+    <Compile Include="Data\Smtp.vb" />
+    <Compile Include="Data\Builders\SmtpBuilder.vb" />
     <Compile Include="Email\EmailUtil.vb" />
     <Compile Include="FrmButtonList.Designer.vb">
       <DependentUpon>FrmButtonList.vb</DependentUpon>
@@ -220,6 +232,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Data\Backup\FrmBackup.resx">
+      <DependentUpon>FrmBackup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Backup\FrmRestore.resx">
+      <DependentUpon>FrmRestore.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Email\FrmSmtpAccounts.resx">
       <DependentUpon>FrmSmtpAccounts.vb</DependentUpon>
     </EmbeddedResource>

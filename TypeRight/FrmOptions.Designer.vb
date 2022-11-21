@@ -64,6 +64,8 @@ Partial Class FrmOptions
         Me.Image2 = New System.Windows.Forms.PictureBox()
         Me.BtnViewLog = New System.Windows.Forms.Button()
         Me.ToolTip6 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BtnRestore = New System.Windows.Forms.Button()
+        Me.BtnBackup = New System.Windows.Forms.Button()
         Me.GrpLicence.SuspendLayout()
         CType(Me.Slider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -438,11 +440,33 @@ Partial Class FrmOptions
         Me.BtnViewLog.Text = "View Log"
         Me.BtnViewLog.UseVisualStyleBackColor = True
         '
+        'BtnRestore
+        '
+        Me.BtnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnRestore.Location = New System.Drawing.Point(312, 338)
+        Me.BtnRestore.Name = "BtnRestore"
+        Me.BtnRestore.Size = New System.Drawing.Size(94, 31)
+        Me.BtnRestore.TabIndex = 23
+        Me.BtnRestore.Text = "Restore"
+        Me.BtnRestore.UseVisualStyleBackColor = True
+        '
+        'BtnBackup
+        '
+        Me.BtnBackup.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnBackup.Location = New System.Drawing.Point(209, 338)
+        Me.BtnBackup.Name = "BtnBackup"
+        Me.BtnBackup.Size = New System.Drawing.Size(94, 31)
+        Me.BtnBackup.TabIndex = 24
+        Me.BtnBackup.Text = "Backup"
+        Me.BtnBackup.UseVisualStyleBackColor = True
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(650, 479)
+        Me.Controls.Add(Me.BtnBackup)
+        Me.Controls.Add(Me.BtnRestore)
         Me.Controls.Add(Me.BtnViewLog)
         Me.Controls.Add(Me.Image2)
         Me.Controls.Add(Me.Image1)
@@ -467,7 +491,6 @@ Partial Class FrmOptions
         Me.Controls.Add(Me.BtnDfltFont)
         Me.Controls.Add(Me.GrpLicence)
         Me.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmOptions"
@@ -529,4 +552,6 @@ Partial Class FrmOptions
     Friend WithEvents Image2 As Windows.Forms.PictureBox
     Friend WithEvents BtnViewLog As Windows.Forms.Button
     Friend WithEvents ToolTip6 As Windows.Forms.ToolTip
+    Friend WithEvents BtnRestore As Windows.Forms.Button
+    Friend WithEvents BtnBackup As Windows.Forms.Button
 End Class

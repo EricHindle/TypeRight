@@ -51,7 +51,7 @@ Public Class FrmEmail
     End Sub
 
     Private Sub SetAccountsDatasource()
-        _smtpTable = GetSmtp()
+        _smtpTable = GetSmtpTable()
         cbSmtpAccounts.DataSource = _smtpTable
         cbSmtpAccounts.DisplayMember = "smtpUsername"
         cbSmtpAccounts.ValueMember = "smtpId"

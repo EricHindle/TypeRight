@@ -100,7 +100,7 @@ Public Class FrmSmtpAccounts
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
     Private Sub SetAccountsDatasource()
-        _smtpTable = GetSmtp()
+        _smtpTable = GetSmtpTable()
         CbSmtpAccount.DataSource = _smtpTable
         CbSmtpAccount.DisplayMember = "smtpUsername"
         CbSmtpAccount.ValueMember = "smtpId"

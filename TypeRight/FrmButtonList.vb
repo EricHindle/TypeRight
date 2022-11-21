@@ -36,6 +36,7 @@ Public Class FrmButtonList
         LogUtil.LogFolder = My.Settings.LogFolder
         LogUtil.StartLogging()
         InitialiseApplication()
+        InitialiseData()
         GetFormPos(Me, My.Settings.ButtonListPos)
         ' Set window width based on number of columns and button width
         Me.Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
@@ -319,8 +320,8 @@ Public Class FrmButtonList
         End Using
     End Sub
     Private Sub FillNamesList()
-        Dim _senders As TypeRightDataSet.sendersDataTable = GetSenders()
-        Dim _groups As TypeRightDataSet.buttongroupsDataTable = GetButtonGroups()
+        Dim _senders As TypeRightDataSet.sendersDataTable = GetSenderTable()
+        Dim _groups As TypeRightDataSet.buttongroupsDataTable = GetButtonGroupTable()
         Dim comboItems As New Dictionary(Of Integer, String)
         For Each grpRow As TypeRightDataSet.buttongroupsRow In _groups.Rows
             comboItems.Add(grpRow.buttongroupid * -1, "** " & grpRow.groupname & " **")
