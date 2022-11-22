@@ -73,7 +73,7 @@ Partial Class FrmEmail
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(938, 22)
-        Me.StatusStrip1.TabIndex = 5
+        Me.StatusStrip1.TabIndex = 4
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'LblStatus
@@ -103,7 +103,7 @@ Partial Class FrmEmail
         Me.Label1.Location = New System.Drawing.Point(13, 54)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(31, 18)
-        Me.Label1.TabIndex = 6
+        Me.Label1.TabIndex = 12
         Me.Label1.Text = "To:"
         '
         'Label2
@@ -112,7 +112,7 @@ Partial Class FrmEmail
         Me.Label2.Location = New System.Drawing.Point(13, 6)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(47, 18)
-        Me.Label2.TabIndex = 5
+        Me.Label2.TabIndex = 11
         Me.Label2.Text = "From:"
         '
         'Label3
@@ -121,7 +121,7 @@ Partial Class FrmEmail
         Me.Label3.Location = New System.Drawing.Point(13, 102)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(61, 18)
-        Me.Label3.TabIndex = 7
+        Me.Label3.TabIndex = 13
         Me.Label3.Text = "Subject:"
         '
         'Label4
@@ -130,7 +130,7 @@ Partial Class FrmEmail
         Me.Label4.Location = New System.Drawing.Point(13, 150)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(44, 18)
-        Me.Label4.TabIndex = 8
+        Me.Label4.TabIndex = 14
         Me.Label4.Text = "Text:"
         '
         'TxtSubject
@@ -165,7 +165,7 @@ Partial Class FrmEmail
         Me.BtnClose.Location = New System.Drawing.Point(847, 439)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 41)
-        Me.BtnClose.TabIndex = 4
+        Me.BtnClose.TabIndex = 3
         Me.BtnClose.Text = "Close"
         Me.BtnClose.UseVisualStyleBackColor = True
         '
@@ -191,7 +191,7 @@ Partial Class FrmEmail
         Me.BtnPasteTo.Location = New System.Drawing.Point(724, 53)
         Me.BtnPasteTo.Name = "BtnPasteTo"
         Me.BtnPasteTo.Size = New System.Drawing.Size(26, 23)
-        Me.BtnPasteTo.TabIndex = 9
+        Me.BtnPasteTo.TabIndex = 5
         Me.BtnPasteTo.UseVisualStyleBackColor = True
         '
         'BtnPasteSubject
@@ -202,7 +202,7 @@ Partial Class FrmEmail
         Me.BtnPasteSubject.Location = New System.Drawing.Point(724, 100)
         Me.BtnPasteSubject.Name = "BtnPasteSubject"
         Me.BtnPasteSubject.Size = New System.Drawing.Size(26, 23)
-        Me.BtnPasteSubject.TabIndex = 10
+        Me.BtnPasteSubject.TabIndex = 6
         Me.BtnPasteSubject.UseVisualStyleBackColor = True
         '
         'BtnPasteText
@@ -213,7 +213,7 @@ Partial Class FrmEmail
         Me.BtnPasteText.Location = New System.Drawing.Point(670, 173)
         Me.BtnPasteText.Name = "BtnPasteText"
         Me.BtnPasteText.Size = New System.Drawing.Size(26, 23)
-        Me.BtnPasteText.TabIndex = 11
+        Me.BtnPasteText.TabIndex = 7
         Me.BtnPasteText.UseVisualStyleBackColor = True
         '
         'SplitContainer1
@@ -259,7 +259,7 @@ Partial Class FrmEmail
         Me.BtnSmtp.Location = New System.Drawing.Point(670, 314)
         Me.BtnSmtp.Name = "BtnSmtp"
         Me.BtnSmtp.Size = New System.Drawing.Size(86, 41)
-        Me.BtnSmtp.TabIndex = 2
+        Me.BtnSmtp.TabIndex = 10
         Me.BtnSmtp.Text = "SMTP accounts"
         Me.BtnSmtp.UseVisualStyleBackColor = False
         '
@@ -272,7 +272,7 @@ Partial Class FrmEmail
         Me.BtnClearText.Location = New System.Drawing.Point(670, 202)
         Me.BtnClearText.Name = "BtnClearText"
         Me.BtnClearText.Size = New System.Drawing.Size(86, 41)
-        Me.BtnClearText.TabIndex = 6
+        Me.BtnClearText.TabIndex = 8
         Me.BtnClearText.Text = "Clear Text"
         Me.BtnClearText.UseVisualStyleBackColor = False
         '
@@ -284,7 +284,7 @@ Partial Class FrmEmail
         Me.BtnClear.Location = New System.Drawing.Point(670, 258)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(86, 41)
-        Me.BtnClear.TabIndex = 3
+        Me.BtnClear.TabIndex = 9
         Me.BtnClear.Text = "ClearForm"
         Me.BtnClear.UseVisualStyleBackColor = True
         '
@@ -318,7 +318,7 @@ Partial Class FrmEmail
         Me.BtnReset.Location = New System.Drawing.Point(693, 441)
         Me.BtnReset.Name = "BtnReset"
         Me.BtnReset.Size = New System.Drawing.Size(75, 41)
-        Me.BtnReset.TabIndex = 6
+        Me.BtnReset.TabIndex = 2
         Me.BtnReset.Text = "Reset"
         Me.BtnReset.UseVisualStyleBackColor = False
         '

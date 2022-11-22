@@ -135,6 +135,9 @@ Public Class FrmEmail
                 End If
             End If
         End If
+        TopMost = True
+        BringToFront()
+        TopMost = False
     End Sub
     Private Sub TxtTo_DragDrop(sender As Object, e As DragEventArgs) Handles TxtTo.DragDrop
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
@@ -152,6 +155,9 @@ Public Class FrmEmail
             End If
             TxtTo.Text = _string.Trim
         End If
+        TopMost = True
+        BringToFront()
+        TopMost = False
     End Sub
     Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtTo.DragEnter,
                                                                                                                  TxtSubject.DragEnter,
