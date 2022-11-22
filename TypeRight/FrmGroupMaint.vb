@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 Public Class FrmGroupMaint
 #Region "database variables"
-    Private oBtnGrpRow As TypeRightDataSet.buttongroupsRow
+    Private oBtnGrp As ButtonGroup
 #End Region
 #Region "properties"
     Private _button As NbuttonControlLibrary.Nbutton
@@ -32,8 +32,7 @@ Public Class FrmGroupMaint
         Dim iActGrp As Integer
         iActGrp = iCurrGrp
         Me.DialogResult = DialogResult.OK
-        Dim btnGrpRow As TypeRightDataSet.buttongroupsRow = GetButtonGroup(iActGrp)
-        Select Case _Action
+        Select Case _action
             Case GroupAction.GRP_TRANS
                 If cmbGroups.SelectedIndex = -1 Then
                     MsgBox("Select group to transfer to", vbExclamation, "Missing Information")
@@ -77,12 +76,9 @@ Public Class FrmGroupMaint
         Me.ButtongroupsTableAdapter.Fill(Me.TypeRightDataSet.buttongroups)
         ClearForm()
         TxtGrpNumber.Text = CStr(iCurrGrp)
-        oBtnGrpRow = GetButtonGroup(iCurrGrp)
-        If oBtnGrpRow IsNot Nothing Then
-            TxtGrpName.Text = oBtnGrpRow.groupname
-        End If
-
-        Select Case _Action
+        oBtnGrp = GetButtonGroupById(iCurrGrp)
+        TxtGrpName.Text = oBtnGrp.GroupName
+        Select Case _action
             Case GroupAction.GRP_ADD
                 LogUtil.Info("Adding new group", MyBase.Name)
                 BtnUpdate.Text = "Add"

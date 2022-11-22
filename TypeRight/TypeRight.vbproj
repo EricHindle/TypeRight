@@ -125,7 +125,9 @@
     <Compile Include="Data\Backup\FrmRestore.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Data\Builders\ButtonGroupBuilder.vb" />
     <Compile Include="Data\Builders\SenderButtonBuilder.vb" />
+    <Compile Include="Data\ButtonGroup.vb" />
     <Compile Include="Data\DatabaseFunctions.vb" />
     <Compile Include="Data\Sender.vb" />
     <Compile Include="Data\Builders\SenderBuilder.vb" />

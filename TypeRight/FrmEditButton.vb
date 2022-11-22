@@ -51,13 +51,13 @@ Public Class FrmEditButton
             iSeq = _button.Sequence
             iGrp = _button.Group
             iId = _button.Id
-            Dim btnGrpRow As TypeRightDataSet.buttongroupsRow = GetButtonGroup(iGrp)
+            Dim btnGrp As ButtonGroup = GetButtonGroupById(iGrp)
             BtnFont.Text = _button.FontName & "(" & CStr(_button.FontSize) & ")"
             If isPro Then
                 chkEncrypt.Checked = _button.Encrypt
             End If
             LblBtnSeq.Text = CStr(iSeq)
-            LblBtnGrp.Text = btnGrpRow.groupname
+            LblBtnGrp.Text = btnGrp.GroupName
             TxtHint.Text = _button.Hint
             TxtValue.Text = If(chkEncrypt.Checked, oNCrypter.DecryptData(_button.Value), _button.Value)
             txtCaption.Text = _button.Caption

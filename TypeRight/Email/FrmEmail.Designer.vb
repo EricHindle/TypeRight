@@ -41,11 +41,12 @@ Partial Class FrmEmail
         Me.BtnPasteSubject = New System.Windows.Forms.Button()
         Me.BtnPasteText = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.cbSmtpAccounts = New System.Windows.Forms.ComboBox()
-        Me.TxtFromName = New System.Windows.Forms.TextBox()
-        Me.BtnClear = New System.Windows.Forms.Button()
         Me.BtnSmtp = New System.Windows.Forms.Button()
         Me.BtnClearText = New System.Windows.Forms.Button()
+        Me.BtnClear = New System.Windows.Forms.Button()
+        Me.cbSmtpAccounts = New System.Windows.Forms.ComboBox()
+        Me.TxtFromName = New System.Windows.Forms.TextBox()
+        Me.BtnReset = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -159,7 +160,8 @@ Partial Class FrmEmail
         'BtnClose
         '
         Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnClose.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClose.Location = New System.Drawing.Point(847, 439)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(75, 41)
@@ -247,38 +249,6 @@ Partial Class FrmEmail
         Me.SplitContainer1.SplitterDistance = 768
         Me.SplitContainer1.TabIndex = 0
         '
-        'cbSmtpAccounts
-        '
-        Me.cbSmtpAccounts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbSmtpAccounts.FormattingEnabled = True
-        Me.cbSmtpAccounts.Location = New System.Drawing.Point(95, 3)
-        Me.cbSmtpAccounts.Name = "cbSmtpAccounts"
-        Me.cbSmtpAccounts.Size = New System.Drawing.Size(341, 26)
-        Me.cbSmtpAccounts.TabIndex = 0
-        '
-        'TxtFromName
-        '
-        Me.TxtFromName.AllowDrop = True
-        Me.TxtFromName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtFromName.Location = New System.Drawing.Point(452, 3)
-        Me.TxtFromName.Margin = New System.Windows.Forms.Padding(4)
-        Me.TxtFromName.Name = "TxtFromName"
-        Me.TxtFromName.Size = New System.Drawing.Size(298, 25)
-        Me.TxtFromName.TabIndex = 1
-        '
-        'BtnClear
-        '
-        Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnClear.ForeColor = System.Drawing.Color.DimGray
-        Me.BtnClear.Location = New System.Drawing.Point(670, 258)
-        Me.BtnClear.Name = "BtnClear"
-        Me.BtnClear.Size = New System.Drawing.Size(86, 41)
-        Me.BtnClear.TabIndex = 3
-        Me.BtnClear.Text = "ClearForm"
-        Me.BtnClear.UseVisualStyleBackColor = True
-        '
         'BtnSmtp
         '
         Me.BtnSmtp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -306,11 +276,58 @@ Partial Class FrmEmail
         Me.BtnClearText.Text = "Clear Text"
         Me.BtnClearText.UseVisualStyleBackColor = False
         '
+        'BtnClear
+        '
+        Me.BtnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnClear.ForeColor = System.Drawing.Color.DimGray
+        Me.BtnClear.Location = New System.Drawing.Point(670, 258)
+        Me.BtnClear.Name = "BtnClear"
+        Me.BtnClear.Size = New System.Drawing.Size(86, 41)
+        Me.BtnClear.TabIndex = 3
+        Me.BtnClear.Text = "ClearForm"
+        Me.BtnClear.UseVisualStyleBackColor = True
+        '
+        'cbSmtpAccounts
+        '
+        Me.cbSmtpAccounts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbSmtpAccounts.FormattingEnabled = True
+        Me.cbSmtpAccounts.Location = New System.Drawing.Point(95, 3)
+        Me.cbSmtpAccounts.Name = "cbSmtpAccounts"
+        Me.cbSmtpAccounts.Size = New System.Drawing.Size(341, 26)
+        Me.cbSmtpAccounts.TabIndex = 0
+        '
+        'TxtFromName
+        '
+        Me.TxtFromName.AllowDrop = True
+        Me.TxtFromName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtFromName.Location = New System.Drawing.Point(452, 3)
+        Me.TxtFromName.Margin = New System.Windows.Forms.Padding(4)
+        Me.TxtFromName.Name = "TxtFromName"
+        Me.TxtFromName.Size = New System.Drawing.Size(298, 25)
+        Me.TxtFromName.TabIndex = 1
+        '
+        'BtnReset
+        '
+        Me.BtnReset.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnReset.BackColor = System.Drawing.Color.Linen
+        Me.BtnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnReset.Font = New System.Drawing.Font("Tahoma", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnReset.ForeColor = System.Drawing.Color.Sienna
+        Me.BtnReset.Location = New System.Drawing.Point(693, 441)
+        Me.BtnReset.Name = "BtnReset"
+        Me.BtnReset.Size = New System.Drawing.Size(75, 41)
+        Me.BtnReset.TabIndex = 6
+        Me.BtnReset.Text = "Reset"
+        Me.BtnReset.UseVisualStyleBackColor = False
+        '
         'FrmEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(938, 507)
+        Me.Controls.Add(Me.BtnReset)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.BtnSend)
         Me.Controls.Add(Me.BtnClose)
@@ -354,4 +371,5 @@ Partial Class FrmEmail
     Friend WithEvents BtnClear As Windows.Forms.Button
     Friend WithEvents BtnSmtp As Windows.Forms.Button
     Friend WithEvents BtnClearText As Windows.Forms.Button
+    Friend WithEvents BtnReset As Windows.Forms.Button
 End Class

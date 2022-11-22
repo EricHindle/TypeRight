@@ -8,7 +8,7 @@ Public Class SmtpBuilder
     Private _port As Integer
     Private _ssl As Boolean
     Private _reqCred As Boolean
-    Public Shared Function anSmtp() As SmtpBuilder
+    Public Shared Function aSmtp() As SmtpBuilder
         Return New SmtpBuilder
     End Function
     Private Sub Initialise()

@@ -94,6 +94,7 @@ Public Class FrmEmail
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         DisplayProgress("Sending Email",, True)
+        BtnSend.Enabled = False
         If cbSmtpAccounts.SelectedIndex >= 0 Then
             Dim _smtp As Smtp = GetSmtpById(cbSmtpAccounts.SelectedValue)
             If String.IsNullOrWhiteSpace(TxtTo.Text) Or String.IsNullOrWhiteSpace(TxtSubject.Text) Or String.IsNullOrWhiteSpace(TxtText.Text) Then
@@ -193,6 +194,10 @@ Public Class FrmEmail
 
     Private Sub BtnClearText_Click(sender As Object, e As EventArgs) Handles BtnClearText.Click
         TxtText.Text = ""
+    End Sub
+
+    Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
+        BtnSend.Enabled = True
     End Sub
 #End Region
 End Class

@@ -22,7 +22,7 @@ Public Class FrmSmtpAccounts
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
         DisplayProgress("Adding SMTP Account details", , True)
         Dim _username As String = CbSmtpAccount.Text
-        Dim _smtp As Smtp = SmtpBuilder.anSmtp.StartingWith(-1, _username, TxtPassword.Text, TxtHost.Text, CInt(TxtPort.Text), chkSsl.Checked, chkCredReq.Checked).Build
+        Dim _smtp As Smtp = SmtpBuilder.aSmtp.StartingWith(-1, _username, TxtPassword.Text, TxtHost.Text, CInt(TxtPort.Text), chkSsl.Checked, chkCredReq.Checked).Build
         If InsertSmtp(_smtp) Then
             DisplayProgress("Added OK",, True)
         Else
@@ -75,7 +75,7 @@ Public Class FrmSmtpAccounts
         Dim _id As Integer = CbSmtpAccount.SelectedValue
         Dim _smtp As Smtp = GetSmtpById(_id)
         If _smtp.SmtpId >= 0 Then
-            _smtp = SmtpBuilder.anSmtp.StartingWith(_smtp) _
+            _smtp = SmtpBuilder.aSmtp.StartingWith(_smtp) _
                                 .WithPassword(TxtPassword.Text) _
                                 .WithHost(TxtHost.Text) _
                                 .WithPort(CInt(TxtPort.Text)) _

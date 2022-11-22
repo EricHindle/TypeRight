@@ -292,14 +292,20 @@ Module DatabaseFunctions
     End Sub
 #End Region
 #Region "groups"
-    Public Function GetButtonGroup(_buttonGrpId As Integer) As TypeRightDataSet.buttongroupsRow
-        LogUtil.Info("Getting group " & CStr(_buttonGrpId), MethodBase.GetCurrentMethod.Name)
-        Dim oBgRow As TypeRightDataSet.buttongroupsRow = Nothing
-        oBgTa.FillById(oBgTable, _buttonGrpId)
-        If oBgTable.Rows.Count = 1 Then
-            oBgRow = oBgTable.Rows(0)
-        End If
-        Return oBgRow
+    Public Function GetButtonGroupById(_id As Integer) As ButtonGroup
+        LogUtil.Info("Getting button group " & CStr(_id), MethodBase.GetCurrentMethod.Name)
+        Dim oButtonGroup As New ButtonGroup
+        Try
+            oBgTa.FillById(oBgTable, _id)
+            If oBgTable.Rows.Count > 0 Then
+                oButtonGroup = ButtonGroupBuilder.aButtonGroup.StartingWith(oBgTable.Rows(0)).Build
+            Else
+                LogUtil.Info("ButtonGroup not found ", MethodBase.GetCurrentMethod.Name)
+            End If
+        Catch ex As Exception
+            LogUtil.Exception("ButtonGroup not found: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return oButtonGroup
     End Function
     Public Function GetButtonGroupTable() As TypeRightDataSet.buttongroupsDataTable
         LogUtil.Info("Getting group table", MethodBase.GetCurrentMethod.Name)
@@ -530,7 +536,7 @@ Module DatabaseFunctions
         Try
             oSmtpTa.Fill(oSmtpTable)
             For Each _row As TypeRightDataSet.smtpRow In oSmtpTable.Rows
-                _smtpList.Add(SmtpBuilder.anSmtp.StartingWith(_row).Build)
+                _smtpList.Add(SmtpBuilder.aSmtp.StartingWith(_row).Build)
             Next
         Catch ex As DbException
             LogUtil.Exception("Failed: ", ex, MethodBase.GetCurrentMethod.Name)
@@ -543,7 +549,7 @@ Module DatabaseFunctions
         Try
             oSmtpTa.FillById(oSmtpTable, pId)
             If oSmtpTable.Rows.Count > 0 Then
-                _smtp = SmtpBuilder.anSmtp.StartingWith(oSmtpTable.Rows(0)).Build
+                _smtp = SmtpBuilder.aSmtp.StartingWith(oSmtpTable.Rows(0)).Build
             End If
         Catch ex As DbException
             LogUtil.Exception("SMTP not found: ", ex, MethodBase.GetCurrentMethod.Name)
