@@ -331,7 +331,7 @@ Public Class FrmDbUpdate
     End Sub
     Private Function StoreSenderValues() As Sender
         Dim senderId As Integer = If(IsNumeric(TxtId.Text), CInt(TxtId.Text), -1)
-        Return SenderBuilder.NewSender.StartingWith(senderId, TxtForename.Text,
+        Return SenderBuilder.aSender.StartingWith(senderId, TxtForename.Text,
                                                     TxtSurname.Text, TxtAdd2.Text,
                                                     TxtTown.Text, TxtCounty.Text,
                                                     TxtPostCode.Text, DtpDob.Value,

@@ -20,7 +20,7 @@
     Private _maritalstatus As String
     Private _username As String
 
-    Public Shared Function NewSender() As SenderBuilder
+    Public Shared Function aSender() As SenderBuilder
         Return New SenderBuilder
     End Function
 
@@ -51,25 +51,24 @@
     Public Function StartingWith(ByVal oRow As TypeRight.TypeRightDataSet.sendersRow) As SenderBuilder
         _id = oRow.senderid
         _firstname = oRow.firstname
-        _lastname = oRow.lastname
-        _address2 = oRow.address2
-        _town = oRow.town
-        _county = oRow.county
-        _postcode = oRow.postcode
-        _dob = oRow.dob
-        _title = oRow.Title
-        _address1 = oRow.Address1
-        _country = oRow.country
-        _email = oRow.email
-        _phone = oRow.phone
-        _mobile = oRow.mobile
-        _password = oRow.passwd
-        _secretword = oRow.secretword
-        _gender = oRow.gender
-        _occupation = oRow.occupation
-        _maritalstatus = oRow.maritalstatus
-        _username = oRow.username
-
+        _lastname = oRow.LastName
+        _address2 = If(oRow.IsAddress2Null, "", oRow.Address2)
+        _town = If(oRow.IsTownNull, "", oRow.Town)
+        _county = If(oRow.IsCountyNull, "", oRow.County)
+        _postcode = If(oRow.IsPostCodeNull, "", oRow.PostCode)
+        _dob = If(oRow.IsdobNull, Date.MinValue, oRow.dob)
+        _title = If(oRow.IsTitleNull, "", oRow.Title)
+        _address1 = If(oRow.IsAddress1Null, "", oRow.Address1)
+        _country = If(oRow.IsCountryNull, "", oRow.Country)
+        _email = If(oRow.IsEmailNull, "", oRow.Email)
+        _phone = If(oRow.IsPhoneNull, "", oRow.Phone)
+        _mobile = If(oRow.IsMobileNull, "", oRow.Mobile)
+        _password = If(oRow.IsPasswdNull, "", oRow.Passwd)
+        _secretword = If(oRow.IsSecretWordNull, "", orow.secretword)
+        _gender = If(oRow.IsgenderNull, "", oRow.gender)
+        _occupation = If(oRow.IsOccupationNull, "", oRow.Occupation)
+        _maritalstatus = If(oRow.IsMaritalStatusNull, "", oRow.MaritalStatus)
+        _username = If(oRow.IsUsernameNull, "", oRow.Username)
         Return Me
     End Function
     Public Function StartingWith(pId As Integer,

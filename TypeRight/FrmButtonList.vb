@@ -26,7 +26,7 @@ Public Class FrmButtonList
     Private bLockClock As Boolean
     Private ReadOnly bDrag As Boolean
     Private ReadOnly iDragBtnIndex As Integer
-    Private ReadOnly oCurrentSenderRow As TypeRightDataSet.sendersRow
+    Private  oSenderRow As TypeRightDataSet.sendersRow
 
     Dim redClockText As String
 #End Region
@@ -343,7 +343,7 @@ Public Class FrmButtonList
             If isPro And _nButton.Encrypt Then
                 strKeyText = oNCrypter.DecryptData(strKeyText)
             End If
-            strKeyText = ButtonUtil.GetDBFields(strKeyText)
+            strKeyText = ButtonUtil.GetDBFields(strKeyText, oSenderRow)
             strKeyText = ButtonUtil.ApplySubstrings(strKeyText)
             Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
             If GreenClock.Visible = True Then
@@ -381,71 +381,74 @@ Public Class FrmButtonList
         Dim fulladdr As String
         Dim dtDob As Date
         Dim strAge As String
-        Dim oRow As TypeRightDataSet.sendersRow = GetSenderRowById(sndKey)
-        Dim oTable As New TypeRightDataSet.sendersDataTable
-        fname = oRow.FirstName
-        lname = oRow.LastName
-        add1 = If(oRow.IsAddress1Null, "", oRow.Address1)
-        add2 = If(oRow.IsAddress2Null, "", oRow.Address2)
-        town = If(oRow.IsTownNull, "", oRow.Town)
-        county = If(oRow.IsCountyNull, "", oRow.County)
-        country = If(oRow.IsCountyNull, "", oRow.Country)
-        username = If(oRow.IsUsernameNull, "", oRow.Username)
-        pcode = If(oRow.IsPostCodeNull, "", oRow.PostCode)
-        dtDob = If(oRow.IsdobNull, Date.MinValue, oRow.dob)
-        fullname = Trim(fname & " " & lname)
-        Dim addBuilder As New StringBuilder
-        If Not String.IsNullOrEmpty(add1) Then
-            addBuilder.Append(add1)
-        End If
-        If Not String.IsNullOrEmpty(add2) Then
-            If addBuilder.Length > 0 Then
-                addBuilder.Append("{ENTER}")
+        Dim oSender As Sender = GetSenderById(sndKey)
+        If Not oSender.IsEmpty Then
+            fname = oSender.FirstName
+            lname = oSender.LastName
+            add1 = oSender.Address1
+            add2 = oSender.Address2
+            town = oSender.Town
+            county = oSender.County
+            country = oSender.Country
+            username = oSender.Username
+            pcode = oSender.PostCode
+            dtDob = oSender.DateOfBirth
+            fullname = Trim(fname & " " & lname)
+            Dim addBuilder As New StringBuilder
+            If Not String.IsNullOrEmpty(add1) Then
+                addBuilder.Append(add1)
             End If
-            addBuilder.Append(add2)
-        End If
-        If Not String.IsNullOrEmpty(town) Then
-            If addBuilder.Length > 0 Then
-                addBuilder.Append("{ENTER}")
+            If Not String.IsNullOrEmpty(add2) Then
+                If addBuilder.Length > 0 Then
+                    addBuilder.Append("{ENTER}")
+                End If
+                addBuilder.Append(add2)
             End If
-            addBuilder.Append(town)
-        End If
-        If Not String.IsNullOrEmpty(county) Then
-            If addBuilder.Length > 0 Then
-                addBuilder.Append("{ENTER}")
+            If Not String.IsNullOrEmpty(town) Then
+                If addBuilder.Length > 0 Then
+                    addBuilder.Append("{ENTER}")
+                End If
+                addBuilder.Append(town)
             End If
-            addBuilder.Append(county)
-        End If
-        If Not String.IsNullOrEmpty(pcode) Then
-            If addBuilder.Length > 0 Then
-                addBuilder.Append("{ENTER}")
+            If Not String.IsNullOrEmpty(county) Then
+                If addBuilder.Length > 0 Then
+                    addBuilder.Append("{ENTER}")
+                End If
+                addBuilder.Append(county)
             End If
-            addBuilder.Append(pcode)
-        End If
-        fulladdr = addBuilder.ToString
-        strAge = Format(ButtonUtil.Calc_age(dtDob))
-        iBct = 0
-        Dim _senderButton As SenderButton
-        For Each _col As DataColumn In oTable.Columns
-            _senderButton = GetSenderButton(_col.ColumnName)
-            strButtonValue = If(IsDBNull(oRow(_col.ColumnName)), "", oRow(_col.ColumnName))
-            If _senderButton IsNot Nothing AndAlso CBool(_senderButton.IsEncrypted) Then
-                strButtonValue = oNCrypter.DecryptData(strButtonValue)
+            If Not String.IsNullOrEmpty(pcode) Then
+                If addBuilder.Length > 0 Then
+                    addBuilder.Append("{ENTER}")
+                End If
+                addBuilder.Append(pcode)
             End If
-            strButtonTxt = _col.ColumnName
-            strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 20))
-            strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
-            AddSenderButton(iBct, _senderButton, strButtonCaption, strButtonValue, strButtonHint)
+            fulladdr = addBuilder.ToString
+            strAge = Format(ButtonUtil.Calc_age(dtDob))
+            iBct = 0
+            oSenderRow = GetSenderRowById(sndKey)
+            Dim oTable As New TypeRightDataSet.sendersDataTable
+            Dim _senderButton As SenderButton
+            For Each _col As DataColumn In oTable.Columns
+                _senderButton = GetSenderButton(_col.ColumnName)
+                strButtonValue = If(IsDBNull(oSenderRow(_col.ColumnName)), "", oSenderRow(_col.ColumnName))
+                If _senderButton IsNot Nothing AndAlso CBool(_senderButton.IsEncrypted) Then
+                    strButtonValue = oNCrypter.DecryptData(strButtonValue)
+                End If
+                strButtonTxt = _col.ColumnName
+                strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 20))
+                strButtonHint = strButtonValue.Substring(0, Math.Min(strButtonValue.Length, 50))
+                AddSenderButton(iBct, _senderButton, strButtonCaption, strButtonValue, strButtonHint)
+                iBct += 1
+            Next
+            Dim caption As String = "Full Name"
+            AddSenderButton(iBct, GetSenderButton(caption), caption, fullname, fullname.Substring(0, Math.Min(fullname.Length, 50)))
             iBct += 1
-        Next
-        Dim caption As String = "Full Name"
-        AddSenderButton(iBct, GetSenderButton(caption), caption, fullname, fullname.Substring(0, Math.Min(fullname.Length, 50)))
-        iBct += 1
-        caption = "Full Addr"
-        AddSenderButton(iBct, GetSenderButton(caption), caption, fulladdr, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)))
-        iBct += 1
-        caption = "Age"
-        AddSenderButton(iBct, GetSenderButton(caption), caption, strAge, strAge)
+            caption = "Full Addr"
+            AddSenderButton(iBct, GetSenderButton(caption), caption, fulladdr, fulladdr.Substring(0, Math.Min(fulladdr.Length, 50)))
+            iBct += 1
+            caption = "Age"
+            AddSenderButton(iBct, GetSenderButton(caption), caption, strAge, strAge)
+        End If
     End Sub
     Private Sub AddSenderButton(btnSeq As Integer, oSenderButton As SenderButton, btnCaption As String, btnValue As String, btnHint As String)
         Dim isButtonBold As Boolean
@@ -576,7 +579,7 @@ Public Class FrmButtonList
         My.Settings.Save()
     End Sub
     Private Sub PicEmail_Click(sender As Object, e As EventArgs) Handles PicEmail.Click
-        LogUtil.Info("Sending Email", MyBase.Name)
+        LogUtil.Info("Loading Email form", MyBase.Name)
         Me.Hide()
         Using _emailForm As New FrmEmail
             _emailForm.SenderId = iCurrSender

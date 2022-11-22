@@ -7,17 +7,14 @@ Imports System.Windows.Forms
 
 Module DatabaseFunctions
 
-#Region "constants"
-    Private Const MODULE_NAME As String = "DatabaseFunctions"
-#End Region
 
 #Region "dB"
     Private ReadOnly oBgTa As New TypeRightDataSetTableAdapters.buttongroupsTableAdapter
-    Private ReadOnly oBgTable As New TypeRightDataSet.buttongroupsDataTable
+    Private oBgTable As New TypeRightDataSet.buttongroupsDataTable
     Private ReadOnly oBtnTa As New TypeRightDataSetTableAdapters.buttonTableAdapter
     Private oBtnTable As New TypeRightDataSet.buttonDataTable
     Private ReadOnly oSndTa As New TypeRightDataSetTableAdapters.sendersTableAdapter
-    Private ReadOnly oSndTable As New TypeRightDataSet.sendersDataTable
+    Private oSndTable As New TypeRightDataSet.sendersDataTable
     Private ReadOnly oSndBtnTa As New TypeRightDataSetTableAdapters.senderButtonTableAdapter
     Private oSndBtnTable As New TypeRightDataSet.senderButtonDataTable
     Private ReadOnly oSmtpTa As New TypeRightDataSetTableAdapters.smtpTableAdapter
@@ -26,13 +23,12 @@ Module DatabaseFunctions
 #Region "backup"
     Private tableList As New List(Of String)
     Public Sub InitialiseData()
-        LogUtil.Info("Initialising data", MODULE_NAME)
+        LogUtil.Info("Initialising data", MethodBase.GetCurrentMethod.Name)
         tableList.Add("Buttons")
         tableList.Add("ButtonGroups")
         tableList.Add("Senders")
         tableList.Add("SenderButtons")
         tableList.Add("Smtp")
-
     End Sub
     Public Sub FillTableTree(ByRef tvtables As TreeView)
         tvtables.Nodes.Clear()
@@ -76,8 +72,8 @@ Module DatabaseFunctions
                         rowCount = oSmtpTa.GetData().Rows.Count
                     End If
             End Select
-        Catch ex As Exception
-
+        Catch ex As DbException
+            DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
         End Try
         Return rowCount
     End Function
@@ -94,7 +90,7 @@ Module DatabaseFunctions
                     isTableOK = True
                 End If
             Catch ex As Exception
-
+                DisplayException(MethodBase.GetCurrentMethod, ex, "Db")
             End Try
         End If
         Return isTableOK
@@ -116,7 +112,7 @@ Module DatabaseFunctions
         Return isOK
     End Function
     Private Sub StartSqlService()
-        LogUtil.Info("Starting SQL Server", MODULE_NAME)
+        LogUtil.Info("Starting SQL Server", MethodBase.GetCurrentMethod.Name)
         Try
             Dim procStartInfo As New ProcessStartInfo
             With procStartInfo
@@ -133,11 +129,11 @@ Module DatabaseFunctions
         End Try
     End Sub
     Public Function GetButtonTable()
-        LogUtil.Info("Getting button table", MODULE_NAME)
+        LogUtil.Info("Getting button table", MethodBase.GetCurrentMethod.Name)
         Return oBtnTa.GetData()
     End Function
     Public Function GetButtonByGroupAndSeq(_buttonGrpId As Integer, _buttonSeq As Integer) As TypeRightDataSet.buttonRow
-        LogUtil.Info("Getting button row for Grp " & CStr(_buttonGrpId) & " Seq " & CStr(_buttonSeq), MODULE_NAME)
+        LogUtil.Info("Getting button row for Grp " & CStr(_buttonGrpId) & " Seq " & CStr(_buttonSeq), MethodBase.GetCurrentMethod.Name)
         Dim oBtnRow As TypeRightDataSet.buttonRow = Nothing
         oBtnTa.FillByGroupSeq(oBtnTable, _buttonGrpId, _buttonSeq)
         If oBtnTable.Rows.Count = 1 Then
@@ -146,12 +142,12 @@ Module DatabaseFunctions
         Return oBtnRow
     End Function
     Public Function GetButtonsByGroup(_buttonGrpId As Integer) As TypeRightDataSet.buttonDataTable
-        LogUtil.Info("Getting button table for Grp " & CStr(_buttonGrpId), MODULE_NAME)
+        LogUtil.Info("Getting button table for Grp " & CStr(_buttonGrpId), MethodBase.GetCurrentMethod.Name)
         oBtnTa.FillByGroup(oBtnTable, _buttonGrpId)
         Return oBtnTable
     End Function
     Public Function GetButtonById(_buttonId As Integer) As TypeRightDataSet.buttonRow
-        LogUtil.Info("Getting button row " & CStr(_buttonId), MODULE_NAME)
+        LogUtil.Info("Getting button row " & CStr(_buttonId), MethodBase.GetCurrentMethod.Name)
         Dim oBtnRow As TypeRightDataSet.buttonRow = Nothing
         oBtnTa.FillById(oBtnTable, _buttonId)
         If oBtnTable.Rows.Count = 1 Then
@@ -159,51 +155,134 @@ Module DatabaseFunctions
         End If
         Return oBtnRow
     End Function
-    Public Function UpdateButtonGroupOnButton(_buttonGrpId As Integer, _buttonId As Integer) As Integer
-        LogUtil.Info("Updating Grp " & CStr(_buttonGrpId), MODULE_NAME)
-        Return oBtnTa.UpdateGroup(_buttonGrpId, _buttonId)
+    Public Function UpdateButtonGroupOnButton(_buttonGrpId As Integer, _buttonId As Integer) As Boolean
+        LogUtil.Info("Updating Grp " & CStr(_buttonGrpId), MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBtnTa.UpdateGroup(_buttonGrpId, _buttonId) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
-    Public Function InsertButton(_button As NbuttonControlLibrary.Nbutton) As Integer
-        LogUtil.Info("Inserting button for Grp " & CStr(_button.Group) & " Seq " & CStr(_button.Sequence), MODULE_NAME)
-        Return oBtnTa.InsertButton(_button.Group, _button.Sequence,
-                                   _button.Caption, _button.Hint,
-                                   _button.Value, _button.FontName,
-                                   _button.FontBold, _button.FontSize,
-                                   _button.FontItalic, _button.Encrypt)
+    Public Function InsertButton(_button As NbuttonControlLibrary.Nbutton) As Boolean
+        LogUtil.Info("Inserting button for Grp " & CStr(_button.Group) & " Seq " & CStr(_button.Sequence), MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBtnTa.InsertButton(_button.Group,
+                                       _button.Sequence,
+                                       _button.Caption,
+                                       _button.Hint,
+                                       _button.Value,
+                                       _button.FontName,
+                                       _button.FontBold,
+                                       _button.FontSize,
+                                       _button.FontItalic,
+                                       _button.Encrypt) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
-    Public Function UpdateButton(_button As NbuttonControlLibrary.Nbutton) As Integer
-        LogUtil.Info("Updating button " & CStr(_button.Id), MODULE_NAME)
-        Return oBtnTa.UpdateButton(_button.Group, _button.Sequence,
-                                   _button.Caption, _button.Hint,
-                                   _button.Value, _button.FontName,
-                                   _button.FontBold, _button.FontSize,
-                                   _button.FontItalic, _button.Encrypt, _button.Id)
+    Public Function UpdateButton(_button As NbuttonControlLibrary.Nbutton) As Boolean
+        LogUtil.Info("Updating button " & CStr(_button.Id), MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBtnTa.UpdateButton(_button.Group,
+                                       _button.Sequence,
+                                       _button.Caption,
+                                       _button.Hint,
+                                       _button.Value,
+                                       _button.FontName,
+                                       _button.FontBold,
+                                       _button.FontSize,
+                                       _button.FontItalic,
+                                       _button.Encrypt,
+                                       _button.Id) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
-    Public Function InsertButton(_buttonGrp As Integer, _buttonSeq As Integer, _buttontext As String, _buttonHint As String, _buttonValue As String, _buttonFont As String, _buttonBold As Boolean, _buttonFontSize As Integer, _buttonItalic As Boolean, _buttonEncrypt As Boolean) As Integer
-        LogUtil.Info("Inserting button row for Grp " & CStr(_buttonGrp) & " Seq " & CStr(_buttonSeq), MODULE_NAME)
-        Return oBtnTa.InsertButton(_buttonGrp, _buttonSeq,
-                                   _buttontext, _buttonHint,
-                                   _buttonValue, _buttonFont,
-                                   _buttonBold, _buttonFontSize,
-                                   _buttonItalic, _buttonEncrypt)
+    Public Function InsertButton(_buttonGrp As Integer,
+                                 _buttonSeq As Integer,
+                                 _buttontext As String,
+                                 _buttonHint As String,
+                                 _buttonValue As String,
+                                 _buttonFont As String,
+                                 _buttonBold As Boolean,
+                                 _buttonFontSize As Integer,
+                                 _buttonItalic As Boolean,
+                                 _buttonEncrypt As Boolean) As Boolean
+        LogUtil.Info("Inserting button row for Grp " & CStr(_buttonGrp) & " Seq " & CStr(_buttonSeq), MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBtnTa.InsertButton(_buttonGrp,
+                                       _buttonSeq,
+                                       _buttontext,
+                                       _buttonHint,
+                                       _buttonValue,
+                                       _buttonFont,
+                                       _buttonBold,
+                                       _buttonFontSize,
+                                       _buttonItalic,
+                                       _buttonEncrypt) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
-    Public Function UpdateButton(_buttonGrp As Integer, _buttonSeq As Integer, _buttontext As String, _buttonHint As String, _buttonValue As String, _buttonFont As String, _buttonBold As Boolean, _buttonFontSize As Integer, _buttonItalic As Boolean, _buttonEncrypt As Boolean, _buttonId As Integer) As Integer
-        LogUtil.Info("Updating button " & CStr(_buttonId), MODULE_NAME)
-        Return oBtnTa.UpdateButton(_buttonGrp, _buttonSeq,
-                                   _buttontext, _buttonHint,
-                                   _buttonValue, _buttonFont,
-                                   CByte(_buttonBold), _buttonFontSize,
-                                   CByte(_buttonItalic), _buttonEncrypt, _buttonId)
+    Public Function UpdateButton(_buttonGrp As Integer,
+                                 _buttonSeq As Integer,
+                                 _buttontext As String,
+                                 _buttonHint As String,
+                                 _buttonValue As String,
+                                 _buttonFont As String,
+                                 _buttonBold As Boolean,
+                                 _buttonFontSize As Integer,
+                                 _buttonItalic As Boolean,
+                                 _buttonEncrypt As Boolean,
+                                 _buttonId As Integer) As Boolean
+        LogUtil.Info("Updating button " & CStr(_buttonId), MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBtnTa.UpdateButton(_buttonGrp,
+                                       _buttonSeq,
+                                       _buttontext,
+                                       _buttonHint,
+                                       _buttonValue,
+                                       _buttonFont,
+                                       CByte(_buttonBold),
+                                       _buttonFontSize,
+                                       CByte(_buttonItalic),
+                                       _buttonEncrypt,
+                                       _buttonId) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
-    Public Function UpdateButtonSeq(_seq As Integer, _id As Integer) As Integer
-        Return oBtnTa.UpdateSeq(_seq, _id)
+    Public Function UpdateButtonSeq(_seq As Integer, _id As Integer) As Boolean
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBtnTa.UpdateSeq(_seq, _id) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
-    Public Function DeleteButton(_Id As Integer) As Integer
-        LogUtil.Info("Deleting button " & CStr(_Id), MODULE_NAME)
-        Return oBtnTa.DeleteButton(_Id)
+    Public Function DeleteButton(_Id As Integer) As Boolean
+        LogUtil.Info("Deleting button " & CStr(_Id), MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBtnTa.DeleteButton(_Id) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
     Public Sub ResequenceButtons(_grp As Integer)
-        LogUtil.Info("Resequencing buttons", MODULE_NAME)
+        LogUtil.Info("Resequencing buttons", MethodBase.GetCurrentMethod.Name)
         oBtnTable = GetButtonsByGroup(_grp)
         Dim iSeq As Integer = 1
         For Each oRow As TypeRightDataSet.buttonRow In oBtnTable.Rows
@@ -214,7 +293,7 @@ Module DatabaseFunctions
 #End Region
 #Region "groups"
     Public Function GetButtonGroup(_buttonGrpId As Integer) As TypeRightDataSet.buttongroupsRow
-        LogUtil.Info("Getting group " & CStr(_buttonGrpId), MODULE_NAME)
+        LogUtil.Info("Getting group " & CStr(_buttonGrpId), MethodBase.GetCurrentMethod.Name)
         Dim oBgRow As TypeRightDataSet.buttongroupsRow = Nothing
         oBgTa.FillById(oBgTable, _buttonGrpId)
         If oBgTable.Rows.Count = 1 Then
@@ -223,84 +302,171 @@ Module DatabaseFunctions
         Return oBgRow
     End Function
     Public Function GetButtonGroupTable() As TypeRightDataSet.buttongroupsDataTable
-        LogUtil.Info("Getting group table", MODULE_NAME)
-        Return oBgTa.GetData
+        LogUtil.Info("Getting group table", MethodBase.GetCurrentMethod.Name)
+
+        oBgTable = New TypeRightDataSet.buttongroupsDataTable
+        Try
+            oBgTable = oBgTa.GetData()
+        Catch ex As Exception
+            LogUtil.Exception("Failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return oBgTable
     End Function
-    Public Function DeleteButtonGroup(_buttonGrpId As Integer) As Integer
-        LogUtil.Info("Deleting group " & CStr(_buttonGrpId), MODULE_NAME)
-        Return oBgTa.DeleteButtonGroup(_buttonGrpId)
+    Public Function DeleteButtonGroup(_buttonGrpId As Integer) As Boolean
+        LogUtil.Info("Deleting group " & CStr(_buttonGrpId), MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBgTa.DeleteButtonGroup(_buttonGrpId) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Delete failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
-    Public Function InsertButtonGroup(_groupname As String) As Integer
-        LogUtil.Info("Inserting group " & _groupname, MODULE_NAME)
-        Return oBgTa.InsertButtonGroup(_groupname)
+    Public Function InsertButtonGroup(_groupname As String) As Boolean
+        LogUtil.Info("Inserting group " & _groupname, MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBgTa.InsertButtonGroup(_groupname) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Insert failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
-    Public Function UpdateButtonGroupName(_groupname As String, _groupId As Integer) As Integer
-        LogUtil.Info("Updating group " & CStr(_groupId), MODULE_NAME)
-        Return oBgTa.UpdateGroupName(_groupname, _groupId)
+    Public Function UpdateButtonGroupName(_groupname As String, _groupId As Integer) As Boolean
+        LogUtil.Info("Updating group " & CStr(_groupId), MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oBgTa.UpdateGroupName(_groupname, _groupId) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
 #End Region
 #Region "senders"
     Public Function GetSenderTable() As TypeRightDataSet.sendersDataTable
-        LogUtil.Info("Getting sender table", MODULE_NAME)
-        Return oSndTa.GetData()
+        LogUtil.Info("Getting sender table", MethodBase.GetCurrentMethod.Name)
+        oSndTable = New TypeRightDataSet.sendersDataTable
+        Try
+            oSndTable = oSndTa.GetData()
+        Catch ex As Exception
+            LogUtil.Exception("Failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return oSndTable
     End Function
     Public Function GetSenderRowById(_id As Integer) As TypeRightDataSet.sendersRow
-        LogUtil.Info("Getting sender row " & CStr(_id), MODULE_NAME)
-        oSndTa.FillById(oSndTable, _id)
+
         Dim oSenderRow As TypeRightDataSet.sendersRow = Nothing
-        If oSndTable.Rows.Count > 0 Then
-            Dim oSendertable As New TypeRightDataSet.sendersDataTable
-            oSendertable.ImportRow(oSndTable.Rows(0))
-            oSenderRow = oSendertable.Rows(0)
-        Else
-            LogUtil.Info("Row not found ", MODULE_NAME)
-        End If
+        Try
+            oSndTa.FillById(oSndTable, _id)
+            If oSndTable.Rows.Count > 0 Then
+                Dim oSendertable As New TypeRightDataSet.sendersDataTable
+                oSendertable.ImportRow(oSndTable.Rows(0))
+                oSenderRow = oSendertable.Rows(0)
+            Else
+                LogUtil.Info("Sender row not found ", MethodBase.GetCurrentMethod.Name)
+            End If
+        Catch ex As Exception
+            LogUtil.Exception("Sender not found: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
         Return oSenderRow
     End Function
-    Public Function InsertSender(ByRef oSender As Sender) As Integer
-        LogUtil.Info("Inserting sender " & oSender.FirstName & " " & oSender.LastName, MODULE_NAME)
-        Return oSndTa.InsertSender(oSender.Title, oSender.FirstName,
-                                   oSender.LastName, oSender.Address1,
-                                   oSender.Address2, oSender.Town,
-                                   oSender.County, oSender.Country,
-                                   oSender.PostCode, Format(oSender.DateOfBirth, "yyyy-MM-dd"),
-                                   oSender.Email, oSender.Phone,
-                                   oSender.Mobile, oSender.Password,
-                                   oSender.SecretWord, oSender.Gender,
-                                   oSender.Occupation, oSender.MaritalStatus, oSender.Username)
+    Public Function GetSenderById(_id As Integer) As Sender
+        LogUtil.Info("Getting sender " & CStr(_id), MethodBase.GetCurrentMethod.Name)
+        Dim oSender As New Sender
+        Try
+            oSndTa.FillById(oSndTable, _id)
+            If oSndTable.Rows.Count > 0 Then
+                oSender = SenderBuilder.aSender.StartingWith(oSndTable.Rows(0)).Build
+            Else
+                LogUtil.Info("Sender not found ", MethodBase.GetCurrentMethod.Name)
+            End If
+        Catch ex As Exception
+            LogUtil.Exception("Sender not found: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return oSender
     End Function
-    Public Function UpdateSender(ByRef oSender As Sender) As Integer
-        LogUtil.Info("Updating sender " & oSender.SenderId, MODULE_NAME)
-        Return oSndTa.UpdateSender(oSender.Title, oSender.FirstName,
-                                   oSender.LastName, oSender.Address1,
-                                   oSender.Address2, oSender.Town,
-                                    oSender.County, oSender.Country,
-                                    oSender.PostCode, Format(oSender.DateOfBirth, "yyyy-MM-dd"),
-                                    oSender.Email, oSender.Phone,
-                                    oSender.Mobile, oSender.Password,
-                                    oSender.SecretWord, oSender.Gender,
-                                    oSender.Occupation, oSender.MaritalStatus,
-                                    oSender.Username, oSender.SenderId)
-
+    Public Function InsertSender(ByRef oSender As Sender) As Boolean
+        LogUtil.Info("Inserting sender " & oSender.FirstName & " " & oSender.LastName, MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oSndTa.InsertSender(oSender.Title,
+                                       oSender.FirstName,
+                                       oSender.LastName,
+                                       oSender.Address1,
+                                       oSender.Address2,
+                                       oSender.Town,
+                                       oSender.County,
+                                       oSender.Country,
+                                       oSender.PostCode,
+                                       Format(oSender.DateOfBirth, "yyyy-MM-dd"),
+                                       oSender.Email,
+                                       oSender.Phone,
+                                       oSender.Mobile,
+                                       oSender.Password,
+                                       oSender.SecretWord,
+                                       oSender.Gender,
+                                       oSender.Occupation,
+                                       oSender.MaritalStatus,
+                                       oSender.Username) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Insert failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
     End Function
-    Public Function DeleteSender(_id As Integer) As Integer
-        LogUtil.Info("Deleting sender " & _id, MODULE_NAME)
-        Return oSndTa.DeleteSender(_id)
+    Public Function UpdateSender(ByRef oSender As Sender) As Boolean
+        LogUtil.Info("Updating sender " & oSender.SenderId, MethodBase.GetCurrentMethod.Name)
+        Dim isOk As Boolean = False
+        Try
+            isOk = oSndTa.UpdateSender(oSender.Title,
+                                       oSender.FirstName,
+                                       oSender.LastName,
+                                       oSender.Address1,
+                                       oSender.Address2,
+                                       oSender.Town,
+                                       oSender.County,
+                                       oSender.Country,
+                                       oSender.PostCode,
+                                       Format(oSender.DateOfBirth, "yyyy-MM-dd"),
+                                       oSender.Email,
+                                       oSender.Phone,
+                                       oSender.Mobile,
+                                       oSender.Password,
+                                       oSender.SecretWord,
+                                       oSender.Gender,
+                                       oSender.Occupation,
+                                       oSender.MaritalStatus,
+                                       oSender.Username,
+                                       oSender.SenderId) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOk
+    End Function
+    Public Function DeleteSender(_id As Integer) As Boolean
+        LogUtil.Info("Deleting sender " & _id, MethodBase.GetCurrentMethod.Name)
+        Dim isOK As Boolean = False
+        Try
+            isOK = oSndTa.DeleteSender(_id) = 1
+        Catch ex As DbException
+            LogUtil.Exception("Delete failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return isOK
     End Function
 #End Region
 #Region "senderbuttons"
     Public Function GetSenderButtonTable() As TypeRightDataSet.senderButtonDataTable
-        LogUtil.Info("Getting sender button table", MODULE_NAME)
+        LogUtil.Info("Getting sender button table", MethodBase.GetCurrentMethod.Name)
         oSndBtnTable = New TypeRightDataSet.senderButtonDataTable
         Try
             oSndBtnTable = oSndBtnTa.GetData()
         Catch ex As Exception
-            LogUtil.Exception("Failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return oSndBtnTable
     End Function
     Public Function GetSenderButton(columnName As String) As SenderButton
-        '      LogUtil.Info("Getting sender button row for " & columnName, MODULE_NAME)
+        '      LogUtil.Info("Getting sender button row for " & columnName, MethodBase.GetCurrentMethod.Name)
         Dim oSenderButton As New SenderButton
         Try
             oSndBtnTa.FillByColName(oSndBtnTable, columnName)
@@ -308,64 +474,58 @@ Module DatabaseFunctions
                 oSenderButton = SenderButtonBuilder.aSenderButton.StartingWith(oSndBtnTable.Rows(0)).Build
             End If
         Catch ex As DbException
-            LogUtil.Exception("Failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return oSenderButton
     End Function
     Public Function DeleteSenderButton(columnName As String) As Boolean
-        LogUtil.Info("Deleting sender button for " & columnName, MODULE_NAME)
+        LogUtil.Info("Deleting sender button for " & columnName, MethodBase.GetCurrentMethod.Name)
         Dim isOK As Boolean = False
         Try
-            If oSndBtnTa.DeleteSenderButton(columnName) = 1 Then
-                isOK = True
-            End If
+            isOK = oSndBtnTa.DeleteSenderButton(columnName) = 1
         Catch ex As DbException
-            LogUtil.Exception("Delete failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Delete failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return isOK
     End Function
     Public Function InsertSenderButton(pSenderButton As SenderButton) As Boolean
-        LogUtil.Info("Insering sender button row for " & pSenderButton.ColumnName, MODULE_NAME)
+        LogUtil.Info("Insering sender button row for " & pSenderButton.ColumnName, MethodBase.GetCurrentMethod.Name)
         Dim isOK As Boolean = False
         Try
-            If oSndBtnTa.InsertSenderButton(pSenderButton.ColumnName, pSenderButton.Bold,
+            isOK = oSndBtnTa.InsertSenderButton(pSenderButton.ColumnName, pSenderButton.Bold,
                                             pSenderButton.Italic, pSenderButton.FontName,
-                                           pSenderButton.FontSize, pSenderButton.IsEncrypted) = 1 Then
-                isOK = True
-            End If
+                                           pSenderButton.FontSize, pSenderButton.IsEncrypted) = 1
         Catch ex As DbException
-            LogUtil.Exception("Insert failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Insert failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return isOK
     End Function
     Public Function UpdateSenderButton(pSenderButton As SenderButton) As Boolean
-        LogUtil.Info("Updating sender button row for " & pSenderButton.ColumnName, MODULE_NAME)
+        LogUtil.Info("Updating sender button row for " & pSenderButton.ColumnName, MethodBase.GetCurrentMethod.Name)
         Dim isOK As Boolean = False
         Try
-            If oSndBtnTa.UpdateSenderButton(pSenderButton.Bold, pSenderButton.Italic,
+            isOK = oSndBtnTa.UpdateSenderButton(pSenderButton.Bold, pSenderButton.Italic,
                                             pSenderButton.FontName, pSenderButton.FontSize,
-                                            pSenderButton.IsEncrypted, pSenderButton.ColumnName) = 1 Then
-                isOK = True
-            End If
+                                            pSenderButton.IsEncrypted, pSenderButton.ColumnName) = 1
         Catch ex As DbException
-            LogUtil.Exception("Insert failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Insert failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return isOK
     End Function
 #End Region
 #Region "smtp"
     Public Function GetSmtpTable() As TypeRightDataSet.smtpDataTable
-        LogUtil.Info("Getting SMTP table", MODULE_NAME)
+        LogUtil.Info("Getting SMTP table", MethodBase.GetCurrentMethod.Name)
         oSmtpTable = New TypeRightDataSet.smtpDataTable
         Try
             oSmtpTable = oSmtpTa.GetData
         Catch ex As Exception
-            LogUtil.Exception("Failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return oSmtpTable
     End Function
     Public Function GetSmtpList() As List(Of Smtp)
-        LogUtil.Info("Getting SMTP list", MODULE_NAME)
+        LogUtil.Info("Getting SMTP list", MethodBase.GetCurrentMethod.Name)
         Dim _smtpList As New List(Of Smtp)
         Try
             oSmtpTa.Fill(oSmtpTable)
@@ -373,12 +533,12 @@ Module DatabaseFunctions
                 _smtpList.Add(SmtpBuilder.anSmtp.StartingWith(_row).Build)
             Next
         Catch ex As DbException
-            LogUtil.Exception("Failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return _smtpList
     End Function
     Public Function GetSmtpById(pId As Integer) As Smtp
-        LogUtil.Info("Getting SMTP by Id", MODULE_NAME)
+        LogUtil.Info("Getting SMTP by Id", MethodBase.GetCurrentMethod.Name)
         Dim _smtp As New Smtp
         Try
             oSmtpTa.FillById(oSmtpTable, pId)
@@ -386,43 +546,41 @@ Module DatabaseFunctions
                 _smtp = SmtpBuilder.anSmtp.StartingWith(oSmtpTable.Rows(0)).Build
             End If
         Catch ex As DbException
-            LogUtil.Exception("SMTP not found: ", ex, MODULE_NAME)
+            LogUtil.Exception("SMTP not found: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return _smtp
     End Function
     Public Function InsertSmtp(pSmtp As Smtp) As Boolean
-        LogUtil.Info("Inserting SMTP Account", MODULE_NAME)
+        LogUtil.Info("Inserting SMTP Account", MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             Dim _isSsl As Integer = If(pSmtp.IsEnableSsl, 1, 0)
             Dim _isCred As Integer = If(pSmtp.IsCredentialsRequired, 1, 0)
             isOk = oSmtpTa.InsertSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, _isSsl, _isCred)
         Catch ex As DbException
-            LogUtil.Exception("Insert failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Insert failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return isOk
     End Function
     Public Function UpdateSmtp(pSmtp As Smtp) As Boolean
-        LogUtil.Info("Updating SMTP", MODULE_NAME)
+        LogUtil.Info("Updating SMTP", MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             Dim _isSsl As Integer = If(pSmtp.IsEnableSsl, 1, 0)
             Dim _isCred As Integer = If(pSmtp.IsCredentialsRequired, 1, 0)
-            isOk = oSmtpTa.UpdateSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, _isSsl, _isCred, pSmtp.SmtpId)
+            isOk = oSmtpTa.UpdateSmtp(pSmtp.Username, pSmtp.Password, pSmtp.Host, pSmtp.Port, _isSsl, _isCred, pSmtp.SmtpId) = 1
         Catch ex As DbException
-            LogUtil.Exception("Update failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Update failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return isOk
     End Function
     Public Function DeleteSmtp(_id As Integer) As Boolean
-        LogUtil.Info("Deleting SMTP " & _id, MODULE_NAME)
+        LogUtil.Info("Deleting SMTP " & _id, MethodBase.GetCurrentMethod.Name)
         Dim isOK As Boolean = False
         Try
-            If oSmtpTa.DeleteSmtp(_id) = 1 Then
-                isOK = True
-            End If
+            isOK = oSmtpTa.DeleteSmtp(_id) = 1
         Catch ex As DbException
-            LogUtil.Exception("Delete failed: ", ex, MODULE_NAME)
+            LogUtil.Exception("Delete failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return isOK
     End Function

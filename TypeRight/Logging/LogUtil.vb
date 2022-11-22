@@ -6,7 +6,7 @@
 ' Created Aug 2020
 Imports System.IO
 Imports System.Threading
-Imports System.Diagnostics
+
 Public NotInheritable Class LogUtil
 #Region "constants"
     Private Const MODULE_NAME As String = "LogUtil"

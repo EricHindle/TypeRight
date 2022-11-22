@@ -180,26 +180,26 @@
         End Set
     End Property
     Public Sub New()
-        SenderId = -1
-        FirstName = ""
-        LastName = ""
-        Address2 = ""
-        Town = ""
-        County = ""
-        PostCode = ""
-        DateOfBirth = Date.MinValue
-        Title = ""
-        Address1 = ""
-        Country = ""
-        Email = ""
-        Phone = ""
-        Mobile = ""
-        Password = ""
-        SecretWord = ""
-        Gender = ""
-        Occupation = ""
-        MaritalStatus = ""
-        Username = ""
+        _id = -1
+        _firstname = ""
+        _lastname = ""
+        _address2 = ""
+        _town = ""
+        _county = ""
+        _postcode = ""
+        _dob = Date.MinValue
+        _title = ""
+        _address1 = ""
+        _country = ""
+        _email = ""
+        _phone = ""
+        _mobile = ""
+        _password = ""
+        _secretword = ""
+        _gender = ""
+        _occupation = ""
+        _maritalstatus = ""
+        _username = ""
     End Sub
     Public Sub New(pId As Integer,
                     pFirstName As String,
@@ -220,56 +220,30 @@
                     pGender As String,
                     pOccupation As String,
                     pMaritalStatus As String,
-                    pUsername As String
-)
-        SenderId = pId
-        FirstName = pFirstName
-        LastName = pLastName
-        Address2 = pAddress2
-        Town = pTown
-        County = pCounty
-        PostCode = pPostCode
-        DateOfBirth = pDateOfBirth
-        Title = pTitle
-        Address1 = pAddress1
-        Country = pCountry
-        Email = pEmail
-        Phone = pPhone
-        Mobile = pMobile
-        Password = pPassword
-        SecretWord = pSecretWord
-        Gender = pGender
-        Occupation = pOccupation
-        MaritalStatus = pMaritalStatus
-        Username = pUsername
+                    pUsername As String)
+        _id = pId
+        _firstname = pFirstName
+        _lastname = pLastName
+        _address2 = pAddress2
+        _town = pTown
+        _county = pCounty
+        _postcode = pPostCode
+        _dob = pDateOfBirth
+        _title = pTitle
+        _address1 = pAddress1
+        _country = pCountry
+        _email = pEmail
+        _phone = pPhone
+        _mobile = pMobile
+        _password = pPassword
+        _secretword = pSecretWord
+        _gender = pGender
+        _occupation = pOccupation
+        _maritalstatus = pMaritalStatus
+        _username = pUsername
     End Sub
-    Public Sub New(pId As Integer)
-        Dim oRow As TypeRightDataSet.sendersRow = GetSenderRowById(pId)
-        LoadFromRow(oRow)
-    End Sub
-    Public Sub New(pRow As TypeRightDataSet.sendersRow)
-        LoadFromRow(pRow)
-    End Sub
-    Private Sub LoadFromRow(oRow As TypeRightDataSet.sendersRow)
-        SenderId = oRow.SenderId
-        FirstName = oRow.FirstName
-        LastName = oRow.LastName
-        Address2 = If(oRow.IsAddress2Null, "", oRow.Address2)
-        Town = If(oRow.IsTownNull, "", oRow.Town)
-        County = If(oRow.IsCountyNull, "", oRow.County)
-        PostCode = If(oRow.IsPostCodeNull, "", oRow.PostCode)
-        DateOfBirth = If(oRow.IsdobNull, New Date(), oRow.dob)
-        Title = If(oRow.IsTitleNull, "", oRow.Title)
-        Address1 = If(oRow.IsAddress1Null, "", oRow.Address1)
-        Country = If(oRow.IsCountryNull, "", oRow.Country)
-        Email = If(oRow.IsEmailNull, "", oRow.Email)
-        Phone = If(oRow.IsPhoneNull, "", oRow.Phone)
-        Mobile = If(oRow.IsMobileNull, "", oRow.Mobile)
-        Password = If(oRow.IsPasswdNull, "", oRow.Passwd)
-        SecretWord = If(oRow.IsSecretWordNull, "", oRow.SecretWord)
-        Gender = If(oRow.IsgenderNull, "", oRow.gender)
-        Occupation = If(oRow.IsOccupationNull, "", oRow.Occupation)
-        MaritalStatus = If(oRow.IsMaritalStatusNull, "", oRow.MaritalStatus)
-        Username = If(oRow.IsUsernameNull, "", oRow.Username)
-    End Sub
+    Public Function IsEmpty() As Boolean
+        Return SenderId = -1
+    End Function
+
 End Class
