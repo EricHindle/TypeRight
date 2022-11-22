@@ -109,13 +109,11 @@ Public Class FrmOptions
     Private Sub HScroll1_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles HScroll1.Scroll
         ScrollValueChanged()
     End Sub
-
     Private Sub ScrollValueChanged()
         BtnSample.Text = Format(HScroll1.Value)
         BtnSample.Width = HScroll1.Value
         iButtonWidth = HScroll1.Value
     End Sub
-
     Private Sub Slider1_Scroll(sender As Object, e As EventArgs) Handles Slider1.Scroll
         Me.Owner.Opacity = Slider1.Value / 100
     End Sub
@@ -127,6 +125,8 @@ Public Class FrmOptions
         My.Settings.ButtonListPos = "10~10~600~124"
         My.Settings.SndrBtnFormPos = "10~10~286~393"
         My.Settings.LogViewerPos = "10~10~876~588"
+        My.Settings.EmailFormPos = "10~10~546~954"
+        My.Settings.SmtpFormPos = "10~10~327~600"
         My.Settings.Save()
         DisplayProgress("Form screen positions reset")
     End Sub
@@ -147,11 +147,9 @@ Public Class FrmOptions
         StatusStrip1.Refresh()
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
-
     Private Sub HScroll1_ValueChanged(sender As Object, e As EventArgs) Handles HScroll1.ValueChanged
         ScrollValueChanged()
     End Sub
-
     Private Function MissingFolderResolved(folderName As String, folderType As String) As Boolean
         Dim isOK As Boolean = False
         If My.Computer.FileSystem.DirectoryExists(folderName) Then
@@ -168,18 +166,15 @@ Public Class FrmOptions
         End If
         Return isOK
     End Function
-
     Private Sub BtnBackup_Click(sender As Object, e As EventArgs) Handles BtnBackup.Click
         Using _backup As New FrmBackup
             _backup.ShowDialog()
         End Using
     End Sub
-
     Private Sub BtnRestore_Click(sender As Object, e As EventArgs) Handles BtnRestore.Click
         Using _restore As New FrmRestore
             _restore.ShowDialog()
         End Using
     End Sub
-
 #End Region
 End Class
