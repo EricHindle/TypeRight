@@ -568,7 +568,6 @@ Public Class FrmButtonList
         Using _options As New FrmOptions
             _options.Owner = Me
             _options.ShowDialog()
-            '       LoadOptions()
             Opacity = iTransPerc / 100
             GrpBottom.Visible = bToolBar
             SetTopMost()

@@ -9,10 +9,6 @@ Imports System.Data
 Imports System.Windows.Forms
 
 Public Class FrmEditButton
-#Region "constants"
-
-#End Region
-
 #Region "variables"
     Private iId As Integer
     Private iSeq As Integer
