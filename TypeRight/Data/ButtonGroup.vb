@@ -1,4 +1,11 @@
-﻿Public Class ButtonGroup
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class ButtonGroup
     Private _groupId As Integer
     Private _groupName As String
     Public Property GroupName() As String
@@ -25,5 +32,7 @@
         _groupId = pId
         _groupName = pName
     End Sub
-
+    Public Function IsEmpty() As Boolean
+        Return _groupId = -1
+    End Function
 End Class

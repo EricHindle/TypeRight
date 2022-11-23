@@ -1,4 +1,11 @@
-﻿Imports System.Security.Cryptography
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Security.Cryptography
 Public Class NCrypt
 
     Private ReadOnly TripleDes As New TripleDESCryptoServiceProvider

@@ -1,4 +1,11 @@
-﻿Public NotInheritable Class FrmSplash
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public NotInheritable Class FrmSplash
     Private _delay As Integer = 5
     Public Property Delay() As Integer
         Get

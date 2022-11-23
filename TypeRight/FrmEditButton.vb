@@ -1,4 +1,11 @@
-﻿Imports System.Data
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Data
 Imports System.Windows.Forms
 
 Public Class FrmEditButton

@@ -1,4 +1,11 @@
-﻿Imports System.Windows.Forms
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Windows.Forms
 
 Public Class FrmOptions
 #Region "form control handlers"

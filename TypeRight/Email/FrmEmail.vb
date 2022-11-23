@@ -1,5 +1,11 @@
-﻿Imports System.Collections.Generic
-Imports System.Linq
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Collections.Generic
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
 

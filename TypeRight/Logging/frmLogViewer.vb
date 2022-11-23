@@ -1,9 +1,9 @@
-﻿'
-' Copyright (c) 2020, Eric Hindle
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
 ' All rights reserved.
 '
-' Author E Hindle
-' Created June 2020
+' Author Eric Hindle
+'
 
 Imports System.Windows.Forms
 

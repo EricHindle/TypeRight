@@ -1,9 +1,10 @@
-﻿'
-' Copyright (c) 2020 Eric Hindle
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
-' Created Aug 2020
+'
+
 Imports System.IO
 Imports System.Threading
 

@@ -1,7 +1,11 @@
-﻿Imports System.Security.Cryptography
-Imports System.Security.Principal
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
 Imports System.Windows.Forms
-Imports TypeRight.TypeRightDataSetTableAdapters
 
 Public Class FrmSmtpAccounts
 #Region "variables"

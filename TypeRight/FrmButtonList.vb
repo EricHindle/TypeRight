@@ -1,4 +1,11 @@
-﻿Imports System.Collections.Generic
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Collections.Generic
 Imports System.Data
 Imports System.Data.Common
 Imports System.Text
@@ -26,7 +33,7 @@ Public Class FrmButtonList
     Private bLockClock As Boolean
     Private ReadOnly bDrag As Boolean
     Private ReadOnly iDragBtnIndex As Integer
-    Private  oSenderRow As TypeRightDataSet.sendersRow
+    Private oSenderRow As TypeRightDataSet.sendersRow
 
     Dim redClockText As String
 #End Region

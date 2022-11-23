@@ -1,4 +1,11 @@
-﻿Imports System.Collections.Generic
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Collections.Generic
 Imports System.Data
 Imports System.Data.Common
 Imports System.IO
@@ -21,7 +28,7 @@ Module DatabaseFunctions
     Private oSmtpTable As New TypeRightDataSet.smtpDataTable
 #End Region
 #Region "backup"
-    Private tableList As New List(Of String)
+    Private ReadOnly tableList As New List(Of String)
     Public Sub InitialiseData()
         LogUtil.Info("Initialising data", MethodBase.GetCurrentMethod.Name)
         tableList.Add("Buttons")

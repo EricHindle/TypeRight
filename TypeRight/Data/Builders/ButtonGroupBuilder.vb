@@ -1,4 +1,9 @@
-﻿Imports System.Windows.Forms
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
 
 Public Class ButtonGroupBuilder
     Private _groupId As Integer

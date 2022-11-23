@@ -1,12 +1,4 @@
-﻿Imports System
-Imports System.Collections
-Imports System.ComponentModel
-Imports System.ComponentModel.Design
-Imports System.Drawing
-Imports System.Windows.Forms
-Imports System.Windows.Forms.Design
-
-Public Class Nbutton
+﻿Public Class Nbutton
     Public Enum DataSource
         Undefined
         Group

@@ -1,4 +1,11 @@
-﻿Public Class Smtp
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class Smtp
 #Region "properties"
     Private _smtpId As Integer
     Private _username As String

@@ -1,4 +1,11 @@
-﻿Imports System.Security.Cryptography
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Security.Cryptography
 Imports System.Text
 Public NotInheritable Class NRegisterApp
     Private Const VALID_CHARS As String = "ABCDEFGHJKLM0123456789NPQRTUVWXY"

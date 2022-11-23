@@ -1,4 +1,11 @@
-﻿Public Class Sender
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class Sender
     Private _id As Integer
     Private _firstname As String
     Private _lastname As String

@@ -1,14 +1,15 @@
-﻿'
-' Copyright (c) 2021 Eric Hindle
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
+'
 
+Imports System.Collections
+Imports System.Drawing
 Imports System.IO
 Imports System.Net
 Imports System.Net.Mime
-Imports System.Drawing
-Imports System.Collections
 
 ''' <summary>
 ''' Utility for sending emails

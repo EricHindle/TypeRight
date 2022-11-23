@@ -1,4 +1,11 @@
-﻿Public Class SenderButtonBuilder
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Public Class SenderButtonBuilder
     Private _columnName As String
     Private _bold As Boolean
     Private _italic As Boolean

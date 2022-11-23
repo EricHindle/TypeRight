@@ -1,5 +1,10 @@
-﻿Imports System.Security.Cryptography
-Imports System.Windows.Forms
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
 Public Class SmtpBuilder
     Private _smtpId As Integer
     Private _username As String

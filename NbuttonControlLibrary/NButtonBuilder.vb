@@ -1,5 +1,4 @@
-﻿Imports NbuttonControlLibrary
-Public Class NButtonBuilder
+﻿Public Class NButtonBuilder
     Private _Id As Integer
     Private _Group As Integer
     Private _Sequence As Integer

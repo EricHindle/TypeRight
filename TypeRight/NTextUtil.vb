@@ -1,4 +1,11 @@
-﻿Imports System.Windows.Forms
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Windows.Forms
 Public NotInheritable Class NTextUtil
     Public Shared Function ConvertSelectedTextToLowercase(ByRef _control As Object) As String
         Dim oText As String = ""

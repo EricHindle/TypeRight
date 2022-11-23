@@ -1,9 +1,15 @@
-﻿Imports NbuttonControlLibrary
+﻿' Hindleware
+' Copyright (c) 2022 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Text
 Imports System.Windows.Forms
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports NbuttonControlLibrary
 
 Public Class ButtonUtil
 #Region "constants"
