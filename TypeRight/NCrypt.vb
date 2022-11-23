@@ -66,5 +66,4 @@ Public Class NCrypt
         Return System.Text.Encoding.Unicode.GetString(ms.ToArray)
     End Function
 
-
 End Class

@@ -121,7 +121,7 @@ Public Class ButtonUtil
             For Each _col As DataColumn In oSenderTable.Columns
                 senderButton = GetSenderButton(_col.ColumnName)
                 strButtonValue = If(IsDBNull(oSenderRow(_col.ColumnName)), "", oSenderRow(_col.ColumnName))
-                If senderButton IsNot Nothing AndAlso CBool(senderButton.IsEncrypted) Then
+                If senderButton IsNot Nothing AndAlso senderButton.IsEncrypted Then
                     strButtonValue = oNCrypter.DecryptData(strButtonValue)
                 End If
                 strButtonTxt = _col.ColumnName
@@ -160,9 +160,9 @@ Public Class ButtonUtil
     End Function
     Public Shared Function FillButtonPanel(ByRef oPanel As Panel, ByRef oList As List(Of Nbutton), Optional rowOffset As Integer = 0, ByRef Optional buttonMenu As ContextMenuStrip = Nothing) As Integer
         iButtonCt = oList.Count
-        Dim iRowCt As Integer = CInt(iButtonCt / iColCt)
+        Dim iRowCt As Integer = iButtonCt / iColCt
         ' Any left over ? Then add a row
-        Dim iMod As Integer = (iButtonCt) Mod iColCt
+        Dim iMod As Integer = iButtonCt Mod iColCt
         If iMod > 0 Then
             iRowCt += 1
         End If
@@ -181,7 +181,7 @@ Public Class ButtonUtil
             If buttonMenu IsNot Nothing Then
                 oBtn.ContextMenuStrip = buttonMenu
             End If
-            oBtn.Name = oPanel.Name & CStr(actualRow) & CStr(iBtnCol)
+            oBtn.Name = oPanel.Name & actualRow & iBtnCol
             iBtnRow += 1
             If actualRow > iMaxRow Then iMaxRow = actualRow
             If iBtnRow > iRowCt - 2 Then
@@ -220,7 +220,7 @@ Public Class ButtonUtil
         Do Until String.IsNullOrEmpty(fieldName)
             _senderButton = GetSenderButton(fieldName)
             fieldValue = If(IsDBNull(oSenderRow(fieldName)), "", CStr(oSenderRow(fieldName)))
-            If _senderButton IsNot Nothing AndAlso CBool(_senderButton.IsEncrypted) Then
+            If _senderButton IsNot Nothing AndAlso _senderButton.IsEncrypted Then
                 fieldValue = oNCrypter.DecryptData(fieldValue)
             End If
             newText = newText.Replace(FIELD_START_MARKER & fieldName & FIELD_END_MARKER, fieldValue)
@@ -238,9 +238,9 @@ Public Class ButtonUtil
                 If subparts.Length = 2 Then
                     Dim subInts As String() = Split(subparts(1), ",")
                     If subInts.Length = 2 Then
-                        subValue = subparts(0).Substring(CInt(subInts(0)), CInt(subInts(1)))
+                        subValue = subparts(0).Substring(subInts(0), subInts(1))
                     Else
-                        subValue = subparts(0).Substring(CInt(subInts(0)))
+                        subValue = subparts(0).Substring(subInts(0))
                     End If
                     newText = newText.Replace(SUB_START_MARKER & subText & SUB_END_MARKER, subValue)
                     subText = GetValueBetweenBrackets(newText, SUB_START_MARKER, SUB_END_MARKER)

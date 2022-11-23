@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmLogViewer
+Partial Class FrmLogViewer
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class frmLogViewer
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogViewer))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmLogViewer))
         Me.OK_Button = New System.Windows.Forms.Button()
         Me.rtbLog = New System.Windows.Forms.RichTextBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -34,7 +34,7 @@ Partial Class frmLogViewer
         Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TrackBar1 = New System.Windows.Forms.TrackBar()
-        Me.btnNoZoom = New System.Windows.Forms.Button()
+        Me.BtnNoZoom = New System.Windows.Forms.Button()
         Me.BtnClearLog = New System.Windows.Forms.Button()
         Me.BtnPrevFile = New System.Windows.Forms.Button()
         Me.BtnNextFile = New System.Windows.Forms.Button()
@@ -133,19 +133,19 @@ Partial Class frmLogViewer
         '
         'btnNoZoom
         '
-        Me.btnNoZoom.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnNoZoom.AutoSize = True
-        Me.btnNoZoom.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.btnNoZoom.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNoZoom.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnNoZoom.Location = New System.Drawing.Point(381, 505)
-        Me.btnNoZoom.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.btnNoZoom.Name = "btnNoZoom"
-        Me.btnNoZoom.Size = New System.Drawing.Size(47, 31)
-        Me.btnNoZoom.TabIndex = 3
-        Me.btnNoZoom.Text = "1"
-        Me.btnNoZoom.UseVisualStyleBackColor = True
-        Me.btnNoZoom.Visible = False
+        Me.BtnNoZoom.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnNoZoom.AutoSize = True
+        Me.BtnNoZoom.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.BtnNoZoom.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNoZoom.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.BtnNoZoom.Location = New System.Drawing.Point(381, 505)
+        Me.BtnNoZoom.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.BtnNoZoom.Name = "btnNoZoom"
+        Me.BtnNoZoom.Size = New System.Drawing.Size(47, 31)
+        Me.BtnNoZoom.TabIndex = 3
+        Me.BtnNoZoom.Text = "1"
+        Me.BtnNoZoom.UseVisualStyleBackColor = True
+        Me.BtnNoZoom.Visible = False
         '
         'BtnClearLog
         '
@@ -218,7 +218,7 @@ Partial Class frmLogViewer
         Me.Controls.Add(Me.BtnPrevFile)
         Me.Controls.Add(Me.BtnClearLog)
         Me.Controls.Add(Me.TrackBar1)
-        Me.Controls.Add(Me.btnNoZoom)
+        Me.Controls.Add(Me.BtnNoZoom)
         Me.Controls.Add(Me.rtbLog)
         Me.Controls.Add(Me.OK_Button)
         Me.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -240,7 +240,7 @@ Partial Class frmLogViewer
     Friend WithEvents OK_Button As System.Windows.Forms.Button
     Friend WithEvents rtbLog As System.Windows.Forms.RichTextBox
     Friend WithEvents TrackBar1 As System.Windows.Forms.TrackBar
-    Friend WithEvents btnNoZoom As System.Windows.Forms.Button
+    Friend WithEvents BtnNoZoom As System.Windows.Forms.Button
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents WrapTextToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator

@@ -59,7 +59,7 @@ Public Class FrmEditButton
             iGrp = _button.Group
             iId = _button.Id
             Dim btnGrp As ButtonGroup = GetButtonGroupById(iGrp)
-            BtnFont.Text = _button.FontName & "(" & CStr(_button.FontSize) & ")"
+            BtnFont.Text = _button.FontName & "(" & _button.FontSize & ")"
             If isPro Then
                 chkEncrypt.Checked = _button.Encrypt
             End If
@@ -93,8 +93,8 @@ Public Class FrmEditButton
     End Sub
     Private Sub BtnCancel_Click() Handles BtnCancel.Click
         DisplayProgress("Button not updated")
-        Me.DialogResult = DialogResult.Cancel
-        Me.Close()
+        DialogResult = DialogResult.Cancel
+        Close()
     End Sub
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles BtnOK.Click
         DisplayProgress(actionString & " button")
@@ -125,8 +125,8 @@ Public Class FrmEditButton
             If oBtn IsNot Nothing Then
                 UpdateButton(oBtn.buttonGroup, oBtn.buttonSeq, txtCaption.Text, TxtHint.Text, strNewText, BtnFont.Font.Name, BtnFont.Font.Bold, BtnFont.Font.Size, BtnFont.Font.Italic, isEncrypted, oBtn.buttonId)
             End If
-            Me.DialogResult = DialogResult.OK
-            Me.Close()
+            DialogResult = DialogResult.OK
+            Close()
         End If
     End Sub
     Private Sub BtnSpecialKey1_Click(sender As Object, e As EventArgs) Handles BtnOpenCurlyBracket.Click,
@@ -261,21 +261,21 @@ Public Class FrmEditButton
     End Sub
     Private Sub MnuPaste_Click(menuItem As Object, e As EventArgs) Handles MnuPaste.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.Paste()
         End If
     End Sub
     Private Sub MnuDelete_Click(menuItem As Object, e As EventArgs) Handles MnuDelete.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = ""
         End If
     End Sub
     Private Sub MnuSelectAll_Click(menuItem As Object, e As EventArgs) Handles MnuSelectAll.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             If _textBox IsNot Nothing Then
                 _textBox.SelectAll()
@@ -293,7 +293,7 @@ Public Class FrmEditButton
     End Sub
     Private Sub MnuToggleCase_Click(menuItem As Object, e As EventArgs) Handles MnuToggleCase.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is TextBox Or TypeOf (sourceControl) Is RichTextBox Then
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
             _textBox.SelectedText = NTextUtil.ToggleText(_textBox.SelectedText)
         End If

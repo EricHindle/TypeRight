@@ -7,33 +7,33 @@
 
 Imports System.Windows.Forms
 
-Public Class frmLogViewer
+Public Class FrmLogViewer
 #Region "variables"
     Dim currentDate As Date
 #End Region
 #Region "form control handlers"
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
+        DialogResult = System.Windows.Forms.DialogResult.OK
+        Close()
     End Sub
     Private Sub LogViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LogUtil.Info(My.Resources.LOADING, MyBase.Name)
         GetFormPos(Me, My.Settings.LogViewerPos)
         LoadTodaysLog()
     End Sub
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNoZoom.Click
+    Private Sub BtnNoZoom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnNoZoom.Click
         TrackBar1.Value = 10
     End Sub
     Private Sub TrackBar1_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TrackBar1.ValueChanged
         rtbLog.ZoomFactor = TrackBar1.Value / 10
-        btnNoZoom.Text = rtbLog.ZoomFactor
+        BtnNoZoom.Text = rtbLog.ZoomFactor
     End Sub
     Private Sub WrapTextToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WrapTextToolStripMenuItem.Click
         rtbLog.WordWrap = WrapTextToolStripMenuItem.Checked
     End Sub
     Private Sub ZoomToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ZoomToolStripMenuItem.Click
         TrackBar1.Visible = ZoomToolStripMenuItem.Checked
-        btnNoZoom.Visible = ZoomToolStripMenuItem.Checked
+        BtnNoZoom.Visible = ZoomToolStripMenuItem.Checked
         If ZoomToolStripMenuItem.Checked = False Then
             TrackBar1.Value = 10
         End If
@@ -72,7 +72,7 @@ Public Class frmLogViewer
         Dim logContents As String = ""
         If My.Computer.FileSystem.FileExists(newLogFileName) Then
             BtnClearLog.Enabled = False
-            Me.Text = "Log: " & newLogFileName
+            Text = "Log: " & newLogFileName
             If newLogFileName = LogUtil.GetLogfileName Then
                 logContents = LogUtil.GetLogContents
                 BtnClearLog.Enabled = True
@@ -85,7 +85,7 @@ Public Class frmLogViewer
     End Sub
     Private Sub LoadTodaysLog()
         currentDate = Today
-        Me.Text = "Log: " & LogUtil.GetLogfileName
+        Text = "Log: " & LogUtil.GetLogfileName
         rtbLog.Text = LogUtil.GetLogContents()
         BtnClearLog.Enabled = True
     End Sub

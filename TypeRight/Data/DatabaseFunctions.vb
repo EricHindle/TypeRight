@@ -14,7 +14,6 @@ Imports System.Windows.Forms
 
 Module DatabaseFunctions
 
-
 #Region "dB"
     Private ReadOnly oBgTa As New TypeRightDataSetTableAdapters.buttongroupsTableAdapter
     Private oBgTable As New TypeRightDataSet.buttongroupsDataTable
@@ -26,6 +25,8 @@ Module DatabaseFunctions
     Private oSndBtnTable As New TypeRightDataSet.senderButtonDataTable
     Private ReadOnly oSmtpTa As New TypeRightDataSetTableAdapters.smtpTableAdapter
     Private oSmtpTable As New TypeRightDataSet.smtpDataTable
+    Private ReadOnly oSettingsTa As New TypeRightDataSetTableAdapters.SettingsTableAdapter
+    Private oSettingsTable As New TypeRightDataSet.SettingsDataTable
 #End Region
 #Region "backup"
     Private ReadOnly tableList As New List(Of String)
@@ -36,6 +37,7 @@ Module DatabaseFunctions
         tableList.Add("Senders")
         tableList.Add("SenderButtons")
         tableList.Add("Smtp")
+        tableList.Add("Settings")
     End Sub
     Public Sub FillTableTree(ByRef tvtables As TreeView)
         tvtables.Nodes.Clear()
@@ -50,31 +52,31 @@ Module DatabaseFunctions
             Select Case tableType
                 Case "Buttons"
                     If RecreateTable(oBtnTable, datapath) Then
-                        '   oBtnTa.TruncatePeople()
+                        oBtnTa.TruncateButton()
                         oBtnTa.Update(oBtnTable)
                         rowCount = oBtnTa.GetData().Rows.Count
                     End If
                 Case "ButtonGroups"
                     If RecreateTable(oBgTable, datapath) Then
-                        '   oBgTa.TruncatePeople()
+                        oBgTa.TruncateButtonGroups()
                         oBgTa.Update(oBgTable)
                         rowCount = oBgTa.GetData().Rows.Count
                     End If
                 Case "Senders"
                     If RecreateTable(oSndTable, datapath) Then
-                        '   osndTa.TruncatePeople()
+                        oSndTa.TruncateSenders()
                         oSndTa.Update(oSndTable)
                         rowCount = oSndTa.GetData().Rows.Count
                     End If
                 Case "SenderButtons"
                     If RecreateTable(oSndBtnTable, datapath) Then
-                        '   osndBtnTa.TruncatePeople()
+                        oSndBtnTa.TruncateSenderButton()
                         oSndBtnTa.Update(oSndBtnTable)
                         rowCount = oSndBtnTa.GetData().Rows.Count
                     End If
                 Case "Smtp"
                     If RecreateTable(oSmtpTable, datapath) Then
-                        '   osmtpTa.TruncatePeople()
+                        oSmtpTa.TruncateSmtp()
                         oSmtpTa.Update(oSmtpTable)
                         rowCount = oSmtpTa.GetData().Rows.Count
                     End If
@@ -136,11 +138,11 @@ Module DatabaseFunctions
         End Try
     End Sub
     Public Function GetButtonTable()
-        LogUtil.Info("Getting button table", MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Getting Button table", MethodBase.GetCurrentMethod.Name)
         Return oBtnTa.GetData()
     End Function
     Public Function GetButtonByGroupAndSeq(_buttonGrpId As Integer, _buttonSeq As Integer) As TypeRightDataSet.buttonRow
-        LogUtil.Info("Getting button row for Grp " & CStr(_buttonGrpId) & " Seq " & CStr(_buttonSeq), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Getting Button row for Grp " & _buttonGrpId & " Seq " & _buttonSeq, MethodBase.GetCurrentMethod.Name)
         Dim oBtnRow As TypeRightDataSet.buttonRow = Nothing
         oBtnTa.FillByGroupSeq(oBtnTable, _buttonGrpId, _buttonSeq)
         If oBtnTable.Rows.Count = 1 Then
@@ -149,12 +151,12 @@ Module DatabaseFunctions
         Return oBtnRow
     End Function
     Public Function GetButtonsByGroup(_buttonGrpId As Integer) As TypeRightDataSet.buttonDataTable
-        LogUtil.Info("Getting button table for Grp " & CStr(_buttonGrpId), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Getting Button table for Grp " & _buttonGrpId, MethodBase.GetCurrentMethod.Name)
         oBtnTa.FillByGroup(oBtnTable, _buttonGrpId)
         Return oBtnTable
     End Function
     Public Function GetButtonById(_buttonId As Integer) As TypeRightDataSet.buttonRow
-        LogUtil.Info("Getting button row " & CStr(_buttonId), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Getting button row " & _buttonId, MethodBase.GetCurrentMethod.Name)
         Dim oBtnRow As TypeRightDataSet.buttonRow = Nothing
         oBtnTa.FillById(oBtnTable, _buttonId)
         If oBtnTable.Rows.Count = 1 Then
@@ -163,7 +165,7 @@ Module DatabaseFunctions
         Return oBtnRow
     End Function
     Public Function UpdateButtonGroupOnButton(_buttonGrpId As Integer, _buttonId As Integer) As Boolean
-        LogUtil.Info("Updating Grp " & CStr(_buttonGrpId), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Updating Grp " & _buttonGrpId, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oBtnTa.UpdateGroup(_buttonGrpId, _buttonId) = 1
@@ -173,7 +175,7 @@ Module DatabaseFunctions
         Return isOk
     End Function
     Public Function InsertButton(_button As NbuttonControlLibrary.Nbutton) As Boolean
-        LogUtil.Info("Inserting button for Grp " & CStr(_button.Group) & " Seq " & CStr(_button.Sequence), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Inserting Button for Grp " & _button.Group & " Seq " & _button.Sequence, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oBtnTa.InsertButton(_button.Group,
@@ -192,7 +194,7 @@ Module DatabaseFunctions
         Return isOk
     End Function
     Public Function UpdateButton(_button As NbuttonControlLibrary.Nbutton) As Boolean
-        LogUtil.Info("Updating button " & CStr(_button.Id), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Updating Button " & _button.Id, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oBtnTa.UpdateButton(_button.Group,
@@ -221,7 +223,7 @@ Module DatabaseFunctions
                                  _buttonFontSize As Integer,
                                  _buttonItalic As Boolean,
                                  _buttonEncrypt As Boolean) As Boolean
-        LogUtil.Info("Inserting button row for Grp " & CStr(_buttonGrp) & " Seq " & CStr(_buttonSeq), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Inserting Button row for Grp " & _buttonGrp & " Seq " & _buttonSeq, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oBtnTa.InsertButton(_buttonGrp,
@@ -250,7 +252,7 @@ Module DatabaseFunctions
                                  _buttonItalic As Boolean,
                                  _buttonEncrypt As Boolean,
                                  _buttonId As Integer) As Boolean
-        LogUtil.Info("Updating button " & CStr(_buttonId), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Updating Button " & _buttonId, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oBtnTa.UpdateButton(_buttonGrp,
@@ -259,9 +261,9 @@ Module DatabaseFunctions
                                        _buttonHint,
                                        _buttonValue,
                                        _buttonFont,
-                                       CByte(_buttonBold),
+                                       _buttonBold,
                                        _buttonFontSize,
-                                       CByte(_buttonItalic),
+                                       _buttonItalic,
                                        _buttonEncrypt,
                                        _buttonId) = 1
         Catch ex As DbException
@@ -279,7 +281,7 @@ Module DatabaseFunctions
         Return isOk
     End Function
     Public Function DeleteButton(_Id As Integer) As Boolean
-        LogUtil.Info("Deleting button " & CStr(_Id), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Deleting Button " & _Id, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oBtnTa.DeleteButton(_Id) = 1
@@ -300,7 +302,7 @@ Module DatabaseFunctions
 #End Region
 #Region "groups"
     Public Function GetButtonGroupById(_id As Integer) As ButtonGroup
-        LogUtil.Info("Getting button group " & CStr(_id), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Getting Button Group " & _id, MethodBase.GetCurrentMethod.Name)
         Dim oButtonGroup As New ButtonGroup
         Try
             oBgTa.FillById(oBgTable, _id)
@@ -315,7 +317,7 @@ Module DatabaseFunctions
         Return oButtonGroup
     End Function
     Public Function GetButtonGroupTable() As TypeRightDataSet.buttongroupsDataTable
-        LogUtil.Info("Getting group table", MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Getting Button Group table", MethodBase.GetCurrentMethod.Name)
 
         oBgTable = New TypeRightDataSet.buttongroupsDataTable
         Try
@@ -326,7 +328,7 @@ Module DatabaseFunctions
         Return oBgTable
     End Function
     Public Function DeleteButtonGroup(_buttonGrpId As Integer) As Boolean
-        LogUtil.Info("Deleting group " & CStr(_buttonGrpId), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Deleting Button Group " & _buttonGrpId, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oBgTa.DeleteButtonGroup(_buttonGrpId) = 1
@@ -336,7 +338,7 @@ Module DatabaseFunctions
         Return isOk
     End Function
     Public Function InsertButtonGroup(_groupname As String) As Boolean
-        LogUtil.Info("Inserting group " & _groupname, MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Inserting Button Group " & _groupname, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oBgTa.InsertButtonGroup(_groupname) = 1
@@ -346,7 +348,7 @@ Module DatabaseFunctions
         Return isOk
     End Function
     Public Function UpdateButtonGroupName(_groupname As String, _groupId As Integer) As Boolean
-        LogUtil.Info("Updating group " & CStr(_groupId), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Updating Button Group " & _groupId, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oBgTa.UpdateGroupName(_groupname, _groupId) = 1
@@ -358,7 +360,7 @@ Module DatabaseFunctions
 #End Region
 #Region "senders"
     Public Function GetSenderTable() As TypeRightDataSet.sendersDataTable
-        LogUtil.Info("Getting sender table", MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Getting Sender table", MethodBase.GetCurrentMethod.Name)
         oSndTable = New TypeRightDataSet.sendersDataTable
         Try
             oSndTable = oSndTa.GetData()
@@ -385,7 +387,7 @@ Module DatabaseFunctions
         Return oSenderRow
     End Function
     Public Function GetSenderById(_id As Integer) As Sender
-        LogUtil.Info("Getting sender " & CStr(_id), MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Getting Sender " & _id, MethodBase.GetCurrentMethod.Name)
         Dim oSender As New Sender
         Try
             oSndTa.FillById(oSndTable, _id)
@@ -400,7 +402,7 @@ Module DatabaseFunctions
         Return oSender
     End Function
     Public Function InsertSender(ByRef oSender As Sender) As Boolean
-        LogUtil.Info("Inserting sender " & oSender.FirstName & " " & oSender.LastName, MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Inserting Sender " & oSender.FirstName & " " & oSender.LastName, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oSndTa.InsertSender(oSender.Title,
@@ -428,7 +430,7 @@ Module DatabaseFunctions
         Return isOk
     End Function
     Public Function UpdateSender(ByRef oSender As Sender) As Boolean
-        LogUtil.Info("Updating sender " & oSender.SenderId, MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Updating Sender " & oSender.SenderId, MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
             isOk = oSndTa.UpdateSender(oSender.Title,
@@ -457,7 +459,7 @@ Module DatabaseFunctions
         Return isOk
     End Function
     Public Function DeleteSender(_id As Integer) As Boolean
-        LogUtil.Info("Deleting sender " & _id, MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Deleting Sender " & _id, MethodBase.GetCurrentMethod.Name)
         Dim isOK As Boolean = False
         Try
             isOK = oSndTa.DeleteSender(_id) = 1
@@ -469,7 +471,7 @@ Module DatabaseFunctions
 #End Region
 #Region "senderbuttons"
     Public Function GetSenderButtonTable() As TypeRightDataSet.senderButtonDataTable
-        LogUtil.Info("Getting sender button table", MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Getting Sender Button table", MethodBase.GetCurrentMethod.Name)
         oSndBtnTable = New TypeRightDataSet.senderButtonDataTable
         Try
             oSndBtnTable = oSndBtnTa.GetData()
@@ -479,7 +481,7 @@ Module DatabaseFunctions
         Return oSndBtnTable
     End Function
     Public Function GetSenderButton(columnName As String) As SenderButton
-        '      LogUtil.Info("Getting sender button row for " & columnName, MethodBase.GetCurrentMethod.Name)
+        '      LogUtil.Info("Getting Sender Button row for " & columnName, MethodBase.GetCurrentMethod.Name)
         Dim oSenderButton As New SenderButton
         Try
             oSndBtnTa.FillByColName(oSndBtnTable, columnName)
@@ -492,7 +494,7 @@ Module DatabaseFunctions
         Return oSenderButton
     End Function
     Public Function DeleteSenderButton(columnName As String) As Boolean
-        LogUtil.Info("Deleting sender button for " & columnName, MethodBase.GetCurrentMethod.Name)
+        LogUtil.Info("Deleting Sender Button for " & columnName, MethodBase.GetCurrentMethod.Name)
         Dim isOK As Boolean = False
         Try
             isOK = oSndBtnTa.DeleteSenderButton(columnName) = 1
@@ -598,5 +600,16 @@ Module DatabaseFunctions
         Return isOK
     End Function
 #End Region
-
+#Region "settings"
+    Public Function GetSettingsTable() As TypeRightDataSet.SettingsDataTable
+        LogUtil.Info("Getting Settings table", MethodBase.GetCurrentMethod.Name)
+        oSettingsTable = New TypeRightDataSet.SettingsDataTable
+        Try
+            oSettingsTable = oSettingsTa.GetData
+        Catch ex As Exception
+            LogUtil.Exception("Failed: ", ex, MethodBase.GetCurrentMethod.Name)
+        End Try
+        Return oSettingsTable
+    End Function
+#End Region
 End Module

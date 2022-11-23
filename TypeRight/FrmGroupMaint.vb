@@ -32,13 +32,13 @@ Public Class FrmGroupMaint
 #End Region
 #Region "form control handlers"
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
-        Me.DialogResult = DialogResult.Cancel
-        Me.Close()
+        DialogResult = DialogResult.Cancel
+        Close()
     End Sub
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles BtnUpdate.Click
         Dim iActGrp As Integer
         iActGrp = iCurrGrp
-        Me.DialogResult = DialogResult.OK
+        DialogResult = DialogResult.OK
         Select Case _action
             Case GroupAction.GRP_TRANS
                 If cmbGroups.SelectedIndex = -1 Then
@@ -71,16 +71,16 @@ Public Class FrmGroupMaint
                     DeleteButtonGroup(iActGrp)
                 Else
                     MsgBox("There are buttons in the group. Group cannot be removed", MsgBoxStyle.Exclamation, "Forbidden action")
-                    Me.DialogResult = DialogResult.Cancel
+                    DialogResult = DialogResult.Cancel
                 End If
         End Select
 
-        Me.Close()
+        Close()
     End Sub
     Private Sub FrmGroupMaint_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info(My.Resources.LOADING, MyBase.Name)
         GetFormPos(Me, My.Settings.GroupMaintPos)
-        Me.ButtongroupsTableAdapter.Fill(Me.TypeRightDataSet.buttongroups)
+        ButtongroupsTableAdapter.Fill(TypeRightDataSet.buttongroups)
         ClearForm()
         TxtGrpNumber.Text = CStr(iCurrGrp)
         oBtnGrp = GetButtonGroupById(iCurrGrp)

@@ -16,7 +16,7 @@ Imports System.Net.Mime
 ''' </summary>
 ''' <remarks></remarks>
 Public NotInheritable Class EmailUtil
-    Private Const className As String = "EmailUtil"
+    Private Const CLASS_NAME As String = "EmailUtil"
     Private Const SEND_VIA As String = "SendMailViaSMTP"
     ''' <summary>
     ''' Send an email

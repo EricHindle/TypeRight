@@ -69,7 +69,7 @@ Public Class FrmDbUpdate
         If isDataChanged = False OrElse
             MsgBox(UNSAVED_CHANGES_WARNING,
                     MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-            Me.Close()
+            Close()
         End If
     End Sub
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
@@ -93,7 +93,7 @@ Public Class FrmDbUpdate
     Private Sub BtnDel_Click(sender As Object, e As EventArgs) Handles BtnDel.Click
         If Not String.IsNullOrEmpty(TxtId.Text) Then
             DisplayProgress(DELETE_SENDER)
-            DeleteSender(CInt(TxtId.Text))
+            DeleteSender(TxtId.Text)
             isDataChanged = False
             LoadSenderTable()
             DisplayProgress(DELETE_SENDER & COMPLETE)
@@ -222,7 +222,7 @@ Public Class FrmDbUpdate
             sErrorMsg = sErrorMsg & vbCrLf & "Email is mandatory"
             isOK = False
         Else
-            If Not (TxtEmail.Text Like "?*[@]?*[.]?*") Then
+            If Not TxtEmail.Text Like "?*[@]?*[.]?*" Then
                 sErrorMsg = sErrorMsg & vbCrLf & "Email: Invalid format"
                 isOK = False
             End If
@@ -307,7 +307,7 @@ Public Class FrmDbUpdate
     Public Shared Function Calc_age(dtDob) As Integer
         Dim age As Integer
         age = Today.Year - Year(dtDob)
-        If (dtDob > Today.AddYears(-age)) Then age -= 1
+        If dtDob > Today.AddYears(-age) Then age -= 1
         Return age
     End Function
     Private Sub ClearForm()

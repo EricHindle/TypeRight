@@ -107,7 +107,7 @@
         Set(ByVal value As String)
             m_Caption = value
             Button1.Text = m_Caption
-            Me.Text = m_Caption
+            Text = m_Caption
         End Set
     End Property
     Public Property Hint() As String
@@ -154,7 +154,7 @@
 
 
     Public Sub New()
-        Me.InitializeComponent()
+        InitializeComponent()
         m_Id = -1
         m_Fontname = m_def_Fontname
         m_Fontsize = m_def_Size
@@ -170,7 +170,7 @@
         DataType = DataSource.Undefined
     End Sub
     Public Sub New(pId As Integer, pGroup As Integer, pSeq As Integer, pCaption As String, pHint As String, pValue As String, pFontName As String, pFontSize As Single, pBold As Boolean, pItalic As Boolean, pEncrypt As Boolean, pSource As DataSource)
-        Me.InitializeComponent()
+        InitializeComponent()
         m_Id = pId
         m_Fontname = pFontName
         m_Fontsize = pFontSize
@@ -188,7 +188,7 @@
     End Sub
     Private Function MakeFont(p_Typeface As Typeface) As Font
         Dim newStyle As FontStyle = If(p_Typeface.isBold, FontStyle.Bold, FontStyle.Regular) Or If(p_Typeface.isItalic, FontStyle.Italic, FontStyle.Regular)
-        Dim newFont As Font = New Font(p_Typeface.fontName, p_Typeface.fontSize, newStyle)
+        Dim newFont As New Font(p_Typeface.fontName, p_Typeface.fontSize, newStyle)
         Return newFont
     End Function
     Private Function MakeTypeface(p_FontName As String, p_FontSize As Integer, isFontBold As Boolean, isFontItalic As Boolean) As Typeface
@@ -204,17 +204,17 @@
         Button1.Font = MakeFont(m_Typeface)
     End Sub
     Private Sub Nbutton_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-        Button1.Size = Me.Size
+        Button1.Size = Size
     End Sub
     Private Sub Nbutton_FontChanged(sender As Object, e As EventArgs) Handles Me.FontChanged
-        Button1.Font = Me.Font
+        Button1.Font = Font
         m_Fontname = Button1.Font.Name
         m_Fontsize = Button1.Font.Size
         m_Italic = Button1.Font.Italic
         m_Bold = Button1.Font.Bold
     End Sub
     Private Sub Button1_SizeChanged(sender As Object, e As EventArgs) Handles Button1.SizeChanged
-        Me.Size = Button1.Size
+        Size = Button1.Size
     End Sub
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
         MyBase.OnPaint(e)

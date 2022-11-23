@@ -191,10 +191,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalSettings.vb" />
-    <Compile Include="Logging\frmLogViewer.designer.vb">
-      <DependentUpon>frmLogViewer.vb</DependentUpon>
+    <Compile Include="Logging\FrmLogViewer.designer.vb">
+      <DependentUpon>FrmLogViewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Logging\frmLogViewer.vb">
+    <Compile Include="Logging\FrmLogViewer.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Logging\LogUtil.vb" />
@@ -271,8 +271,8 @@
     <EmbeddedResource Include="FrmSplash.resx">
       <DependentUpon>FrmSplash.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Logging\frmLogViewer.resx">
-      <DependentUpon>frmLogViewer.vb</DependentUpon>
+    <EmbeddedResource Include="Logging\FrmLogViewer.resx">
+      <DependentUpon>FrmLogViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>

@@ -149,7 +149,7 @@
         Return Me
     End Function
     Public Sub SaveButton()
-        oBtnTa.UpdateButton(_Group, _Sequence, _Text, _Hint, _Value, _FontName, CByte(_FontBold), _FontSize, CByte(_FontItalic), CByte(_Encrypt), _Id)
+        oBtnTa.UpdateButton(_Group, _Sequence, _Text, _Hint, _Value, _FontName, _FontBold, _FontSize, _FontItalic, _Encrypt, _Id)
     End Sub
     Public Function Build() As Nbutton
         Return New Nbutton(_Id, _Group, _Sequence, _Text, _Hint, _Value, _FontName, _FontSize, _FontBold, _FontItalic, _Encrypt, _Source)

@@ -43,7 +43,7 @@ Public Class FrmSenderButtonFormat
         End If
     End Sub
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub CbDbValue_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CbDbValue.SelectedIndexChanged
         If CbDbValue.SelectedIndex >= 0 Then
@@ -53,7 +53,7 @@ Public Class FrmSenderButtonFormat
                 Dim _style As Drawing.FontStyle = If(oSenderButton.Bold, FontStyle.Bold, FontStyle.Regular) Or If(oSenderButton.Italic, FontStyle.Italic, FontStyle.Regular)
                 BtnFont.Font = New Drawing.Font(oSenderButton.FontName, oSenderButton.FontSize, _style)
                 BtnFont.Text = oSenderButton.FontName & " (" & oSenderButton.FontSize & ")"
-                chkEncrypted.Checked = CBool(oSenderButton.IsEncrypted)
+                chkEncrypted.Checked = oSenderButton.IsEncrypted
             End If
         Else
             ClearForm()
@@ -108,7 +108,7 @@ Public Class FrmSenderButtonFormat
     Private Sub ClearForm()
         Dim _style As Drawing.FontStyle = My.Settings.FontBold Or My.Settings.FontItalic
         BtnFont.Font = New Drawing.Font(My.Settings.FontName, My.Settings.FontSize, _style)
-        BtnFont.Text = My.Settings.FontName & " (" & CStr(My.Settings.FontSize) & ")"
+        BtnFont.Text = My.Settings.FontName & " (" & My.Settings.FontSize & ")"
         chkEncrypted.Checked = False
     End Sub
 #End Region

@@ -11,7 +11,7 @@ Public Class FrmOptions
 #Region "form control handlers"
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles BtnCancel.Click
         LogUtil.Info("Changes not saved", MyBase.Name)
-        Me.Close()
+        Close()
     End Sub
     Private Sub BtnDfltFont_Click(sender As Object, e As EventArgs) Handles BtnDfltFont.Click
         DisplayProgress("Selecting font")
@@ -77,7 +77,7 @@ Public Class FrmOptions
         My.Settings.FontItalic = bDfltFontItalic
         My.Settings.Save()
         LogUtil.Info("Saved", MyBase.Name)
-        Me.Close()
+        Close()
     End Sub
     Private Sub FrmOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info(My.Resources.LOADING, MyBase.Name)
@@ -122,7 +122,7 @@ Public Class FrmOptions
         iButtonWidth = HScroll1.Value
     End Sub
     Private Sub Slider1_Scroll(sender As Object, e As EventArgs) Handles Slider1.Scroll
-        Me.Owner.Opacity = Slider1.Value / 100
+        Owner.Opacity = Slider1.Value / 100
     End Sub
     Private Sub BtnPosReset_Click(sender As Object, e As EventArgs) Handles BtnPosReset.Click
         My.Settings.EditButtonPos = "10~10~628~913"
@@ -138,7 +138,7 @@ Public Class FrmOptions
         DisplayProgress("Form screen positions reset")
     End Sub
     Private Sub BtnViewLog_Click(sender As Object, e As EventArgs) Handles BtnViewLog.Click
-        Using _logView As New frmLogViewer
+        Using _logView As New FrmLogViewer
             _logView.ShowDialog()
         End Using
     End Sub

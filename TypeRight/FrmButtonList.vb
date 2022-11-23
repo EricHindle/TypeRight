@@ -34,8 +34,7 @@ Public Class FrmButtonList
     Private ReadOnly bDrag As Boolean
     Private ReadOnly iDragBtnIndex As Integer
     Private oSenderRow As TypeRightDataSet.sendersRow
-
-    Dim redClockText As String
+    Private redClockText As String
 #End Region
 #Region "form control handlers"
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -46,7 +45,7 @@ Public Class FrmButtonList
         InitialiseData()
         GetFormPos(Me, My.Settings.ButtonListPos)
         ' Set window width based on number of columns and button width
-        Me.Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
+        Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
         FillNamesList()
         For Each cmbItem As KeyValuePair(Of Integer, String) In cbNames.Items
             Dim key As Integer = cmbItem.Key
@@ -62,7 +61,7 @@ Public Class FrmButtonList
         GrpTop.Visible = isPro
         mnuGroups.Visible = isPro
         mnuSep3.Visible = isPro
-        Me.Opacity = iTransPerc / 100
+        Opacity = iTransPerc / 100
         GrpBottom.Visible = bToolBar
         iButtonCt = 0
         If isPro Then
@@ -70,7 +69,7 @@ Public Class FrmButtonList
         Else
             GroupButtonPanel.Top = 0
         End If
-        Me.Text = cbNames.SelectedItem.value
+        Text = cbNames.SelectedItem.value
         If iCurrGrp > 0 Then
             LoadGroupButtons(iCurrGrp)
             DrawGroupButtons()
@@ -86,9 +85,9 @@ Public Class FrmButtonList
         DelayTimer.Enabled = False
         bLockClock = False
         If bMinimise Then
-            Me.WindowState = FormWindowState.Minimized
+            WindowState = FormWindowState.Minimized
         Else
-            Me.WindowState = FormWindowState.Normal
+            WindowState = FormWindowState.Normal
         End If
         isLoading = False
         SetTopMost()
@@ -109,12 +108,12 @@ Public Class FrmButtonList
                 DrawSenderButtons()
                 iCurrSender = btnVal
             End If
-            Me.Text = cbNames.SelectedItem.value
+            Text = cbNames.SelectedItem.value
         End If
     End Sub
 
     Private Sub ImgTack_Click(sender As Object, e As EventArgs) Handles ImgTack.Click
-        bOnTop = Not (bOnTop)
+        bOnTop = Not bOnTop
         SetTopMost()
         SaveOptions()
     End Sub
@@ -123,15 +122,15 @@ Public Class FrmButtonList
     End Sub
 
     Private Sub ShowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowToolStripMenuItem.Click
-        Me.WindowState = FormWindowState.Normal
+        WindowState = FormWindowState.Normal
     End Sub
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub CopyToClipboardToolStripMenuItem_Click(MenuItem As Object, e As EventArgs) Handles CopyToClipboardToolStripMenuItem.Click
         Clipboard.Clear()
         Dim sourceControl As Object = GetSourceControl(MenuItem)
-        If TypeOf (sourceControl) Is Nbutton Then
+        If TypeOf sourceControl Is Nbutton Then
             Dim _btn As Nbutton = CType(sourceControl, Nbutton)
             Dim strText As String = _btn.Value.Replace("{Return}", Chr(10)).Replace("{{}", "{").Replace("{}}", "}")
             Clipboard.SetText(strText)
@@ -153,7 +152,7 @@ Public Class FrmButtonList
     End Sub
     Private Sub MnuEdit_Click(menuItem As Object, e As EventArgs) Handles mnuEdit.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is Nbutton Then
+        If TypeOf sourceControl Is Nbutton Then
             Dim _btn As Nbutton = CType(sourceControl, Nbutton)
             Try
                 If _btn.DataType = Nbutton.DataSource.Group Then
@@ -173,10 +172,10 @@ Public Class FrmButtonList
     End Sub
     Private Sub MnuDelete_Click(menuItem As Object, e As EventArgs) Handles mnuDelete.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
-        If TypeOf (sourceControl) Is Nbutton Then
+        If TypeOf sourceControl Is Nbutton Then
             Dim _btn As Nbutton = CType(sourceControl, Nbutton)
-            LogUtil.Info("Deleting button " & CStr(_btn.Id), MyBase.Name)
-            If _btn.DataType = Nbutton.DataSource.Group Then
+            LogUtil.Info("Deleting button " & _btn.Id, MyBase.Name)
+            If _btn.DataType = Global.NbuttonControlLibrary.Nbutton.DataSource.Group Then
                 Try
                     DeleteButton(_btn.Id)
                     ResequenceButtons(_btn.Group)
@@ -206,18 +205,18 @@ Public Class FrmButtonList
         ShowGroupMaint(GroupAction.GRP_TRANS, selectedButton)
     End Sub
     Private Sub FrmButtonList_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-        If Me.WindowState <> FormWindowState.Minimized Then
-            Me.ShowInTaskbar = False
+        If WindowState <> FormWindowState.Minimized Then
+            ShowInTaskbar = False
         End If
     End Sub
     Private Sub BtnMinimise_Click(sender As Object, e As EventArgs) Handles BtnMinimise.Click, mnuMinimise.Click, MnuMinimise1.Click
-        Me.ShowInTaskbar = True
-        Me.WindowState = FormWindowState.Minimized
+        ShowInTaskbar = True
+        WindowState = FormWindowState.Minimized
     End Sub
     Private Sub ResetPositionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetPositionToolStripMenuItem.Click
         LogUtil.Info("Resetting button list position", MyBase.Name)
-        Me.Top = 50
-        Me.Left = 50
+        Top = 50
+        Left = 50
     End Sub
     Private Sub FrmButtonList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
@@ -290,7 +289,7 @@ Public Class FrmButtonList
             iColCt -= 1
             DrawButtons()
         End If
-        Me.Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
+        Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
         My.Settings.Columns = iColCt
         My.Settings.Save()
     End Sub
@@ -300,12 +299,12 @@ Public Class FrmButtonList
             iColCt += 1
             DrawButtons()
         End If
-        Me.Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
+        Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
         My.Settings.Columns = iColCt
         My.Settings.Save()
     End Sub
     Private Sub ImgExit_Click(sender As Object, e As EventArgs) Handles PicExit.Click
-        Me.Close()
+        Close()
     End Sub
 #End Region
 #Region "subroutines"
@@ -371,7 +370,7 @@ Public Class FrmButtonList
         End If
     End Sub
     Private Sub LoadSenderButtons(sndKey As Integer)
-        LogUtil.Info("Fill button list with buttons for sender " & CStr(sndKey), MyBase.Name)
+        LogUtil.Info("Fill button list with buttons for sender " & sndKey, MyBase.Name)
         senderButtonList.Clear()
         Dim strButtonTxt As String
         Dim strButtonValue As String
@@ -438,7 +437,7 @@ Public Class FrmButtonList
             For Each _col As DataColumn In oTable.Columns
                 _senderButton = GetSenderButton(_col.ColumnName)
                 strButtonValue = If(IsDBNull(oSenderRow(_col.ColumnName)), "", oSenderRow(_col.ColumnName))
-                If _senderButton IsNot Nothing AndAlso CBool(_senderButton.IsEncrypted) Then
+                If _senderButton IsNot Nothing AndAlso _senderButton.IsEncrypted Then
                     strButtonValue = oNCrypter.DecryptData(strButtonValue)
                 End If
                 strButtonTxt = _col.ColumnName
@@ -514,7 +513,7 @@ Public Class FrmButtonList
             AddHandler _btn.Button1.Click, AddressOf Button_Click
         Next
         SenderButtonPanel.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + 4
-        Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
+        Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
         GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height
         lResizeActive = True
     End Sub
@@ -527,7 +526,7 @@ Public Class FrmButtonList
             RemoveHandler _btn.Button1.Click, AddressOf Button_Click
             AddHandler _btn.Button1.Click, AddressOf Button_Click
         Next
-        Me.Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
+        Height = GrpTop.Height + GroupButtonPanel.Height + SenderButtonPanel.Height + GrpBottom.Height + 40
         GrpBottom.Top = GroupButtonPanel.Top + GroupButtonPanel.Height + SenderButtonPanel.Height + 4
         lResizeActive = True
     End Sub
@@ -535,7 +534,7 @@ Public Class FrmButtonList
         LogUtil.Info("Draw all buttons", MyBase.Name)
         lResizeActive = False
         ' Size of window
-        Me.Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
+        Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
         DrawGroupButtons()
         DrawSenderButtons()
         lResizeActive = True
@@ -546,9 +545,9 @@ Public Class FrmButtonList
         Else
             ImgTack.Image = My.Resources.tackup
         End If
-        Me.TopMost = bOnTop
+        TopMost = bOnTop
         If bOnTop Then
-            Me.BringToFront()
+            BringToFront()
         End If
     End Sub
     Private Sub ShowGroupMaint(_action As GroupAction, _button As Nbutton)
@@ -570,10 +569,10 @@ Public Class FrmButtonList
             _options.Owner = Me
             _options.ShowDialog()
             '       LoadOptions()
-            Me.Opacity = iTransPerc / 100
+            Opacity = iTransPerc / 100
             GrpBottom.Visible = bToolBar
             SetTopMost()
-            If Me.Width <> (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH Then
+            If Width <> (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH Then
                 DrawButtons()
             End If
         End Using
@@ -587,13 +586,13 @@ Public Class FrmButtonList
     End Sub
     Private Sub PicEmail_Click(sender As Object, e As EventArgs) Handles PicEmail.Click
         LogUtil.Info("Loading Email form", MyBase.Name)
-        Me.Hide()
+        Hide()
         Using _emailForm As New FrmEmail
             _emailForm.SenderId = iCurrSender
             _emailForm.GroupId = iCurrGrp
             _emailForm.ShowDialog()
         End Using
-        Me.Show()
+        Show()
     End Sub
 
 #End Region

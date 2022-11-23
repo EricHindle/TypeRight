@@ -29,7 +29,7 @@ Public NotInheritable Class NRegisterApp
                            strRegisteredName As String,
                            strAppChars As String) As Boolean
         ' Check for equality
-        Return (GenerateKey(strRegisteredName, strAppChars) = strKey)
+        Return GenerateKey(strRegisteredName, strAppChars) = strKey
     End Function
     Private Shared Function Md5FromString(ByVal Source As String) As String
         Dim Bytes() As Byte

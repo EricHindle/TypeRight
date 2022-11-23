@@ -9,7 +9,7 @@ Imports System.Windows.Forms
 Public NotInheritable Class NTextUtil
     Public Shared Function ConvertSelectedTextToLowercase(ByRef _control As Object) As String
         Dim oText As String = ""
-        If TypeOf (_control) Is TextBox Or TypeOf (_control) Is RichTextBox Then
+        If TypeOf _control Is TextBox Or TypeOf _control Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(_control, TextBoxBase)
             oText = _textBox.SelectedText.ToLower(myCultureInfo)
             _textBox.SelectedText = oText
@@ -18,7 +18,7 @@ Public NotInheritable Class NTextUtil
     End Function
     Public Shared Function ConvertSelectedTextToUpperCase(ByRef _control As Object) As String
         Dim oText As String = ""
-        If TypeOf (_control) Is TextBox Or TypeOf (_control) Is RichTextBox Then
+        If TypeOf _control Is TextBox Or TypeOf _control Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(_control, TextBoxBase)
             oText = _textBox.SelectedText.ToUpper(myCultureInfo)
             _textBox.SelectedText = oText
@@ -27,7 +27,7 @@ Public NotInheritable Class NTextUtil
     End Function
     Public Shared Function ConvertSelectedTextToTitleCase(ByRef _control As Object) As String
         Dim oText As String = ""
-        If TypeOf (_control) Is TextBox Or TypeOf (_control) Is RichTextBox Then
+        If TypeOf _control Is TextBox Or TypeOf _control Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(_control, TextBoxBase)
             oText = StrConv(_textBox.SelectedText, VbStrConv.ProperCase)
             _textBox.SelectedText = oText

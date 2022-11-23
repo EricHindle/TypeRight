@@ -61,7 +61,7 @@ Public Class FrmEmail
         isLoading = False
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
+        Close()
     End Sub
     Private Sub FrmEmail_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
@@ -180,12 +180,12 @@ Public Class FrmEmail
         End If
     End Sub
     Private Sub BtnSmtp_Click(sender As Object, e As EventArgs) Handles BtnSmtp.Click
-        Me.Hide()
+        Hide()
         Using _smtpForm As New FrmSmtpAccounts
             _smtpForm.ShowDialog()
         End Using
         SetAccountsDatasource()
-        Me.Show()
+        Show()
     End Sub
 #End Region
 #Region "subroutines"
