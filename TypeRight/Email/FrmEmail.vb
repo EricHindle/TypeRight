@@ -6,6 +6,7 @@
 '
 
 Imports System.Collections.Generic
+Imports System.Reflection
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
 
@@ -201,7 +202,13 @@ Public Class FrmEmail
         If isLogged Then LogUtil.Info(pText, MyBase.Name)
     End Sub
     Private Sub SetSplitterDistance()
-        SplitContainer1.SplitterDistance = SplitContainer1.Width - (iColCt * iButtonWidth) - SplitContainer1.SplitterWidth
+        Try
+            SplitContainer1.SplitterDistance = SplitContainer1.Width - (iColCt * iButtonWidth) - SplitContainer1.SplitterWidth
+        Catch ex1 As ArgumentOutOfRangeException
+            DisplayException(MethodBase.GetCurrentMethod, ex1, "Out of Range")
+        Catch ex2 As InvalidOperationException
+            DisplayException(MethodBase.GetCurrentMethod, ex2, "Invalid Operation")
+        End Try
     End Sub
 
     Private Sub BtnClearText_Click(sender As Object, e As EventArgs) Handles BtnClearText.Click
