@@ -5,6 +5,7 @@
 ' Author Eric Hindle
 '
 
+Imports System.Collections
 Imports System.Collections.Generic
 Imports System.Reflection
 Imports System.Windows.Forms
@@ -20,6 +21,9 @@ Public Class FrmEmail
     Private isLoading As Boolean = True
     Private oSenderRow As TypeRightDataSet.sendersRow
     Private oSmtpTable As TypeRightDataSet.smtpDataTable
+    Private _attachmentList As String()
+    Private ReadOnly aAttachList As New List(Of String)
+
 #End Region
 #Region "properties"
     Private _groupId As Integer
@@ -59,6 +63,8 @@ Public Class FrmEmail
             RemoveHandler _btn.Button1.Click, AddressOf Button_Click
             AddHandler _btn.Button1.Click, AddressOf Button_Click
         Next
+        CbAttachList.Items.Clear()
+        aAttachList.Clear()
         isLoading = False
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
@@ -102,12 +108,18 @@ Public Class FrmEmail
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         DisplayProgress("Sending Email",, True)
         BtnSend.Enabled = False
+        For Each oAtt As String In CbAttachList.Items
+            If My.Computer.FileSystem.FileExists(oAtt) Then
+                aAttachList.Add(oAtt)
+            End If
+        Next
+        _attachmentList = aAttachList.ToArray
         If cbSmtpAccounts.SelectedIndex >= 0 Then
             Dim _smtp As Smtp = GetSmtpById(cbSmtpAccounts.SelectedValue)
             If String.IsNullOrWhiteSpace(TxtTo.Text) Or String.IsNullOrWhiteSpace(TxtSubject.Text) Or String.IsNullOrWhiteSpace(TxtText.Text) Then
                 DisplayProgress("Missing value(s). Mail not sent.",, True)
             Else
-                If EmailUtil.SendMailViaSMTP(_smtp, TxtTo.Text, {}, TxtSubject.Text, TxtText.Text, TxtFromName.Text) Then
+                If EmailUtil.SendMailViaSMTP(_smtp, TxtTo.Text, {}, TxtSubject.Text, TxtText.Text, TxtFromName.Text, _attachmentList) Then
                     DisplayProgress("Mail sent OK.", , True)
                 Else
                     DisplayProgress("Mail failed.", , True)
@@ -127,6 +139,12 @@ Public Class FrmEmail
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtSubject.DragDrop,
                                                                                            TxtFromName.DragDrop,
                                                                                            TxtText.DragDrop
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            Dim _data As String() = e.Data.GetData(DataFormats.FileDrop)
+            Dim _filename As String = _data(0)
+            CbAttachList.Items.Add(_filename)
+            CbAttachList.SelectedIndex = CbAttachList.Items.Count - 1
+        End If
         If e.Data.GetDataPresent(DataFormats.StringFormat) Then
             Dim oBox As TextBox = CType(sender, TextBox)
             Dim _string As String = e.Data.GetData(DataFormats.StringFormat)
@@ -169,15 +187,22 @@ Public Class FrmEmail
     Private Sub TextBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles TxtTo.DragEnter,
                                                                                                                  TxtSubject.DragEnter,
                                                                                                                  TxtFromName.DragEnter,
-                                                                                                                 TxtText.DragEnter
-        If e.Data.GetDataPresent(DataFormats.StringFormat) Then
-            e.Effect = DragDropEffects.Copy
-        Else
-            If e.Data.GetDataPresent(DataFormats.Text) Then
+                                                                                                                 TxtText.DragEnter,
+                                                                                                                 CbAttachList.DragEnter
+        If sender.GetType = GetType(TextBox) Then
+            If e.Data.GetDataPresent(DataFormats.StringFormat) Then
+                e.Effect = DragDropEffects.Copy
+            ElseIf e.Data.GetDataPresent(DataFormats.FileDrop) And sender.name = TxtText.Name Then
+                e.Effect = DragDropEffects.Copy
+            ElseIf e.Data.GetDataPresent(DataFormats.Text) Then
                 e.Effect = DragDropEffects.Copy
             Else
                 e.Effect = DragDropEffects.None
             End If
+        End If
+        If sender.GetType = GetType(ComboBox) AndAlso sender.name = CbAttachList.Name AndAlso
+            e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
         End If
     End Sub
     Private Sub BtnSmtp_Click(sender As Object, e As EventArgs) Handles BtnSmtp.Click
@@ -210,13 +235,43 @@ Public Class FrmEmail
             DisplayException(MethodBase.GetCurrentMethod, ex2, "Invalid Operation")
         End Try
     End Sub
-
     Private Sub BtnClearText_Click(sender As Object, e As EventArgs) Handles BtnClearText.Click
         TxtText.Text = ""
     End Sub
-
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
         BtnSend.Enabled = True
     End Sub
+    Private Sub BtnAttach_Click(sender As Object, e As EventArgs) Handles BtnAttach.Click
+        Dim oFilename As String = SelectFile()
+        If Not String.IsNullOrWhiteSpace(oFilename) Then
+            CbAttachList.Items.Add(oFilename)
+            DisplayProgress("Attachment " & oFilename & " added", , True)
+        End If
+        CbAttachList.SelectedIndex = CbAttachList.Items.Count - 1
+    End Sub
+    Private Sub BtnRmvAtt_Click(sender As Object, e As EventArgs) Handles BtnRmvAtt.Click
+        If CbAttachList.SelectedIndex >= 0 Then
+            Dim _index As Integer = CbAttachList.SelectedIndex
+            CbAttachList.Items.Remove(CbAttachList.SelectedItem)
+            If _index < CbAttachList.Items.Count Then
+                CbAttachList.SelectedIndex = _index
+            Else
+                CbAttachList.SelectedIndex = _index - 1
+            End If
+            DisplayProgress("Attachment removed", , True)
+        End If
+    End Sub
+
+    Private Sub CbAttachList_DragDrop(sender As Object, e As DragEventArgs) Handles CbAttachList.DragDrop
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            Dim _data As String() = e.Data.GetData(DataFormats.FileDrop)
+            Dim _filename As String = _data(0)
+            CbAttachList.Items.Add(_filename)
+        ElseIf e.Data.GetDataPresent(DataFormats.StringFormat) Then
+            CbAttachList.Items.Add(e.Data.GetData(DataFormats.StringFormat))
+        End If
+        CbAttachList.SelectedIndex = CbAttachList.Items.Count - 1
+    End Sub
+
 #End Region
 End Class

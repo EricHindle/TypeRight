@@ -28,6 +28,8 @@ Partial Class FrmEmail
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip9 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BtnAttach = New System.Windows.Forms.Button()
+        Me.BtnRmvAtt = New System.Windows.Forms.Button()
         Me.TxtTo = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -41,12 +43,15 @@ Partial Class FrmEmail
         Me.BtnPasteSubject = New System.Windows.Forms.Button()
         Me.BtnPasteText = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.CbAttachList = New System.Windows.Forms.ComboBox()
         Me.BtnSmtp = New System.Windows.Forms.Button()
         Me.BtnClearText = New System.Windows.Forms.Button()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.cbSmtpAccounts = New System.Windows.Forms.ComboBox()
         Me.TxtFromName = New System.Windows.Forms.TextBox()
         Me.BtnReset = New System.Windows.Forms.Button()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -85,6 +90,30 @@ Partial Class FrmEmail
         Me.LblStatus.Name = "LblStatus"
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.LblStatus.Size = New System.Drawing.Size(10, 17)
+        '
+        'BtnAttach
+        '
+        Me.BtnAttach.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnAttach.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
+        Me.BtnAttach.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnAttach.Location = New System.Drawing.Point(669, 398)
+        Me.BtnAttach.Name = "BtnAttach"
+        Me.BtnAttach.Size = New System.Drawing.Size(26, 23)
+        Me.BtnAttach.TabIndex = 17
+        Me.ToolTip9.SetToolTip(Me.BtnAttach, "Select attachment")
+        Me.BtnAttach.UseVisualStyleBackColor = True
+        '
+        'BtnRmvAtt
+        '
+        Me.BtnRmvAtt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnRmvAtt.BackgroundImage = Global.TypeRight.My.Resources.Resources.cancel
+        Me.BtnRmvAtt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnRmvAtt.Location = New System.Drawing.Point(701, 399)
+        Me.BtnRmvAtt.Name = "BtnRmvAtt"
+        Me.BtnRmvAtt.Size = New System.Drawing.Size(26, 23)
+        Me.BtnRmvAtt.TabIndex = 18
+        Me.ToolTip9.SetToolTip(Me.BtnRmvAtt, "Remove attachments")
+        Me.BtnRmvAtt.UseVisualStyleBackColor = True
         '
         'TxtTo
         '
@@ -154,7 +183,7 @@ Partial Class FrmEmail
         Me.TxtText.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtText.Multiline = True
         Me.TxtText.Name = "TxtText"
-        Me.TxtText.Size = New System.Drawing.Size(659, 254)
+        Me.TxtText.Size = New System.Drawing.Size(659, 206)
         Me.TxtText.TabIndex = 4
         '
         'BtnClose
@@ -226,6 +255,10 @@ Partial Class FrmEmail
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.BtnRmvAtt)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.BtnAttach)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.Label5)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.CbAttachList)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnSmtp)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnClearText)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnClear)
@@ -248,6 +281,28 @@ Partial Class FrmEmail
         Me.SplitContainer1.Size = New System.Drawing.Size(926, 430)
         Me.SplitContainer1.SplitterDistance = 768
         Me.SplitContainer1.TabIndex = 0
+        '
+        'Label5
+        '
+        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(8, 401)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(91, 18)
+        Me.Label5.TabIndex = 16
+        Me.Label5.Text = "Attachments"
+        '
+        'cbAttachList
+        '
+        Me.CbAttachList.AllowDrop = True
+        Me.CbAttachList.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CbAttachList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CbAttachList.FormattingEnabled = True
+        Me.CbAttachList.Location = New System.Drawing.Point(105, 398)
+        Me.CbAttachList.Name = "cbAttachList"
+        Me.CbAttachList.Size = New System.Drawing.Size(558, 26)
+        Me.CbAttachList.TabIndex = 15
         '
         'BtnSmtp
         '
@@ -372,4 +427,9 @@ Partial Class FrmEmail
     Friend WithEvents BtnSmtp As Windows.Forms.Button
     Friend WithEvents BtnClearText As Windows.Forms.Button
     Friend WithEvents BtnReset As Windows.Forms.Button
+    Friend WithEvents BtnAttach As Windows.Forms.Button
+    Friend WithEvents Label5 As Windows.Forms.Label
+    Friend WithEvents CbAttachList As Windows.Forms.ComboBox
+    Friend WithEvents FolderBrowserDialog1 As Windows.Forms.FolderBrowserDialog
+    Friend WithEvents BtnRmvAtt As Windows.Forms.Button
 End Class

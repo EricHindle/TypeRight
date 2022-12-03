@@ -6,9 +6,12 @@
 '
 
 Imports System.Drawing
+Imports System.Drawing.Imaging
 Imports System.Globalization
+Imports System.IO
 Imports System.Reflection
 Imports System.Windows.Forms
+Imports Microsoft.VisualBasic.FileIO
 
 Module TypeRightMain
 #Region "public variables"
@@ -218,6 +221,21 @@ Module TypeRightMain
             & vbCrLf & "OK to continue?",
                       MsgBoxStyle.YesNo Or MsgBoxStyle.Exclamation,
                       pExceptionType)
+    End Function
+    Public Function SelectFile(Optional ByVal pFolder As String = Nothing) As String
+        Dim sFilename As String = ""
+        Using fbd As New OpenFileDialog
+            If String.IsNullOrWhiteSpace(pFolder) Then
+                fbd.InitialDirectory = SpecialDirectories.MyDocuments
+            Else
+                fbd.InitialDirectory = pFolder
+            End If
+            fbd.CheckFileExists = True
+            If fbd.ShowDialog() = DialogResult.OK Then
+                sFilename = fbd.FileName
+            End If
+        End Using
+        Return sFilename
     End Function
 #End Region
 End Module
