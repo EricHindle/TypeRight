@@ -5,8 +5,12 @@
 ' Author Eric Hindle
 '
 
+Imports System.Collections.Generic
+Imports System.Collections.ObjectModel
 Imports System.IO
+Imports System.Linq
 Imports System.Threading
+Imports Microsoft
 
 Public NotInheritable Class LogUtil
 #Region "constants"
@@ -53,8 +57,31 @@ Public NotInheritable Class LogUtil
         Info(My.Application.Info.Copyright)
         Info("Logging started at " & Format(Now, "dd/MM/yyyy HH:mm:ss"))
         If IsDebugOn Then
-            Info("Debug is ON")
+            Info("Debug : ON")
         End If
+        Info("Computer name    : " & My.Computer.Name)
+        Info("Application path : " & My.Application.Info.DirectoryPath)
+        LogDbDetails()
+        Info("-".PadRight(40, "-"))
+    End Sub
+    Public Shared Sub LogDbDetails()
+        Dim sConnection As String() = Split(My.Settings.TypeRightConnectionString, ";")
+        Dim serverName As String = ""
+        Dim dbName As String = ""
+        For Each oConn As String In sConnection
+            Dim nvp As String() = Split(oConn, "=")
+            If nvp.GetUpperBound(0) = 1 Then
+                Select Case nvp(0)
+                    Case "Data Source"
+                        serverName = nvp(1)
+                    Case "Initial Catalog"
+                        dbName = nvp(1)
+                End Select
+            End If
+        Next
+        Info("Data connection  :")
+        Info("   server   = " & serverName)
+        Info("   database = " & dbName)
     End Sub
     Public Shared Sub StopLogging()
         If isConfigured Then
@@ -72,7 +99,7 @@ Public NotInheritable Class LogUtil
         Dim sPad As String = "".PadRight(padCt)
         Dim sPrefix As String = sPad & thisThread & My.Computer.Clock.LocalTime.ToString() & " - "
         If sSub.Length > 0 Then
-            sPrefix += "(" & sSub & ") "
+            sPrefix += ("(" & sSub & ")").PadRight(22)
         End If
         If Not String.IsNullOrEmpty(errorCode) Then
             sPrefix += "Error code: " & errorCode & " "

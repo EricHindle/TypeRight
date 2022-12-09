@@ -5,7 +5,6 @@
 ' Author Eric Hindle
 '
 
-Imports System.Collections
 Imports System.Collections.Generic
 Imports System.Reflection
 Imports System.Windows.Forms
@@ -48,7 +47,7 @@ Public Class FrmEmail
 #Region "form control handlers"
     Private Sub FrmEmail_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
-        LogUtil.Info("Email ----------", MyBase.Name)
+        LogUtil.Info("Email ".PadRight(40, "-"), MyBase.Name)
         GetFormPos(Me, My.Settings.EmailFormPos)
         SetAccountsDatasource()
         oSenderRow = GetSenderRowById(_senderId)
@@ -106,7 +105,7 @@ Public Class FrmEmail
         End If
     End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
-        DisplayProgress("Sending Email",, True)
+        DisplayProgress("Sending Email...",, True)
         BtnSend.Enabled = False
         For Each oAtt As String In CbAttachList.Items
             If My.Computer.FileSystem.FileExists(oAtt) Then

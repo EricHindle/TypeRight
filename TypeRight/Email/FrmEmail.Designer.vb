@@ -175,6 +175,8 @@ Partial Class FrmEmail
         '
         'TxtText
         '
+        Me.TxtText.AcceptsReturn = True
+        Me.TxtText.AcceptsTab = True
         Me.TxtText.AllowDrop = True
         Me.TxtText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
@@ -183,6 +185,7 @@ Partial Class FrmEmail
         Me.TxtText.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtText.Multiline = True
         Me.TxtText.Name = "TxtText"
+        Me.TxtText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TxtText.Size = New System.Drawing.Size(659, 206)
         Me.TxtText.TabIndex = 4
         '
@@ -292,7 +295,7 @@ Partial Class FrmEmail
         Me.Label5.TabIndex = 16
         Me.Label5.Text = "Attachments"
         '
-        'cbAttachList
+        'CbAttachList
         '
         Me.CbAttachList.AllowDrop = True
         Me.CbAttachList.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
@@ -300,7 +303,7 @@ Partial Class FrmEmail
         Me.CbAttachList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CbAttachList.FormattingEnabled = True
         Me.CbAttachList.Location = New System.Drawing.Point(105, 398)
-        Me.CbAttachList.Name = "cbAttachList"
+        Me.CbAttachList.Name = "CbAttachList"
         Me.CbAttachList.Size = New System.Drawing.Size(558, 26)
         Me.CbAttachList.TabIndex = 15
         '
