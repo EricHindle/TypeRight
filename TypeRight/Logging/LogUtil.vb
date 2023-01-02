@@ -1,16 +1,12 @@
 ﻿' Hindleware
-' Copyright (c) 2022 Eric Hindle
+' Copyright (c) 2022-23 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
 '
 
-Imports System.Collections.Generic
-Imports System.Collections.ObjectModel
 Imports System.IO
-Imports System.Linq
 Imports System.Threading
-Imports Microsoft
 
 Public NotInheritable Class LogUtil
 #Region "constants"
@@ -98,9 +94,11 @@ Public NotInheritable Class LogUtil
         padCt += 6 - thisThread.Length
         Dim sPad As String = "".PadRight(padCt)
         Dim sPrefix As String = sPad & thisThread & My.Computer.Clock.LocalTime.ToString() & " - "
-        If sSub.Length > 0 Then
-            sPrefix += ("(" & sSub & ")").PadRight(22)
+        Dim sOrigin As String = " "
+        If Not String.IsNullOrEmpty(sSub) Then
+            sOrigin = "(" & sSub & ") "
         End If
+        sPrefix += sOrigin.PadRight(My.Resources.ORIGIN_WIDTH)
         If Not String.IsNullOrEmpty(errorCode) Then
             sPrefix += "Error code: " & errorCode & " "
         End If

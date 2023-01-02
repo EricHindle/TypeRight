@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2022 Eric Hindle
+' Copyright (c) 2022-23 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -238,6 +238,10 @@ Public Class FrmEmail
         TxtText.Text = ""
     End Sub
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
+        TxtTo.Text = ""
+        TxtSubject.Text = ""
+        TxtText.Text = ""
+        CbAttachList.Items.Clear()
         BtnSend.Enabled = True
     End Sub
     Private Sub BtnAttach_Click(sender As Object, e As EventArgs) Handles BtnAttach.Click

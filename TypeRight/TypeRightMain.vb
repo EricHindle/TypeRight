@@ -1,14 +1,12 @@
 ﻿' Hindleware
-' Copyright (c) 2022 Eric Hindle
+' Copyright (c) 2022-23 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
 '
 
 Imports System.Drawing
-Imports System.Drawing.Imaging
 Imports System.Globalization
-Imports System.IO
 Imports System.Reflection
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic.FileIO

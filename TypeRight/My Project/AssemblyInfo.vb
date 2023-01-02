@@ -1,5 +1,5 @@
 ﻿' Hindleware
-' Copyright (c) 2022 Eric Hindle
+' Copyright (c) 2022-23 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Automatic keyboard")>
 <Assembly: AssemblyCompany("netWYrks")>
 <Assembly: AssemblyProduct("")>
-<Assembly: AssemblyCopyright("(c) Eric Hindle 2021-22")>
+<Assembly: AssemblyCopyright("(c) Eric Hindle 2021-23")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -36,5 +36,5 @@ Imports System.Runtime.InteropServices
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("2.10.1.*")>
-<Assembly: AssemblyFileVersion("2.10.1.0")>
+<Assembly: AssemblyVersion("2.10.2.*")>
+<Assembly: AssemblyFileVersion("2.10.2.0")>
