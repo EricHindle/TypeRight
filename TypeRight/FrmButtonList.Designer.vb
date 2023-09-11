@@ -57,6 +57,7 @@ Partial Class FrmButtonList
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.MnuMinimise1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.GrpBottom = New System.Windows.Forms.GroupBox()
+        Me.PicEmail = New System.Windows.Forms.PictureBox()
         Me.WhiteClock = New System.Windows.Forms.PictureBox()
         Me.GreenClock = New System.Windows.Forms.PictureBox()
         Me.PicExit = New System.Windows.Forms.PictureBox()
@@ -71,12 +72,12 @@ Partial Class FrmButtonList
         Me.ProgressTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
-        Me.PicEmail = New System.Windows.Forms.PictureBox()
         Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuPopup.SuspendLayout()
         Me.mnuButtons.SuspendLayout()
         Me.GrpBottom.SuspendLayout()
+        CType(Me.PicEmail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WhiteClock, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GreenClock, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicExit, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,7 +86,6 @@ Partial Class FrmButtonList
         CType(Me.PicLock, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RedClock, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PicEmail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GrpTop
@@ -343,6 +343,17 @@ Partial Class FrmButtonList
         Me.GrpBottom.TabIndex = 3
         Me.GrpBottom.TabStop = False
         '
+        'PicEmail
+        '
+        Me.PicEmail.Image = Global.TypeRight.My.Resources.Resources.email
+        Me.PicEmail.Location = New System.Drawing.Point(94, 11)
+        Me.PicEmail.Name = "PicEmail"
+        Me.PicEmail.Size = New System.Drawing.Size(15, 16)
+        Me.PicEmail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PicEmail.TabIndex = 7
+        Me.PicEmail.TabStop = False
+        Me.ToolTip2.SetToolTip(Me.PicEmail, "Send an Email")
+        '
         'WhiteClock
         '
         Me.WhiteClock.Image = Global.TypeRight.My.Resources.Resources.whiteclock
@@ -462,17 +473,6 @@ Partial Class FrmButtonList
         Me.TypeRightDataSet.DataSetName = "TypeRightDataSet"
         Me.TypeRightDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'PicEmail
-        '
-        Me.PicEmail.Image = Global.TypeRight.My.Resources.Resources.email
-        Me.PicEmail.Location = New System.Drawing.Point(94, 11)
-        Me.PicEmail.Name = "PicEmail"
-        Me.PicEmail.Size = New System.Drawing.Size(15, 16)
-        Me.PicEmail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PicEmail.TabIndex = 7
-        Me.PicEmail.TabStop = False
-        Me.ToolTip2.SetToolTip(Me.PicEmail, "Sender database maintenance")
-        '
         'FrmButtonList
         '
         Me.BackColor = System.Drawing.SystemColors.ControlDark
@@ -495,6 +495,7 @@ Partial Class FrmButtonList
         Me.mnuPopup.ResumeLayout(False)
         Me.mnuButtons.ResumeLayout(False)
         Me.GrpBottom.ResumeLayout(False)
+        CType(Me.PicEmail, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WhiteClock, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GreenClock, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PicExit, System.ComponentModel.ISupportInitialize).EndInit()
@@ -503,7 +504,6 @@ Partial Class FrmButtonList
         CType(Me.PicLock, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RedClock, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PicEmail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

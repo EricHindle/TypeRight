@@ -100,5 +100,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=LAPTOP-11NSK703\SQLEXPRESS;Initial Catalog=TypeRight;Persist Security Info=True;User ID=sa;Password=dkk.sql</Value>
     </Setting>
+    <Setting Name="LastEmailTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

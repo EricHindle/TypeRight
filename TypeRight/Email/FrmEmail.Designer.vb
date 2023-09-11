@@ -31,6 +31,16 @@ Partial Class FrmEmail
         Me.BtnAttach = New System.Windows.Forms.Button()
         Me.BtnRmvAtt = New System.Windows.Forms.Button()
         Me.TxtTo = New System.Windows.Forms.TextBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.MnuPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuClear = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MnuToUpper = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuToLower = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuToTitle = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MnuToggle = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -43,6 +53,7 @@ Partial Class FrmEmail
         Me.BtnPasteSubject = New System.Windows.Forms.Button()
         Me.BtnPasteText = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.BtnLastTo = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.CbAttachList = New System.Windows.Forms.ComboBox()
         Me.BtnSmtp = New System.Windows.Forms.Button()
@@ -53,6 +64,7 @@ Partial Class FrmEmail
         Me.BtnReset = New System.Windows.Forms.Button()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.StatusStrip1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -120,11 +132,70 @@ Partial Class FrmEmail
         Me.TxtTo.AllowDrop = True
         Me.TxtTo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtTo.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TxtTo.Location = New System.Drawing.Point(95, 51)
         Me.TxtTo.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtTo.Name = "TxtTo"
-        Me.TxtTo.Size = New System.Drawing.Size(622, 25)
+        Me.TxtTo.Size = New System.Drawing.Size(600, 25)
         Me.TxtTo.TabIndex = 2
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MnuPaste, Me.MnuClear, Me.ToolStripSeparator2, Me.MnuToUpper, Me.MnuToLower, Me.MnuToTitle, Me.MnuToggle, Me.ToolStripSeparator1, Me.CloseToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(138, 170)
+        '
+        'MnuPaste
+        '
+        Me.MnuPaste.Name = "MnuPaste"
+        Me.MnuPaste.Size = New System.Drawing.Size(137, 22)
+        Me.MnuPaste.Text = "Paste"
+        '
+        'MnuClear
+        '
+        Me.MnuClear.Name = "MnuClear"
+        Me.MnuClear.Size = New System.Drawing.Size(137, 22)
+        Me.MnuClear.Text = "Clear"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(134, 6)
+        '
+        'MnuToUpper
+        '
+        Me.MnuToUpper.Name = "MnuToUpper"
+        Me.MnuToUpper.Size = New System.Drawing.Size(137, 22)
+        Me.MnuToUpper.Text = "UPPERCASE"
+        '
+        'MnuToLower
+        '
+        Me.MnuToLower.Name = "MnuToLower"
+        Me.MnuToLower.Size = New System.Drawing.Size(137, 22)
+        Me.MnuToLower.Text = "lowercase"
+        '
+        'MnuToTitle
+        '
+        Me.MnuToTitle.Name = "MnuToTitle"
+        Me.MnuToTitle.Size = New System.Drawing.Size(137, 22)
+        Me.MnuToTitle.Text = "Title Case"
+        '
+        'MnuToggle
+        '
+        Me.MnuToggle.Name = "MnuToggle"
+        Me.MnuToggle.Size = New System.Drawing.Size(137, 22)
+        Me.MnuToggle.Text = "ToggleCase"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(134, 6)
+        '
+        'CloseToolStripMenuItem
+        '
+        Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
+        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.CloseToolStripMenuItem.Text = "Close"
         '
         'Label1
         '
@@ -167,10 +238,11 @@ Partial Class FrmEmail
         Me.TxtSubject.AllowDrop = True
         Me.TxtSubject.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtSubject.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TxtSubject.Location = New System.Drawing.Point(95, 99)
         Me.TxtSubject.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtSubject.Name = "TxtSubject"
-        Me.TxtSubject.Size = New System.Drawing.Size(622, 25)
+        Me.TxtSubject.Size = New System.Drawing.Size(600, 25)
         Me.TxtSubject.TabIndex = 3
         '
         'TxtText
@@ -181,6 +253,7 @@ Partial Class FrmEmail
         Me.TxtText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtText.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TxtText.Location = New System.Drawing.Point(4, 172)
         Me.TxtText.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtText.Multiline = True
@@ -220,7 +293,7 @@ Partial Class FrmEmail
         Me.BtnPasteTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPasteTo.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
         Me.BtnPasteTo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnPasteTo.Location = New System.Drawing.Point(724, 53)
+        Me.BtnPasteTo.Location = New System.Drawing.Point(700, 51)
         Me.BtnPasteTo.Name = "BtnPasteTo"
         Me.BtnPasteTo.Size = New System.Drawing.Size(26, 23)
         Me.BtnPasteTo.TabIndex = 5
@@ -231,7 +304,7 @@ Partial Class FrmEmail
         Me.BtnPasteSubject.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnPasteSubject.BackgroundImage = Global.TypeRight.My.Resources.Resources.menu_left
         Me.BtnPasteSubject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnPasteSubject.Location = New System.Drawing.Point(724, 100)
+        Me.BtnPasteSubject.Location = New System.Drawing.Point(700, 100)
         Me.BtnPasteSubject.Name = "BtnPasteSubject"
         Me.BtnPasteSubject.Size = New System.Drawing.Size(26, 23)
         Me.BtnPasteSubject.TabIndex = 6
@@ -258,6 +331,7 @@ Partial Class FrmEmail
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.BtnLastTo)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnRmvAtt)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnAttach)
         Me.SplitContainer1.Panel1.Controls.Add(Me.Label5)
@@ -284,6 +358,19 @@ Partial Class FrmEmail
         Me.SplitContainer1.Size = New System.Drawing.Size(926, 430)
         Me.SplitContainer1.SplitterDistance = 768
         Me.SplitContainer1.TabIndex = 0
+        '
+        'BtnLastTo
+        '
+        Me.BtnLastTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnLastTo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnLastTo.Font = New System.Drawing.Font("Tahoma", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnLastTo.ForeColor = System.Drawing.Color.Brown
+        Me.BtnLastTo.Location = New System.Drawing.Point(731, 51)
+        Me.BtnLastTo.Name = "BtnLastTo"
+        Me.BtnLastTo.Size = New System.Drawing.Size(32, 23)
+        Me.BtnLastTo.TabIndex = 19
+        Me.BtnLastTo.Text = "Last"
+        Me.BtnLastTo.UseVisualStyleBackColor = True
         '
         'Label5
         '
@@ -360,6 +447,7 @@ Partial Class FrmEmail
         '
         Me.TxtFromName.AllowDrop = True
         Me.TxtFromName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtFromName.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TxtFromName.Location = New System.Drawing.Point(452, 3)
         Me.TxtFromName.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtFromName.Name = "TxtFromName"
@@ -397,6 +485,7 @@ Partial Class FrmEmail
         Me.Text = "Email"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel1.PerformLayout()
         Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -435,4 +524,15 @@ Partial Class FrmEmail
     Friend WithEvents CbAttachList As Windows.Forms.ComboBox
     Friend WithEvents FolderBrowserDialog1 As Windows.Forms.FolderBrowserDialog
     Friend WithEvents BtnRmvAtt As Windows.Forms.Button
+    Friend WithEvents BtnLastTo As Windows.Forms.Button
+    Friend WithEvents ContextMenuStrip1 As Windows.Forms.ContextMenuStrip
+    Friend WithEvents MnuToUpper As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuToLower As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuToggle As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents CloseToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuPaste As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MnuClear As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents MnuToTitle As Windows.Forms.ToolStripMenuItem
 End Class

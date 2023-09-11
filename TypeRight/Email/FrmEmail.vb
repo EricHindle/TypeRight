@@ -118,6 +118,9 @@ Public Class FrmEmail
             If String.IsNullOrWhiteSpace(TxtTo.Text) Or String.IsNullOrWhiteSpace(TxtSubject.Text) Or String.IsNullOrWhiteSpace(TxtText.Text) Then
                 DisplayProgress("Missing value(s). Mail not sent.",, True)
             Else
+                My.Settings.LastEmailTo = TxtTo.Text
+                My.Settings.Save()
+
                 If EmailUtil.SendMailViaSMTP(_smtp, TxtTo.Text, {}, TxtSubject.Text, TxtText.Text, TxtFromName.Text, _attachmentList) Then
                     DisplayProgress("Mail sent OK.", , True)
                 Else
@@ -274,6 +277,63 @@ Public Class FrmEmail
             CbAttachList.Items.Add(e.Data.GetData(DataFormats.StringFormat))
         End If
         CbAttachList.SelectedIndex = CbAttachList.Items.Count - 1
+    End Sub
+
+    Private Sub BtnLastTo_Click(sender As Object, e As EventArgs) Handles BtnLastTo.Click
+        TxtTo.Text = My.Settings.LastEmailTo
+    End Sub
+
+    Private Sub MnuPaste_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles MnuPaste.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            _textBox.Paste()
+        End If
+    End Sub
+    Private Sub MnuToLower_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles MnuToLower.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            _textBox.SelectedText = _textBox.SelectedText.ToLower(myCultureInfo)
+        End If
+    End Sub
+    Private Sub MnuToUpper_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles MnuToUpper.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            _textBox.SelectedText = _textBox.SelectedText.ToUpper(myCultureInfo)
+        End If
+    End Sub
+    Private Sub MnuToTitle_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles MnuToTitle.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            _textBox.SelectedText = StrConv(_textBox.SelectedText, VbStrConv.ProperCase)
+        End If
+    End Sub
+    Private Sub MnuClear_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles MnuClear.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            _textBox.Text = String.Empty
+        End If
+    End Sub
+
+    Private Sub MnuToggle_Click(ByVal menuItem As Object, e As EventArgs) Handles MnuToggle.Click
+        Dim sourceControl As Object = GetSourceControl(menuItem)
+        If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
+            Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
+            Dim inputArray As Char() = _textBox.Text.ToCharArray()
+            Dim _toggleText As String = String.Empty
+            For Each c As Char In inputArray
+                If Char.IsLower(c) Then
+                    _toggleText += [Char].ToUpper(c)
+                Else
+                    _toggleText += [Char].ToLower(c)
+                End If
+            Next
+            _textBox.Text = _toggleText
+        End If
     End Sub
 
 #End Region
