@@ -45,7 +45,7 @@ Public Class FrmButtonList
         InitialiseData()
         GetFormPos(Me, My.Settings.ButtonListPos)
         ' Set window width based on number of columns and button width
-        Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
+        Width = (iColCt * iButtonWidth) + FRAME_WIDTH
         FillNamesList()
         For Each cmbItem As KeyValuePair(Of Integer, String) In cbNames.Items
             Dim key As Integer = cmbItem.Key
@@ -289,7 +289,7 @@ Public Class FrmButtonList
             iColCt -= 1
             DrawButtons()
         End If
-        Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
+        Width = (iColCt * iButtonWidth) + FRAME_WIDTH
         My.Settings.Columns = iColCt
         My.Settings.Save()
     End Sub
@@ -299,7 +299,7 @@ Public Class FrmButtonList
             iColCt += 1
             DrawButtons()
         End If
-        Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
+        Width = (iColCt * iButtonWidth) + FRAME_WIDTH
         My.Settings.Columns = iColCt
         My.Settings.Save()
     End Sub
@@ -349,8 +349,8 @@ Public Class FrmButtonList
             If isPro And _nButton.Encrypt Then
                 strKeyText = oNCrypter.DecryptData(strKeyText)
             End If
-            strKeyText = ButtonUtil.GetDBFields(strKeyText, oSenderRow)
-            strKeyText = ButtonUtil.ApplySubstrings(strKeyText)
+            strKeyText = GetDBFieldValues(strKeyText, oSenderRow)
+            strKeyText = EditFieldValues(strKeyText, ReplaceType.None)
             Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
             If GreenClock.Visible = True Then
                 RedClock.Visible = True
@@ -429,7 +429,7 @@ Public Class FrmButtonList
                 addBuilder.Append(pcode)
             End If
             fulladdr = addBuilder.ToString
-            strAge = Format(ButtonUtil.Calc_age(dtDob))
+            strAge = Format(Calc_age(dtDob))
             iBct = 0
             oSenderRow = GetSenderRowById(sndKey)
             Dim oTable As New TypeRightDataSet.sendersDataTable
@@ -506,8 +506,8 @@ Public Class FrmButtonList
     Private Sub DrawGroupButtons()
         LogUtil.Info("Draw group buttons", MyBase.Name)
         lResizeActive = False
-        ButtonUtil.RemovePanelButtons(GroupButtonPanel)
-        ButtonUtil.FillButtonPanel(GroupButtonPanel, groupButtonList, 0, mnuButtons)
+        RemovePanelButtons(GroupButtonPanel)
+        FillButtonPanel(GroupButtonPanel, groupButtonList, 0, mnuButtons)
         For Each _btn As Nbutton In GroupButtonPanel.Controls
             RemoveHandler _btn.Button1.Click, AddressOf Button_Click
             AddHandler _btn.Button1.Click, AddressOf Button_Click
@@ -520,8 +520,8 @@ Public Class FrmButtonList
     Private Sub DrawSenderButtons()
         LogUtil.Info("Draw sender buttons", MyBase.Name)
         lResizeActive = False
-        ButtonUtil.RemovePanelButtons(SenderButtonPanel)
-        ButtonUtil.FillButtonPanel(SenderButtonPanel, senderButtonList, 0, mnuButtons)
+        RemovePanelButtons(SenderButtonPanel)
+        FillButtonPanel(SenderButtonPanel, senderButtonList, 0, mnuButtons)
         For Each _btn As Nbutton In SenderButtonPanel.Controls
             RemoveHandler _btn.Button1.Click, AddressOf Button_Click
             AddHandler _btn.Button1.Click, AddressOf Button_Click
@@ -534,7 +534,7 @@ Public Class FrmButtonList
         LogUtil.Info("Draw all buttons", MyBase.Name)
         lResizeActive = False
         ' Size of window
-        Width = (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH
+        Width = (iColCt * iButtonWidth) + FRAME_WIDTH
         DrawGroupButtons()
         DrawSenderButtons()
         lResizeActive = True
@@ -571,7 +571,7 @@ Public Class FrmButtonList
             Opacity = iTransPerc / 100
             GrpBottom.Visible = bToolBar
             SetTopMost()
-            If Width <> (iColCt * iButtonWidth) + ButtonUtil.FRAME_WIDTH Then
+            If Width <> (iColCt * iButtonWidth) + FRAME_WIDTH Then
                 DrawButtons()
             End If
         End Using

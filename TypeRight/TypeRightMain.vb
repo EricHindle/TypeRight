@@ -5,8 +5,10 @@
 ' Author Eric Hindle
 '
 
+Imports System.Collections.Generic
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Linq
 Imports System.Reflection
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic.FileIO
@@ -203,13 +205,32 @@ Module TypeRightMain
     End Function
     Public Function GetValueBetweenBrackets(sKeyText As String, Optional marker1 As String = "(", Optional marker2 As String = ")")
         Dim value As String = ""
-        Dim parts1 As String() = Split(sKeyText, marker1)
-        Dim parts2 As String()
+        Dim parts1 As String() = Split(sKeyText, marker1, 2)
         If parts1.Length > 1 Then
-            parts2 = Split(parts1(1), marker2)
-            value = parts2(0)
+            Dim _lastmarker As Integer = GetMatchingMarker(parts1(1), marker1, marker2)
+            If _lastmarker < 0 Then
+                value = parts1(1)
+            Else
+                value = parts1(1).Substring(0, _lastmarker)
+            End If
         End If
         Return value
+    End Function
+    Private Function GetMatchingMarker(pString As String, pOpenMarker As String, pCloseMarker As String) As Integer
+        Dim _lastClose As Integer = -1
+        Dim _closereq As Integer = 1
+        Dim _closefound As Integer = 0
+        Dim x As Integer = 0
+        Do Until x >= pString.Length Or _closefound = _closereq
+            If pString.Substring(x).StartsWith(pOpenMarker) Then
+                _closereq += 1
+            ElseIf pString.Substring(x).StartsWith(pCloseMarker) Then
+                _closefound += 1
+                _lastClose = x
+            End If
+            x += 1
+        Loop
+        Return _lastClose
     End Function
     Public Function DisplayException(pMethodBase As MethodBase, pException As Exception, pExceptionType As String) As MsgBoxResult
         LogUtil.Exception(pExceptionType, pException, pMethodBase.Name)

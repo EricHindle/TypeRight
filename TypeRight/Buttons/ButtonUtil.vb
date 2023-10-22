@@ -7,11 +7,19 @@
 
 Imports System.Collections.Generic
 Imports System.Data
+Imports System.Drawing.Text
 Imports System.Text
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
 
-Public Class ButtonUtil
+Module ButtonUtil
+#Region "enum"
+    Friend Enum ReplaceType
+        None
+        Split
+        Substring
+    End Enum
+#End Region
 #Region "constants"
     Public Const FRAME_WIDTH As Integer = 18
     Public Const SUB_START_MARKER As String = "$="
@@ -19,15 +27,18 @@ Public Class ButtonUtil
     Public Const SUB_END_MARKER As String = "=$"
     Public Const FIELD_START_MARKER As String = "?="
     Public Const FIELD_END_MARKER As String = "=?"
+    Public Const SPLIT_START_MARKER As String = "/="
+    Public Const SPLIT_MID_MARKER As String = "//"
+    Public Const SPLIT_END_MARKER As String = "=/"
 #End Region
 #Region "variables"
-    Public Shared tooltipcommon As New Windows.Forms.ToolTip
-    Private Shared strButtonHint As String
-    Private Shared oButtonList As List(Of Nbutton)
-    Private Shared oCurrentSender As New Sender
+    Public tooltipcommon As New Windows.Forms.ToolTip
+    Private strButtonHint As String
+    Private oButtonList As List(Of Nbutton)
+    Private oCurrentSender As New Sender
 #End Region
 #Region "subroutines"
-    Private Shared Sub AddButtonToList(btnSeq As Integer, oButton As SenderButton, btnCaption As String, btnValue As String, btnHint As String)
+    Private Sub AddButtonToList(btnSeq As Integer, oButton As SenderButton, btnCaption As String, btnValue As String, btnHint As String)
         Dim isButtonBold As Boolean
         Dim isButtonItalic As Boolean
         Dim strButtonFontName As String
@@ -48,12 +59,12 @@ Public Class ButtonUtil
             oButtonList.Add(_nbutton)
         End If
     End Sub
-    Public Shared Sub RemovePanelButtons(ByRef ButtonPanel As Panel)
+    Public Sub RemovePanelButtons(ByRef ButtonPanel As Panel)
         ButtonPanel.Controls.Clear()
     End Sub
 #End Region
 #Region "functions"
-    Public Shared Function LoadSenderButtons(sndKey As Integer, oSenderRow As TypeRightDataSet.sendersRow) As List(Of Nbutton)
+    Public Function LoadSenderButtons(sndKey As Integer, oSenderRow As TypeRightDataSet.sendersRow) As List(Of Nbutton)
 
         oButtonList = New List(Of Nbutton)
         Dim strButtonTxt As String
@@ -141,7 +152,7 @@ Public Class ButtonUtil
         End If
         Return oButtonList
     End Function
-    Public Shared Function LoadGroupButtons(grpNo As Long) As List(Of Nbutton)
+    Public Function LoadGroupButtons(grpNo As Long) As List(Of Nbutton)
         Dim groupButtonList As New List(Of Nbutton)
         Dim _nbb As New NButtonBuilder
         Dim undoButton As Nbutton = _nbb.StartingWith(0, grpNo, 0, "Undo", "", "^z", "Tahoma", 10, False, False, False, Nbutton.DataSource.Undefined).Build
@@ -158,7 +169,7 @@ Public Class ButtonUtil
         End If
         Return groupButtonList
     End Function
-    Public Shared Function FillButtonPanel(ByRef oPanel As Panel, ByRef oList As List(Of Nbutton), Optional rowOffset As Integer = 0, ByRef Optional buttonMenu As ContextMenuStrip = Nothing) As Integer
+    Public Function FillButtonPanel(ByRef oPanel As Panel, ByRef oList As List(Of Nbutton), Optional rowOffset As Integer = 0, ByRef Optional buttonMenu As ContextMenuStrip = Nothing) As Integer
         iButtonCt = oList.Count
         Dim iRowCt As Integer = iButtonCt / iColCt
         ' Any left over ? Then add a row
@@ -199,7 +210,7 @@ Public Class ButtonUtil
         Next
         Return iMaxRow
     End Function
-    Public Shared Function Calc_age(dtDob As DateTime) As Integer
+    Public Function Calc_age(dtDob As DateTime) As Integer
         Dim fmm As Integer
         Dim tmm As Integer
         Dim age As Integer
@@ -211,7 +222,10 @@ Public Class ButtonUtil
         End If
         Return age
     End Function
-    Public Shared Function GetDBFields(ByVal sKeyText As String, oSenderRow As TypeRightDataSet.sendersRow) As String
+    '
+    ' Look for database field names and replace with values from the database
+    '
+    Public Function GetDBFieldValues(ByVal sKeyText As String, oSenderRow As TypeRightDataSet.sendersRow) As String
         Dim fieldName As String
         Dim fieldValue As String
         Dim newText As String = sKeyText
@@ -228,33 +242,97 @@ Public Class ButtonUtil
         Loop
         Return newText
     End Function
-    Public Shared Function ApplySubstrings(ByVal sKeyText As String) As String
+    Public Function EditFieldValues(ByVal sKeyText As String, ByVal pReplaceType As ReplaceType) As String
         Dim newText As String = sKeyText
+        Do While newText.Contains(SUB_START_MARKER) Or newText.Contains(SPLIT_START_MARKER)
+            Dim _replaceType As ReplaceType
+            Dim subText As String = GetSubtext(newText, _replaceType)
+            Dim isSub As Boolean = _replaceType = ReplaceType.Substring
+            Dim isSplit As Boolean = _replaceType = ReplaceType.Split
+            If subText.Contains(SUB_START_MARKER) Or subText.Contains(SPLIT_START_MARKER) Then
+                Dim editedText As String = EditFieldValues(subText, _replaceType)
+                newText = newText.Replace(subText, editedText)
+                Continue Do
+            Else
+                newText = DoEdit(newText, subText, _replaceType)
+            End If
+        Loop
+        Return newText
+    End Function
+    Private Function DoEdit(newtext As String, subtext As String, _replacetype As ReplaceType) As String
+        If _replacetype = ReplaceType.Substring Then
+            newtext = GetSubstring(newtext, subtext)
+        ElseIf _replacetype = ReplaceType.Split Then
+            newtext = GetWord(newtext, subtext)
+        End If
+        Return newtext
+    End Function
+    Private Function GetSubtext(ByVal pText As String, ByRef pType As ReplaceType) As String
+        Dim subText As String = String.Empty
+        Dim _index1 As Integer = pText.IndexOf(SUB_START_MARKER)
+        Dim _index2 As Integer = pText.IndexOf(SPLIT_START_MARKER)
+        Dim isSubstring As Boolean = _index1 >= 0
+        Dim isSplit As Boolean = _index2 >= 0
+        pType = ReplaceType.None
+        If isSubstring And isSplit Then
+            If _index1 < _index2 Then
+                pType = ReplaceType.Substring
+            Else
+                pType = ReplaceType.Split
+            End If
+        ElseIf isSubstring Then
+            pType = ReplaceType.Substring
+        ElseIf isSplit Then
+            pType = ReplaceType.Split
+        End If
+        If pType = ReplaceType.Substring Then
+            subText = GetValueBetweenBrackets(pText, SUB_START_MARKER, SUB_END_MARKER)
+        End If
+        If pType = ReplaceType.Split Then
+            subText = GetValueBetweenBrackets(pText, SPLIT_START_MARKER, SPLIT_END_MARKER)
+        End If
+        Return subText
+    End Function
+    Private Function GetSubstring(ByVal newText As String, subtext As String) As String
         Try
-            Dim subText As String = GetValueBetweenBrackets(newText, SUB_START_MARKER, SUB_END_MARKER)
-            Do Until String.IsNullOrEmpty(subText)
-                Dim subparts As String() = Split(subText, SUB_MID_MARKER)
-                Dim subValue As String
-                If subparts.Length = 2 Then
-                    Dim subInts As String() = Split(subparts(1), ",")
-                    If subInts.Length = 2 Then
-                        subValue = subparts(0).Substring(subInts(0), subInts(1))
-                    Else
-                        subValue = subparts(0).Substring(subInts(0))
-                    End If
-                    newText = newText.Replace(SUB_START_MARKER & subText & SUB_END_MARKER, subValue)
-                    subText = GetValueBetweenBrackets(newText, SUB_START_MARKER, SUB_END_MARKER)
+            Dim subparts As String() = Split(subtext, SUB_MID_MARKER)
+            Dim subValue As String
+            If subparts.Length = 2 Then
+                Dim subInts As String() = Split(subparts(1), ",")
+                If subInts.Length = 2 Then
+                    subValue = subparts(0).Substring(subInts(0), subInts(1))
                 Else
-                    newText = newText.Replace(SUB_START_MARKER, "!!").Replace(SUB_END_MARKER, "!!")
-                    subText = ""
+                    subValue = subparts(0).Substring(subInts(0))
                 End If
-            Loop
+                newText = newText.Replace(SUB_START_MARKER & subtext & SUB_END_MARKER, subValue)
+            Else
+                newText = newText.Replace(SUB_START_MARKER, "!!").Replace(SUB_END_MARKER, "!!")
+            End If
         Catch ex As ArgumentOutOfRangeException
             LogUtil.Exception("Substring Exception", ex, "ApplySubstrings")
         End Try
-
+        Return newText
+    End Function
+    Private Function GetWord(ByVal newText As String, subtext As String) As String
+        Try
+            Dim subparts As String() = Split(subtext, SPLIT_MID_MARKER)
+            Dim subValue As String
+            If subparts.Length = 2 Then
+                Dim subInts As String() = Split(subparts(1), ",")
+                If subInts.Length = 3 Then
+                    subValue = Split(subparts(0), subInts(1), subInts(2))(subInts(0))
+                Else
+                    subValue = ""
+                End If
+                newText = newText.Replace(SPLIT_START_MARKER & subtext & SPLIT_END_MARKER, subValue)
+            Else
+                newText = newText.Replace(SUB_START_MARKER, "!!").Replace(SUB_END_MARKER, "!!")
+            End If
+        Catch ex As ArgumentOutOfRangeException
+            LogUtil.Exception("Substring Exception", ex, "ApplySubstrings")
+        End Try
         Return newText
     End Function
 #End Region
 
-End Class
+End Module

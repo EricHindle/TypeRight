@@ -53,11 +53,11 @@ Public Class FrmEmail
         oSenderRow = GetSenderRowById(_senderId)
         TxtFromName.Text = oSenderRow.FirstName & " " & oSenderRow.LastName
         SetSplitterDistance()
-        ButtonUtil.RemovePanelButtons(PnlButtons)
-        oButtonList = ButtonUtil.LoadGroupButtons(_groupId)
-        Dim _lastRow As Integer = ButtonUtil.FillButtonPanel(PnlButtons, oButtonList, 0)
-        oButtonList = ButtonUtil.LoadSenderButtons(_senderId, oSenderRow)
-        ButtonUtil.FillButtonPanel(PnlButtons, oButtonList, _lastRow + 1)
+        RemovePanelButtons(PnlButtons)
+        oButtonList = LoadGroupButtons(_groupId)
+        Dim _lastRow As Integer = FillButtonPanel(PnlButtons, oButtonList, 0)
+        oButtonList = LoadSenderButtons(_senderId, oSenderRow)
+        FillButtonPanel(PnlButtons, oButtonList, _lastRow + 1)
         For Each _btn As Nbutton In PnlButtons.Controls
             RemoveHandler _btn.Button1.Click, AddressOf Button_Click
             AddHandler _btn.Button1.Click, AddressOf Button_Click
@@ -98,7 +98,7 @@ Public Class FrmEmail
                 If isPro And _nButton.Encrypt Then
                     strKeyText = oNCrypter.DecryptData(strKeyText)
                 End If
-                strKeyText = ButtonUtil.ApplySubstrings(ButtonUtil.GetDBFields(strKeyText, oSenderRow)).Replace("{ENTER}", vbCrLf)
+                strKeyText = EditFieldValues(GetDBFieldValues(strKeyText, oSenderRow), ReplaceType.None).Replace("{ENTER}", vbCrLf)
                 Clipboard.SetText(strKeyText)
                 TxtText.SelectedText = strKeyText
             End If
