@@ -203,6 +203,9 @@ Module TypeRightMain
         Dim newFont As New Font(p_FontName, p_FontSize, newStyle)
         Return newFont
     End Function
+    '
+    ' get text between a matching pair of markers
+    '
     Public Function GetValueBetweenBrackets(sKeyText As String, Optional marker1 As String = "(", Optional marker2 As String = ")")
         Dim value As String = ""
         Dim parts1 As String() = Split(sKeyText, marker1, 2)
@@ -216,6 +219,9 @@ Module TypeRightMain
         End If
         Return value
     End Function
+    '
+    '  find the matching end marker, ignoring other inner pairs of markers
+    '
     Private Function GetMatchingMarker(pString As String, pOpenMarker As String, pCloseMarker As String) As Integer
         Dim _lastClose As Integer = -1
         Dim _closereq As Integer = 1

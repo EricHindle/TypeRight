@@ -301,29 +301,56 @@ Public Class FrmEditButton
         LogUtil.Info(My.Resources.CLOSING, MyBase.Name)
     End Sub
     Private Sub BtnField_Click(sender As Object, e As EventArgs) Handles BtnField.Click
+        LblStatus.Text = ""
         If CbDbValue.SelectedIndex >= 0 Then
-            Dim _pos As Long
-            _pos = TxtValue.SelectionStart
+            Dim _pos As Long = TxtValue.SelectionStart
+            Dim _word As String = TxtWordNo.Text.Trim
             Dim _sep As String = If(String.IsNullOrEmpty(TxtSep.Text), " ", TxtSep.Text)
-            Dim _remains As String = Regex.Replace(TxtSl.Text, "(?:[0-9][0-9]*),(?:[0-9][0-9]*)|(?:[0-9][0-9]*)", "")
-            Dim _word As Integer = If(IsNumeric(TxtWordNo.Text), CInt(TxtWordNo.Text), -1)
+            Dim _start As String = TxtStart.Text.Trim
+            Dim _length As String = TxtLength.Text.Trim
+            Dim _pad As String = TxtPad.Text
+            Dim _subParams As String = ""
+            Dim _splitParams As String = ""
             Dim subStart As String = String.Empty
             Dim subEnd As String = String.Empty
             Dim splitStart As String = String.Empty
             Dim splitEnd As String = String.Empty
+            Dim isOK As Boolean = True
+            If ChkSubstring.Checked Then
+                If (String.IsNullOrWhiteSpace(_start) OrElse Not IsNumeric(_start)) OrElse
+                   (Not String.IsNullOrEmpty(_length) AndAlso Not IsNumeric(_start)) Then
+                    isOK = False
+                Else
+                    _subParams = _start &
+                                   If(String.IsNullOrWhiteSpace(_length), "", "," & _length &
+                                                If(String.IsNullOrWhiteSpace(_pad), "", "," & _pad))
+                End If
+            End If
+            If ChkSplit.Checked Then
+                If String.IsNullOrWhiteSpace(_word) OrElse Not IsNumeric(_word) Then
+                    isOK = False
+                Else
+                    _splitParams = _word & "," & _sep & "," & If(RbSingle.Checked, "-1", "2")
+                End If
+            End If
+            If isOK Then
+                If ChkSubstring.Checked And Not String.IsNullOrWhiteSpace(_start) Then
+                    subStart = If(ChkSubstring.Checked, SUB_START_MARKER, "")
+                    subEnd = If(ChkSubstring.Checked, SUB_MID_MARKER & _subParams & SUB_END_MARKER, "")
+                End If
+                If ChkSplit.Checked And IsNumeric(TxtWordNo.Text) Then
+                    splitStart = If(ChkSplit.Checked, SPLIT_START_MARKER, "")
+                    splitEnd = If(ChkSplit.Checked, SPLIT_MID_MARKER & _splitParams & SPLIT_END_MARKER, "")
+                End If
 
-            If ChkSubstring.Checked And String.IsNullOrWhiteSpace(_remains) Then
-                subStart = If(ChkSubstring.Checked, SUB_START_MARKER, "")
-                subEnd = If(ChkSubstring.Checked, SUB_MID_MARKER & TxtSl.Text & SUB_END_MARKER, "")
+                TxtValue.Text = TxtValue.Text.Substring(0, _pos) & subStart & splitStart & FIELD_START_MARKER & CbDbValue.SelectedItem & FIELD_END_MARKER & splitEnd & subEnd & Mid(TxtValue.Text, _pos + 1)
+                TxtValue.SelectionStart = _pos + Len(CbDbValue.SelectedItem) + 2
+            Else
+                DisplayProgress("Invalid edit values", True)
             End If
-            If ChkSplit.Checked And IsNumeric(TxtWordNo.Text) Then
-                splitStart = If(ChkSplit.Checked, SPLIT_START_MARKER, "")
-                splitEnd = If(ChkSplit.Checked, SPLIT_MID_MARKER & TxtWordNo.Text & "," & _sep & ", " & If(RbSingle.Checked, "-1", "2") & SPLIT_END_MARKER, "")
-            End If
-
-            TxtValue.Text = TxtValue.Text.Substring(0, _pos) & subStart & splitStart & FIELD_START_MARKER & CbDbValue.SelectedItem & FIELD_END_MARKER & splitEnd & subEnd & Mid(TxtValue.Text, _pos + 1)
-            TxtValue.SelectionStart = _pos + Len(CbDbValue.SelectedItem) + 2
-            End If
+        Else
+            DisplayProgress("No field selected", True)
+        End If
     End Sub
 #End Region
 #Region "subroutines"

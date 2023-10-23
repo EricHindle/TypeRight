@@ -174,7 +174,7 @@ Module ButtonUtil
         Dim iRowCt As Integer = iButtonCt / iColCt
         ' Any left over ? Then add a row
         Dim iMod As Integer = iButtonCt Mod iColCt
-        If iMod > 0 Then
+        If iColCt * iRowCt < oList.Count Then
             iRowCt += 1
         End If
         oPanel.Height = (iRowCt + rowOffset) * 27
@@ -242,6 +242,10 @@ Module ButtonUtil
         Loop
         Return newText
     End Function
+    '
+    ' apply substring or select words from text according to delimiters
+    ' process nested delimiters first
+    '
     Public Function EditFieldValues(ByVal sKeyText As String, ByVal pReplaceType As ReplaceType) As String
         Dim newText As String = sKeyText
         Do While newText.Contains(SUB_START_MARKER) Or newText.Contains(SPLIT_START_MARKER)
@@ -254,12 +258,12 @@ Module ButtonUtil
                 newText = newText.Replace(subText, editedText)
                 Continue Do
             Else
-                newText = DoEdit(newText, subText, _replaceType)
+                newText = EditText(newText, subText, _replaceType)
             End If
         Loop
         Return newText
     End Function
-    Private Function DoEdit(newtext As String, subtext As String, _replacetype As ReplaceType) As String
+    Private Function EditText(newtext As String, subtext As String, _replacetype As ReplaceType) As String
         If _replacetype = ReplaceType.Substring Then
             newtext = GetSubstring(newtext, subtext)
         ElseIf _replacetype = ReplaceType.Split Then
@@ -267,6 +271,9 @@ Module ButtonUtil
         End If
         Return newtext
     End Function
+    '
+    ' Get next text string marked by any accepted delimiters and return delimiter type
+    '
     Private Function GetSubtext(ByVal pText As String, ByRef pType As ReplaceType) As String
         Dim subText As String = String.Empty
         Dim _index1 As Integer = pText.IndexOf(SUB_START_MARKER)
@@ -296,13 +303,21 @@ Module ButtonUtil
     Private Function GetSubstring(ByVal newText As String, subtext As String) As String
         Try
             Dim subparts As String() = Split(subtext, SUB_MID_MARKER)
-            Dim subValue As String
-            If subparts.Length = 2 Then
+            Dim subValue As String = subparts(0)
+            If subparts.Length > 1 Then
                 Dim subInts As String() = Split(subparts(1), ",")
-                If subInts.Length = 2 Then
-                    subValue = subparts(0).Substring(subInts(0), subInts(1))
-                Else
-                    subValue = subparts(0).Substring(subInts(0))
+                Dim _start As Integer = If(IsNumeric(subInts(0)), Math.Abs(CInt(subInts(0))), 0)
+                Dim _length As Integer = If(subInts.Length > 1 AndAlso IsNumeric(subInts(1)), Math.Abs(CInt(subInts(1))), 0)
+                If subInts.Length > 2 Then
+                    Dim rPad As String = subInts(2)
+                    subValue = subValue.PadRight(_start + _length, rPad)
+                End If
+                If _start > 0 AndAlso _start + _length <= subValue.Length Then
+                    If subInts.Length = 2 And _length > 0 Then
+                        subValue = subValue.Substring(_start, _length)
+                    Else
+                        subValue = subValue.Substring(_start)
+                    End If
                 End If
                 newText = newText.Replace(SUB_START_MARKER & subtext & SUB_END_MARKER, subValue)
             Else

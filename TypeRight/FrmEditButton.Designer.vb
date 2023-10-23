@@ -28,8 +28,13 @@ Partial Class FrmEditButton
         Me.chkEncrypt = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.RbToEnd = New System.Windows.Forms.RadioButton()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.RbSingle = New System.Windows.Forms.RadioButton()
+        Me.ChkSplit = New System.Windows.Forms.CheckBox()
+        Me.ChkSubstring = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TxtSl = New System.Windows.Forms.TextBox()
+        Me.TxtStart = New System.Windows.Forms.TextBox()
         Me.TxtSep = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.CbDbValue = New System.Windows.Forms.ComboBox()
@@ -93,11 +98,10 @@ Partial Class FrmEditButton
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip3 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ChkSubstring = New System.Windows.Forms.CheckBox()
-        Me.ChkSplit = New System.Windows.Forms.CheckBox()
-        Me.RbSingle = New System.Windows.Forms.RadioButton()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.RbToEnd = New System.Windows.Forms.RadioButton()
+        Me.TxtLength = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TxtPad = New System.Windows.Forms.TextBox()
         Me.grpOpts.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -113,7 +117,7 @@ Partial Class FrmEditButton
         Me.grpOpts.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.grpOpts.Name = "grpOpts"
         Me.grpOpts.Padding = New System.Windows.Forms.Padding(2, 4, 2, 4)
-        Me.grpOpts.Size = New System.Drawing.Size(369, 44)
+        Me.grpOpts.Size = New System.Drawing.Size(334, 44)
         Me.grpOpts.TabIndex = 4
         Me.grpOpts.TabStop = False
         Me.grpOpts.Text = "Options"
@@ -157,53 +161,112 @@ Partial Class FrmEditButton
         Me.GroupBox1.Controls.Add(Me.BtnTab)
         Me.GroupBox1.Controls.Add(Me.BtnCloseCurlyBracket)
         Me.GroupBox1.Controls.Add(Me.BtnOpenCurlyBracket)
-        Me.GroupBox1.Location = New System.Drawing.Point(495, 113)
+        Me.GroupBox1.Location = New System.Drawing.Point(461, 113)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 4, 2, 4)
-        Me.GroupBox1.Size = New System.Drawing.Size(369, 447)
+        Me.GroupBox1.Size = New System.Drawing.Size(368, 447)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.TxtPad)
+        Me.GroupBox2.Controls.Add(Me.Label11)
+        Me.GroupBox2.Controls.Add(Me.Label10)
+        Me.GroupBox2.Controls.Add(Me.TxtLength)
         Me.GroupBox2.Controls.Add(Me.RbToEnd)
         Me.GroupBox2.Controls.Add(Me.Label7)
         Me.GroupBox2.Controls.Add(Me.RbSingle)
         Me.GroupBox2.Controls.Add(Me.ChkSplit)
         Me.GroupBox2.Controls.Add(Me.ChkSubstring)
         Me.GroupBox2.Controls.Add(Me.Label9)
-        Me.GroupBox2.Controls.Add(Me.TxtSl)
+        Me.GroupBox2.Controls.Add(Me.TxtStart)
         Me.GroupBox2.Controls.Add(Me.TxtSep)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.CbDbValue)
         Me.GroupBox2.Controls.Add(Me.TxtWordNo)
         Me.GroupBox2.Controls.Add(Me.BtnField)
-        Me.GroupBox2.Location = New System.Drawing.Point(5, 18)
+        Me.GroupBox2.Location = New System.Drawing.Point(5, 14)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(355, 126)
+        Me.GroupBox2.Size = New System.Drawing.Size(355, 138)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Database Field"
         '
+        'RbToEnd
+        '
+        Me.RbToEnd.AutoSize = True
+        Me.RbToEnd.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RbToEnd.Location = New System.Drawing.Point(287, 54)
+        Me.RbToEnd.Name = "RbToEnd"
+        Me.RbToEnd.Size = New System.Drawing.Size(58, 17)
+        Me.RbToEnd.TabIndex = 13
+        Me.RbToEnd.Text = "To end"
+        Me.RbToEnd.UseVisualStyleBackColor = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(86, 54)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(18, 17)
+        Me.Label7.TabIndex = 12
+        Me.Label7.Text = "#"
+        '
+        'RbSingle
+        '
+        Me.RbSingle.AutoSize = True
+        Me.RbSingle.Checked = True
+        Me.RbSingle.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RbSingle.Location = New System.Drawing.Point(201, 54)
+        Me.RbSingle.Name = "RbSingle"
+        Me.RbSingle.Size = New System.Drawing.Size(80, 17)
+        Me.RbSingle.TabIndex = 11
+        Me.RbSingle.TabStop = True
+        Me.RbSingle.Text = "Single word"
+        Me.RbSingle.UseVisualStyleBackColor = True
+        '
+        'ChkSplit
+        '
+        Me.ChkSplit.AutoSize = True
+        Me.ChkSplit.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkSplit.Location = New System.Drawing.Point(6, 53)
+        Me.ChkSplit.Name = "ChkSplit"
+        Me.ChkSplit.Size = New System.Drawing.Size(56, 18)
+        Me.ChkSplit.TabIndex = 10
+        Me.ChkSplit.Text = "Word"
+        Me.ChkSplit.UseVisualStyleBackColor = True
+        '
+        'ChkSubstring
+        '
+        Me.ChkSubstring.AutoSize = True
+        Me.ChkSubstring.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkSubstring.Location = New System.Drawing.Point(6, 77)
+        Me.ChkSubstring.Name = "ChkSubstring"
+        Me.ChkSubstring.Size = New System.Drawing.Size(77, 18)
+        Me.ChkSubstring.TabIndex = 9
+        Me.ChkSubstring.Text = "Substring"
+        Me.ChkSubstring.UseVisualStyleBackColor = True
+        '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(86, 78)
+        Me.Label9.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(88, 80)
         Me.Label9.Margin = New System.Windows.Forms.Padding(0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(18, 14)
+        Me.Label9.Size = New System.Drawing.Size(31, 13)
         Me.Label9.TabIndex = 1
-        Me.Label9.Text = "s,l"
+        Me.Label9.Text = "Start"
         '
-        'TxtSl
+        'TxtStart
         '
-        Me.TxtSl.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtSl.Location = New System.Drawing.Point(107, 75)
-        Me.TxtSl.Name = "TxtSl"
-        Me.TxtSl.Size = New System.Drawing.Size(43, 20)
-        Me.TxtSl.TabIndex = 1
+        Me.TxtStart.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtStart.Location = New System.Drawing.Point(122, 76)
+        Me.TxtStart.Name = "TxtStart"
+        Me.TxtStart.Size = New System.Drawing.Size(32, 20)
+        Me.TxtStart.TabIndex = 1
         '
         'TxtSep
         '
@@ -244,9 +307,12 @@ Partial Class FrmEditButton
         '
         'BtnField
         '
-        Me.BtnField.Location = New System.Drawing.Point(215, 91)
+        Me.BtnField.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnField.AutoSize = True
+        Me.BtnField.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnField.Location = New System.Drawing.Point(248, 103)
         Me.BtnField.Name = "BtnField"
-        Me.BtnField.Size = New System.Drawing.Size(128, 29)
+        Me.BtnField.Size = New System.Drawing.Size(101, 29)
         Me.BtnField.TabIndex = 4
         Me.BtnField.Text = "<Insert Field"
         Me.ToolTip3.SetToolTip(Me.BtnField, "Insert field marker")
@@ -254,7 +320,7 @@ Partial Class FrmEditButton
         '
         'BtnCloseBracket
         '
-        Me.BtnCloseBracket.Location = New System.Drawing.Point(144, 191)
+        Me.BtnCloseBracket.Location = New System.Drawing.Point(147, 199)
         Me.BtnCloseBracket.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnCloseBracket.Name = "BtnCloseBracket"
         Me.BtnCloseBracket.Size = New System.Drawing.Size(55, 32)
@@ -264,7 +330,7 @@ Partial Class FrmEditButton
         '
         'BtnOpenBracket
         '
-        Me.BtnOpenBracket.Location = New System.Drawing.Point(77, 191)
+        Me.BtnOpenBracket.Location = New System.Drawing.Point(80, 199)
         Me.BtnOpenBracket.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnOpenBracket.Name = "BtnOpenBracket"
         Me.BtnOpenBracket.Size = New System.Drawing.Size(55, 32)
@@ -274,7 +340,7 @@ Partial Class FrmEditButton
         '
         'BtnTilde
         '
-        Me.BtnTilde.Location = New System.Drawing.Point(211, 191)
+        Me.BtnTilde.Location = New System.Drawing.Point(214, 199)
         Me.BtnTilde.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnTilde.Name = "BtnTilde"
         Me.BtnTilde.Size = New System.Drawing.Size(55, 32)
@@ -284,7 +350,7 @@ Partial Class FrmEditButton
         '
         'BtnPlus
         '
-        Me.BtnPlus.Location = New System.Drawing.Point(10, 191)
+        Me.BtnPlus.Location = New System.Drawing.Point(13, 199)
         Me.BtnPlus.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPlus.Name = "BtnPlus"
         Me.BtnPlus.Size = New System.Drawing.Size(55, 32)
@@ -294,7 +360,7 @@ Partial Class FrmEditButton
         '
         'BtnCaret
         '
-        Me.BtnCaret.Location = New System.Drawing.Point(211, 151)
+        Me.BtnCaret.Location = New System.Drawing.Point(214, 162)
         Me.BtnCaret.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnCaret.Name = "BtnCaret"
         Me.BtnCaret.Size = New System.Drawing.Size(55, 32)
@@ -304,7 +370,7 @@ Partial Class FrmEditButton
         '
         'BtnPct
         '
-        Me.BtnPct.Location = New System.Drawing.Point(10, 151)
+        Me.BtnPct.Location = New System.Drawing.Point(13, 162)
         Me.BtnPct.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPct.Name = "BtnPct"
         Me.BtnPct.Size = New System.Drawing.Size(55, 32)
@@ -315,7 +381,7 @@ Partial Class FrmEditButton
         'BtnAlt
         '
         Me.BtnAlt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnAlt.Location = New System.Drawing.Point(293, 393)
+        Me.BtnAlt.Location = New System.Drawing.Point(288, 389)
         Me.BtnAlt.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnAlt.Name = "BtnAlt"
         Me.BtnAlt.Size = New System.Drawing.Size(55, 46)
@@ -327,7 +393,7 @@ Partial Class FrmEditButton
         'BtnCtrl
         '
         Me.BtnCtrl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnCtrl.Location = New System.Drawing.Point(10, 393)
+        Me.BtnCtrl.Location = New System.Drawing.Point(13, 389)
         Me.BtnCtrl.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnCtrl.Name = "BtnCtrl"
         Me.BtnCtrl.Size = New System.Drawing.Size(55, 46)
@@ -339,7 +405,7 @@ Partial Class FrmEditButton
         'BtnRightArrow
         '
         Me.BtnRightArrow.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnRightArrow.Location = New System.Drawing.Point(211, 339)
+        Me.BtnRightArrow.Location = New System.Drawing.Point(214, 338)
         Me.BtnRightArrow.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnRightArrow.Name = "BtnRightArrow"
         Me.BtnRightArrow.Size = New System.Drawing.Size(55, 46)
@@ -351,7 +417,7 @@ Partial Class FrmEditButton
         'BtnDownArrow
         '
         Me.BtnDownArrow.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnDownArrow.Location = New System.Drawing.Point(144, 393)
+        Me.BtnDownArrow.Location = New System.Drawing.Point(147, 389)
         Me.BtnDownArrow.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnDownArrow.Name = "BtnDownArrow"
         Me.BtnDownArrow.Size = New System.Drawing.Size(55, 46)
@@ -363,7 +429,7 @@ Partial Class FrmEditButton
         'BtnLeftArrow
         '
         Me.BtnLeftArrow.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnLeftArrow.Location = New System.Drawing.Point(77, 339)
+        Me.BtnLeftArrow.Location = New System.Drawing.Point(80, 338)
         Me.BtnLeftArrow.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnLeftArrow.Name = "BtnLeftArrow"
         Me.BtnLeftArrow.Size = New System.Drawing.Size(55, 46)
@@ -375,7 +441,7 @@ Partial Class FrmEditButton
         'BtnUpArrow
         '
         Me.BtnUpArrow.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnUpArrow.Location = New System.Drawing.Point(144, 339)
+        Me.BtnUpArrow.Location = New System.Drawing.Point(147, 338)
         Me.BtnUpArrow.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnUpArrow.Name = "BtnUpArrow"
         Me.BtnUpArrow.Size = New System.Drawing.Size(55, 46)
@@ -387,7 +453,7 @@ Partial Class FrmEditButton
         'BtnReturn
         '
         Me.BtnReturn.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnReturn.Location = New System.Drawing.Point(293, 245)
+        Me.BtnReturn.Location = New System.Drawing.Point(288, 236)
         Me.BtnReturn.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnReturn.Name = "BtnReturn"
         Me.BtnReturn.Size = New System.Drawing.Size(55, 81)
@@ -399,7 +465,7 @@ Partial Class FrmEditButton
         'BtnBackspace
         '
         Me.BtnBackspace.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnBackspace.Location = New System.Drawing.Point(277, 151)
+        Me.BtnBackspace.Location = New System.Drawing.Point(280, 162)
         Me.BtnBackspace.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnBackspace.Name = "BtnBackspace"
         Me.BtnBackspace.Size = New System.Drawing.Size(71, 46)
@@ -411,7 +477,7 @@ Partial Class FrmEditButton
         'BtnPageDown
         '
         Me.BtnPageDown.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPageDown.Location = New System.Drawing.Point(211, 285)
+        Me.BtnPageDown.Location = New System.Drawing.Point(214, 287)
         Me.BtnPageDown.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPageDown.Name = "BtnPageDown"
         Me.BtnPageDown.Size = New System.Drawing.Size(55, 46)
@@ -423,7 +489,7 @@ Partial Class FrmEditButton
         'BtnEnd
         '
         Me.BtnEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnEnd.Location = New System.Drawing.Point(144, 285)
+        Me.BtnEnd.Location = New System.Drawing.Point(147, 287)
         Me.BtnEnd.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnEnd.Name = "BtnEnd"
         Me.BtnEnd.Size = New System.Drawing.Size(55, 46)
@@ -435,7 +501,7 @@ Partial Class FrmEditButton
         'BtnDelete
         '
         Me.BtnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnDelete.Location = New System.Drawing.Point(77, 285)
+        Me.BtnDelete.Location = New System.Drawing.Point(80, 287)
         Me.BtnDelete.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(55, 46)
@@ -447,7 +513,7 @@ Partial Class FrmEditButton
         'BtnBacktab
         '
         Me.BtnBacktab.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnBacktab.Location = New System.Drawing.Point(10, 285)
+        Me.BtnBacktab.Location = New System.Drawing.Point(13, 287)
         Me.BtnBacktab.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnBacktab.Name = "BtnBacktab"
         Me.BtnBacktab.Size = New System.Drawing.Size(55, 46)
@@ -459,7 +525,7 @@ Partial Class FrmEditButton
         'BtnPageUp
         '
         Me.BtnPageUp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPageUp.Location = New System.Drawing.Point(211, 231)
+        Me.BtnPageUp.Location = New System.Drawing.Point(214, 236)
         Me.BtnPageUp.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnPageUp.Name = "BtnPageUp"
         Me.BtnPageUp.Size = New System.Drawing.Size(55, 46)
@@ -471,7 +537,7 @@ Partial Class FrmEditButton
         'BtnHome
         '
         Me.BtnHome.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnHome.Location = New System.Drawing.Point(144, 231)
+        Me.BtnHome.Location = New System.Drawing.Point(147, 236)
         Me.BtnHome.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnHome.Name = "BtnHome"
         Me.BtnHome.Size = New System.Drawing.Size(55, 46)
@@ -483,7 +549,7 @@ Partial Class FrmEditButton
         'BtnInsert
         '
         Me.BtnInsert.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnInsert.Location = New System.Drawing.Point(77, 231)
+        Me.BtnInsert.Location = New System.Drawing.Point(80, 236)
         Me.BtnInsert.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnInsert.Name = "BtnInsert"
         Me.BtnInsert.Size = New System.Drawing.Size(55, 46)
@@ -495,7 +561,7 @@ Partial Class FrmEditButton
         'BtnTab
         '
         Me.BtnTab.Font = New System.Drawing.Font("Wingdings 3", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnTab.Location = New System.Drawing.Point(10, 231)
+        Me.BtnTab.Location = New System.Drawing.Point(13, 236)
         Me.BtnTab.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnTab.Name = "BtnTab"
         Me.BtnTab.Size = New System.Drawing.Size(55, 46)
@@ -506,7 +572,7 @@ Partial Class FrmEditButton
         '
         'BtnCloseCurlyBracket
         '
-        Me.BtnCloseCurlyBracket.Location = New System.Drawing.Point(144, 151)
+        Me.BtnCloseCurlyBracket.Location = New System.Drawing.Point(147, 162)
         Me.BtnCloseCurlyBracket.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnCloseCurlyBracket.Name = "BtnCloseCurlyBracket"
         Me.BtnCloseCurlyBracket.Size = New System.Drawing.Size(55, 32)
@@ -516,7 +582,7 @@ Partial Class FrmEditButton
         '
         'BtnOpenCurlyBracket
         '
-        Me.BtnOpenCurlyBracket.Location = New System.Drawing.Point(77, 151)
+        Me.BtnOpenCurlyBracket.Location = New System.Drawing.Point(80, 162)
         Me.BtnOpenCurlyBracket.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnOpenCurlyBracket.Name = "BtnOpenCurlyBracket"
         Me.BtnOpenCurlyBracket.Size = New System.Drawing.Size(55, 32)
@@ -777,7 +843,7 @@ Partial Class FrmEditButton
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 564)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(893, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(835, 22)
         Me.StatusStrip1.TabIndex = 18
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -791,67 +857,50 @@ Partial Class FrmEditButton
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.LblStatus.Size = New System.Drawing.Size(10, 17)
         '
-        'ChkSubstring
+        'TxtLength
         '
-        Me.ChkSubstring.AutoSize = True
-        Me.ChkSubstring.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkSubstring.Location = New System.Drawing.Point(6, 77)
-        Me.ChkSubstring.Name = "ChkSubstring"
-        Me.ChkSubstring.Size = New System.Drawing.Size(77, 18)
-        Me.ChkSubstring.TabIndex = 9
-        Me.ChkSubstring.Text = "Substring"
-        Me.ChkSubstring.UseVisualStyleBackColor = True
+        Me.TxtLength.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtLength.Location = New System.Drawing.Point(200, 76)
+        Me.TxtLength.Name = "TxtLength"
+        Me.TxtLength.Size = New System.Drawing.Size(32, 20)
+        Me.TxtLength.TabIndex = 14
         '
-        'ChkSplit
+        'Label10
         '
-        Me.ChkSplit.AutoSize = True
-        Me.ChkSplit.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkSplit.Location = New System.Drawing.Point(6, 53)
-        Me.ChkSplit.Name = "ChkSplit"
-        Me.ChkSplit.Size = New System.Drawing.Size(56, 18)
-        Me.ChkSplit.TabIndex = 10
-        Me.ChkSplit.Text = "Word"
-        Me.ChkSplit.UseVisualStyleBackColor = True
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(157, 80)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(40, 13)
+        Me.Label10.TabIndex = 15
+        Me.Label10.Text = "Length"
         '
-        'RbSingle
+        'Label11
         '
-        Me.RbSingle.AutoSize = True
-        Me.RbSingle.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RbSingle.Location = New System.Drawing.Point(201, 55)
-        Me.RbSingle.Name = "RbSingle"
-        Me.RbSingle.Size = New System.Drawing.Size(80, 17)
-        Me.RbSingle.TabIndex = 11
-        Me.RbSingle.TabStop = True
-        Me.RbSingle.Text = "Single word"
-        Me.RbSingle.UseVisualStyleBackColor = True
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(235, 80)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(25, 13)
+        Me.Label11.TabIndex = 16
+        Me.Label11.Text = "Pad"
         '
-        'Label7
+        'TxtPad
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(86, 54)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(18, 17)
-        Me.Label7.TabIndex = 12
-        Me.Label7.Text = "#"
-        '
-        'RbToEnd
-        '
-        Me.RbToEnd.AutoSize = True
-        Me.RbToEnd.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RbToEnd.Location = New System.Drawing.Point(287, 55)
-        Me.RbToEnd.Name = "RbToEnd"
-        Me.RbToEnd.Size = New System.Drawing.Size(58, 17)
-        Me.RbToEnd.TabIndex = 13
-        Me.RbToEnd.TabStop = True
-        Me.RbToEnd.Text = "To end"
-        Me.RbToEnd.UseVisualStyleBackColor = True
+        Me.TxtPad.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPad.Location = New System.Drawing.Point(263, 76)
+        Me.TxtPad.Name = "TxtPad"
+        Me.TxtPad.Size = New System.Drawing.Size(21, 20)
+        Me.TxtPad.TabIndex = 17
         '
         'FrmEditButton
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(893, 586)
+        Me.ClientSize = New System.Drawing.Size(835, 586)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.LblErrs)
         Me.Controls.Add(Me.Label6)
@@ -960,10 +1009,14 @@ Partial Class FrmEditButton
     Friend WithEvents TxtWordNo As Windows.Forms.TextBox
     Friend WithEvents GroupBox2 As Windows.Forms.GroupBox
     Friend WithEvents Label9 As Windows.Forms.Label
-    Friend WithEvents TxtSl As Windows.Forms.TextBox
+    Friend WithEvents TxtStart As Windows.Forms.TextBox
     Friend WithEvents ChkSplit As Windows.Forms.CheckBox
     Friend WithEvents ChkSubstring As Windows.Forms.CheckBox
     Friend WithEvents RbSingle As Windows.Forms.RadioButton
     Friend WithEvents RbToEnd As Windows.Forms.RadioButton
     Friend WithEvents Label7 As Windows.Forms.Label
+    Friend WithEvents TxtPad As Windows.Forms.TextBox
+    Friend WithEvents Label11 As Windows.Forms.Label
+    Friend WithEvents Label10 As Windows.Forms.Label
+    Friend WithEvents TxtLength As Windows.Forms.TextBox
 End Class
