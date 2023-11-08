@@ -6,6 +6,7 @@
 '
 
 Imports System.Collections.Generic
+Imports System.Diagnostics.Eventing.Reader
 Imports System.Reflection
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
@@ -115,17 +116,30 @@ Public Class FrmEmail
         _attachmentList = aAttachList.ToArray
         If cbSmtpAccounts.SelectedIndex >= 0 Then
             Dim _smtp As Smtp = GetSmtpById(cbSmtpAccounts.SelectedValue)
-            If String.IsNullOrWhiteSpace(TxtTo.Text) Or String.IsNullOrWhiteSpace(TxtSubject.Text) Or String.IsNullOrWhiteSpace(TxtText.Text) Then
-                DisplayProgress("Missing value(s). Mail not sent.",, True)
-            Else
+            Dim _error As String = ""
+            Dim isValid As Boolean = True
+            If String.IsNullOrWhiteSpace(TxtTo.Text) Then
+                _error &= "To."
+                isValid = False
+            End If
+            If String.IsNullOrWhiteSpace(TxtSubject.Text) Then
+                _error &= "Subject."
+                isValid = False
+            End If
+            If Not ChkNoText.Checked AndAlso String.IsNullOrWhiteSpace(TxtText.Text) Then
+                _error &= "Text."
+                isValid = False
+            End If
+            If isValid Then
                 My.Settings.LastEmailTo = TxtTo.Text
                 My.Settings.Save()
-
                 If EmailUtil.SendMailViaSMTP(_smtp, TxtTo.Text, {}, TxtSubject.Text, TxtText.Text, TxtFromName.Text, _attachmentList) Then
                     DisplayProgress("Mail sent OK.", , True)
                 Else
                     DisplayProgress("Mail failed.", , True)
                 End If
+            Else
+                DisplayProgress(_error & " value(s) missing. Mail not sent.",, True)
             End If
         Else
             DisplayProgress("From account not selected. Mail not sent.", , True)
@@ -137,6 +151,8 @@ Public Class FrmEmail
         TxtSubject.Text = ""
         TxtText.Text = ""
         TxtTo.Text = ""
+        ChkNoText.Checked = False
+        BtnSend.Enabled = True
     End Sub
     Private Sub TextBox_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles TxtSubject.DragDrop,
                                                                                            TxtFromName.DragDrop,
@@ -241,10 +257,6 @@ Public Class FrmEmail
         TxtText.Text = ""
     End Sub
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
-        TxtTo.Text = ""
-        TxtSubject.Text = ""
-        TxtText.Text = ""
-        CbAttachList.Items.Clear()
         BtnSend.Enabled = True
     End Sub
     Private Sub BtnAttach_Click(sender As Object, e As EventArgs) Handles BtnAttach.Click

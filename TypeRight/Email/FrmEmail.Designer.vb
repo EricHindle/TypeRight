@@ -63,6 +63,7 @@ Partial Class FrmEmail
         Me.TxtFromName = New System.Windows.Forms.TextBox()
         Me.BtnReset = New System.Windows.Forms.Button()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.ChkNoText = New System.Windows.Forms.CheckBox()
         Me.StatusStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -331,6 +332,7 @@ Partial Class FrmEmail
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.ChkNoText)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnLastTo)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnRmvAtt)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnAttach)
@@ -468,6 +470,18 @@ Partial Class FrmEmail
         Me.BtnReset.Text = "Reset"
         Me.BtnReset.UseVisualStyleBackColor = False
         '
+        'ChkNoText
+        '
+        Me.ChkNoText.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChkNoText.AutoSize = True
+        Me.ChkNoText.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkNoText.Location = New System.Drawing.Point(530, 151)
+        Me.ChkNoText.Name = "ChkNoText"
+        Me.ChkNoText.Size = New System.Drawing.Size(106, 21)
+        Me.ChkNoText.TabIndex = 20
+        Me.ChkNoText.Text = "Allow no text"
+        Me.ChkNoText.UseVisualStyleBackColor = True
+        '
         'FrmEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
@@ -535,4 +549,5 @@ Partial Class FrmEmail
     Friend WithEvents MnuClear As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents MnuToTitle As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ChkNoText As Windows.Forms.CheckBox
 End Class
