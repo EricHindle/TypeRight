@@ -53,6 +53,7 @@ Partial Class FrmEmail
         Me.BtnPasteSubject = New System.Windows.Forms.Button()
         Me.BtnPasteText = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.ChkNoText = New System.Windows.Forms.CheckBox()
         Me.BtnLastTo = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.CbAttachList = New System.Windows.Forms.ComboBox()
@@ -63,13 +64,14 @@ Partial Class FrmEmail
         Me.TxtFromName = New System.Windows.Forms.TextBox()
         Me.BtnReset = New System.Windows.Forms.Button()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.ChkNoText = New System.Windows.Forms.CheckBox()
+        Me.ImgTack = New System.Windows.Forms.PictureBox()
         Me.StatusStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
+        CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PnlButtons
@@ -298,6 +300,7 @@ Partial Class FrmEmail
         Me.BtnPasteTo.Name = "BtnPasteTo"
         Me.BtnPasteTo.Size = New System.Drawing.Size(26, 23)
         Me.BtnPasteTo.TabIndex = 5
+        Me.ToolTip9.SetToolTip(Me.BtnPasteTo, "Paste from clipboard")
         Me.BtnPasteTo.UseVisualStyleBackColor = True
         '
         'BtnPasteSubject
@@ -309,6 +312,7 @@ Partial Class FrmEmail
         Me.BtnPasteSubject.Name = "BtnPasteSubject"
         Me.BtnPasteSubject.Size = New System.Drawing.Size(26, 23)
         Me.BtnPasteSubject.TabIndex = 6
+        Me.ToolTip9.SetToolTip(Me.BtnPasteSubject, "Paste from clipboard")
         Me.BtnPasteSubject.UseVisualStyleBackColor = True
         '
         'BtnPasteText
@@ -320,6 +324,7 @@ Partial Class FrmEmail
         Me.BtnPasteText.Name = "BtnPasteText"
         Me.BtnPasteText.Size = New System.Drawing.Size(26, 23)
         Me.BtnPasteText.TabIndex = 7
+        Me.ToolTip9.SetToolTip(Me.BtnPasteText, "Paste from clipboard")
         Me.BtnPasteText.UseVisualStyleBackColor = True
         '
         'SplitContainer1
@@ -332,6 +337,7 @@ Partial Class FrmEmail
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.ImgTack)
         Me.SplitContainer1.Panel1.Controls.Add(Me.ChkNoText)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnLastTo)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnRmvAtt)
@@ -361,6 +367,19 @@ Partial Class FrmEmail
         Me.SplitContainer1.SplitterDistance = 768
         Me.SplitContainer1.TabIndex = 0
         '
+        'ChkNoText
+        '
+        Me.ChkNoText.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ChkNoText.AutoSize = True
+        Me.ChkNoText.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkNoText.Location = New System.Drawing.Point(530, 151)
+        Me.ChkNoText.Name = "ChkNoText"
+        Me.ChkNoText.Size = New System.Drawing.Size(106, 21)
+        Me.ChkNoText.TabIndex = 20
+        Me.ChkNoText.Text = "Allow no text"
+        Me.ToolTip9.SetToolTip(Me.ChkNoText, "Permit email to be sent with no text")
+        Me.ChkNoText.UseVisualStyleBackColor = True
+        '
         'BtnLastTo
         '
         Me.BtnLastTo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -372,6 +391,7 @@ Partial Class FrmEmail
         Me.BtnLastTo.Size = New System.Drawing.Size(32, 23)
         Me.BtnLastTo.TabIndex = 19
         Me.BtnLastTo.Text = "Last"
+        Me.ToolTip9.SetToolTip(Me.BtnLastTo, "Use last 'to' email")
         Me.BtnLastTo.UseVisualStyleBackColor = True
         '
         'Label5
@@ -453,7 +473,7 @@ Partial Class FrmEmail
         Me.TxtFromName.Location = New System.Drawing.Point(452, 3)
         Me.TxtFromName.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtFromName.Name = "TxtFromName"
-        Me.TxtFromName.Size = New System.Drawing.Size(298, 25)
+        Me.TxtFromName.Size = New System.Drawing.Size(274, 25)
         Me.TxtFromName.TabIndex = 1
         '
         'BtnReset
@@ -470,17 +490,16 @@ Partial Class FrmEmail
         Me.BtnReset.Text = "Reset"
         Me.BtnReset.UseVisualStyleBackColor = False
         '
-        'ChkNoText
+        'ImgTack
         '
-        Me.ChkNoText.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ChkNoText.AutoSize = True
-        Me.ChkNoText.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkNoText.Location = New System.Drawing.Point(530, 151)
-        Me.ChkNoText.Name = "ChkNoText"
-        Me.ChkNoText.Size = New System.Drawing.Size(106, 21)
-        Me.ChkNoText.TabIndex = 20
-        Me.ChkNoText.Text = "Allow no text"
-        Me.ChkNoText.UseVisualStyleBackColor = True
+        Me.ImgTack.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ImgTack.Image = Global.TypeRight.My.Resources.Resources.tackup
+        Me.ImgTack.Location = New System.Drawing.Point(747, 6)
+        Me.ImgTack.Name = "ImgTack"
+        Me.ImgTack.Size = New System.Drawing.Size(16, 16)
+        Me.ImgTack.TabIndex = 21
+        Me.ImgTack.TabStop = False
+        Me.ToolTip9.SetToolTip(Me.ImgTack, "Pin on top")
         '
         'FrmEmail
         '
@@ -505,6 +524,7 @@ Partial Class FrmEmail
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
+        CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -550,4 +570,5 @@ Partial Class FrmEmail
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents MnuToTitle As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChkNoText As Windows.Forms.CheckBox
+    Friend WithEvents ImgTack As Windows.Forms.PictureBox
 End Class

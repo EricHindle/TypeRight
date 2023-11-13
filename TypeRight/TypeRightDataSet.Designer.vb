@@ -4004,7 +4004,7 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.TypeRight.Settings.Default.TypeRightConnectionString
+            Me._connection.ConnectionString = Global.TypeRight.My.MySettings.Default.TypeRightConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4534,7 +4534,7 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.TypeRight.Settings.Default.TypeRightConnectionString
+            Me._connection.ConnectionString = Global.TypeRight.My.MySettings.Default.TypeRightConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5481,7 +5481,7 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.TypeRight.Settings.Default.TypeRightConnectionString
+            Me._connection.ConnectionString = Global.TypeRight.My.MySettings.Default.TypeRightConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -6792,7 +6792,7 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.TypeRight.Settings.Default.TypeRightConnectionString
+            Me._connection.ConnectionString = Global.TypeRight.My.MySettings.Default.TypeRightConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7341,7 +7341,7 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.TypeRight.Settings.Default.TypeRightConnectionString
+            Me._connection.ConnectionString = Global.TypeRight.My.MySettings.Default.TypeRightConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7906,7 +7906,7 @@ Namespace TypeRightDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.TypeRight.Settings.Default.TypeRightConnectionString
+            Me._connection.ConnectionString = Global.TypeRight.My.MySettings.Default.TypeRightConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

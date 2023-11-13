@@ -23,7 +23,7 @@ Public Class FrmEmail
     Private oSmtpTable As TypeRightDataSet.smtpDataTable
     Private _attachmentList As String()
     Private ReadOnly aAttachList As New List(Of String)
-
+    Private isMailOnTop As Boolean
 #End Region
 #Region "properties"
     Private _groupId As Integer
@@ -66,6 +66,8 @@ Public Class FrmEmail
         CbAttachList.Items.Clear()
         aAttachList.Clear()
         isLoading = False
+        isMailOnTop = My.Settings.MailOnTop
+        SetTopMost()
     End Sub
     Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
         Close()
@@ -348,5 +350,22 @@ Public Class FrmEmail
         End If
     End Sub
 
+    Private Sub ImgTack_Click(sender As Object, e As EventArgs) Handles ImgTack.Click
+        isMailOnTop = Not isMailOnTop
+        My.Settings.MailOnTop = isMailOnTop
+        My.Settings.Save()
+        SetTopMost()
+    End Sub
+    Private Sub SetTopMost()
+        If isMailOnTop Then
+            ImgTack.Image = My.Resources.tackdown
+        Else
+            ImgTack.Image = My.Resources.tackup
+        End If
+        TopMost = isMailOnTop
+        If isMailOnTop Then
+            BringToFront()
+        End If
+    End Sub
 #End Region
 End Class
