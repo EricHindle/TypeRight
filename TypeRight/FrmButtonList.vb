@@ -589,9 +589,12 @@ Public Class FrmButtonList
         Using _emailForm As New FrmEmail
             _emailForm.SenderId = iCurrSender
             _emailForm.GroupId = iCurrGrp
+            _emailForm.TopMost = My.Settings.MailOnTop
             _emailForm.ShowDialog()
         End Using
         Show()
+        SetTopMost()
+
     End Sub
 
 #End Region
