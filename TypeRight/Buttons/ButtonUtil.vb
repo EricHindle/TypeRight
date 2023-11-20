@@ -312,7 +312,7 @@ Module ButtonUtil
                     Dim rPad As String = subInts(2)
                     subValue = subValue.PadRight(_start + _length, rPad)
                 End If
-                If _start > 0 AndAlso _start + _length <= subValue.Length Then
+                If _start > -1 AndAlso _start + _length <= subValue.Length Then
                     If subInts.Length = 2 And _length > 0 Then
                         subValue = subValue.Substring(_start, _length)
                     Else
