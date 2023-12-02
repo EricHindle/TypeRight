@@ -12,7 +12,7 @@ Imports System.Linq
 Imports System.Reflection
 Imports System.Windows.Forms
 Imports Microsoft.VisualBasic.FileIO
-
+Imports HindlewareLib.Logging
 Module TypeRightMain
 #Region "public variables"
     Public myCultureInfo As CultureInfo = CultureInfo.CurrentUICulture

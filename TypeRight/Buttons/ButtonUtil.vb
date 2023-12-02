@@ -11,7 +11,7 @@ Imports System.Drawing.Text
 Imports System.Text
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
-
+Imports HindlewareLib.Logging
 Module ButtonUtil
 #Region "enum"
     Friend Enum ReplaceType

@@ -11,6 +11,7 @@ Imports System.Data.Common
 Imports System.Text
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
+Imports HindlewareLib.Logging
 Public Class FrmButtonList
 #Region "private variables"
     Private strKeyText As String
@@ -40,7 +41,7 @@ Public Class FrmButtonList
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
         LogUtil.LogFolder = My.Settings.LogFolder
-        LogUtil.StartLogging()
+        LogUtil.StartLogging(My.Settings.TypeRightConnectionString)
         InitialiseApplication()
         InitialiseData()
         GetFormPos(Me, My.Settings.ButtonListPos)

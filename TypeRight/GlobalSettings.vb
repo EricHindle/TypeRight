@@ -6,6 +6,8 @@
 '
 
 Imports System.Data.Common
+Imports HindlewareLib.Logging
+
 ''' <summary>
 ''' Options and settings to be used by all users
 ''' </summary>

@@ -11,7 +11,9 @@ Imports System.Data.Common
 Imports System.IO
 Imports System.Reflection
 Imports System.Windows.Forms
-
+Imports HindlewareLib.Logging
+Imports HindlewareLib.Domain.Objects
+Imports HindlewareLib.Domain.Builders
 Module DatabaseFunctions
 
 #Region "dB"
@@ -539,33 +541,33 @@ Module DatabaseFunctions
         End Try
         Return oSmtpTable
     End Function
-    Public Function GetSmtpList() As List(Of Smtp)
+    Public Function GetSmtpList() As List(Of SmtpAccount)
         LogUtil.Info("Getting SMTP list", MethodBase.GetCurrentMethod.Name)
-        Dim _smtpList As New List(Of Smtp)
+        Dim _smtpList As New List(Of SmtpAccount)
         Try
             oSmtpTa.Fill(oSmtpTable)
             For Each _row As TypeRightDataSet.smtpRow In oSmtpTable.Rows
-                _smtpList.Add(SmtpBuilder.aSmtp.StartingWith(_row).Build)
+                _smtpList.Add(TypeRight.SmtpAccountBuilder.AnSmtpAccount.StartingWith(_row).Build)
             Next
         Catch ex As DbException
             LogUtil.Exception("Failed: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return _smtpList
     End Function
-    Public Function GetSmtpById(pId As Integer) As Smtp
+    Public Function GetSmtpById(pId As Integer) As SmtpAccount
         LogUtil.Info("Getting SMTP by Id", MethodBase.GetCurrentMethod.Name)
-        Dim _smtp As New Smtp
+        Dim _smtp As New SmtpAccount
         Try
             oSmtpTa.FillById(oSmtpTable, pId)
             If oSmtpTable.Rows.Count > 0 Then
-                _smtp = SmtpBuilder.aSmtp.StartingWith(oSmtpTable.Rows(0)).Build
+                _smtp = SmtpAccountBuilder.AnSmtpAccount.StartingWith(oSmtpTable.Rows(0)).Build
             End If
         Catch ex As DbException
             LogUtil.Exception("SMTP not found: ", ex, MethodBase.GetCurrentMethod.Name)
         End Try
         Return _smtp
     End Function
-    Public Function InsertSmtp(pSmtp As Smtp) As Boolean
+    Public Function InsertSmtp(pSmtp As SmtpAccount) As Boolean
         LogUtil.Info("Inserting SMTP Account", MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try
@@ -577,7 +579,7 @@ Module DatabaseFunctions
         End Try
         Return isOk
     End Function
-    Public Function UpdateSmtp(pSmtp As Smtp) As Boolean
+    Public Function UpdateSmtp(pSmtp As SmtpAccount) As Boolean
         LogUtil.Info("Updating SMTP", MethodBase.GetCurrentMethod.Name)
         Dim isOk As Boolean = False
         Try

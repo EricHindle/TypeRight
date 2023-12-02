@@ -8,6 +8,7 @@
 Imports System.Data
 Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
+Imports HindlewareLib.Logging
 
 Public Class FrmEditButton
 #Region "variables"

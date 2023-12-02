@@ -6,7 +6,8 @@
 '
 
 Imports System.Windows.Forms
-
+Imports HindlewareLib.Domain.Objects
+Imports HindlewareLib.Logging
 Public Class FrmSmtpAccounts
 #Region "variables"
     Private _smtpTable As TypeRightDataSet.smtpDataTable
@@ -27,7 +28,7 @@ Public Class FrmSmtpAccounts
         DisplayProgress("Adding SMTP Account details", , True)
         If IsValidAccount() Then
             Dim _username As String = CbSmtpAccount.Text
-            Dim _smtp As Smtp = SmtpBuilder.aSmtp.StartingWith(-1,
+            Dim _smtp As SmtpAccount = SmtpAccountBuilder.AnSmtpAccount.StartingWith(-1,
                                                                _username,
                                                                TxtPassword.Text,
                                                                TxtHost.Text,
@@ -54,7 +55,7 @@ Public Class FrmSmtpAccounts
     Private Sub CbSmtpAccount_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CbSmtpAccount.SelectedIndexChanged
         If Not isLoading Then
             If CbSmtpAccount.SelectedIndex >= 0 Then
-                Dim _smtp As Smtp = GetSmtpById(CbSmtpAccount.SelectedValue)
+                Dim _smtp As SmtpAccount = GetSmtpById(CbSmtpAccount.SelectedValue)
                 TxtHost.Text = _smtp.Host
                 TxtPort.Text = _smtp.Port
                 TxtPassword.Text = _smtp.Password
@@ -91,9 +92,9 @@ Public Class FrmSmtpAccounts
         DisplayProgress("Updating SMTP Account details", , True)
         If IsValidAccount() Then
             Dim _id As Integer = CbSmtpAccount.SelectedValue
-            Dim _smtp As Smtp = GetSmtpById(_id)
+            Dim _smtp As SmtpAccount = GetSmtpById(_id)
             If _smtp.SmtpId >= 0 Then
-                _smtp = SmtpBuilder.aSmtp.StartingWith(_smtp) _
+                _smtp = SmtpAccountBuilder.AnSmtpAccount.StartingWith(_smtp) _
                                     .WithPassword(TxtPassword.Text) _
                                     .WithHost(TxtHost.Text) _
                                     .WithPort(TxtPort.Text) _

@@ -128,14 +128,12 @@
     </Compile>
     <Compile Include="Data\Builders\ButtonGroupBuilder.vb" />
     <Compile Include="Data\Builders\SenderButtonBuilder.vb" />
+    <Compile Include="Data\Builders\SmtpAccountBuilder.vb" />
     <Compile Include="Data\ButtonGroup.vb" />
     <Compile Include="Data\DatabaseFunctions.vb" />
     <Compile Include="Data\Sender.vb" />
     <Compile Include="Data\Builders\SenderBuilder.vb" />
     <Compile Include="Data\SenderButton.vb" />
-    <Compile Include="Data\Smtp.vb" />
-    <Compile Include="Data\Builders\SmtpBuilder.vb" />
-    <Compile Include="Email\EmailUtil.vb" />
     <Compile Include="FrmButtonList.Designer.vb">
       <DependentUpon>FrmButtonList.vb</DependentUpon>
     </Compile>
@@ -197,7 +195,6 @@
     <Compile Include="Logging\FrmLogViewer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Logging\LogUtil.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -228,6 +225,9 @@
     <Compile Include="TypeRightMain.vb" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="HindlewareLib">
+      <HintPath>..\..\HindlewareLib\bin\Release\HindlewareLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />

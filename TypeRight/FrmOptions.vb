@@ -6,6 +6,7 @@
 '
 
 Imports System.Windows.Forms
+Imports HindlewareLib.Logging
 
 Public Class FrmOptions
 #Region "form control handlers"

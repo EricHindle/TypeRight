@@ -6,6 +6,8 @@
 '
 
 Imports System.Windows.Forms
+Imports HindlewareLib.Logging
+
 Public Class FrmGroupMaint
 #Region "database variables"
     Private oBtnGrp As ButtonGroup

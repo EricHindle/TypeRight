@@ -15,7 +15,7 @@
       <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="Delay" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">2000</Value>
     </Setting>
     <Setting Name="ToolBar" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

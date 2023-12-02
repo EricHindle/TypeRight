@@ -8,7 +8,7 @@
 Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
-
+Imports HindlewareLib.Logging
 Public Class FrmSenderButtonFormat
 #Region "database variables"
     Private ReadOnly oTable As New TypeRightDataSet.sendersDataTable

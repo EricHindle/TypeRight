@@ -10,7 +10,12 @@ Imports System.Diagnostics.Eventing.Reader
 Imports System.Reflection
 Imports System.Windows.Forms
 Imports NbuttonControlLibrary
-
+Imports HindlewareLib.Logging
+Imports HindlewareLib.Email
+Imports HindlewareLib.Domain.Objects
+Imports HindlewareLib.Domain.Builders
+Imports System.Net.Mail
+Imports System.Net
 Public Class FrmEmail
 #Region "constants"
     Private Const MAILTO As String = "mailto:"
@@ -21,8 +26,8 @@ Public Class FrmEmail
     Private isLoading As Boolean = True
     Private oSenderRow As TypeRightDataSet.sendersRow
     Private oSmtpTable As TypeRightDataSet.smtpDataTable
-    Private _attachmentList As String()
-    Private ReadOnly aAttachList As New List(Of String)
+    '  Private _attachmentList As String()
+    Private ReadOnly aAttachList As New List(Of Attachment)
     Private isMailOnTop As Boolean
 #End Region
 #Region "properties"
@@ -112,12 +117,11 @@ Public Class FrmEmail
         BtnSend.Enabled = False
         For Each oAtt As String In CbAttachList.Items
             If My.Computer.FileSystem.FileExists(oAtt) Then
-                aAttachList.Add(oAtt)
+                aAttachList.Add(New Attachment(oAtt))
             End If
         Next
-        _attachmentList = aAttachList.ToArray
         If cbSmtpAccounts.SelectedIndex >= 0 Then
-            Dim _smtp As Smtp = GetSmtpById(cbSmtpAccounts.SelectedValue)
+            Dim _smtp As SmtpAccount = GetSmtpById(cbSmtpAccounts.SelectedValue)
             Dim _error As String = ""
             Dim isValid As Boolean = True
             If String.IsNullOrWhiteSpace(TxtTo.Text) Then
@@ -135,7 +139,18 @@ Public Class FrmEmail
             If isValid Then
                 My.Settings.LastEmailTo = TxtTo.Text
                 My.Settings.Save()
-                If EmailUtil.SendMailViaSMTP(_smtp, TxtTo.Text, {}, TxtSubject.Text, TxtText.Text, TxtFromName.Text, _attachmentList) Then
+                Dim oFrom As New MailAddress(_smtp.Username)
+                If Not String.IsNullOrEmpty(TxtFromName.Text) Then
+                    oFrom = New Mail.MailAddress(_smtp.Username, TxtFromName.Text)
+                End If
+                Dim oEmail As Email = EmailBuilder.AnEmail.StartingWithNothing _
+                    .WithTo(TxtTo.Text) _
+                    .WithSubject(TxtSubject.Text) _
+                    .WithBody(TxtText.Text) _
+                    .WithFromAddress(oFrom) _
+                    .WithAttachments(aAttachList) _
+                    .Build
+                If EmailUtil.SendMailViaSMTP(oEmail, _smtp) Then
                     DisplayProgress("Mail sent OK.", , True)
                 Else
                     DisplayProgress("Mail failed.", , True)
