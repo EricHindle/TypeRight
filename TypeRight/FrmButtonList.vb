@@ -133,7 +133,7 @@ Public Class FrmButtonList
         Dim sourceControl As Object = GetSourceControl(MenuItem)
         If TypeOf sourceControl Is Nbutton Then
             Dim _btn As Nbutton = CType(sourceControl, Nbutton)
-            Dim strText As String = _btn.Value.Replace("{Return}", Chr(10)).Replace("{{}", "{").Replace("{}}", "}")
+            Dim strText As String = _btn.Value.Replace("{ENTER}", vbCrLf).Replace("{Return}", Chr(10)).Replace("{{}", "{").Replace("{}}", "}")
             Clipboard.SetText(strText)
         End If
     End Sub
