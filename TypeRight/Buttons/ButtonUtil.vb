@@ -7,11 +7,11 @@
 
 Imports System.Collections.Generic
 Imports System.Data
-Imports System.Drawing.Text
 Imports System.Text
 Imports System.Windows.Forms
-Imports NbuttonControlLibrary
 Imports HindlewareLib.Logging
+Imports HindlewareLib.Security
+Imports NbuttonControlLibrary
 Module ButtonUtil
 #Region "enum"
     Friend Enum ReplaceType
@@ -133,7 +133,7 @@ Module ButtonUtil
                 senderButton = GetSenderButton(_col.ColumnName)
                 strButtonValue = If(IsDBNull(oSenderRow(_col.ColumnName)), "", oSenderRow(_col.ColumnName))
                 If senderButton IsNot Nothing AndAlso senderButton.IsEncrypted Then
-                    strButtonValue = oNCrypter.DecryptData(strButtonValue)
+                    strButtonValue = EncryptionUtil.DecryptText(strButtonValue, My.Resources.APP_STRING)
                 End If
                 strButtonTxt = _col.ColumnName
                 strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 20))
@@ -235,7 +235,7 @@ Module ButtonUtil
             _senderButton = GetSenderButton(fieldName)
             fieldValue = If(IsDBNull(oSenderRow(fieldName)), "", CStr(oSenderRow(fieldName)))
             If _senderButton IsNot Nothing AndAlso _senderButton.IsEncrypted Then
-                fieldValue = oNCrypter.DecryptData(fieldValue)
+                fieldValue = EncryptionUtil.DecryptText(fieldValue, My.Resources.APP_STRING)
             End If
             newText = newText.Replace(FIELD_START_MARKER & fieldName & FIELD_END_MARKER, fieldValue)
             fieldName = GetValueBetweenBrackets(newText, FIELD_START_MARKER, FIELD_END_MARKER)
@@ -349,5 +349,4 @@ Module ButtonUtil
         Return newText
     End Function
 #End Region
-
 End Module

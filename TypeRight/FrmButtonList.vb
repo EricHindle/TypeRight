@@ -10,8 +10,9 @@ Imports System.Data
 Imports System.Data.Common
 Imports System.Text
 Imports System.Windows.Forms
-Imports NbuttonControlLibrary
 Imports HindlewareLib.Logging
+Imports HindlewareLib.Security
+Imports NbuttonControlLibrary
 Public Class FrmButtonList
 #Region "private variables"
     Private strKeyText As String
@@ -348,7 +349,7 @@ Public Class FrmButtonList
             Dim _nButton As Nbutton = _button.Parent
             strKeyText = _nButton.Value
             If isPro And _nButton.Encrypt Then
-                strKeyText = oNCrypter.DecryptData(strKeyText)
+                strKeyText = encryptionutil.Decrypttext(strKeyText, My.Resources.APP_STRING)
             End If
             strKeyText = GetDBFieldValues(strKeyText, oSenderRow)
             strKeyText = EditFieldValues(strKeyText, ReplaceType.None)
@@ -439,7 +440,7 @@ Public Class FrmButtonList
                 _senderButton = GetSenderButton(_col.ColumnName)
                 strButtonValue = If(IsDBNull(oSenderRow(_col.ColumnName)), "", oSenderRow(_col.ColumnName))
                 If _senderButton IsNot Nothing AndAlso _senderButton.IsEncrypted Then
-                    strButtonValue = oNCrypter.DecryptData(strButtonValue)
+                    strButtonValue = EncryptionUtil.DecryptText(strButtonValue, My.Resources.APP_STRING)
                 End If
                 strButtonTxt = _col.ColumnName
                 strButtonCaption = strButtonTxt.Substring(0, Math.Min(strButtonTxt.Length, 20))

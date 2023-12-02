@@ -61,7 +61,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to skRywTenYbtHgiRepYt.
+        '''  Looks up a localized string similar to TjIZvtONCdSLbHOf.
         '''</summary>
         Friend ReadOnly Property APP_STRING() As String
             Get

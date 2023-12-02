@@ -6,16 +6,16 @@
 '
 
 Imports System.Collections.Generic
-Imports System.Diagnostics.Eventing.Reader
+Imports System.Net
+Imports System.Net.Mail
 Imports System.Reflection
 Imports System.Windows.Forms
-Imports NbuttonControlLibrary
-Imports HindlewareLib.Logging
-Imports HindlewareLib.Email
-Imports HindlewareLib.Domain.Objects
 Imports HindlewareLib.Domain.Builders
-Imports System.Net.Mail
-Imports System.Net
+Imports HindlewareLib.Domain.Objects
+Imports HindlewareLib.Email
+Imports HindlewareLib.Logging
+Imports HindlewareLib.Security
+Imports NbuttonControlLibrary
 Public Class FrmEmail
 #Region "constants"
     Private Const MAILTO As String = "mailto:"
@@ -104,7 +104,7 @@ Public Class FrmEmail
             strKeyText = _nButton.Value
             If Not String.IsNullOrWhiteSpace(strKeyText) Then
                 If isPro And _nButton.Encrypt Then
-                    strKeyText = oNCrypter.DecryptData(strKeyText)
+                    strKeyText = EncryptionUtil.DecryptText(strKeyText, My.Resources.APP_STRING)
                 End If
                 strKeyText = EditFieldValues(GetDBFieldValues(strKeyText, oSenderRow), ReplaceType.None).Replace("{ENTER}", vbCrLf)
                 Clipboard.SetText(strKeyText)

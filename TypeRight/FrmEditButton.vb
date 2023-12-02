@@ -6,10 +6,9 @@
 '
 
 Imports System.Data
-Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 Imports HindlewareLib.Logging
-
+Imports HindlewareLib.Security
 Public Class FrmEditButton
 #Region "variables"
     Private iId As Integer
@@ -64,7 +63,7 @@ Public Class FrmEditButton
             LblBtnSeq.Text = CStr(iSeq)
             LblBtnGrp.Text = btnGrp.GroupName
             TxtHint.Text = _button.Hint
-            TxtValue.Text = If(chkEncrypt.Checked, oNCrypter.DecryptData(_button.Value), _button.Value)
+            TxtValue.Text = If(chkEncrypt.Checked, encryptionutil.Decrypttext(_button.Value, My.Resources.APP_STRING), _button.Value)
             txtCaption.Text = _button.Caption
             BtnFont.Font = _button.Font
         Else
@@ -101,7 +100,7 @@ Public Class FrmEditButton
         If IsValidated() Then
             If isPro And chkEncrypt.Checked Then
                 isEncrypted = True
-                strNewText = oNCrypter.EncryptData(TxtValue.Text)
+                strNewText = EncryptionUtil.EncryptText(TxtValue.Text, My.Resources.APP_STRING)
             Else
                 isEncrypted = False
                 strNewText = TxtValue.Text
@@ -318,7 +317,7 @@ Public Class FrmEditButton
             Dim splitEnd As String = String.Empty
             Dim isOK As Boolean = True
             If ChkSubstring.Checked Then
-                If (String.IsNullOrWhiteSpace(_start) OrElse Not IsNumeric(_start)) OrElse
+                If String.IsNullOrWhiteSpace(_start) OrElse Not IsNumeric(_start) OrElse
                    (Not String.IsNullOrEmpty(_length) AndAlso Not IsNumeric(_start)) Then
                     isOK = False
                 Else

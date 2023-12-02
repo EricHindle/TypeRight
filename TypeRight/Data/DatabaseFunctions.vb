@@ -11,9 +11,8 @@ Imports System.Data.Common
 Imports System.IO
 Imports System.Reflection
 Imports System.Windows.Forms
-Imports HindlewareLib.Logging
 Imports HindlewareLib.Domain.Objects
-Imports HindlewareLib.Domain.Builders
+Imports HindlewareLib.Logging
 Module DatabaseFunctions
 
 #Region "dB"

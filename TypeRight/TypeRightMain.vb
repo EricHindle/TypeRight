@@ -5,14 +5,13 @@
 ' Author Eric Hindle
 '
 
-Imports System.Collections.Generic
 Imports System.Drawing
 Imports System.Globalization
-Imports System.Linq
 Imports System.Reflection
 Imports System.Windows.Forms
-Imports Microsoft.VisualBasic.FileIO
 Imports HindlewareLib.Logging
+Imports HindlewareLib.Security
+Imports Microsoft.VisualBasic.FileIO
 Module TypeRightMain
 #Region "public variables"
     Public myCultureInfo As CultureInfo = CultureInfo.CurrentUICulture
@@ -46,7 +45,7 @@ Module TypeRightMain
     Public iCurrGrp As Long
     Public iCurrSender As Long
     Public strApplication As String
-    Public oNCrypter As NCrypt
+    '  Public oNCrypter As EncryptionUtil
     Public lBtnListHandle As Long
     Public bNewWidth As Boolean
     Public bMinimise As Boolean
@@ -109,7 +108,6 @@ Module TypeRightMain
         isPro = False
         strApplication = "TypeRight"
         ' Set an encryption object
-        oNCrypter = New NCrypt(My.Resources.APP_STRING)
         ' Get the registered name and licence code
         sLicName = My.Settings.RegName
         sLicCode = My.Settings.RegCode

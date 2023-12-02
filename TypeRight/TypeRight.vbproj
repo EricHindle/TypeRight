@@ -211,7 +211,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="NCrypt.vb" />
     <Compile Include="NRegisterApp.vb" />
     <Compile Include="NTextUtil.vb" />
     <Compile Include="TypeRightDataSet.Designer.vb">

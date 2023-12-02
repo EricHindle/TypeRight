@@ -7,7 +7,7 @@
 
 Imports System.Windows.Forms
 Imports HindlewareLib.Logging
-
+Imports HindlewareLib.Security
 Public Class FrmDbUpdate
 #Region "constants"
     Private Const COMPLETE As String = " - complete"
@@ -275,10 +275,10 @@ Public Class FrmDbUpdate
                 TxtMobile.Text = .Mobile
             End If
             If Not .IsPasswdNull Then
-                TxtPassword.Text = If(String.IsNullOrEmpty(.Passwd), "", oNCrypter.DecryptData(.Passwd))
+                TxtPassword.Text = If(String.IsNullOrEmpty(.Passwd), "", EncryptionUtil.DecryptText(.Passwd))
             End If
             If Not .IsSecretWordNull Then
-                TxtSWord.Text = If(String.IsNullOrEmpty(.SecretWord), "", oNCrypter.DecryptData(.SecretWord))
+                TxtSWord.Text = If(String.IsNullOrEmpty(.SecretWord), "", EncryptionUtil.DecryptText(.SecretWord))
             End If
             If Not .IsUsernameNull Then
                 TxtUsername.Text = .Username
@@ -345,8 +345,8 @@ Public Class FrmDbUpdate
                                                     TxtAdd1.Text,
                                                     TxtCountry.Text, TxtEmail.Text,
                                                     TxtPhone.Text, TxtMobile.Text,
-                                                    oNCrypter.EncryptData(TxtPassword.Text),
-                                                    oNCrypter.EncryptData(TxtSWord.Text),
+                                                    EncryptionUtil.EncryptText(TxtPassword.Text, My.Resources.APP_STRING),
+                                                    EncryptionUtil.EncryptText(TxtSWord.Text, My.Resources.APP_STRING),
                                                     CbGender.SelectedItem, CbOcc.SelectedItem,
                                                     CbMarStat.SelectedItem, TxtUsername.Text).Build
 
