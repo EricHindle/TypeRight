@@ -448,6 +448,30 @@ Namespace My
                 Me("MailOnTop") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+        Public Property logZoomValue() As Integer
+            Get
+                Return CType(Me("logZoomValue"),Integer)
+            End Get
+            Set
+                Me("logZoomValue") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property LogZoomOn() As Boolean
+            Get
+                Return CType(Me("LogZoomOn"),Boolean)
+            End Get
+            Set
+                Me("LogZoomOn") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

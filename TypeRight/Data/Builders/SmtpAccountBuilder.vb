@@ -7,11 +7,9 @@
 Imports HindlewareLib.Domain
 Public Class SmtpAccountBuilder
     Inherits Builders.SmtpAccountBuilder
-
     Public Overloads Shared Function AnSmtpAccount() As SmtpAccountBuilder
         Return New SmtpAccountBuilder
     End Function
-
     Public Overloads Function StartingWith(ByVal pSmtpRow As TypeRightDataSet.smtpRow) As SmtpAccountBuilder
         WithId(pSmtpRow.smtpId)
         WithHost(pSmtpRow.smtpHost)

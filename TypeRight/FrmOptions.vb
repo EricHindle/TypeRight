@@ -140,7 +140,14 @@ Public Class FrmOptions
     End Sub
     Private Sub BtnViewLog_Click(sender As Object, e As EventArgs) Handles BtnViewLog.Click
         Using _logView As New FrmLogViewer
+            _logView.FormPosition = My.Settings.LogViewerPos
+            _logView.ZoomValue = My.Settings.logZoomValue
+            _logView.IsZoomOn = My.Settings.logZoomOn
             _logView.ShowDialog()
+            My.Settings.LogViewerPos = _logView.FormPosition
+            My.Settings.logZoomValue = _logView.ZoomValue
+            My.Settings.LogZoomOn = _logView.IsZoomOn
+            My.Settings.Save()
         End Using
     End Sub
     Private Sub FrmOptions_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing

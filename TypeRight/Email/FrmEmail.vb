@@ -26,7 +26,6 @@ Public Class FrmEmail
     Private isLoading As Boolean = True
     Private oSenderRow As TypeRightDataSet.sendersRow
     Private oSmtpTable As TypeRightDataSet.smtpDataTable
-    '  Private _attachmentList As String()
     Private ReadOnly aAttachList As New List(Of Attachment)
     Private isMailOnTop As Boolean
 #End Region
@@ -290,7 +289,6 @@ Public Class FrmEmail
             DisplayProgress("Attachment removed", , True)
         End If
     End Sub
-
     Private Sub CbAttachList_DragDrop(sender As Object, e As DragEventArgs) Handles CbAttachList.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             Dim _data As String() = e.Data.GetData(DataFormats.FileDrop)
@@ -301,11 +299,9 @@ Public Class FrmEmail
         End If
         CbAttachList.SelectedIndex = CbAttachList.Items.Count - 1
     End Sub
-
     Private Sub BtnLastTo_Click(sender As Object, e As EventArgs) Handles BtnLastTo.Click
         TxtTo.Text = My.Settings.LastEmailTo
     End Sub
-
     Private Sub MnuPaste_Click(ByVal menuItem As System.Object, ByVal e As System.EventArgs) Handles MnuPaste.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
@@ -341,7 +337,6 @@ Public Class FrmEmail
             _textBox.Text = String.Empty
         End If
     End Sub
-
     Private Sub MnuToggle_Click(ByVal menuItem As Object, e As EventArgs) Handles MnuToggle.Click
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
@@ -358,7 +353,6 @@ Public Class FrmEmail
             _textBox.Text = _toggleText
         End If
     End Sub
-
     Private Sub ImgTack_Click(sender As Object, e As EventArgs) Handles ImgTack.Click
         isMailOnTop = Not isMailOnTop
         My.Settings.MailOnTop = isMailOnTop
