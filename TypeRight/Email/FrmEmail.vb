@@ -111,6 +111,11 @@ Public Class FrmEmail
             End If
         End If
     End Sub
+    Private Sub BtnReturn_Click(sender As Object, e As EventArgs) Handles BtnReturn.Click
+        TxtText.Text &= vbCrLf
+        TxtText.Focus()
+        TxtText.SelectionStart = TxtText.Text.Length
+    End Sub
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         DisplayProgress("Sending Email...",, True)
         BtnSend.Enabled = False
