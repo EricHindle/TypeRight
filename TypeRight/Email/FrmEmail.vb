@@ -116,6 +116,17 @@ Public Class FrmEmail
         TxtText.Focus()
         TxtText.SelectionStart = TxtText.Text.Length
     End Sub
+    Private Sub BtnPhone_Click(sender As Object, e As EventArgs) Handles BtnPhone.Click
+        TxtText.Text &= "&#x260E; : "
+        TxtText.Focus()
+        TxtText.SelectionStart = TxtText.Text.Length
+    End Sub
+    Private Sub BtnMail_Click(sender As Object, e As EventArgs) Handles BtnMail.Click
+        TxtText.Text &= "&#x2709; : "
+        TxtText.Focus()
+        TxtText.SelectionStart = TxtText.Text.Length
+    End Sub
+
     Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
         DisplayProgress("Sending Email...",, True)
         BtnSend.Enabled = False
@@ -153,6 +164,7 @@ Public Class FrmEmail
                     .WithBody(TxtText.Text) _
                     .WithFromAddress(oFrom) _
                     .WithAttachments(aAttachList) _
+                    .WithIsHtml(True) _
                     .Build
                 If EmailUtil.SendMailViaSMTP(oEmail, _smtp) Then
                     DisplayProgress("Mail sent OK.", , True)
@@ -375,5 +387,9 @@ Public Class FrmEmail
             BringToFront()
         End If
     End Sub
+
+
+
+
 #End Region
 End Class

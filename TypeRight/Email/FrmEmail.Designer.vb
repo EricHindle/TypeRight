@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmEmail
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmEmail
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEmail))
@@ -66,6 +66,8 @@ Partial Class FrmEmail
         Me.TxtFromName = New System.Windows.Forms.TextBox()
         Me.BtnReset = New System.Windows.Forms.Button()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.BtnPhone = New System.Windows.Forms.Button()
+        Me.BtnMail = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -346,12 +348,12 @@ Partial Class FrmEmail
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtText.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.TxtText.Location = New System.Drawing.Point(4, 172)
+        Me.TxtText.Location = New System.Drawing.Point(11, 172)
         Me.TxtText.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtText.Multiline = True
         Me.TxtText.Name = "TxtText"
         Me.TxtText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TxtText.Size = New System.Drawing.Size(659, 183)
+        Me.TxtText.Size = New System.Drawing.Size(652, 183)
         Me.TxtText.TabIndex = 4
         '
         'BtnClose
@@ -390,6 +392,8 @@ Partial Class FrmEmail
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.BtnMail)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.BtnPhone)
         Me.SplitContainer1.Panel1.Controls.Add(Me.BtnReturn)
         Me.SplitContainer1.Panel1.Controls.Add(Me.ImgTack)
         Me.SplitContainer1.Panel1.Controls.Add(Me.ChkNoText)
@@ -517,6 +521,34 @@ Partial Class FrmEmail
         Me.BtnReset.Text = "Reset"
         Me.BtnReset.UseVisualStyleBackColor = False
         '
+        'BtnPhone
+        '
+        Me.BtnPhone.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPhone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnPhone.Font = New System.Drawing.Font("Wingdings", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
+        Me.BtnPhone.Location = New System.Drawing.Point(584, 359)
+        Me.BtnPhone.Margin = New System.Windows.Forms.Padding(0)
+        Me.BtnPhone.Name = "BtnPhone"
+        Me.BtnPhone.Size = New System.Drawing.Size(26, 23)
+        Me.BtnPhone.TabIndex = 23
+        Me.BtnPhone.Text = "("
+        Me.ToolTip9.SetToolTip(Me.BtnPhone, "Phone")
+        Me.BtnPhone.UseVisualStyleBackColor = True
+        '
+        'BtnMail
+        '
+        Me.BtnMail.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnMail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnMail.Font = New System.Drawing.Font("Wingdings", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
+        Me.BtnMail.Location = New System.Drawing.Point(549, 359)
+        Me.BtnMail.Margin = New System.Windows.Forms.Padding(0)
+        Me.BtnMail.Name = "BtnMail"
+        Me.BtnMail.Size = New System.Drawing.Size(26, 23)
+        Me.BtnMail.TabIndex = 24
+        Me.BtnMail.Text = "*"
+        Me.ToolTip9.SetToolTip(Me.BtnMail, "Email")
+        Me.BtnMail.UseVisualStyleBackColor = True
+        '
         'FrmEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
@@ -588,4 +620,6 @@ Partial Class FrmEmail
     Friend WithEvents ChkNoText As Windows.Forms.CheckBox
     Friend WithEvents ImgTack As Windows.Forms.PictureBox
     Friend WithEvents BtnReturn As Windows.Forms.Button
+    Friend WithEvents BtnPhone As Windows.Forms.Button
+    Friend WithEvents BtnMail As Windows.Forms.Button
 End Class

@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Automatic keyboard")>
 <Assembly: AssemblyCompany("netWYrks")>
 <Assembly: AssemblyProduct("")>
-<Assembly: AssemblyCopyright("(c) Eric Hindle 2021-23")>
+<Assembly: AssemblyCopyright("(c) Eric Hindle 2021-24")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -36,5 +36,5 @@ Imports System.Runtime.InteropServices
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("2.14.2.*")>
+<Assembly: AssemblyVersion("2.15.0.*")>
 <Assembly: AssemblyFileVersion("2.15.0.0")>
