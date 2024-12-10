@@ -37,6 +37,7 @@ Public Class FrmButtonList
     Private ReadOnly iDragBtnIndex As Integer
     Private oSenderRow As TypeRightDataSet.sendersRow
     Private redClockText As String
+    Private isClipboardOnly As Boolean
 #End Region
 #Region "form control handlers"
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -81,11 +82,8 @@ Public Class FrmButtonList
             DrawSenderButtons()
         End If
         lResizeActive = True
-        WhiteClock.Visible = True
-        GreenClock.Visible = False
-        RedClock.Visible = False
-        DelayTimer.Enabled = False
-        bLockClock = False
+        InitialiseClock()
+        InitialiseClipboardOnly()
         If bMinimise Then
             WindowState = FormWindowState.Minimized
         Else
@@ -94,6 +92,19 @@ Public Class FrmButtonList
         isLoading = False
         SetTopMost()
     End Sub
+    Private Sub InitialiseClipboardOnly()
+        isClipboardOnly = False
+        PicClipOn.Visible = False
+        PicClipOff.Visible = True
+    End Sub
+    Private Sub InitialiseClock()
+        WhiteClock.Visible = True
+        GreenClock.Visible = False
+        RedClock.Visible = False
+        DelayTimer.Enabled = False
+        bLockClock = False
+    End Sub
+
     Private Sub BtnReDraw_Click(sender As Object, e As EventArgs) Handles BtnReDraw.Click
         RedrawButtons()
     End Sub
@@ -354,20 +365,22 @@ Public Class FrmButtonList
             strKeyText = GetDBFieldValues(strKeyText, oSenderRow)
             strKeyText = EditFieldValues(strKeyText, ReplaceType.None)
             Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
-            If GreenClock.Visible = True Then
-                RedClock.Visible = True
-                GreenClock.Visible = False
-                DelayTimer.Interval = iDelay
-                ProgressBar1.Maximum = iDelay
-                ProgressBar1.Value = iDelay
-                ProgressBar1.Visible = True
-                ProgressBar1.BringToFront()
-                DelayTimer.Enabled = True
-                ProgressTimer.Enabled = True
-                redClockText = strKeyText
-            Else
-                SendKeys.Send("%{ESC}")
-                SendKeys.Send(strKeyText)
+            If Not isClipboardOnly Then
+                If GreenClock.Visible = True Then
+                    RedClock.Visible = True
+                    GreenClock.Visible = False
+                    DelayTimer.Interval = iDelay
+                    ProgressBar1.Maximum = iDelay
+                    ProgressBar1.Value = iDelay
+                    ProgressBar1.Visible = True
+                    ProgressBar1.BringToFront()
+                    DelayTimer.Enabled = True
+                    ProgressTimer.Enabled = True
+                    redClockText = strKeyText
+                Else
+                    SendKeys.Send("%{ESC}")
+                    SendKeys.Send(strKeyText)
+                End If
             End If
         End If
     End Sub
@@ -598,6 +611,16 @@ Public Class FrmButtonList
         SetTopMost()
 
     End Sub
-
+    Private Sub PicClipOff_Click(sender As Object, e As EventArgs) Handles PicClipOff.Click
+        isClipboardOnly = True
+        PicClipOff.Visible = False
+        PicClipOn.Visible = True
+        InitialiseClock()
+    End Sub
+    Private Sub PicClipOn_Click(sender As Object, e As EventArgs) Handles PicClipOn.Click
+        isClipboardOnly = False
+        PicClipOff.Visible = True
+        PicClipOn.Visible = False
+    End Sub
 #End Region
 End Class

@@ -285,6 +285,8 @@
   <ItemGroup>
     <Content Include="images\cancel.bmp" />
     <Content Include="images\check.bmp" />
+    <None Include="images\clipoff.bmp" />
+    <None Include="images\clipon.bmp" />
     <Content Include="images\CLOCK01.ICO" />
     <Content Include="images\CLOCK02.ICO" />
     <Content Include="images\CLOCK03.ICO" />

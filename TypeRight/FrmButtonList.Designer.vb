@@ -65,6 +65,8 @@ Partial Class FrmButtonList
         Me.PicOptions = New System.Windows.Forms.PictureBox()
         Me.PicLock = New System.Windows.Forms.PictureBox()
         Me.RedClock = New System.Windows.Forms.PictureBox()
+        Me.PicClipOff = New System.Windows.Forms.PictureBox()
+        Me.PicClipOn = New System.Windows.Forms.PictureBox()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.GroupButtonPanel = New System.Windows.Forms.Panel()
         Me.DelayTimer = New System.Windows.Forms.Timer(Me.components)
@@ -85,6 +87,8 @@ Partial Class FrmButtonList
         CType(Me.PicOptions, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicLock, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RedClock, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PicClipOff, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PicClipOn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -105,7 +109,7 @@ Partial Class FrmButtonList
         Me.GrpTop.Margin = New System.Windows.Forms.Padding(0)
         Me.GrpTop.Name = "GrpTop"
         Me.GrpTop.Padding = New System.Windows.Forms.Padding(0)
-        Me.GrpTop.Size = New System.Drawing.Size(138, 62)
+        Me.GrpTop.Size = New System.Drawing.Size(205, 62)
         Me.GrpTop.TabIndex = 0
         Me.GrpTop.TabStop = False
         '
@@ -160,13 +164,13 @@ Partial Class FrmButtonList
         Me.cbNames.FormattingEnabled = True
         Me.cbNames.Location = New System.Drawing.Point(7, 37)
         Me.cbNames.Name = "cbNames"
-        Me.cbNames.Size = New System.Drawing.Size(124, 21)
+        Me.cbNames.Size = New System.Drawing.Size(191, 21)
         Me.cbNames.TabIndex = 1
         '
         'BtnReDraw
         '
         Me.BtnReDraw.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnReDraw.Location = New System.Drawing.Point(105, 12)
+        Me.BtnReDraw.Location = New System.Drawing.Point(172, 12)
         Me.BtnReDraw.Name = "BtnReDraw"
         Me.BtnReDraw.Size = New System.Drawing.Size(31, 20)
         Me.BtnReDraw.TabIndex = 0
@@ -335,11 +339,13 @@ Partial Class FrmButtonList
         Me.GrpBottom.Controls.Add(Me.PicOptions)
         Me.GrpBottom.Controls.Add(Me.PicLock)
         Me.GrpBottom.Controls.Add(Me.RedClock)
+        Me.GrpBottom.Controls.Add(Me.PicClipOff)
+        Me.GrpBottom.Controls.Add(Me.PicClipOn)
         Me.GrpBottom.Location = New System.Drawing.Point(1, 564)
         Me.GrpBottom.Margin = New System.Windows.Forms.Padding(0)
         Me.GrpBottom.Name = "GrpBottom"
         Me.GrpBottom.Padding = New System.Windows.Forms.Padding(0)
-        Me.GrpBottom.Size = New System.Drawing.Size(138, 32)
+        Me.GrpBottom.Size = New System.Drawing.Size(205, 32)
         Me.GrpBottom.TabIndex = 3
         Me.GrpBottom.TabStop = False
         '
@@ -381,7 +387,7 @@ Partial Class FrmButtonList
         '
         Me.PicExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PicExit.Image = Global.TypeRight.My.Resources.Resources.cancel
-        Me.PicExit.Location = New System.Drawing.Point(115, 11)
+        Me.PicExit.Location = New System.Drawing.Point(182, 11)
         Me.PicExit.Name = "PicExit"
         Me.PicExit.Size = New System.Drawing.Size(16, 16)
         Me.PicExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -434,6 +440,29 @@ Partial Class FrmButtonList
         Me.ToolTip2.SetToolTip(Me.RedClock, "Timer running")
         Me.RedClock.Visible = False
         '
+        'PicClipOff
+        '
+        Me.PicClipOff.Image = Global.TypeRight.My.Resources.Resources.clipoff
+        Me.PicClipOff.Location = New System.Drawing.Point(115, 11)
+        Me.PicClipOff.Name = "PicClipOff"
+        Me.PicClipOff.Size = New System.Drawing.Size(16, 16)
+        Me.PicClipOff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PicClipOff.TabIndex = 8
+        Me.PicClipOff.TabStop = False
+        Me.ToolTip2.SetToolTip(Me.PicClipOff, "Clipboard only (off)")
+        '
+        'PicClipOn
+        '
+        Me.PicClipOn.Image = Global.TypeRight.My.Resources.Resources.clipon
+        Me.PicClipOn.Location = New System.Drawing.Point(115, 11)
+        Me.PicClipOn.Name = "PicClipOn"
+        Me.PicClipOn.Size = New System.Drawing.Size(16, 16)
+        Me.PicClipOn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PicClipOn.TabIndex = 9
+        Me.PicClipOn.TabStop = False
+        Me.ToolTip2.SetToolTip(Me.PicClipOn, "Clipboard only (on)")
+        Me.PicClipOn.Visible = False
+        '
         'NotifyIcon1
         '
         Me.NotifyIcon1.BalloonTipText = "TypeRight from NetWYrks"
@@ -449,7 +478,7 @@ Partial Class FrmButtonList
         Me.GroupButtonPanel.BackColor = System.Drawing.SystemColors.ControlLight
         Me.GroupButtonPanel.Location = New System.Drawing.Point(0, 65)
         Me.GroupButtonPanel.Name = "GroupButtonPanel"
-        Me.GroupButtonPanel.Size = New System.Drawing.Size(138, 157)
+        Me.GroupButtonPanel.Size = New System.Drawing.Size(205, 157)
         Me.GroupButtonPanel.TabIndex = 4
         '
         'DelayTimer
@@ -462,7 +491,7 @@ Partial Class FrmButtonList
         Me.SenderButtonPanel.BackColor = System.Drawing.SystemColors.ControlLight
         Me.SenderButtonPanel.Location = New System.Drawing.Point(0, 228)
         Me.SenderButtonPanel.Name = "SenderButtonPanel"
-        Me.SenderButtonPanel.Size = New System.Drawing.Size(138, 333)
+        Me.SenderButtonPanel.Size = New System.Drawing.Size(205, 333)
         Me.SenderButtonPanel.TabIndex = 5
         '
         'ProgressTimer
@@ -476,7 +505,7 @@ Partial Class FrmButtonList
         'FrmButtonList
         '
         Me.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.ClientSize = New System.Drawing.Size(140, 598)
+        Me.ClientSize = New System.Drawing.Size(207, 598)
         Me.ControlBox = False
         Me.Controls.Add(Me.SenderButtonPanel)
         Me.Controls.Add(Me.GroupButtonPanel)
@@ -503,6 +532,8 @@ Partial Class FrmButtonList
         CType(Me.PicOptions, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PicLock, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RedClock, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PicClipOff, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PicClipOn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TypeRightDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -557,4 +588,6 @@ Partial Class FrmButtonList
     Friend WithEvents RemoveGroupToolStripMenuItem As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolTip2 As Windows.Forms.ToolTip
     Friend WithEvents PicEmail As Windows.Forms.PictureBox
+    Friend WithEvents PicClipOff As Windows.Forms.PictureBox
+    Friend WithEvents PicClipOn As Windows.Forms.PictureBox
 End Class
