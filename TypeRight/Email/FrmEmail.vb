@@ -202,7 +202,7 @@ Public Class FrmEmail
             Dim textlen As Integer = oBox.TextLength
             Dim startpos As Integer = oBox.SelectionStart
             If textlen = 0 Then
-                oBox.Text = _string.Trim
+                oBox.Text = WebUtility.UrlDecode(_string.Trim)
             Else
                 If startpos = 0 Then
                     oBox.SelectedText = _string.TrimStart
@@ -223,7 +223,7 @@ Public Class FrmEmail
                 _string = _splitstring1(0)
                 Dim _splitstring2 As String() = Split(_splitstring1(1), "=", 2)
                 If _splitstring2(0).ToLower = SUBJECT Then
-                    TxtSubject.Text = _splitstring2(1).Trim
+                    TxtSubject.Text = WebUtility.UrlDecode(_splitstring2(1).Trim)
                 End If
             End If
             TxtTo.Text = _string.Trim
@@ -387,9 +387,5 @@ Public Class FrmEmail
             BringToFront()
         End If
     End Sub
-
-
-
-
 #End Region
 End Class

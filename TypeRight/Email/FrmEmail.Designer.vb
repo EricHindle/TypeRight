@@ -37,6 +37,8 @@ Partial Class FrmEmail
         Me.BtnLastTo = New System.Windows.Forms.Button()
         Me.ImgTack = New System.Windows.Forms.PictureBox()
         Me.BtnReturn = New System.Windows.Forms.Button()
+        Me.BtnPhone = New System.Windows.Forms.Button()
+        Me.BtnMail = New System.Windows.Forms.Button()
         Me.TxtTo = New System.Windows.Forms.TextBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MnuPaste = New System.Windows.Forms.ToolStripMenuItem()
@@ -66,8 +68,6 @@ Partial Class FrmEmail
         Me.TxtFromName = New System.Windows.Forms.TextBox()
         Me.BtnReset = New System.Windows.Forms.Button()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.BtnPhone = New System.Windows.Forms.Button()
-        Me.BtnMail = New System.Windows.Forms.Button()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -220,6 +220,34 @@ Partial Class FrmEmail
         Me.BtnReturn.Text = "8"
         Me.ToolTip9.SetToolTip(Me.BtnReturn, "Return")
         Me.BtnReturn.UseVisualStyleBackColor = True
+        '
+        'BtnPhone
+        '
+        Me.BtnPhone.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnPhone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnPhone.Font = New System.Drawing.Font("Wingdings", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
+        Me.BtnPhone.Location = New System.Drawing.Point(584, 359)
+        Me.BtnPhone.Margin = New System.Windows.Forms.Padding(0)
+        Me.BtnPhone.Name = "BtnPhone"
+        Me.BtnPhone.Size = New System.Drawing.Size(26, 23)
+        Me.BtnPhone.TabIndex = 23
+        Me.BtnPhone.Text = "("
+        Me.ToolTip9.SetToolTip(Me.BtnPhone, "Phone")
+        Me.BtnPhone.UseVisualStyleBackColor = True
+        '
+        'BtnMail
+        '
+        Me.BtnMail.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnMail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BtnMail.Font = New System.Drawing.Font("Wingdings", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
+        Me.BtnMail.Location = New System.Drawing.Point(549, 359)
+        Me.BtnMail.Margin = New System.Windows.Forms.Padding(0)
+        Me.BtnMail.Name = "BtnMail"
+        Me.BtnMail.Size = New System.Drawing.Size(26, 23)
+        Me.BtnMail.TabIndex = 24
+        Me.BtnMail.Text = "*"
+        Me.ToolTip9.SetToolTip(Me.BtnMail, "Email")
+        Me.BtnMail.UseVisualStyleBackColor = True
         '
         'TxtTo
         '
@@ -520,34 +548,6 @@ Partial Class FrmEmail
         Me.BtnReset.TabIndex = 2
         Me.BtnReset.Text = "Reset"
         Me.BtnReset.UseVisualStyleBackColor = False
-        '
-        'BtnPhone
-        '
-        Me.BtnPhone.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnPhone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnPhone.Font = New System.Drawing.Font("Wingdings", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnPhone.Location = New System.Drawing.Point(584, 359)
-        Me.BtnPhone.Margin = New System.Windows.Forms.Padding(0)
-        Me.BtnPhone.Name = "BtnPhone"
-        Me.BtnPhone.Size = New System.Drawing.Size(26, 23)
-        Me.BtnPhone.TabIndex = 23
-        Me.BtnPhone.Text = "("
-        Me.ToolTip9.SetToolTip(Me.BtnPhone, "Phone")
-        Me.BtnPhone.UseVisualStyleBackColor = True
-        '
-        'BtnMail
-        '
-        Me.BtnMail.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnMail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BtnMail.Font = New System.Drawing.Font("Wingdings", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.BtnMail.Location = New System.Drawing.Point(549, 359)
-        Me.BtnMail.Margin = New System.Windows.Forms.Padding(0)
-        Me.BtnMail.Name = "BtnMail"
-        Me.BtnMail.Size = New System.Drawing.Size(26, 23)
-        Me.BtnMail.TabIndex = 24
-        Me.BtnMail.Text = "*"
-        Me.ToolTip9.SetToolTip(Me.BtnMail, "Email")
-        Me.BtnMail.UseVisualStyleBackColor = True
         '
         'FrmEmail
         '
