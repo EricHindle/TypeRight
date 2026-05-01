@@ -1,5 +1,5 @@
-﻿' Hindleware
-' Copyright (c) 2022-23 Eric Hindle
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -16,6 +16,8 @@ Imports HindlewareLib.Email
 Imports HindlewareLib.Logging
 Imports HindlewareLib.Security
 Imports NbuttonControlLibrary
+Imports TypeRight.Domain
+Imports TypeRight.TypeRightDataSet1
 Public Class FrmEmail
 #Region "constants"
     Private Const MAILTO As String = "mailto:"
@@ -24,8 +26,8 @@ Public Class FrmEmail
 #Region "variables"
     Private oButtonList As New List(Of Nbutton)
     Private isLoading As Boolean = True
-    Private oSenderRow As TypeRightDataSet.sendersRow
-    Private oSmtpTable As TypeRightDataSet.smtpDataTable
+    Private oSenderRow As sendersRow
+    Private oSmtpTable As smtpDataTable
     Private ReadOnly aAttachList As New List(Of Attachment)
     Private isMailOnTop As Boolean
 #End Region
@@ -387,5 +389,6 @@ Public Class FrmEmail
             BringToFront()
         End If
     End Sub
+
 #End Region
 End Class

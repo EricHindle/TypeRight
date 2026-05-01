@@ -28,13 +28,13 @@ Partial Class FrmGroupMaint
         Me.BtnUpdate = New System.Windows.Forms.Button()
         Me.cmbGroups = New System.Windows.Forms.ComboBox()
         Me.ButtongroupsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
+        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet1()
         Me.TxtNewGroup = New System.Windows.Forms.TextBox()
         Me.LblTrans = New System.Windows.Forms.Label()
         Me.LblThisBtn = New System.Windows.Forms.Label()
         Me.TxtGrpName = New System.Windows.Forms.TextBox()
         Me.TxtGrpNumber = New System.Windows.Forms.TextBox()
-        Me.ButtongroupsTableAdapter = New TypeRight.TypeRightDataSetTableAdapters.buttongroupsTableAdapter()
+        '     Me.ButtongroupsTableAdapter = New TypeRight.TypeRightDataSetTableAdapters.buttongroupsTableAdapter()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblGroupName = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
@@ -133,7 +133,7 @@ Partial Class FrmGroupMaint
         '
         'ButtongroupsTableAdapter
         '
-        Me.ButtongroupsTableAdapter.ClearBeforeFill = True
+        '   Me.ButtongroupsTableAdapter.ClearBeforeFill = True
         '
         'Label1
         '
@@ -269,9 +269,9 @@ Partial Class FrmGroupMaint
     Friend WithEvents LblThisBtn As Windows.Forms.Label
     Friend WithEvents TxtGrpName As Windows.Forms.TextBox
     Friend WithEvents TxtGrpNumber As Windows.Forms.TextBox
-    Friend WithEvents TypeRightDataSet As TypeRightDataSet
+    Friend WithEvents TypeRightDataSet As TypeRightDataSet1
     Friend WithEvents ButtongroupsBindingSource As Windows.Forms.BindingSource
-    Friend WithEvents ButtongroupsTableAdapter As TypeRightDataSetTableAdapters.buttongroupsTableAdapter
+    '  Friend WithEvents ButtongroupsTableAdapter As TypeRightDataSetTableAdapters.buttongroupsTableAdapter
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents LblGroupName As Windows.Forms.Label
     Friend WithEvents StatusStrip1 As Windows.Forms.StatusStrip

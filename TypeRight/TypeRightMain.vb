@@ -1,5 +1,5 @@
-﻿' Hindleware
-' Copyright (c) 2022-23 Eric Hindle
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -10,7 +10,6 @@ Imports System.Globalization
 Imports System.Reflection
 Imports System.Windows.Forms
 Imports HindlewareLib.Logging
-Imports HindlewareLib.Security
 Imports Microsoft.VisualBasic.FileIO
 Module TypeRightMain
 #Region "public variables"
@@ -93,16 +92,11 @@ Module TypeRightMain
 #End Region
 #Region "common subroutines"
     Public Sub InitialiseApplication()
-        Dim thisVersion As String = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
-        ' Preserve previous version user application settings
-        Dim oldVersion As String = My.Settings.Version
-        If oldVersion <> thisVersion Then
+        If My.Settings.callUpgrade = 0 Then
             My.Settings.Upgrade()
-            LogUtil.Info("Version change to " & thisVersion, MODULE_NAME)
-            LogUtil.Info("Upgrading settings", MODULE_NAME)
+            My.Settings.callUpgrade = 1
+            My.Settings.Save()
         End If
-        My.Settings.Version = thisVersion
-        My.Settings.Save()
         sLicName = ""
         sLicCode = ""
         isPro = False
@@ -121,7 +115,6 @@ Module TypeRightMain
         End If
         ' Load the options from the registry
         LoadOptions()
-        TestDatabase()
     End Sub
     Public Sub LoadOptions()
         iButtonWidth = My.Settings.ButtonWidth          ' Button width

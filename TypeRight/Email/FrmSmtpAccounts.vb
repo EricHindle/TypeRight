@@ -1,5 +1,5 @@
-﻿' Hindleware
-' Copyright (c) 2022-23 Eric Hindle
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -8,9 +8,11 @@
 Imports System.Windows.Forms
 Imports HindlewareLib.Domain.Objects
 Imports HindlewareLib.Logging
+Imports TypeRight.Domain
+Imports TypeRight.TypeRightDataSet1
 Public Class FrmSmtpAccounts
 #Region "variables"
-    Private _smtpTable As TypeRightDataSet.smtpDataTable
+    Private _smtpTable As smtpDataTable
     Private isLoading As Boolean = False
 #End Region
 #Region "form control handlers"

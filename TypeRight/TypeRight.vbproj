@@ -10,7 +10,7 @@
     <AssemblyName>TypeRight</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>false</Deterministic>
@@ -79,6 +79,9 @@
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml" />
+    <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -88,16 +91,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="TypeRightDataSet.xsc">
-      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
+    <None Include="Domain\TypeRightDataSet1.xsc">
+      <DependentUpon>TypeRightDataSet1.xsd</DependentUpon>
     </None>
-    <None Include="TypeRightDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TypeRightDataSet.Designer.vb</LastGenOutput>
+    <None Include="Domain\TypeRightDataSet1.xsd">
       <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TypeRightDataSet1.Designer.vb</LastGenOutput>
     </None>
-    <None Include="TypeRightDataSet.xss">
-      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
+    <None Include="Domain\TypeRightDataSet1.xss">
+      <DependentUpon>TypeRightDataSet1.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -114,26 +117,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buttons\ButtonUtil.vb" />
-    <Compile Include="Data\Backup\FrmBackup.Designer.vb">
+    <Compile Include="Domain\Backup\FrmBackup.Designer.vb">
       <DependentUpon>FrmBackup.vb</DependentUpon>
     </Compile>
-    <Compile Include="Data\Backup\FrmBackup.vb">
+    <Compile Include="Domain\Backup\FrmBackup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Data\Backup\FrmRestore.Designer.vb">
+    <Compile Include="Domain\Backup\FrmRestore.Designer.vb">
       <DependentUpon>FrmRestore.vb</DependentUpon>
     </Compile>
-    <Compile Include="Data\Backup\FrmRestore.vb">
+    <Compile Include="Domain\Backup\FrmRestore.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Data\Builders\ButtonGroupBuilder.vb" />
-    <Compile Include="Data\Builders\SenderButtonBuilder.vb" />
-    <Compile Include="Data\Builders\SmtpAccountBuilder.vb" />
-    <Compile Include="Data\ButtonGroup.vb" />
-    <Compile Include="Data\DatabaseFunctions.vb" />
-    <Compile Include="Data\Sender.vb" />
-    <Compile Include="Data\Builders\SenderBuilder.vb" />
-    <Compile Include="Data\SenderButton.vb" />
+    <Compile Include="Domain\Builders\ButtonGroupBuilder.vb" />
+    <Compile Include="Domain\Builders\ButtonBuilder.vb" />
+    <Compile Include="Domain\Builders\SenderButtonBuilder.vb" />
+    <Compile Include="Domain\Builders\SmtpAccountBuilder.vb" />
+    <Compile Include="Domain\Objects\ButtonGroup.vb" />
+    <Compile Include="Domain\ModDatabaseFunctions.vb" />
+    <Compile Include="Domain\Objects\Sender.vb" />
+    <Compile Include="Domain\Builders\SenderBuilder.vb" />
+    <Compile Include="Domain\Objects\SenderButton.vb" />
     <Compile Include="FrmButtonList.Designer.vb">
       <DependentUpon>FrmButtonList.vb</DependentUpon>
     </Compile>
@@ -188,7 +192,6 @@
     <Compile Include="FrmSplash.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GlobalSettings.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,13 +210,13 @@
     </Compile>
     <Compile Include="NRegisterApp.vb" />
     <Compile Include="NTextUtil.vb" />
-    <Compile Include="TypeRightDataSet.Designer.vb">
+    <Compile Include="Domain\TypeRightDataSet1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
+      <DependentUpon>TypeRightDataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="TypeRightDataSet.vb">
-      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
+    <Compile Include="Domain\TypeRightDataSet1.vb">
+      <DependentUpon>TypeRightDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="TypeRightMain.vb" />
   </ItemGroup>
@@ -228,12 +231,13 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Backup\FrmBackup.resx">
+    <EmbeddedResource Include="Domain\Backup\FrmBackup.resx">
       <DependentUpon>FrmBackup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Data\Backup\FrmRestore.resx">
+    <EmbeddedResource Include="Domain\Backup\FrmRestore.resx">
       <DependentUpon>FrmRestore.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Email\FrmSmtpAccounts.resx">

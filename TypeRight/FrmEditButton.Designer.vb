@@ -64,7 +64,7 @@ Partial Class FrmEditButton
         Me.BtnTab = New System.Windows.Forms.Button()
         Me.BtnCloseCurlyBracket = New System.Windows.Forms.Button()
         Me.BtnOpenCurlyBracket = New System.Windows.Forms.Button()
-        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
+        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet1()
         Me.TxtPreview = New System.Windows.Forms.RichTextBox()
         Me.TxtValue = New System.Windows.Forms.RichTextBox()
         Me.mnuEdit = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -990,7 +990,7 @@ Partial Class FrmEditButton
     Friend WithEvents MnuTitleCase As Windows.Forms.ToolStripMenuItem
     Friend WithEvents MnuToggleCase As Windows.Forms.ToolStripMenuItem
     Friend WithEvents txtCaption As Windows.Forms.TextBox
-    Friend WithEvents TypeRightDataSet As TypeRightDataSet
+    Friend WithEvents TypeRightDataSet As TypeRightDataSet1
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents Label6 As Windows.Forms.Label
     Friend WithEvents LblErrs As Windows.Forms.Label

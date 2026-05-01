@@ -1,4 +1,10 @@
-﻿Public Class Nbutton
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+Public Class Nbutton
     Public Enum DataSource
         Undefined
         Group
@@ -63,7 +69,6 @@
             UpdateFont()
         End Set
     End Property
-
     Public Property FontName() As String
         Get
             Return m_Fontname
@@ -151,8 +156,6 @@
             m_Encrypt = value
         End Set
     End Property
-
-
     Public Sub New()
         InitializeComponent()
         m_Id = -1

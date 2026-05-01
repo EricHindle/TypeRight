@@ -1,5 +1,5 @@
-﻿' Hindleware
-' Copyright (c) 2022-23 Eric Hindle
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -8,6 +8,8 @@
 Imports System.Windows.Forms
 Imports HindlewareLib.Logging
 Imports HindlewareLib.Security
+Imports TypeRight.Domain
+Imports TypeRight.TypeRightDataSet1
 Public Class FrmDbUpdate
 #Region "constants"
     Private Const COMPLETE As String = " - complete"
@@ -36,12 +38,12 @@ Public Class FrmDbUpdate
     Private isDataChanged As Boolean
 #End Region
 #Region "database"
-    Dim oSndTable As New TypeRight.TypeRightDataSet.sendersDataTable
-    ReadOnly oBtnTable As New TypeRight.TypeRightDataSet.buttonDataTable
-    ReadOnly oSndrTable As New TypeRight.TypeRightDataSet.sendersDataTable
-    ReadOnly oSndrBtnTable As New TypeRight.TypeRightDataSet.senderButtonDataTable
-    ReadOnly oGrpTable As New TypeRight.TypeRightDataSet.buttongroupsDataTable
-    Dim oSndRow As TypeRight.TypeRightDataSet.sendersRow = Nothing
+    Dim oSndTable As New sendersDataTable
+    ReadOnly oBtnTable As New buttonDataTable
+    ReadOnly oSndrTable As New sendersDataTable
+    ReadOnly oSndrBtnTable As New senderButtonDataTable
+    ReadOnly oGrpTable As New buttongroupsDataTable
+    Dim oSndRow As sendersRow = Nothing
 #End Region
 #Region "properties"
     Private _senderId As Integer
@@ -175,7 +177,7 @@ Public Class FrmDbUpdate
         oSndTable = GetSenderTable()
         oSndRow = Nothing
         iCurrSnd = 0
-        For Each oRow As TypeRightDataSet.sendersRow In oSndTable.Rows
+        For Each oRow As sendersRow In oSndTable.Rows
             If oRow.SenderId = _senderId Then
                 oSndRow = oRow
                 Exit For
@@ -239,59 +241,46 @@ Public Class FrmDbUpdate
             ClearForm()
             TxtId.Text = CStr(.SenderId)
             LblId.Text = TxtId.Text
-            CbTitle.SelectedIndex = If(.IsTitleNull, -1, CbTitle.FindString(.Title))
+            CbTitle.SelectedIndex = CbTitle.FindString(.Title)
             TxtForename.Text = .FirstName
             TxtSurname.Text = .LastName
-            If Not .IsAddress1Null Then
-                TxtAdd1.Text = .Address1
-            End If
-            If Not .IsAddress2Null Then
-                TxtAdd2.Text = .Address2
-            End If
-            If Not .IsTownNull Then
-                TxtTown.Text = .Town
-            End If
-            If Not .IsCountyNull Then
-                TxtCounty.Text = .County
-            End If
-            If Not .IsCountryNull Then
-                TxtCountry.Text = .Country
-            End If
-            If Not .IsPhoneNull Then
-                TxtPhone.Text = .Phone
-            End If
-            If Not .IsEmailNull Then
-                TxtEmail.Text = .Email
-            End If
+
+            TxtAdd1.Text = .Address1
+
+            TxtAdd2.Text = .Address2
+
+            TxtTown.Text = .Town
+
+            TxtCounty.Text = .County
+
+            TxtCountry.Text = .Country
+
+            TxtPhone.Text = .Phone
+
+            TxtEmail.Text = .Email
+
             If Not .IsdobNull Then
                 DtpDob.Value = .dob
                 IntAge = Calc_age(.dob)
                 TxtAge.Text = Format(IntAge)
             End If
-            If Not .IsPostCodeNull Then
-                TxtPostCode.Text = .PostCode
-            End If
-            If Not .IsMobileNull Then
-                TxtMobile.Text = .Mobile
-            End If
-            If Not .IsPasswdNull Then
-                TxtPassword.Text = If(String.IsNullOrEmpty(.Passwd), "", EncryptionUtil.DecryptText(.Passwd))
-            End If
-            If Not .IsSecretWordNull Then
-                TxtSWord.Text = If(String.IsNullOrEmpty(.SecretWord), "", EncryptionUtil.DecryptText(.SecretWord))
-            End If
-            If Not .IsUsernameNull Then
-                TxtUsername.Text = .Username
-            End If
-            If Not .IsgenderNull Then
-                CbGender.SelectedIndex = CbGender.FindString(.gender)
-            End If
-            If Not .IsOccupationNull Then
-                CbOcc.SelectedIndex = CbOcc.FindString(.Occupation)
-            End If
-            If Not .IsMaritalStatusNull Then
-                CbMarStat.SelectedIndex = CbMarStat.FindString(.MaritalStatus)
-            End If
+
+            TxtPostCode.Text = .PostCode
+
+            TxtMobile.Text = .Mobile
+
+            TxtPassword.Text = If(String.IsNullOrEmpty(.Passwd), "", EncryptionUtil.DecryptText(.Passwd))
+
+            TxtSWord.Text = If(String.IsNullOrEmpty(.SecretWord), "", EncryptionUtil.DecryptText(.SecretWord))
+
+            TxtUsername.Text = .Username
+
+            CbGender.SelectedIndex = CbGender.FindString(.gender)
+
+            CbOcc.SelectedIndex = CbOcc.FindString(.Occupation)
+
+            CbMarStat.SelectedIndex = CbMarStat.FindString(.MaritalStatus)
+
         End With
     End Sub
     Private Sub SetAllowUpdate()

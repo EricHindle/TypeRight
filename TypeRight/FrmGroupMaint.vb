@@ -1,5 +1,5 @@
-﻿' Hindleware
-' Copyright (c) 2022-23 Eric Hindle
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -7,6 +7,7 @@
 
 Imports System.Windows.Forms
 Imports HindlewareLib.Logging
+Imports TypeRight.Domain
 
 Public Class FrmGroupMaint
 #Region "database variables"
@@ -69,7 +70,7 @@ Public Class FrmGroupMaint
             Case GroupAction.GRP_CHG
                 UpdateButtonGroupName(TxtGrpName.Text, iActGrp)
             Case GroupAction.GRP_RMV
-                If GetButtonsByGroup(iActGrp).Rows.Count = 0 Then
+                If GetButtonsByGroup(iActGrp).Count = 0 Then
                     DeleteButtonGroup(iActGrp)
                 Else
                     MsgBox("There are buttons in the group. Group cannot be removed", MsgBoxStyle.Exclamation, "Forbidden action")
@@ -82,7 +83,7 @@ Public Class FrmGroupMaint
     Private Sub FrmGroupMaint_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogUtil.Info(My.Resources.LOADING, MyBase.Name)
         GetFormPos(Me, My.Settings.GroupMaintPos)
-        ButtongroupsTableAdapter.Fill(TypeRightDataSet.buttongroups)
+        '    ButtongroupsTableAdapter.Fill(TypeRightDataSet.buttongroups)
         ClearForm()
         TxtGrpNumber.Text = CStr(iCurrGrp)
         oBtnGrp = GetButtonGroupById(iCurrGrp)

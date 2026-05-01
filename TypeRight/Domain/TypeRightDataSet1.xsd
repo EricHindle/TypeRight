@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TypeRightDataSet1" targetNamespace="http://tempuri.org/TypeRightDataSet1.xsd" xmlns:mstns="http://tempuri.org/TypeRightDataSet1.xsd" xmlns="http://tempuri.org/TypeRightDataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TypeRightDataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TypeRightDataSet1" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TypeRightDataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="buttongroups" msprop:Generator_RowEvHandlerName="buttongroupsRowChangeEventHandler" msprop:Generator_RowDeletedName="buttongroupsRowDeleted" msprop:Generator_RowDeletingName="buttongroupsRowDeleting" msprop:Generator_RowEvArgName="buttongroupsRowChangeEvent" msprop:Generator_TablePropName="buttongroups" msprop:Generator_RowChangedName="buttongroupsRowChanged" msprop:Generator_UserTableName="buttongroups" msprop:Generator_RowChangingName="buttongroupsRowChanging" msprop:Generator_RowClassName="buttongroupsRow" msprop:Generator_TableClassName="buttongroupsDataTable" msprop:Generator_TableVarName="tablebuttongroups">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="buttongroupid" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="buttongroupidColumn" msprop:Generator_ColumnPropNameInRow="buttongroupid" msprop:Generator_UserColumnName="buttongroupid" msprop:Generator_ColumnVarNameInTable="columnbuttongroupid" type="xs:int" />
+              <xs:element name="groupname" msprop:Generator_ColumnPropNameInTable="groupnameColumn" msprop:Generator_ColumnPropNameInRow="groupname" msprop:Generator_UserColumnName="groupname" msprop:Generator_ColumnVarNameInTable="columngroupname">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="button" msprop:Generator_RowEvHandlerName="buttonRowChangeEventHandler" msprop:Generator_RowDeletedName="buttonRowDeleted" msprop:Generator_RowDeletingName="buttonRowDeleting" msprop:Generator_RowEvArgName="buttonRowChangeEvent" msprop:Generator_TablePropName="button" msprop:Generator_RowChangedName="buttonRowChanged" msprop:Generator_UserTableName="button" msprop:Generator_RowChangingName="buttonRowChanging" msprop:Generator_RowClassName="buttonRow" msprop:Generator_TableClassName="buttonDataTable" msprop:Generator_TableVarName="tablebutton">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="buttonId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="buttonIdColumn" msprop:Generator_ColumnPropNameInRow="buttonId" msprop:Generator_UserColumnName="buttonId" msprop:Generator_ColumnVarNameInTable="columnbuttonId" type="xs:int" />
+              <xs:element name="buttonGroup" msprop:Generator_ColumnPropNameInTable="buttonGroupColumn" msprop:Generator_ColumnPropNameInRow="buttonGroup" msprop:Generator_UserColumnName="buttonGroup" msprop:Generator_ColumnVarNameInTable="columnbuttonGroup" type="xs:int" default="-1" minOccurs="0" />
+              <xs:element name="buttonSeq" msprop:Generator_ColumnPropNameInTable="buttonSeqColumn" msprop:Generator_ColumnPropNameInRow="buttonSeq" msprop:Generator_UserColumnName="buttonSeq" msprop:Generator_ColumnVarNameInTable="columnbuttonSeq" type="xs:int" />
+              <xs:element name="buttonHint" msprop:Generator_ColumnPropNameInTable="buttonHintColumn" msprop:Generator_ColumnPropNameInRow="buttonHint" msprop:Generator_UserColumnName="buttonHint" msprop:Generator_ColumnVarNameInTable="columnbuttonHint" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="buttonValue" msprop:Generator_ColumnPropNameInTable="buttonValueColumn" msprop:Generator_ColumnPropNameInRow="buttonValue" msprop:Generator_UserColumnName="buttonValue" msprop:Generator_ColumnVarNameInTable="columnbuttonValue" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="buttonFont" msprop:Generator_ColumnPropNameInTable="buttonFontColumn" msprop:Generator_ColumnPropNameInRow="buttonFont" msprop:Generator_UserColumnName="buttonFont" msprop:Generator_ColumnVarNameInTable="columnbuttonFont">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="buttonBold" msprop:Generator_ColumnPropNameInTable="buttonBoldColumn" msprop:Generator_ColumnPropNameInRow="buttonBold" msprop:Generator_UserColumnName="buttonBold" msprop:Generator_ColumnVarNameInTable="columnbuttonBold" type="xs:unsignedByte" default="0" />
+              <xs:element name="buttonFontSize" msprop:Generator_ColumnPropNameInTable="buttonFontSizeColumn" msprop:Generator_ColumnPropNameInRow="buttonFontSize" msprop:Generator_UserColumnName="buttonFontSize" msprop:Generator_ColumnVarNameInTable="columnbuttonFontSize" type="xs:decimal" default="10" />
+              <xs:element name="buttonItalic" msprop:Generator_ColumnPropNameInTable="buttonItalicColumn" msprop:Generator_ColumnPropNameInRow="buttonItalic" msprop:Generator_UserColumnName="buttonItalic" msprop:Generator_ColumnVarNameInTable="columnbuttonItalic" type="xs:unsignedByte" />
+              <xs:element name="buttonEncrypt" msprop:Generator_ColumnPropNameInTable="buttonEncryptColumn" msprop:Generator_ColumnPropNameInRow="buttonEncrypt" msprop:Generator_UserColumnName="buttonEncrypt" msprop:Generator_ColumnVarNameInTable="columnbuttonEncrypt" type="xs:unsignedByte" default="0" />
+              <xs:element name="buttonText" msprop:Generator_ColumnPropNameInTable="buttonTextColumn" msprop:Generator_ColumnPropNameInRow="buttonText" msprop:Generator_UserColumnName="buttonText" msprop:Generator_ColumnVarNameInTable="columnbuttonText" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="senders" msprop:Generator_RowEvHandlerName="sendersRowChangeEventHandler" msprop:Generator_RowDeletedName="sendersRowDeleted" msprop:Generator_RowDeletingName="sendersRowDeleting" msprop:Generator_RowEvArgName="sendersRowChangeEvent" msprop:Generator_TablePropName="senders" msprop:Generator_RowChangedName="sendersRowChanged" msprop:Generator_UserTableName="senders" msprop:Generator_RowChangingName="sendersRowChanging" msprop:Generator_RowClassName="sendersRow" msprop:Generator_TableClassName="sendersDataTable" msprop:Generator_TableVarName="tablesenders">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SenderId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="SenderIdColumn" msprop:Generator_ColumnPropNameInRow="SenderId" msprop:Generator_UserColumnName="SenderId" msprop:Generator_ColumnVarNameInTable="columnSenderId" type="xs:int" />
+              <xs:element name="Title" msprop:Generator_ColumnPropNameInTable="TitleColumn" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_UserColumnName="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FirstName" msprop:Generator_ColumnPropNameInTable="FirstNameColumn" msprop:Generator_ColumnPropNameInRow="FirstName" msprop:Generator_UserColumnName="FirstName" msprop:Generator_ColumnVarNameInTable="columnFirstName" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LastName" msprop:Generator_ColumnPropNameInTable="LastNameColumn" msprop:Generator_ColumnPropNameInRow="LastName" msprop:Generator_UserColumnName="LastName" msprop:Generator_ColumnVarNameInTable="columnLastName" default="''" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Address1" msprop:Generator_ColumnPropNameInTable="Address1Column" msprop:Generator_ColumnPropNameInRow="Address1" msprop:Generator_UserColumnName="Address1" msprop:Generator_ColumnVarNameInTable="columnAddress1" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Address2" msprop:Generator_ColumnPropNameInTable="Address2Column" msprop:Generator_ColumnPropNameInRow="Address2" msprop:Generator_UserColumnName="Address2" msprop:Generator_ColumnVarNameInTable="columnAddress2" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Town" msprop:Generator_ColumnPropNameInTable="TownColumn" msprop:Generator_ColumnPropNameInRow="Town" msprop:Generator_UserColumnName="Town" msprop:Generator_ColumnVarNameInTable="columnTown" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="County" msprop:Generator_ColumnPropNameInTable="CountyColumn" msprop:Generator_ColumnPropNameInRow="County" msprop:Generator_UserColumnName="County" msprop:Generator_ColumnVarNameInTable="columnCounty" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Country" msprop:Generator_ColumnPropNameInTable="CountryColumn" msprop:Generator_ColumnPropNameInRow="Country" msprop:Generator_UserColumnName="Country" msprop:Generator_ColumnVarNameInTable="columnCountry" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PostCode" msprop:Generator_ColumnPropNameInTable="PostCodeColumn" msprop:Generator_ColumnPropNameInRow="PostCode" msprop:Generator_UserColumnName="PostCode" msprop:Generator_ColumnVarNameInTable="columnPostCode" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="dob" msprop:Generator_ColumnPropNameInTable="dobColumn" msprop:Generator_ColumnPropNameInRow="dob" msprop:Generator_UserColumnName="dob" msprop:Generator_ColumnVarNameInTable="columndob" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_UserColumnName="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Phone" msprop:Generator_UserColumnName="Phone" msprop:Generator_ColumnPropNameInTable="PhoneColumn" msprop:Generator_ColumnPropNameInRow="Phone" msprop:Generator_ColumnVarNameInTable="columnPhone" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Mobile" msprop:Generator_UserColumnName="Mobile" msprop:Generator_ColumnPropNameInTable="MobileColumn" msprop:Generator_ColumnPropNameInRow="Mobile" msprop:Generator_ColumnVarNameInTable="columnMobile" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Passwd" msprop:Generator_UserColumnName="Passwd" msprop:Generator_ColumnPropNameInTable="PasswdColumn" msprop:Generator_ColumnPropNameInRow="Passwd" msprop:Generator_ColumnVarNameInTable="columnPasswd" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SecretWord" msprop:Generator_UserColumnName="SecretWord" msprop:Generator_ColumnPropNameInTable="SecretWordColumn" msprop:Generator_ColumnPropNameInRow="SecretWord" msprop:Generator_ColumnVarNameInTable="columnSecretWord" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="gender" msprop:Generator_UserColumnName="gender" msprop:Generator_ColumnPropNameInTable="genderColumn" msprop:Generator_ColumnPropNameInRow="gender" msprop:Generator_ColumnVarNameInTable="columngender" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Occupation" msprop:Generator_UserColumnName="Occupation" msprop:Generator_ColumnPropNameInTable="OccupationColumn" msprop:Generator_ColumnPropNameInRow="Occupation" msprop:Generator_ColumnVarNameInTable="columnOccupation" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MaritalStatus" msprop:Generator_UserColumnName="MaritalStatus" msprop:Generator_ColumnPropNameInTable="MaritalStatusColumn" msprop:Generator_ColumnPropNameInRow="MaritalStatus" msprop:Generator_ColumnVarNameInTable="columnMaritalStatus" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Username" msprop:Generator_UserColumnName="Username" msprop:Generator_ColumnPropNameInTable="UsernameColumn" msprop:Generator_ColumnPropNameInRow="Username" msprop:Generator_ColumnVarNameInTable="columnUsername" default="''" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="senderButton" msprop:Generator_RowEvHandlerName="senderButtonRowChangeEventHandler" msprop:Generator_RowDeletedName="senderButtonRowDeleted" msprop:Generator_RowDeletingName="senderButtonRowDeleting" msprop:Generator_RowEvArgName="senderButtonRowChangeEvent" msprop:Generator_TablePropName="senderButton" msprop:Generator_RowChangedName="senderButtonRowChanged" msprop:Generator_UserTableName="senderButton" msprop:Generator_RowChangingName="senderButtonRowChanging" msprop:Generator_RowClassName="senderButtonRow" msprop:Generator_TableClassName="senderButtonDataTable" msprop:Generator_TableVarName="tablesenderButton">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ColumnName" msprop:Generator_ColumnPropNameInTable="ColumnNameColumn" msprop:Generator_ColumnPropNameInRow="ColumnName" msprop:Generator_UserColumnName="ColumnName" msprop:Generator_ColumnVarNameInTable="columnColumnName" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="buttonBold" msprop:Generator_ColumnPropNameInTable="buttonBoldColumn" msprop:Generator_ColumnPropNameInRow="buttonBold" msprop:Generator_UserColumnName="buttonBold" msprop:Generator_ColumnVarNameInTable="columnbuttonBold" type="xs:unsignedByte" default="0" />
+              <xs:element name="buttonItalic" msprop:Generator_ColumnPropNameInTable="buttonItalicColumn" msprop:Generator_ColumnPropNameInRow="buttonItalic" msprop:Generator_UserColumnName="buttonItalic" msprop:Generator_ColumnVarNameInTable="columnbuttonItalic" type="xs:unsignedByte" default="0" />
+              <xs:element name="buttonFontName" msprop:Generator_ColumnPropNameInTable="buttonFontNameColumn" msprop:Generator_ColumnPropNameInRow="buttonFontName" msprop:Generator_UserColumnName="buttonFontName" msprop:Generator_ColumnVarNameInTable="columnbuttonFontName" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="buttonFontSize" msprop:Generator_ColumnPropNameInRow="buttonFontSize" msprop:Generator_ColumnPropNameInTable="buttonFontSizeColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonFontSize" msprop:Generator_UserColumnName="buttonFontSize" type="xs:decimal" />
+              <xs:element name="buttonEncrypted" msprop:Generator_ColumnPropNameInTable="buttonEncryptedColumn" msprop:Generator_ColumnPropNameInRow="buttonEncrypted" msprop:Generator_UserColumnName="buttonEncrypted" msprop:Generator_ColumnVarNameInTable="columnbuttonEncrypted" type="xs:unsignedByte" default="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="settings" msprop:Generator_RowEvHandlerName="settingsRowChangeEventHandler" msprop:Generator_RowDeletedName="settingsRowDeleted" msprop:Generator_RowDeletingName="settingsRowDeleting" msprop:Generator_RowEvArgName="settingsRowChangeEvent" msprop:Generator_TablePropName="settings" msprop:Generator_RowChangedName="settingsRowChanged" msprop:Generator_UserTableName="settings" msprop:Generator_RowChangingName="settingsRowChanging" msprop:Generator_RowClassName="settingsRow" msprop:Generator_TableClassName="settingsDataTable" msprop:Generator_TableVarName="tablesettings">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="pKey" msprop:Generator_ColumnPropNameInTable="pKeyColumn" msprop:Generator_ColumnPropNameInRow="pKey" msprop:Generator_UserColumnName="pKey" msprop:Generator_ColumnVarNameInTable="columnpKey" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pValue" msprop:Generator_ColumnPropNameInTable="pValueColumn" msprop:Generator_ColumnPropNameInRow="pValue" msprop:Generator_UserColumnName="pValue" msprop:Generator_ColumnVarNameInTable="columnpValue" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pType" msprop:Generator_ColumnPropNameInTable="pTypeColumn" msprop:Generator_ColumnPropNameInRow="pType" msprop:Generator_UserColumnName="pType" msprop:Generator_ColumnVarNameInTable="columnpType" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pGroup" msprop:Generator_ColumnPropNameInTable="pGroupColumn" msprop:Generator_ColumnPropNameInRow="pGroup" msprop:Generator_UserColumnName="pGroup" msprop:Generator_ColumnVarNameInTable="columnpGroup" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="smtp" msprop:Generator_RowEvHandlerName="smtpRowChangeEventHandler" msprop:Generator_RowDeletedName="smtpRowDeleted" msprop:Generator_RowDeletingName="smtpRowDeleting" msprop:Generator_RowEvArgName="smtpRowChangeEvent" msprop:Generator_TablePropName="smtp" msprop:Generator_RowChangedName="smtpRowChanged" msprop:Generator_UserTableName="smtp" msprop:Generator_RowChangingName="smtpRowChanging" msprop:Generator_RowClassName="smtpRow" msprop:Generator_TableClassName="smtpDataTable" msprop:Generator_TableVarName="tablesmtp">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="smtpId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="smtpIdColumn" msprop:Generator_ColumnPropNameInRow="smtpId" msprop:Generator_UserColumnName="smtpId" msprop:Generator_ColumnVarNameInTable="columnsmtpId" type="xs:int" />
+              <xs:element name="smtpUsername" msprop:Generator_ColumnPropNameInTable="smtpUsernameColumn" msprop:Generator_ColumnPropNameInRow="smtpUsername" msprop:Generator_UserColumnName="smtpUsername" msprop:Generator_ColumnVarNameInTable="columnsmtpUsername" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="smtpPassword" msprop:Generator_ColumnPropNameInTable="smtpPasswordColumn" msprop:Generator_ColumnPropNameInRow="smtpPassword" msprop:Generator_UserColumnName="smtpPassword" msprop:Generator_ColumnVarNameInTable="columnsmtpPassword" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="smtpHost" msprop:Generator_ColumnPropNameInTable="smtpHostColumn" msprop:Generator_ColumnPropNameInRow="smtpHost" msprop:Generator_UserColumnName="smtpHost" msprop:Generator_ColumnVarNameInTable="columnsmtpHost" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="smtpPort" msprop:Generator_ColumnPropNameInTable="smtpPortColumn" msprop:Generator_ColumnPropNameInRow="smtpPort" msprop:Generator_UserColumnName="smtpPort" msprop:Generator_ColumnVarNameInTable="columnsmtpPort" type="xs:int" default="0" />
+              <xs:element name="smtpSsl" msprop:Generator_ColumnPropNameInTable="smtpSslColumn" msprop:Generator_ColumnPropNameInRow="smtpSsl" msprop:Generator_UserColumnName="smtpSsl" msprop:Generator_ColumnVarNameInTable="columnsmtpSsl" type="xs:unsignedByte" default="0" />
+              <xs:element name="smtpReqCred" msprop:Generator_ColumnPropNameInTable="smtpReqCredColumn" msprop:Generator_ColumnPropNameInRow="smtpReqCred" msprop:Generator_UserColumnName="smtpReqCred" msprop:Generator_ColumnVarNameInTable="columnsmtpReqCred" type="xs:unsignedByte" default="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:buttongroups" />
+      <xs:field xpath="mstns:buttongroupid" />
+    </xs:unique>
+    <xs:unique name="button_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:button" />
+      <xs:field xpath="mstns:buttonId" />
+    </xs:unique>
+    <xs:unique name="senders_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:senders" />
+      <xs:field xpath="mstns:SenderId" />
+    </xs:unique>
+    <xs:unique name="senderButton_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:senderButton" />
+      <xs:field xpath="mstns:ColumnName" />
+    </xs:unique>
+    <xs:unique name="settings_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:settings" />
+      <xs:field xpath="mstns:pKey" />
+    </xs:unique>
+    <xs:unique name="smtp_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:smtp" />
+      <xs:field xpath="mstns:smtpId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

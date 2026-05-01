@@ -1,5 +1,5 @@
-﻿' Hindleware
-' Copyright (c) 2022-23 Eric Hindle
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -13,6 +13,8 @@ Imports System.Windows.Forms
 Imports HindlewareLib.Logging
 Imports HindlewareLib.Security
 Imports NbuttonControlLibrary
+Imports TypeRight.Domain
+Imports TypeRight.TypeRightDataSet1
 Public Class FrmButtonList
 #Region "private variables"
     Private strKeyText As String
@@ -30,12 +32,11 @@ Public Class FrmButtonList
     Private ReadOnly lMoving As Boolean
     Private groupButtonList As New List(Of Nbutton)
     Private senderButtonList As New List(Of Nbutton)
-    Private ReadOnly buttonBuilder As New NButtonBuilder
     Private ReadOnly spath As String
     Private bLockClock As Boolean
     Private ReadOnly bDrag As Boolean
     Private ReadOnly iDragBtnIndex As Integer
-    Private oSenderRow As TypeRightDataSet.sendersRow
+    Private oSenderRow As sendersRow
     Private redClockText As String
     Private isClipboardOnly As Boolean
 #End Region
@@ -43,7 +44,7 @@ Public Class FrmButtonList
     Private Sub FrmButtonList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isLoading = True
         LogUtil.LogFolder = My.Settings.LogFolder
-        LogUtil.StartLogging(My.Settings.TypeRightConnectionString)
+        LogUtil.StartLogging()
         InitialiseApplication()
         InitialiseData()
         GetFormPos(Me, My.Settings.ButtonListPos)
@@ -339,13 +340,13 @@ Public Class FrmButtonList
         End Using
     End Sub
     Private Sub FillNamesList()
-        Dim _senders As TypeRightDataSet.sendersDataTable = GetSenderTable()
-        Dim _groups As TypeRightDataSet.buttongroupsDataTable = GetButtonGroupTable()
+        Dim _senders As sendersDataTable = GetSenderTable()
+        Dim _groups As buttongroupsDataTable = GetButtonGroupsTable()
         Dim comboItems As New Dictionary(Of Integer, String)
-        For Each grpRow As TypeRightDataSet.buttongroupsRow In _groups.Rows
+        For Each grpRow As buttongroupsRow In _groups.Rows
             comboItems.Add(grpRow.buttongroupid * -1, "** " & grpRow.groupname & " **")
         Next
-        For Each sndRow As TypeRightDataSet.sendersRow In _senders.Rows
+        For Each sndRow As sendersRow In _senders.Rows
             comboItems.Add(sndRow.SenderId, sndRow.FirstName & " " & sndRow.LastName)
         Next
         If comboItems.Count > 0 Then
@@ -360,7 +361,7 @@ Public Class FrmButtonList
             Dim _nButton As Nbutton = _button.Parent
             strKeyText = _nButton.Value
             If isPro And _nButton.Encrypt Then
-                strKeyText = encryptionutil.Decrypttext(strKeyText, My.Resources.APP_STRING)
+                strKeyText = EncryptionUtil.DecryptText(strKeyText, My.Resources.APP_STRING)
             End If
             strKeyText = GetDBFieldValues(strKeyText, oSenderRow)
             strKeyText = EditFieldValues(strKeyText, ReplaceType.None)
@@ -447,7 +448,7 @@ Public Class FrmButtonList
             strAge = Format(Calc_age(dtDob))
             iBct = 0
             oSenderRow = GetSenderRowById(sndKey)
-            Dim oTable As New TypeRightDataSet.sendersDataTable
+            Dim oTable As New sendersDataTable
             Dim _senderButton As SenderButton
             For Each _col As DataColumn In oTable.Columns
                 _senderButton = GetSenderButton(_col.ColumnName)
@@ -510,10 +511,10 @@ Public Class FrmButtonList
         LogUtil.Info("Loading group buttons", MyBase.Name)
         Dim undoButton As Nbutton = _nbb.StartingWith(0, grpNo, 0, "Undo", "", "^z", "Tahoma", 10, False, False, False, Nbutton.DataSource.Undefined).Build
         groupButtonList.Add(undoButton)
-        Dim btnTable As TypeRightDataSet.buttonDataTable = GetButtonsByGroup(grpNo)
-        For Each btnRow As TypeRightDataSet.buttonRow In btnTable.Rows
+        Dim btnTable As List(Of buttonRow) = GetButtonsByGroup(grpNo)
+        For Each btnRow As buttonRow In btnTable
             If Not String.IsNullOrEmpty(btnRow.buttonValue) Then
-                Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(btnRow.buttonId).Build()
+                Dim _nbutton As Nbutton = ButtonBuilder.AButtonBuilder.StartingWith(btnRow).Build()
                 groupButtonList.Add(_nbutton)
             End If
         Next

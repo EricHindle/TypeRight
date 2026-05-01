@@ -10,8 +10,9 @@
     <AssemblyName>NbuttonControlLibrary</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <Deterministic>true</Deterministic>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <Deterministic>false</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HindlewareLib">
+      <HintPath>..\..\HindlewareLib\bin\Release\HindlewareLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -71,9 +75,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\ModDatabaseFunctions.vb" />
+    <Compile Include="Domain\TypeRightDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
@@ -86,18 +97,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Nbutton.Designer.vb">
+    <Compile Include="Domain\Nbutton.Designer.vb">
       <DependentUpon>Nbutton.vb</DependentUpon>
     </Compile>
-    <Compile Include="Nbutton.vb">
+    <Compile Include="Domain\Nbutton.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NButtonBuilder.vb" />
-    <Compile Include="TypeRightDataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="Domain\NButtonBuilder.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -106,12 +112,24 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Nbutton.resx">
+    <EmbeddedResource Include="Domain\Nbutton.resx">
       <DependentUpon>Nbutton.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="app.config" />
+    <None Include="Domain\TypeRightDataSet.xsc">
+      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Domain\TypeRightDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TypeRightDataSet.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Domain\TypeRightDataSet.xss">
+      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -120,17 +138,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="TypeRightDataSet.xsc">
-      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TypeRightDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TypeRightDataSet.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="TypeRightDataSet.xss">
-      <DependentUpon>TypeRightDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

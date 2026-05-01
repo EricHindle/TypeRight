@@ -1,5 +1,5 @@
-﻿' Hindleware
-' Copyright (c) 2022-23 Eric Hindle
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -12,6 +12,8 @@ Imports System.Windows.Forms
 Imports HindlewareLib.Logging
 Imports HindlewareLib.Security
 Imports NbuttonControlLibrary
+Imports TypeRight.Domain
+Imports TypeRight.TypeRightDataSet1
 Module ButtonUtil
 #Region "enum"
     Friend Enum ReplaceType
@@ -64,7 +66,7 @@ Module ButtonUtil
     End Sub
 #End Region
 #Region "functions"
-    Public Function LoadSenderButtons(sndKey As Integer, oSenderRow As TypeRightDataSet.sendersRow) As List(Of Nbutton)
+    Public Function LoadSenderButtons(sndKey As Integer, oSenderRow As sendersRow) As List(Of Nbutton)
 
         oButtonList = New List(Of Nbutton)
         Dim strButtonTxt As String
@@ -127,7 +129,7 @@ Module ButtonUtil
             fulladdr = addBuilder.ToString
             strAge = Format(Calc_age(dtDob))
             iBct = 0
-            Dim oSenderTable As New TypeRightDataSet.sendersDataTable
+            Dim oSenderTable As New sendersDataTable
             Dim senderButton As SenderButton
             For Each _col As DataColumn In oSenderTable.Columns
                 senderButton = GetSenderButton(_col.ColumnName)
@@ -157,10 +159,10 @@ Module ButtonUtil
         Dim _nbb As New NButtonBuilder
         Dim undoButton As Nbutton = _nbb.StartingWith(0, grpNo, 0, "Undo", "", "^z", "Tahoma", 10, False, False, False, Nbutton.DataSource.Undefined).Build
         groupButtonList.Add(undoButton)
-        Dim btnTable As TypeRightDataSet.buttonDataTable = GetButtonsByGroup(grpNo)
-        For Each btnRow As TypeRightDataSet.buttonRow In btnTable.Rows
+        Dim btnTable As List(Of ButtonRow) = GetButtonsByGroup(grpNo)
+        For Each btnRow As TypeRightDataSet1.buttonRow In btnTable
             If Not String.IsNullOrEmpty(btnRow.buttonValue) Then
-                Dim _nbutton As Nbutton = NButtonBuilder.NewButton.StartingWith(btnRow.buttonId).Build()
+                Dim _nbutton As Nbutton = ButtonBuilder.AButtonBuilder.StartingWith(btnRow).Build()
                 groupButtonList.Add(_nbutton)
             End If
         Next
@@ -225,7 +227,7 @@ Module ButtonUtil
     '
     ' Look for database field names and replace with values from the database
     '
-    Public Function GetDBFieldValues(ByVal sKeyText As String, oSenderRow As TypeRightDataSet.sendersRow) As String
+    Public Function GetDBFieldValues(ByVal sKeyText As String, oSenderRow As TypeRightDataSet1.sendersRow) As String
         Dim fieldName As String
         Dim fieldValue As String
         Dim newText As String = sKeyText

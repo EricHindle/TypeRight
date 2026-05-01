@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -54,15 +54,16 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-11NSK703\SQLEXPRESS;Initial Catalog=TypeRight;Persist Security"& _ 
-            " Info=True;User ID=sa;Password=dkk.sql")>  _
-        Public ReadOnly Property TypeRightConnectionString() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\ProgramData\hindleware\TypeRight\Data")>  _
+        Public Property DataFilePath() As String
             Get
-                Return CType(Me("TypeRightConnectionString"),String)
+                Return CType(Me("DataFilePath"),String)
             End Get
+            Set
+                Me("DataFilePath") = value
+            End Set
         End Property
     End Class
 End Namespace

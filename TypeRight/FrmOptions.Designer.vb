@@ -368,6 +368,8 @@ Partial Class FrmOptions
         '
         'TxtLogFolder
         '
+        Me.TxtLogFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtLogFolder.Location = New System.Drawing.Point(426, 224)
         Me.TxtLogFolder.Name = "TxtLogFolder"
         Me.TxtLogFolder.Size = New System.Drawing.Size(214, 24)
@@ -375,6 +377,8 @@ Partial Class FrmOptions
         '
         'TxtBkUpFolder
         '
+        Me.TxtBkUpFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtBkUpFolder.Location = New System.Drawing.Point(426, 295)
         Me.TxtBkUpFolder.Name = "TxtBkUpFolder"
         Me.TxtBkUpFolder.Size = New System.Drawing.Size(214, 24)

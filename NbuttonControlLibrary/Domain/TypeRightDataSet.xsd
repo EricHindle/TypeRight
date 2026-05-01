@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TypeRightDataSet" targetNamespace="http://tempuri.org/TypeRightDataSet.xsd" xmlns:mstns="http://tempuri.org/TypeRightDataSet.xsd" xmlns="http://tempuri.org/TypeRightDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TypeRightDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="TypeRightDataSet" msprop:Generator_DataSetName="TypeRightDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="button" msprop:Generator_RowEvHandlerName="buttonRowChangeEventHandler" msprop:Generator_RowDeletedName="buttonRowDeleted" msprop:Generator_RowDeletingName="buttonRowDeleting" msprop:Generator_RowEvArgName="buttonRowChangeEvent" msprop:Generator_TablePropName="button" msprop:Generator_RowChangedName="buttonRowChanged" msprop:Generator_RowChangingName="buttonRowChanging" msprop:Generator_TableClassName="buttonDataTable" msprop:Generator_RowClassName="buttonRow" msprop:Generator_TableVarName="tablebutton" msprop:Generator_UserTableName="button">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="buttonId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="buttonId" msprop:Generator_ColumnPropNameInTable="buttonIdColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonId" msprop:Generator_UserColumnName="buttonId" type="xs:int" />
+              <xs:element name="buttonGroup" msprop:Generator_ColumnPropNameInRow="buttonGroup" msprop:Generator_ColumnPropNameInTable="buttonGroupColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonGroup" msprop:Generator_UserColumnName="buttonGroup" type="xs:int" default="-1" minOccurs="0" />
+              <xs:element name="buttonSeq" msprop:Generator_ColumnPropNameInRow="buttonSeq" msprop:Generator_ColumnPropNameInTable="buttonSeqColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonSeq" msprop:Generator_UserColumnName="buttonSeq" type="xs:int" />
+              <xs:element name="buttonHint" msprop:Generator_ColumnPropNameInRow="buttonHint" msprop:Generator_ColumnPropNameInTable="buttonHintColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonHint" msprop:Generator_UserColumnName="buttonHint" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="buttonValue" msprop:Generator_ColumnPropNameInRow="buttonValue" msprop:Generator_ColumnPropNameInTable="buttonValueColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonValue" msprop:Generator_UserColumnName="buttonValue" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="buttonFont" msprop:Generator_ColumnPropNameInRow="buttonFont" msprop:Generator_ColumnPropNameInTable="buttonFontColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonFont" msprop:Generator_UserColumnName="buttonFont">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="buttonBold" msprop:Generator_ColumnPropNameInRow="buttonBold" msprop:Generator_ColumnPropNameInTable="buttonBoldColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonBold" msprop:Generator_UserColumnName="buttonBold" type="xs:unsignedByte" default="0" />
+              <xs:element name="buttonFontSize" msprop:Generator_ColumnPropNameInRow="buttonFontSize" msprop:Generator_ColumnPropNameInTable="buttonFontSizeColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonFontSize" msprop:Generator_UserColumnName="buttonFontSize" type="xs:decimal" default="10" />
+              <xs:element name="buttonItalic" msprop:Generator_ColumnPropNameInRow="buttonItalic" msprop:Generator_ColumnPropNameInTable="buttonItalicColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonItalic" msprop:Generator_UserColumnName="buttonItalic" type="xs:unsignedByte" />
+              <xs:element name="buttonEncrypt" msprop:Generator_ColumnPropNameInRow="buttonEncrypt" msprop:Generator_ColumnPropNameInTable="buttonEncryptColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonEncrypt" msprop:Generator_UserColumnName="buttonEncrypt" type="xs:unsignedByte" default="0" />
+              <xs:element name="buttonText" msprop:Generator_ColumnPropNameInRow="buttonText" msprop:Generator_ColumnPropNameInTable="buttonTextColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonText" msprop:Generator_UserColumnName="buttonText" default="''">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:button" />
+      <xs:field xpath="mstns:buttonId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

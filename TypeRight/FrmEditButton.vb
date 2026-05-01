@@ -1,5 +1,5 @@
-﻿' Hindleware
-' Copyright (c) 2022-23 Eric Hindle
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -9,13 +9,15 @@ Imports System.Data
 Imports System.Windows.Forms
 Imports HindlewareLib.Logging
 Imports HindlewareLib.Security
+Imports TypeRight.Domain
+Imports TypeRight.TypeRightDataSet1
 Public Class FrmEditButton
 #Region "variables"
     Private iId As Integer
     Private iSeq As Integer
     Private iGrp As Integer
     Private ReadOnly oTextUtil As NTextUtil
-    Private ReadOnly oTable As New TypeRight.TypeRightDataSet.sendersDataTable
+    Private ReadOnly oTable As New sendersDataTable
     Private actionString As String = "Editing"
 #End Region
 #Region "properties"
@@ -118,7 +120,7 @@ Public Class FrmEditButton
             If _action = ButtonAction.BTN_ADD Then
                 Dim newId As Integer = InsertButton(_button)
             End If
-            Dim oBtn As TypeRightDataSet.buttonRow = GetButtonByGroupAndSeq(iGrp, iSeq)
+            Dim oBtn As buttonRow = GetButtonByGroupAndSeq(iGrp, iSeq)
             If oBtn IsNot Nothing Then
                 UpdateButton(oBtn.buttonGroup, oBtn.buttonSeq, txtCaption.Text, TxtHint.Text, strNewText, BtnFont.Font.Name, BtnFont.Font.Bold, BtnFont.Font.Size, BtnFont.Font.Italic, isEncrypted, oBtn.buttonId)
             End If
@@ -274,9 +276,7 @@ Public Class FrmEditButton
         Dim sourceControl As Object = GetSourceControl(menuItem)
         If TypeOf sourceControl Is TextBox Or TypeOf sourceControl Is RichTextBox Then
             Dim _textBox As TextBoxBase = CType(sourceControl, TextBoxBase)
-            If _textBox IsNot Nothing Then
-                _textBox.SelectAll()
-            End If
+            _textBox?.SelectAll()
         End If
     End Sub
     Private Sub MnuLowercase_Click(menuItem As Object, e As EventArgs) Handles MnuLowercase.Click

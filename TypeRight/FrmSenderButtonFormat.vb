@@ -1,5 +1,5 @@
-﻿' Hindleware
-' Copyright (c) 2022-23 Eric Hindle
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
 ' All rights reserved.
 '
 ' Author Eric Hindle
@@ -9,9 +9,11 @@ Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports HindlewareLib.Logging
+Imports TypeRight.Domain
+Imports TypeRight.TypeRightDataSet1
 Public Class FrmSenderButtonFormat
 #Region "database variables"
-    Private ReadOnly oTable As New TypeRightDataSet.sendersDataTable
+    Private ReadOnly oTable As New sendersDataTable
     Private oSenderButton As SenderButton
 #End Region
 #Region "properties"

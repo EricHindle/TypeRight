@@ -73,7 +73,7 @@ Partial Class FrmButtonList
         Me.SenderButtonPanel = New System.Windows.Forms.Panel()
         Me.ProgressTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet()
+        Me.TypeRightDataSet = New TypeRight.TypeRightDataSet1()
         Me.GrpTop.SuspendLayout()
         CType(Me.ImgTack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuPopup.SuspendLayout()
@@ -571,7 +571,7 @@ Partial Class FrmButtonList
     Friend WithEvents PicLock As Windows.Forms.PictureBox
     Friend WithEvents WhiteClock As Windows.Forms.PictureBox
     Friend WithEvents GreenClock As Windows.Forms.PictureBox
-    Friend WithEvents TypeRightDataSet As TypeRightDataSet
+    Friend WithEvents TypeRightDataSet As TypeRightDataSet1
     Friend WithEvents DelayTimer As Windows.Forms.Timer
     Friend WithEvents SenderButtonPanel As Windows.Forms.Panel
     Friend WithEvents BtnAddCol As Windows.Forms.Button

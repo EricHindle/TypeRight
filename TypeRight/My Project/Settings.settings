@@ -60,13 +60,13 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LogFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\netwyrks\TypeRight\Logs</Value>
+      <Value Profile="(Default)">C:\ProgramData\hindleware\TypeRight\Logs</Value>
     </Setting>
     <Setting Name="DebugOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="BackupFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\netwyrks\TypeRight\Backups</Value>
+      <Value Profile="(Default)">C:\ProgramData\hindleware\TypeRight\Backup</Value>
     </Setting>
     <Setting Name="ButtonListPos" Type="System.String" Scope="User">
       <Value Profile="(Default)">10~10~600~136</Value>
@@ -111,6 +111,12 @@
     </Setting>
     <Setting Name="LogZoomOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="callUpgrade" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="DataFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ProgramData\hindleware\TypeRight\Data</Value>
     </Setting>
   </Settings>
 </SettingsFile>

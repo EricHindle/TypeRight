@@ -1,4 +1,11 @@
-﻿Imports System.Reflection
+﻿' hindleware
+' Copyright (c) 2022-26 Eric Hindle
+' All rights reserved.
+'
+' Author Eric Hindle
+'
+
+Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 ' General Information about an assembly is controlled through the following
@@ -9,9 +16,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("NbuttonControlLibrary")>
 <Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyCompany("hindleware")>
 <Assembly: AssemblyProduct("NbuttonControlLibrary")>
-<Assembly: AssemblyCopyright("Copyright ©  2020")>
+<Assembly: AssemblyCopyright("Copyright ©Eric Hindle  2020-26")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -29,5 +36,5 @@ Imports System.Runtime.InteropServices
 ' You can specify all the values or you can default the Build and Revision Numbers
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.1.0.*")>
+<Assembly: AssemblyFileVersion("1.1.0.0")>
