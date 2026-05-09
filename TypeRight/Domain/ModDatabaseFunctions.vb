@@ -382,10 +382,10 @@ Namespace Domain
                 pButtonRow.buttonHint = .Hint
                 pButtonRow.buttonValue = .Value
                 pButtonRow.buttonFont = .FontName
-                pButtonRow.buttonBold = .FontBold
+                pButtonRow.buttonBold = If(.FontBold, 1, 0)
                 pButtonRow.buttonFontSize = .FontSize
-                pButtonRow.buttonItalic = .FontItalic
-                pButtonRow.buttonEncrypt = .Encrypt
+                pButtonRow.buttonItalic = If(.FontItalic, 1, 0)
+                pButtonRow.buttonEncrypt = If(.Encrypt, 1, 0)
             End With
             Return pButtonRow
         End Function
@@ -703,11 +703,11 @@ Namespace Domain
         Private Function SetSenderButtonRowValues(pSenderButton As SenderButton, oSenderButtonRow As senderButtonRow) As senderButtonRow
             With pSenderButton
                 oSenderButtonRow.ColumnName = .ColumnName
-                oSenderButtonRow.buttonBold = .Bold
-                oSenderButtonRow.buttonItalic = .Italic
+                oSenderButtonRow.buttonBold = If(.Bold, 1, 0)
+                oSenderButtonRow.buttonItalic = If(.Italic, 1, 0)
                 oSenderButtonRow.buttonFontName = .FontName
                 oSenderButtonRow.buttonFontSize = .FontSize
-                oSenderButtonRow.buttonEncrypted = .IsEncrypted
+                oSenderButtonRow.buttonEncrypted = If(.IsEncrypted, 1, 0)
             End With
             Return oSenderButtonRow
         End Function

@@ -34,9 +34,9 @@ Namespace Domain
                 _Value = .buttonValue
                 _FontName = .buttonFont
                 _FontSize = .buttonFontSize
-                _FontBold = .buttonBold
-                _FontItalic = .buttonItalic
-                _Encrypt = .buttonEncrypt
+                _FontBold = .buttonBold = 1
+                _FontItalic = .buttonItalic = 1
+                _Encrypt = .buttonEncrypt = 1
                 _Source = Nbutton.DataSource.Group
             End With
             Return Me

@@ -81,23 +81,37 @@ Public Class FrmSenderButtonFormat
         End With
     End Sub
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles BtnOK.Click
-        Dim fontName As String = BtnFont.Font.Name
-        Dim fontSize As Decimal = BtnFont.Font.Size
-        Dim fontBold As Boolean = BtnFont.Font.Bold
-        Dim fontItalic As Boolean = BtnFont.Font.Italic
-        Dim isEncrypted As Boolean = chkEncrypted.Checked
-        Dim _senderbutton As SenderButton = SenderButtonBuilder.aSenderButton.StartingWith(CbDbValue.SelectedItem,
+        If CbDbValue.SelectedIndex >= 0 Then
+            Dim fontName As String = BtnFont.Font.Name
+            Dim fontSize As Decimal = BtnFont.Font.Size
+            Dim fontBold As Boolean = BtnFont.Font.Bold
+            Dim fontItalic As Boolean = BtnFont.Font.Italic
+            Dim isEncrypted As Boolean = chkEncrypted.Checked
+            Dim oColumnName As String = CbDbValue.SelectedItem
+            Dim oOldSenderButton As SenderButton = GetSenderButton(oColumnName)
+            Dim oNewSenderbutton As SenderButton = SenderButtonBuilder.aSenderButton.StartingWith(oColumnName,
                                                                                            fontBold,
                                                                                            fontItalic,
                                                                                            fontName,
                                                                                            fontSize,
                                                                                            isEncrypted).Build
-        If Not oSenderButton.IsEmpty Then
-            LogUtil.Info("Updating " & CbDbValue.SelectedItem, MyBase.Name)
-            UpdateSenderButton(_senderbutton)
-        Else
-            LogUtil.Info("Inserting " & CbDbValue.SelectedItem, MyBase.Name)
-            InsertSenderButton(_senderbutton)
+            If oOldSenderButton.IsEmpty Then
+                LogUtil.Info("Inserting " & oColumnName, MyBase.Name)
+                Dim isInserted As Boolean = InsertSenderButton(oNewSenderbutton)
+                If isInserted Then
+                    LogUtil.ShowStatus("Inserted OK", LblStatus)
+                Else
+                    LogUtil.ShowStatus("Insert failed", LblStatus)
+                End If
+            Else
+                LogUtil.Info("Updating " & oColumnName, MyBase.Name)
+                Dim isUpdated As Boolean = UpdateSenderButton(oNewSenderbutton)
+                If isUpdated Then
+                    LogUtil.ShowStatus("Updated OK", LblStatus)
+                Else
+                    LogUtil.ShowStatus("Update failed", LblStatus)
+                End If
+            End If
         End If
     End Sub
     Private Sub FrmSenderButtonMaint_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing

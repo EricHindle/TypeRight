@@ -45,6 +45,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7230103112DF491E9FB8230677E58E7C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7A397F0A8F294FB69DB0210A650B90F7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -286,6 +292,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7230103112DF491E9FB8230677E58E7C"
+            {
+            "SourcePath" = "8:..\\TypeRight Data\\senderButton.htx"
+            "TargetName" = "8:senderButton.htx"
+            "Tag" = "8:"
+            "Folder" = "8:_667F1C08584E483DBB9905C95400D37A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A397F0A8F294FB69DB0210A650B90F7"
             {
             "SourcePath" = "8:..\\TypeRight Data\\button.htx"
@@ -518,15 +544,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TypeRight"
-        "ProductCode" = "8:{98B804B8-2695-4A9F-8114-89EAD867EC2D}"
-        "PackageCode" = "8:{659891F1-D125-41E9-984F-B934800F4FE2}"
+        "ProductCode" = "8:{00BC18BC-5DCB-47EA-B3DD-A1C63C3A462A}"
+        "PackageCode" = "8:{8C283BAE-275B-4A76-A999-46AB63B5468F}"
         "UpgradeCode" = "8:{7A7447F7-CCA9-4D34-90D1-F8D3FD83FAD5}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.17.1"
+        "ProductVersion" = "8:2.17.2"
         "Manufacturer" = "8:hindleware"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
