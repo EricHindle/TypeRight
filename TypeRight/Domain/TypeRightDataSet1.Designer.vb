@@ -588,8 +588,7 @@ Partial Public Class TypeRightDataSet1
             MyBase.Columns.Add(Me.columngroupname)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnbuttongroupid}, false))
             Me.columnbuttongroupid.AutoIncrement = true
-            Me.columnbuttongroupid.AutoIncrementSeed = -1
-            Me.columnbuttongroupid.AutoIncrementStep = -1
+            Me.columnbuttongroupid.AutoIncrementSeed = 1
             Me.columnbuttongroupid.AllowDBNull = false
             Me.columnbuttongroupid.Unique = true
             Me.columngroupname.AllowDBNull = false
@@ -978,8 +977,7 @@ Partial Public Class TypeRightDataSet1
             MyBase.Columns.Add(Me.columnbuttonText)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnbuttonId}, false))
             Me.columnbuttonId.AutoIncrement = true
-            Me.columnbuttonId.AutoIncrementSeed = -1
-            Me.columnbuttonId.AutoIncrementStep = -1
+            Me.columnbuttonId.AutoIncrementSeed = 1
             Me.columnbuttonId.AllowDBNull = false
             Me.columnbuttonId.Unique = true
             Me.columnbuttonGroup.DefaultValue = CType(-1,Integer)
@@ -1528,8 +1526,7 @@ Partial Public Class TypeRightDataSet1
             MyBase.Columns.Add(Me.columnUsername)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnSenderId}, true))
             Me.columnSenderId.AutoIncrement = true
-            Me.columnSenderId.AutoIncrementSeed = -1
-            Me.columnSenderId.AutoIncrementStep = -1
+            Me.columnSenderId.AutoIncrementSeed = 1
             Me.columnSenderId.AllowDBNull = false
             Me.columnSenderId.Unique = true
             Me.columnTitle.AllowDBNull = false
@@ -2537,7 +2534,7 @@ Partial Public Class TypeRightDataSet1
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Private Sub InitClass()
-            Me.columnsmtpId = New Global.System.Data.DataColumn("smtpId", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnsmtpId = New Global.System.Data.DataColumn("smtpId", GetType(Short), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnsmtpId)
             Me.columnsmtpUsername = New Global.System.Data.DataColumn("smtpUsername", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnsmtpUsername)
@@ -2553,8 +2550,7 @@ Partial Public Class TypeRightDataSet1
             MyBase.Columns.Add(Me.columnsmtpReqCred)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnsmtpId}, false))
             Me.columnsmtpId.AutoIncrement = true
-            Me.columnsmtpId.AutoIncrementSeed = -1
-            Me.columnsmtpId.AutoIncrementStep = -1
+            Me.columnsmtpId.AutoIncrementSeed = 1
             Me.columnsmtpId.AllowDBNull = false
             Me.columnsmtpId.Unique = true
             Me.columnsmtpUsername.AllowDBNull = false
@@ -3335,9 +3331,9 @@ Partial Public Class TypeRightDataSet1
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Property smtpId() As Integer
+        Public Property smtpId() As Short
             Get
-                Return CType(Me(Me.tablesmtp.smtpIdColumn),Integer)
+                Return CType(Me(Me.tablesmtp.smtpIdColumn),Short)
             End Get
             Set
                 Me(Me.tablesmtp.smtpIdColumn) = value

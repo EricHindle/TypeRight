@@ -57,7 +57,6 @@ Partial Class FrmOptions
         Me.BtnPosReset = New System.Windows.Forms.Button()
         Me.TxtLogFolder = New System.Windows.Forms.TextBox()
         Me.TxtBkUpFolder = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.LblVersion = New System.Windows.Forms.Label()
         Me.Image1 = New System.Windows.Forms.PictureBox()
@@ -66,6 +65,12 @@ Partial Class FrmOptions
         Me.ToolTip6 = New System.Windows.Forms.ToolTip(Me.components)
         Me.BtnRestore = New System.Windows.Forms.Button()
         Me.BtnBackup = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.NudZoom = New System.Windows.Forms.NumericUpDown()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.CbZoomOn = New System.Windows.Forms.CheckBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.BtnDonate = New System.Windows.Forms.Button()
         Me.GrpLicence.SuspendLayout()
         CType(Me.Slider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
@@ -73,6 +78,8 @@ Partial Class FrmOptions
         Me.StatusStrip1.SuspendLayout()
         CType(Me.Image1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Image2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.NudZoom, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GrpLicence
@@ -197,7 +204,7 @@ Partial Class FrmOptions
         'BtnCancel
         '
         Me.BtnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnCancel.Location = New System.Drawing.Point(424, 420)
+        Me.BtnCancel.Location = New System.Drawing.Point(465, 420)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(94, 31)
         Me.BtnCancel.TabIndex = 10
@@ -207,12 +214,13 @@ Partial Class FrmOptions
         'BtnOK
         '
         Me.BtnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnOK.Location = New System.Drawing.Point(544, 420)
+        Me.BtnOK.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.BtnOK.Location = New System.Drawing.Point(585, 412)
         Me.BtnOK.Name = "BtnOK"
-        Me.BtnOK.Size = New System.Drawing.Size(94, 31)
+        Me.BtnOK.Size = New System.Drawing.Size(94, 39)
         Me.BtnOK.TabIndex = 11
-        Me.BtnOK.Text = "OK"
-        Me.BtnOK.UseVisualStyleBackColor = True
+        Me.BtnOK.Text = "Save"
+        Me.BtnOK.UseVisualStyleBackColor = False
         '
         'HScroll1
         '
@@ -343,7 +351,7 @@ Partial Class FrmOptions
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 457)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(650, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(691, 22)
         Me.StatusStrip1.TabIndex = 19
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -370,33 +378,24 @@ Partial Class FrmOptions
         '
         Me.TxtLogFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtLogFolder.Location = New System.Drawing.Point(426, 224)
+        Me.TxtLogFolder.Location = New System.Drawing.Point(6, 41)
         Me.TxtLogFolder.Name = "TxtLogFolder"
-        Me.TxtLogFolder.Size = New System.Drawing.Size(214, 24)
+        Me.TxtLogFolder.Size = New System.Drawing.Size(241, 22)
         Me.TxtLogFolder.TabIndex = 8
         '
         'TxtBkUpFolder
         '
         Me.TxtBkUpFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtBkUpFolder.Location = New System.Drawing.Point(426, 295)
+        Me.TxtBkUpFolder.Location = New System.Drawing.Point(426, 305)
         Me.TxtBkUpFolder.Name = "TxtBkUpFolder"
-        Me.TxtBkUpFolder.Size = New System.Drawing.Size(214, 24)
+        Me.TxtBkUpFolder.Size = New System.Drawing.Size(255, 24)
         Me.TxtBkUpFolder.TabIndex = 9
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(423, 204)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(72, 17)
-        Me.Label6.TabIndex = 16
-        Me.Label6.Text = "Log Folder"
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(423, 275)
+        Me.Label11.Location = New System.Drawing.Point(423, 285)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(94, 17)
         Me.Label11.TabIndex = 17
@@ -437,38 +436,114 @@ Partial Class FrmOptions
         'BtnViewLog
         '
         Me.BtnViewLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnViewLog.BackColor = System.Drawing.Color.AliceBlue
         Me.BtnViewLog.Location = New System.Drawing.Point(15, 338)
         Me.BtnViewLog.Name = "BtnViewLog"
         Me.BtnViewLog.Size = New System.Drawing.Size(94, 31)
         Me.BtnViewLog.TabIndex = 22
         Me.BtnViewLog.Text = "View Log"
-        Me.BtnViewLog.UseVisualStyleBackColor = True
+        Me.BtnViewLog.UseVisualStyleBackColor = False
         '
         'BtnRestore
         '
         Me.BtnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnRestore.BackColor = System.Drawing.Color.AliceBlue
         Me.BtnRestore.Location = New System.Drawing.Point(312, 338)
         Me.BtnRestore.Name = "BtnRestore"
         Me.BtnRestore.Size = New System.Drawing.Size(94, 31)
         Me.BtnRestore.TabIndex = 23
         Me.BtnRestore.Text = "Restore"
-        Me.BtnRestore.UseVisualStyleBackColor = True
+        Me.BtnRestore.UseVisualStyleBackColor = False
         '
         'BtnBackup
         '
         Me.BtnBackup.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnBackup.BackColor = System.Drawing.Color.AliceBlue
         Me.BtnBackup.Location = New System.Drawing.Point(209, 338)
         Me.BtnBackup.Name = "BtnBackup"
         Me.BtnBackup.Size = New System.Drawing.Size(94, 31)
         Me.BtnBackup.TabIndex = 24
         Me.BtnBackup.Text = "Backup"
-        Me.BtnBackup.UseVisualStyleBackColor = True
+        Me.BtnBackup.UseVisualStyleBackColor = False
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.NudZoom)
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.CbZoomOn)
+        Me.GroupBox1.Controls.Add(Me.TxtLogFolder)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(426, 172)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(253, 98)
+        Me.GroupBox1.TabIndex = 25
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Log"
+        '
+        'NudZoom
+        '
+        Me.NudZoom.DecimalPlaces = 1
+        Me.NudZoom.Location = New System.Drawing.Point(186, 68)
+        Me.NudZoom.Maximum = New Decimal(New Integer() {30, 0, 0, 65536})
+        Me.NudZoom.Minimum = New Decimal(New Integer() {5, 0, 0, 65536})
+        Me.NudZoom.Name = "NudZoom"
+        Me.NudZoom.Size = New System.Drawing.Size(61, 22)
+        Me.NudZoom.TabIndex = 19
+        Me.NudZoom.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(108, 72)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(72, 14)
+        Me.Label12.TabIndex = 18
+        Me.Label12.Text = "Zoom Value"
+        '
+        'CbZoomOn
+        '
+        Me.CbZoomOn.AutoSize = True
+        Me.CbZoomOn.Location = New System.Drawing.Point(9, 71)
+        Me.CbZoomOn.Name = "CbZoomOn"
+        Me.CbZoomOn.Size = New System.Drawing.Size(77, 18)
+        Me.CbZoomOn.TabIndex = 17
+        Me.CbZoomOn.Text = "Zoom On"
+        Me.CbZoomOn.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(6, 20)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(40, 14)
+        Me.Label6.TabIndex = 16
+        Me.Label6.Text = "Folder"
+        '
+        'BtnDonate
+        '
+        Me.BtnDonate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnDonate.BackColor = System.Drawing.Color.DarkGreen
+        Me.BtnDonate.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue
+        Me.BtnDonate.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDonate.ForeColor = System.Drawing.Color.PaleGreen
+        Me.BtnDonate.Location = New System.Drawing.Point(232, 398)
+        Me.BtnDonate.Margin = New System.Windows.Forms.Padding(0)
+        Me.BtnDonate.Name = "BtnDonate"
+        Me.BtnDonate.Size = New System.Drawing.Size(71, 26)
+        Me.BtnDonate.TabIndex = 26
+        Me.BtnDonate.Text = "Donate"
+        Me.BtnDonate.UseVisualStyleBackColor = False
         '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(650, 479)
+        Me.ClientSize = New System.Drawing.Size(691, 479)
+        Me.Controls.Add(Me.BtnDonate)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.BtnBackup)
         Me.Controls.Add(Me.BtnRestore)
         Me.Controls.Add(Me.BtnViewLog)
@@ -476,9 +551,7 @@ Partial Class FrmOptions
         Me.Controls.Add(Me.Image1)
         Me.Controls.Add(Me.LblVersion)
         Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TxtBkUpFolder)
-        Me.Controls.Add(Me.TxtLogFolder)
         Me.Controls.Add(Me.BtnPosReset)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.nudDelay)
@@ -511,6 +584,9 @@ Partial Class FrmOptions
         Me.StatusStrip1.PerformLayout()
         CType(Me.Image1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Image2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.NudZoom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -548,7 +624,6 @@ Partial Class FrmOptions
     Friend WithEvents BtnPosReset As Windows.Forms.Button
     Friend WithEvents TxtLogFolder As Windows.Forms.TextBox
     Friend WithEvents TxtBkUpFolder As Windows.Forms.TextBox
-    Friend WithEvents Label6 As Windows.Forms.Label
     Friend WithEvents Label11 As Windows.Forms.Label
     Friend WithEvents LblVersion As Windows.Forms.Label
     Friend WithEvents CbDebug As Windows.Forms.CheckBox
@@ -558,4 +633,10 @@ Partial Class FrmOptions
     Friend WithEvents ToolTip6 As Windows.Forms.ToolTip
     Friend WithEvents BtnRestore As Windows.Forms.Button
     Friend WithEvents BtnBackup As Windows.Forms.Button
+    Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
+    Friend WithEvents Label6 As Windows.Forms.Label
+    Friend WithEvents NudZoom As Windows.Forms.NumericUpDown
+    Friend WithEvents Label12 As Windows.Forms.Label
+    Friend WithEvents CbZoomOn As Windows.Forms.CheckBox
+    Friend WithEvents BtnDonate As Windows.Forms.Button
 End Class

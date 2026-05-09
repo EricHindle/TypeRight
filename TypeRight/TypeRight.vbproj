@@ -144,16 +144,16 @@
     <Compile Include="FrmButtonList.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDbUpdate.Designer.vb">
+    <Compile Include="Utilities\FrmDbUpdate.Designer.vb">
       <DependentUpon>FrmDbUpdate.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDbUpdate.vb">
+    <Compile Include="Utilities\FrmDbUpdate.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmEditButton.Designer.vb">
+    <Compile Include="Buttons\FrmEditButton.Designer.vb">
       <DependentUpon>FrmEditButton.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmEditButton.vb">
+    <Compile Include="Buttons\FrmEditButton.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Email\FrmEmail.Designer.vb">
@@ -168,16 +168,16 @@
     <Compile Include="FrmGroupMaint.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmOptions.Designer.vb">
+    <Compile Include="Utilities\FrmOptions.Designer.vb">
       <DependentUpon>FrmOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmOptions.vb">
+    <Compile Include="Utilities\FrmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSenderButtonFormat.Designer.vb">
+    <Compile Include="Buttons\FrmSenderButtonFormat.Designer.vb">
       <DependentUpon>FrmSenderButtonFormat.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSenderButtonFormat.vb">
+    <Compile Include="Buttons\FrmSenderButtonFormat.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Email\FrmSmtpAccounts.Designer.vb">
@@ -219,6 +219,7 @@
       <DependentUpon>TypeRightDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="TypeRightMain.vb" />
+    <Compile Include="Utilities\ModCommon.vb" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HindlewareLib">
@@ -247,10 +248,10 @@
       <DependentUpon>FrmButtonList.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDbUpdate.resx">
+    <EmbeddedResource Include="Utilities\FrmDbUpdate.resx">
       <DependentUpon>FrmDbUpdate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmEditButton.resx">
+    <EmbeddedResource Include="Buttons\FrmEditButton.resx">
       <DependentUpon>FrmEditButton.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Email\FrmEmail.resx">
@@ -259,10 +260,10 @@
     <EmbeddedResource Include="FrmGroupMaint.resx">
       <DependentUpon>FrmGroupMaint.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmOptions.resx">
+    <EmbeddedResource Include="Utilities\FrmOptions.resx">
       <DependentUpon>FrmOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSenderButtonFormat.resx">
+    <EmbeddedResource Include="Buttons\FrmSenderButtonFormat.resx">
       <DependentUpon>FrmSenderButtonFormat.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSplash.resx">

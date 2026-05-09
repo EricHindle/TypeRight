@@ -37,7 +37,7 @@ Namespace Domain
                 _FontBold = .buttonBold
                 _FontItalic = .buttonItalic
                 _Encrypt = .buttonEncrypt
-                _Source = Nbutton.DataSource.Undefined
+                _Source = Nbutton.DataSource.Group
             End With
             Return Me
         End Function

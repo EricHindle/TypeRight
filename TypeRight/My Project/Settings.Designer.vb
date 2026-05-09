@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Eric Hindle")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Your Name")>  _
         Public Property RegName() As String
             Get
                 Return CType(Me("RegName"),String)
@@ -68,7 +68,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("CGL26PUYVR950JEA")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("XXXXXXXXXXXXXXXX")>  _
         Public Property RegCode() As String
             Get
                 Return CType(Me("RegCode"),String)
@@ -212,7 +212,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
         Public Property Columns() As Integer
             Get
                 Return CType(Me("Columns"),Integer)
@@ -414,17 +414,6 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-11NSK703\SQLEXPRESS;Initial Catalog=TypeRight;Persist Security"& _ 
-            " Info=True;User ID=sa;Password=dkk.sql")>  _
-        Public ReadOnly Property TypeRightConnectionString() As String
-            Get
-                Return CType(Me("TypeRightConnectionString"),String)
-            End Get
-        End Property
-        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
@@ -451,10 +440,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
-        Public Property logZoomValue() As Integer
+         Global.System.Configuration.DefaultSettingValueAttribute("1.0")>  _
+        Public Property logZoomValue() As Decimal
             Get
-                Return CType(Me("logZoomValue"),Integer)
+                Return CType(Me("logZoomValue"),Decimal)
             End Get
             Set
                 Me("logZoomValue") = value
@@ -494,6 +483,18 @@ Namespace My
             End Get
             Set
                 Me("DataFilePath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://hindleware.co.uk/typeright/donate.html")>  _
+        Public Property DonationPage() As String
+            Get
+                Return CType(Me("DonationPage"),String)
+            End Get
+            Set
+                Me("DonationPage") = value
             End Set
         End Property
     End Class

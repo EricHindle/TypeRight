@@ -34,7 +34,6 @@ Partial Class FrmGroupMaint
         Me.LblThisBtn = New System.Windows.Forms.Label()
         Me.TxtGrpName = New System.Windows.Forms.TextBox()
         Me.TxtGrpNumber = New System.Windows.Forms.TextBox()
-        '     Me.ButtongroupsTableAdapter = New TypeRight.TypeRightDataSetTableAdapters.buttongroupsTableAdapter()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LblGroupName = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
@@ -61,13 +60,14 @@ Partial Class FrmGroupMaint
         '
         'BtnUpdate
         '
+        Me.BtnUpdate.BackColor = System.Drawing.Color.LightSteelBlue
         Me.BtnUpdate.Location = New System.Drawing.Point(520, 101)
         Me.BtnUpdate.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnUpdate.Name = "BtnUpdate"
         Me.BtnUpdate.Size = New System.Drawing.Size(85, 37)
         Me.BtnUpdate.TabIndex = 7
         Me.BtnUpdate.Text = "Update"
-        Me.BtnUpdate.UseVisualStyleBackColor = True
+        Me.BtnUpdate.UseVisualStyleBackColor = False
         '
         'cmbGroups
         '
@@ -126,14 +126,10 @@ Partial Class FrmGroupMaint
         '
         'TxtGrpNumber
         '
-        Me.TxtGrpNumber.Location = New System.Drawing.Point(180, 24)
+        Me.TxtGrpNumber.Location = New System.Drawing.Point(180, 26)
         Me.TxtGrpNumber.Name = "TxtGrpNumber"
         Me.TxtGrpNumber.Size = New System.Drawing.Size(61, 24)
         Me.TxtGrpNumber.TabIndex = 0
-        '
-        'ButtongroupsTableAdapter
-        '
-        '   Me.ButtongroupsTableAdapter.ClearBeforeFill = True
         '
         'Label1
         '
@@ -207,7 +203,7 @@ Partial Class FrmGroupMaint
         Me.Nbutton1.Group = 1
         Me.Nbutton1.Hint = ""
         Me.Nbutton1.Id = -1
-        Me.Nbutton1.Location = New System.Drawing.Point(475, 24)
+        Me.Nbutton1.Location = New System.Drawing.Point(475, 19)
         Me.Nbutton1.Name = "Nbutton1"
         Me.Nbutton1.Sequence = 999
         Me.Nbutton1.Size = New System.Drawing.Size(130, 38)

@@ -27,7 +27,7 @@ Public Class FrmEmail
     Private oButtonList As New List(Of Nbutton)
     Private isLoading As Boolean = True
     Private oSenderRow As sendersRow
-    Private oSmtpTable As smtpDataTable
+    Private oEmailSmtpTable As smtpDataTable
     Private ReadOnly aAttachList As New List(Of Attachment)
     Private isMailOnTop As Boolean
 #End Region
@@ -108,10 +108,14 @@ Public Class FrmEmail
                     strKeyText = EncryptionUtil.DecryptText(strKeyText, My.Resources.APP_STRING)
                 End If
                 strKeyText = EditFieldValues(GetDBFieldValues(strKeyText, oSenderRow), ReplaceType.None).Replace("{ENTER}", vbCrLf)
-                Clipboard.SetText(strKeyText)
+                If Not String.IsNullOrEmpty(strKeyText) Then
+                    Clipboard.SetText(strKeyText)
+                Else
+                    Clipboard.Clear()
+                End If
                 TxtText.SelectedText = strKeyText
             End If
-        End If
+            End If
     End Sub
     Private Sub BtnReturn_Click(sender As Object, e As EventArgs) Handles BtnReturn.Click
         TxtText.Text &= vbCrLf
@@ -253,18 +257,26 @@ Public Class FrmEmail
         End If
     End Sub
     Private Sub BtnSmtp_Click(sender As Object, e As EventArgs) Handles BtnSmtp.Click
+        OpenSmtpAccountsForm()
+    End Sub
+    Private Sub OpenSmtpAccountsForm()
         Hide()
         Using _smtpForm As New FrmSmtpAccounts
             _smtpForm.ShowDialog()
         End Using
-        SetAccountsDatasource()
+        oEmailSmtpTable = GetSmtpTable()
         Show()
     End Sub
 #End Region
 #Region "subroutines"
     Private Sub SetAccountsDatasource()
-        oSmtpTable = GetSmtpTable()
-        cbSmtpAccounts.DataSource = oSmtpTable
+        oEmailSmtpTable = GetSmtpTable()
+        If oEmailSmtpTable.Rows.Count = 0 Then
+            If MsgBox("No eMail accounts available. Create one now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Email Account") = MsgBoxResult.Yes Then
+                OpenSmtpAccountsForm()
+            End If
+        End If
+        cbSmtpAccounts.DataSource = oEmailSmtpTable
         cbSmtpAccounts.DisplayMember = "smtpUsername"
         cbSmtpAccounts.ValueMember = "smtpId"
     End Sub

@@ -39,6 +39,8 @@ Partial Class FrmSenderButtonFormat
         '
         'BtnOK
         '
+        Me.BtnOK.BackColor = System.Drawing.Color.SteelBlue
+        Me.BtnOK.ForeColor = System.Drawing.Color.White
         Me.BtnOK.Location = New System.Drawing.Point(292, 121)
         Me.BtnOK.Margin = New System.Windows.Forms.Padding(2, 5, 2, 5)
         Me.BtnOK.Name = "BtnOK"
@@ -46,11 +48,12 @@ Partial Class FrmSenderButtonFormat
         Me.BtnOK.TabIndex = 8
         Me.BtnOK.Text = "Update"
         Me.ToolTip7.SetToolTip(Me.BtnOK, "Update format details")
-        Me.BtnOK.UseVisualStyleBackColor = True
+        Me.BtnOK.UseVisualStyleBackColor = False
         '
         'BtnCancel
         '
         Me.BtnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnCancel.BackColor = System.Drawing.Color.LightSteelBlue
         Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.BtnCancel.Location = New System.Drawing.Point(77, 168)
         Me.BtnCancel.Margin = New System.Windows.Forms.Padding(2, 5, 2, 5)
@@ -58,7 +61,7 @@ Partial Class FrmSenderButtonFormat
         Me.BtnCancel.Size = New System.Drawing.Size(141, 39)
         Me.BtnCancel.TabIndex = 9
         Me.BtnCancel.Text = "Done"
-        Me.BtnCancel.UseVisualStyleBackColor = True
+        Me.BtnCancel.UseVisualStyleBackColor = False
         '
         'CbDbValue
         '

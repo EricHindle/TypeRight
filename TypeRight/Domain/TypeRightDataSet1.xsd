@@ -15,7 +15,7 @@
         <xs:element name="buttongroups" msprop:Generator_RowEvHandlerName="buttongroupsRowChangeEventHandler" msprop:Generator_RowDeletedName="buttongroupsRowDeleted" msprop:Generator_RowDeletingName="buttongroupsRowDeleting" msprop:Generator_RowEvArgName="buttongroupsRowChangeEvent" msprop:Generator_TablePropName="buttongroups" msprop:Generator_RowChangedName="buttongroupsRowChanged" msprop:Generator_UserTableName="buttongroups" msprop:Generator_RowChangingName="buttongroupsRowChanging" msprop:Generator_RowClassName="buttongroupsRow" msprop:Generator_TableClassName="buttongroupsDataTable" msprop:Generator_TableVarName="tablebuttongroups">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="buttongroupid" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="buttongroupidColumn" msprop:Generator_ColumnPropNameInRow="buttongroupid" msprop:Generator_UserColumnName="buttongroupid" msprop:Generator_ColumnVarNameInTable="columnbuttongroupid" type="xs:int" />
+              <xs:element name="buttongroupid" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnPropNameInTable="buttongroupidColumn" msprop:Generator_ColumnPropNameInRow="buttongroupid" msprop:Generator_UserColumnName="buttongroupid" msprop:Generator_ColumnVarNameInTable="columnbuttongroupid" type="xs:int" />
               <xs:element name="groupname" msprop:Generator_ColumnPropNameInTable="groupnameColumn" msprop:Generator_ColumnPropNameInRow="groupname" msprop:Generator_UserColumnName="groupname" msprop:Generator_ColumnVarNameInTable="columngroupname">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -29,7 +29,7 @@
         <xs:element name="button" msprop:Generator_RowEvHandlerName="buttonRowChangeEventHandler" msprop:Generator_RowDeletedName="buttonRowDeleted" msprop:Generator_RowDeletingName="buttonRowDeleting" msprop:Generator_RowEvArgName="buttonRowChangeEvent" msprop:Generator_TablePropName="button" msprop:Generator_RowChangedName="buttonRowChanged" msprop:Generator_UserTableName="button" msprop:Generator_RowChangingName="buttonRowChanging" msprop:Generator_RowClassName="buttonRow" msprop:Generator_TableClassName="buttonDataTable" msprop:Generator_TableVarName="tablebutton">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="buttonId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="buttonIdColumn" msprop:Generator_ColumnPropNameInRow="buttonId" msprop:Generator_UserColumnName="buttonId" msprop:Generator_ColumnVarNameInTable="columnbuttonId" type="xs:int" />
+              <xs:element name="buttonId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnPropNameInTable="buttonIdColumn" msprop:Generator_ColumnPropNameInRow="buttonId" msprop:Generator_UserColumnName="buttonId" msprop:Generator_ColumnVarNameInTable="columnbuttonId" type="xs:int" />
               <xs:element name="buttonGroup" msprop:Generator_ColumnPropNameInTable="buttonGroupColumn" msprop:Generator_ColumnPropNameInRow="buttonGroup" msprop:Generator_UserColumnName="buttonGroup" msprop:Generator_ColumnVarNameInTable="columnbuttonGroup" type="xs:int" default="-1" minOccurs="0" />
               <xs:element name="buttonSeq" msprop:Generator_ColumnPropNameInTable="buttonSeqColumn" msprop:Generator_ColumnPropNameInRow="buttonSeq" msprop:Generator_UserColumnName="buttonSeq" msprop:Generator_ColumnVarNameInTable="columnbuttonSeq" type="xs:int" />
               <xs:element name="buttonHint" msprop:Generator_ColumnPropNameInTable="buttonHintColumn" msprop:Generator_ColumnPropNameInRow="buttonHint" msprop:Generator_UserColumnName="buttonHint" msprop:Generator_ColumnVarNameInTable="columnbuttonHint" default="''">
@@ -70,7 +70,7 @@
         <xs:element name="senders" msprop:Generator_RowEvHandlerName="sendersRowChangeEventHandler" msprop:Generator_RowDeletedName="sendersRowDeleted" msprop:Generator_RowDeletingName="sendersRowDeleting" msprop:Generator_RowEvArgName="sendersRowChangeEvent" msprop:Generator_TablePropName="senders" msprop:Generator_RowChangedName="sendersRowChanged" msprop:Generator_UserTableName="senders" msprop:Generator_RowChangingName="sendersRowChanging" msprop:Generator_RowClassName="sendersRow" msprop:Generator_TableClassName="sendersDataTable" msprop:Generator_TableVarName="tablesenders">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="SenderId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="SenderIdColumn" msprop:Generator_ColumnPropNameInRow="SenderId" msprop:Generator_UserColumnName="SenderId" msprop:Generator_ColumnVarNameInTable="columnSenderId" type="xs:int" />
+              <xs:element name="SenderId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnPropNameInTable="SenderIdColumn" msprop:Generator_ColumnPropNameInRow="SenderId" msprop:Generator_UserColumnName="SenderId" msprop:Generator_ColumnVarNameInTable="columnSenderId" type="xs:int" />
               <xs:element name="Title" msprop:Generator_ColumnPropNameInTable="TitleColumn" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_UserColumnName="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" default="''">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -142,56 +142,56 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Phone" msprop:Generator_UserColumnName="Phone" msprop:Generator_ColumnPropNameInTable="PhoneColumn" msprop:Generator_ColumnPropNameInRow="Phone" msprop:Generator_ColumnVarNameInTable="columnPhone" default="''">
+              <xs:element name="Phone" msprop:Generator_ColumnPropNameInTable="PhoneColumn" msprop:Generator_ColumnPropNameInRow="Phone" msprop:Generator_UserColumnName="Phone" msprop:Generator_ColumnVarNameInTable="columnPhone" default="''">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Mobile" msprop:Generator_UserColumnName="Mobile" msprop:Generator_ColumnPropNameInTable="MobileColumn" msprop:Generator_ColumnPropNameInRow="Mobile" msprop:Generator_ColumnVarNameInTable="columnMobile" default="''">
+              <xs:element name="Mobile" msprop:Generator_ColumnPropNameInTable="MobileColumn" msprop:Generator_ColumnPropNameInRow="Mobile" msprop:Generator_UserColumnName="Mobile" msprop:Generator_ColumnVarNameInTable="columnMobile" default="''">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Passwd" msprop:Generator_UserColumnName="Passwd" msprop:Generator_ColumnPropNameInTable="PasswdColumn" msprop:Generator_ColumnPropNameInRow="Passwd" msprop:Generator_ColumnVarNameInTable="columnPasswd" default="''">
+              <xs:element name="Passwd" msprop:Generator_ColumnPropNameInTable="PasswdColumn" msprop:Generator_ColumnPropNameInRow="Passwd" msprop:Generator_UserColumnName="Passwd" msprop:Generator_ColumnVarNameInTable="columnPasswd" default="''">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="SecretWord" msprop:Generator_UserColumnName="SecretWord" msprop:Generator_ColumnPropNameInTable="SecretWordColumn" msprop:Generator_ColumnPropNameInRow="SecretWord" msprop:Generator_ColumnVarNameInTable="columnSecretWord" default="''">
+              <xs:element name="SecretWord" msprop:Generator_ColumnPropNameInTable="SecretWordColumn" msprop:Generator_ColumnPropNameInRow="SecretWord" msprop:Generator_UserColumnName="SecretWord" msprop:Generator_ColumnVarNameInTable="columnSecretWord" default="''">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="gender" msprop:Generator_UserColumnName="gender" msprop:Generator_ColumnPropNameInTable="genderColumn" msprop:Generator_ColumnPropNameInRow="gender" msprop:Generator_ColumnVarNameInTable="columngender" default="''">
+              <xs:element name="gender" msprop:Generator_ColumnPropNameInTable="genderColumn" msprop:Generator_ColumnPropNameInRow="gender" msprop:Generator_UserColumnName="gender" msprop:Generator_ColumnVarNameInTable="columngender" default="''">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Occupation" msprop:Generator_UserColumnName="Occupation" msprop:Generator_ColumnPropNameInTable="OccupationColumn" msprop:Generator_ColumnPropNameInRow="Occupation" msprop:Generator_ColumnVarNameInTable="columnOccupation" default="''">
+              <xs:element name="Occupation" msprop:Generator_ColumnPropNameInTable="OccupationColumn" msprop:Generator_ColumnPropNameInRow="Occupation" msprop:Generator_UserColumnName="Occupation" msprop:Generator_ColumnVarNameInTable="columnOccupation" default="''">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="MaritalStatus" msprop:Generator_UserColumnName="MaritalStatus" msprop:Generator_ColumnPropNameInTable="MaritalStatusColumn" msprop:Generator_ColumnPropNameInRow="MaritalStatus" msprop:Generator_ColumnVarNameInTable="columnMaritalStatus" default="''">
+              <xs:element name="MaritalStatus" msprop:Generator_ColumnPropNameInTable="MaritalStatusColumn" msprop:Generator_ColumnPropNameInRow="MaritalStatus" msprop:Generator_UserColumnName="MaritalStatus" msprop:Generator_ColumnVarNameInTable="columnMaritalStatus" default="''">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Username" msprop:Generator_UserColumnName="Username" msprop:Generator_ColumnPropNameInTable="UsernameColumn" msprop:Generator_ColumnPropNameInRow="Username" msprop:Generator_ColumnVarNameInTable="columnUsername" default="''" minOccurs="0">
+              <xs:element name="Username" msprop:Generator_ColumnPropNameInTable="UsernameColumn" msprop:Generator_ColumnPropNameInRow="Username" msprop:Generator_UserColumnName="Username" msprop:Generator_ColumnVarNameInTable="columnUsername" default="''" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
@@ -220,7 +220,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="buttonFontSize" msprop:Generator_ColumnPropNameInRow="buttonFontSize" msprop:Generator_ColumnPropNameInTable="buttonFontSizeColumn" msprop:Generator_ColumnVarNameInTable="columnbuttonFontSize" msprop:Generator_UserColumnName="buttonFontSize" type="xs:decimal" />
+              <xs:element name="buttonFontSize" msprop:Generator_UserColumnName="buttonFontSize" msprop:Generator_ColumnPropNameInTable="buttonFontSizeColumn" msprop:Generator_ColumnPropNameInRow="buttonFontSize" msprop:Generator_ColumnVarNameInTable="columnbuttonFontSize" type="xs:decimal" />
               <xs:element name="buttonEncrypted" msprop:Generator_ColumnPropNameInTable="buttonEncryptedColumn" msprop:Generator_ColumnPropNameInRow="buttonEncrypted" msprop:Generator_UserColumnName="buttonEncrypted" msprop:Generator_ColumnVarNameInTable="columnbuttonEncrypted" type="xs:unsignedByte" default="0" />
             </xs:sequence>
           </xs:complexType>
@@ -262,7 +262,7 @@
         <xs:element name="smtp" msprop:Generator_RowEvHandlerName="smtpRowChangeEventHandler" msprop:Generator_RowDeletedName="smtpRowDeleted" msprop:Generator_RowDeletingName="smtpRowDeleting" msprop:Generator_RowEvArgName="smtpRowChangeEvent" msprop:Generator_TablePropName="smtp" msprop:Generator_RowChangedName="smtpRowChanged" msprop:Generator_UserTableName="smtp" msprop:Generator_RowChangingName="smtpRowChanging" msprop:Generator_RowClassName="smtpRow" msprop:Generator_TableClassName="smtpDataTable" msprop:Generator_TableVarName="tablesmtp">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="smtpId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="smtpIdColumn" msprop:Generator_ColumnPropNameInRow="smtpId" msprop:Generator_UserColumnName="smtpId" msprop:Generator_ColumnVarNameInTable="columnsmtpId" type="xs:int" />
+              <xs:element name="smtpId" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnPropNameInTable="smtpIdColumn" msprop:Generator_ColumnPropNameInRow="smtpId" msprop:Generator_UserColumnName="smtpId" msprop:Generator_ColumnVarNameInTable="columnsmtpId" type="xs:short" />
               <xs:element name="smtpUsername" msprop:Generator_ColumnPropNameInTable="smtpUsernameColumn" msprop:Generator_ColumnPropNameInRow="smtpUsername" msprop:Generator_UserColumnName="smtpUsername" msprop:Generator_ColumnVarNameInTable="columnsmtpUsername" default="''">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">

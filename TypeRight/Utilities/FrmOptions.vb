@@ -76,6 +76,8 @@ Public Class FrmOptions
         My.Settings.FontSize = iDfltFontSize
         My.Settings.FontBold = bDfltFontBold
         My.Settings.FontItalic = bDfltFontItalic
+        My.Settings.logZoomValue = NudZoom.Value
+        My.Settings.LogZoomOn = CbZoomOn.Checked
         My.Settings.Save()
         LogUtil.Info("Saved", MyBase.Name)
         Close()
@@ -112,6 +114,8 @@ Public Class FrmOptions
         TxtBkUpFolder.Text = My.Settings.BackupFolder
         TxtLogFolder.Text = My.Settings.LogFolder
         CbDebug.Checked = My.Settings.DebugOn
+        CbZoomOn.Checked = My.Settings.LogZoomOn
+        NudZoom.Value = My.Settings.logZoomValue
         LblVersion.Text = System.String.Format(LblVersion.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
     End Sub
     Private Sub HScroll1_Scroll(sender As Object, e As Windows.Forms.ScrollEventArgs) Handles HScroll1.Scroll
@@ -142,10 +146,11 @@ Public Class FrmOptions
         Using _logView As New FrmLogViewer
             _logView.FormPosition = My.Settings.LogViewerPos
             _logView.ZoomValue = My.Settings.logZoomValue
-            _logView.IsZoomOn = My.Settings.logZoomOn
+            _logView.IsZoomOn = My.Settings.LogZoomOn
             _logView.ShowDialog()
             My.Settings.LogViewerPos = _logView.FormPosition
             My.Settings.logZoomValue = _logView.ZoomValue
+            NudZoom.Value = _logView.ZoomValue
             My.Settings.LogZoomOn = _logView.IsZoomOn
             My.Settings.Save()
         End Using
@@ -190,6 +195,10 @@ Public Class FrmOptions
         Using _restore As New FrmRestore
             _restore.ShowDialog()
         End Using
+    End Sub
+
+    Private Sub BtnDonate_Click(sender As Object, e As EventArgs) Handles BtnDonate.Click
+        Process.Start(My.Settings.DonationPage)
     End Sub
 #End Region
 End Class

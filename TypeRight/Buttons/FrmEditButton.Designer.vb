@@ -28,6 +28,10 @@ Partial Class FrmEditButton
         Me.chkEncrypt = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TxtPad = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TxtLength = New System.Windows.Forms.TextBox()
         Me.RbToEnd = New System.Windows.Forms.RadioButton()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.RbSingle = New System.Windows.Forms.RadioButton()
@@ -98,10 +102,6 @@ Partial Class FrmEditButton
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.LblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip3 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.TxtLength = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.TxtPad = New System.Windows.Forms.TextBox()
         Me.grpOpts.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -193,6 +193,44 @@ Partial Class FrmEditButton
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Database Field"
+        '
+        'TxtPad
+        '
+        Me.TxtPad.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPad.Location = New System.Drawing.Point(263, 76)
+        Me.TxtPad.Name = "TxtPad"
+        Me.TxtPad.Size = New System.Drawing.Size(21, 20)
+        Me.TxtPad.TabIndex = 17
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(235, 80)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(25, 13)
+        Me.Label11.TabIndex = 16
+        Me.Label11.Text = "Pad"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(157, 80)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(40, 13)
+        Me.Label10.TabIndex = 15
+        Me.Label10.Text = "Length"
+        '
+        'TxtLength
+        '
+        Me.TxtLength.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtLength.Location = New System.Drawing.Point(200, 76)
+        Me.TxtLength.Name = "TxtLength"
+        Me.TxtLength.Size = New System.Drawing.Size(32, 20)
+        Me.TxtLength.TabIndex = 14
         '
         'RbToEnd
         '
@@ -700,7 +738,7 @@ Partial Class FrmEditButton
         Me.BtnFont.Location = New System.Drawing.Point(310, 7)
         Me.BtnFont.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnFont.Name = "BtnFont"
-        Me.BtnFont.Size = New System.Drawing.Size(323, 46)
+        Me.BtnFont.Size = New System.Drawing.Size(260, 46)
         Me.BtnFont.TabIndex = 3
         Me.BtnFont.Text = "Caption Font"
         Me.ToolTip3.SetToolTip(Me.BtnFont, "Change button caption font")
@@ -718,7 +756,7 @@ Partial Class FrmEditButton
         'BtnCancel
         '
         Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnCancel.Location = New System.Drawing.Point(263, 500)
+        Me.BtnCancel.Location = New System.Drawing.Point(263, 507)
         Me.BtnCancel.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(141, 39)
@@ -728,19 +766,20 @@ Partial Class FrmEditButton
         '
         'BtnOK
         '
+        Me.BtnOK.BackColor = System.Drawing.Color.LightSteelBlue
         Me.BtnOK.DialogResult = System.Windows.Forms.DialogResult.Abort
-        Me.BtnOK.Location = New System.Drawing.Point(14, 500)
+        Me.BtnOK.Location = New System.Drawing.Point(14, 507)
         Me.BtnOK.Margin = New System.Windows.Forms.Padding(2, 4, 2, 4)
         Me.BtnOK.Name = "BtnOK"
         Me.BtnOK.Size = New System.Drawing.Size(141, 39)
         Me.BtnOK.TabIndex = 6
         Me.BtnOK.Text = "Update"
-        Me.BtnOK.UseVisualStyleBackColor = True
+        Me.BtnOK.UseVisualStyleBackColor = False
         '
         'LblBtnSeq
         '
         Me.LblBtnSeq.AutoSize = True
-        Me.LblBtnSeq.Location = New System.Drawing.Point(792, 36)
+        Me.LblBtnSeq.Location = New System.Drawing.Point(778, 36)
         Me.LblBtnSeq.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblBtnSeq.Name = "LblBtnSeq"
         Me.LblBtnSeq.Size = New System.Drawing.Size(16, 17)
@@ -750,17 +789,17 @@ Partial Class FrmEditButton
         'LblBtnGrp
         '
         Me.LblBtnGrp.AutoSize = True
-        Me.LblBtnGrp.Location = New System.Drawing.Point(792, 9)
+        Me.LblBtnGrp.Location = New System.Drawing.Point(738, 9)
         Me.LblBtnGrp.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LblBtnGrp.Name = "LblBtnGrp"
-        Me.LblBtnGrp.Size = New System.Drawing.Size(16, 17)
+        Me.LblBtnGrp.Size = New System.Drawing.Size(84, 17)
         Me.LblBtnGrp.TabIndex = 9
-        Me.LblBtnGrp.Text = "0"
+        Me.LblBtnGrp.Text = "Group name"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(656, 9)
+        Me.Label2.Location = New System.Drawing.Point(605, 9)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(97, 17)
@@ -818,7 +857,7 @@ Partial Class FrmEditButton
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(656, 36)
+        Me.Label6.Location = New System.Drawing.Point(605, 36)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(119, 17)
@@ -856,44 +895,6 @@ Partial Class FrmEditButton
         Me.LblStatus.Name = "LblStatus"
         Me.LblStatus.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
         Me.LblStatus.Size = New System.Drawing.Size(10, 17)
-        '
-        'TxtLength
-        '
-        Me.TxtLength.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtLength.Location = New System.Drawing.Point(200, 76)
-        Me.TxtLength.Name = "TxtLength"
-        Me.TxtLength.Size = New System.Drawing.Size(32, 20)
-        Me.TxtLength.TabIndex = 14
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(157, 80)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(40, 13)
-        Me.Label10.TabIndex = 15
-        Me.Label10.Text = "Length"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(235, 80)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(25, 13)
-        Me.Label11.TabIndex = 16
-        Me.Label11.Text = "Pad"
-        '
-        'TxtPad
-        '
-        Me.TxtPad.Font = New System.Drawing.Font("Tahoma", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtPad.Location = New System.Drawing.Point(263, 76)
-        Me.TxtPad.Name = "TxtPad"
-        Me.TxtPad.Size = New System.Drawing.Size(21, 20)
-        Me.TxtPad.TabIndex = 17
         '
         'FrmEditButton
         '

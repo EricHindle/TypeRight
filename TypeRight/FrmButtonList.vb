@@ -147,7 +147,11 @@ Public Class FrmButtonList
         If TypeOf sourceControl Is Nbutton Then
             Dim _btn As Nbutton = CType(sourceControl, Nbutton)
             Dim strText As String = _btn.Value.Replace("{ENTER}", vbCrLf).Replace("{Return}", Chr(10)).Replace("{{}", "{").Replace("{}}", "}")
-            Clipboard.SetText(strText)
+            If Not String.IsNullOrEmpty(strText) Then
+                Clipboard.SetText(strText)
+            Else
+                Clipboard.Clear()
+            End If
         End If
     End Sub
     Private Sub MnuNew_Click(sender As Object, e As EventArgs) Handles mnuNew.Click
@@ -239,10 +243,7 @@ Public Class FrmButtonList
     End Sub
     Private Sub PicDatabase_Click(sender As Object, e As EventArgs) Handles PicDatabase.Click
         LogUtil.Info("Updating Database", MyBase.Name)
-        Using _dbUpdate As New FrmDbUpdate
-            _dbUpdate.SenderId = iCurrSender
-            _dbUpdate.ShowDialog()
-        End Using
+        OpenDatabaseForm()
         FillNamesList()
     End Sub
     Private Sub ProgressTimer_Tick(sender As Object, e As EventArgs) Handles ProgressTimer.Tick
@@ -365,7 +366,11 @@ Public Class FrmButtonList
             End If
             strKeyText = GetDBFieldValues(strKeyText, oSenderRow)
             strKeyText = EditFieldValues(strKeyText, ReplaceType.None)
-            Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
+            If Not String.IsNullOrEmpty(strKeyText) Then
+                Clipboard.SetText(strKeyText.Replace("{ENTER}", vbCrLf))
+            Else
+                Clipboard.Clear()
+            End If
             If Not isClipboardOnly Then
                 If GreenClock.Visible = True Then
                     RedClock.Visible = True
@@ -623,5 +628,6 @@ Public Class FrmButtonList
         PicClipOff.Visible = True
         PicClipOn.Visible = False
     End Sub
+
 #End Region
 End Class

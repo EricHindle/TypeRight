@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_082B70E930454E60B477FE872BCDC3F7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_386E23A2611F1696EF374E3557792DEC"
         "OwnerKey" = "8:_573022E4AE0E420CACD42A7CEB74A2B7"
         "MsmSig" = "8:_UNDEFINED"
@@ -39,6 +45,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7A397F0A8F294FB69DB0210A650B90F7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_85574B4DE946E7FC21FB34F1B9E2EEBA"
         "OwnerKey" = "8:_573022E4AE0E420CACD42A7CEB74A2B7"
         "MsmSig" = "8:_UNDEFINED"
@@ -52,6 +64,24 @@
         "Entry"
         {
         "MsmKey" = "8:_884DB3FB6CC3477280DFB89BEF011F36"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BFAFF0E7BB9D41009E6C4CDA84D0942F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CF30C76A8B59447D983A98CE48C79FF7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D5927DD154E24E5185AE0AA6F9E97834"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -174,6 +204,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_082B70E930454E60B477FE872BCDC3F7"
+            {
+            "SourcePath" = "8:..\\TypeRight Data\\senders.htx"
+            "TargetName" = "8:senders.htx"
+            "Tag" = "8:"
+            "Folder" = "8:_667F1C08584E483DBB9905C95400D37A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_386E23A2611F1696EF374E3557792DEC"
             {
             "AssemblyRegister" = "3:1"
@@ -236,6 +286,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7A397F0A8F294FB69DB0210A650B90F7"
+            {
+            "SourcePath" = "8:..\\TypeRight Data\\button.htx"
+            "TargetName" = "8:button.htx"
+            "Tag" = "8:"
+            "Folder" = "8:_667F1C08584E483DBB9905C95400D37A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_85574B4DE946E7FC21FB34F1B9E2EEBA"
             {
             "AssemblyRegister" = "3:1"
@@ -273,6 +343,66 @@
             "TargetName" = "8:KEYS03.ICO"
             "Tag" = "8:"
             "Folder" = "8:_AB721D1CC9CA4397A51BA9591C0F1254"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BFAFF0E7BB9D41009E6C4CDA84D0942F"
+            {
+            "SourcePath" = "8:..\\TypeRight Data\\smtp.htx"
+            "TargetName" = "8:smtp.htx"
+            "Tag" = "8:"
+            "Folder" = "8:_667F1C08584E483DBB9905C95400D37A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CF30C76A8B59447D983A98CE48C79FF7"
+            {
+            "SourcePath" = "8:..\\TypeRight Data\\buttongroups.htx"
+            "TargetName" = "8:buttongroups.htx"
+            "Tag" = "8:"
+            "Folder" = "8:_667F1C08584E483DBB9905C95400D37A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D5927DD154E24E5185AE0AA6F9E97834"
+            {
+            "SourcePath" = "8:..\\TypeRight Data\\Settings.htx"
+            "TargetName" = "8:Settings.htx"
+            "Tag" = "8:"
+            "Folder" = "8:_667F1C08584E483DBB9905C95400D37A"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -388,15 +518,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TypeRight"
-        "ProductCode" = "8:{429F0F9F-8EEE-4524-B69D-49DAF60DB51E}"
-        "PackageCode" = "8:{473A09C6-C8E7-48CE-A8B9-98B602C07560}"
+        "ProductCode" = "8:{98B804B8-2695-4A9F-8114-89EAD867EC2D}"
+        "PackageCode" = "8:{659891F1-D125-41E9-984F-B934800F4FE2}"
         "UpgradeCode" = "8:{7A7447F7-CCA9-4D34-90D1-F8D3FD83FAD5}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.17.0"
+        "ProductVersion" = "8:2.17.1"
         "Manufacturer" = "8:hindleware"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

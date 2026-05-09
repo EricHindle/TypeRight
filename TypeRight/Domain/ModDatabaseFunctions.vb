@@ -60,6 +60,11 @@ Namespace Domain
             LogUtil.Info("Data path is " & oDataFolderName, MethodBase.GetCurrentMethod.Name)
             Try
                 LoadDataTables()
+                If oSendersTable.Rows.Count = 0 Then
+                    If MsgBox("No personal details available. Create data record now?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Email Account") = MsgBoxResult.Yes Then
+                        OpenDatabaseForm()
+                    End If
+                End If
             Catch ex As ApplicationException
                 LogUtil.DisplayException(ex, "Loading Data", MethodBase.GetCurrentMethod.Name)
             End Try
@@ -140,52 +145,52 @@ Namespace Domain
                 Select Case otable
                     Case "ButtonGroups"
                         oXmlFileName = Path.Combine(pFolder, oButtonGroupsTable.TableName & DATA_EXT)
-                        If My.Computer.FileSystem.FileExists(oXmlFileName) Then
-                            oButtonGroupsTable.Clear()
-                            oButtonGroupsTable.ReadXml(oXmlFileName)
-                        Else
-                            Throw New ApplicationException("ButtonGroups data file missing.")
+                        If Not My.Computer.FileSystem.FileExists(oXmlFileName) Then
+                            LogUtil.LogInfo("ButtonGroups file loaded from installation", MethodBase.GetCurrentMethod.Name)
+                            LoadDataTableFromInstallation(oXmlFileName)
                         End If
+                        oButtonGroupsTable.Clear()
+                        oButtonGroupsTable.ReadXml(oXmlFileName)
                     Case "Button"
                         oXmlFileName = Path.Combine(pFolder, oButtonTable.TableName & DATA_EXT)
-                        If My.Computer.FileSystem.FileExists(oXmlFileName) Then
-                            oButtonTable.Clear()
-                            oButtonTable.ReadXml(oXmlFileName)
-                        Else
-                            Throw New ApplicationException("Button data file missing.")
+                        If Not My.Computer.FileSystem.FileExists(oXmlFileName) Then
+                            LogUtil.LogInfo("Button file loaded from installation", MethodBase.GetCurrentMethod.Name)
+                            LoadDataTableFromInstallation(oXmlFileName)
                         End If
+                        oButtonTable.Clear()
+                        oButtonTable.ReadXml(oXmlFileName)
                     Case "Senders"
                         oXmlFileName = Path.Combine(pFolder, oSendersTable.TableName & DATA_EXT)
-                        If My.Computer.FileSystem.FileExists(oXmlFileName) Then
-                            oSendersTable.Clear()
-                            oSendersTable.ReadXml(oXmlFileName)
-                        Else
-                            Throw New ApplicationException("Senders data file missing.")
+                        If Not My.Computer.FileSystem.FileExists(oXmlFileName) Then
+                            LogUtil.LogInfo("Senders file loaded from installation", MethodBase.GetCurrentMethod.Name)
+                            LoadDataTableFromInstallation(oXmlFileName)
                         End If
+                        oSendersTable.Clear()
+                        oSendersTable.ReadXml(oXmlFileName)
                     Case "SenderButton"
                         oXmlFileName = Path.Combine(pFolder, oSenderButtonTable.TableName & DATA_EXT)
-                        If My.Computer.FileSystem.FileExists(oXmlFileName) Then
-                            oSenderButtonTable.Clear()
-                            oSenderButtonTable.ReadXml(oXmlFileName)
-                        Else
-                            Throw New ApplicationException("SenderButton data file missing.")
+                        If Not My.Computer.FileSystem.FileExists(oXmlFileName) Then
+                            LogUtil.LogInfo("SenderButton file loaded from installation", MethodBase.GetCurrentMethod.Name)
+                            LoadDataTableFromInstallation(oXmlFileName)
                         End If
+                        oSenderButtonTable.Clear()
+                        oSenderButtonTable.ReadXml(oXmlFileName)
                     Case "Smtp"
                         oXmlFileName = Path.Combine(pFolder, oSmtpTable.TableName & DATA_EXT)
-                        If My.Computer.FileSystem.FileExists(oXmlFileName) Then
-                            oSmtpTable.Clear()
-                            oSmtpTable.ReadXml(oXmlFileName)
-                        Else
-                            Throw New ApplicationException("Smtp data file missing.")
+                        If Not My.Computer.FileSystem.FileExists(oXmlFileName) Then
+                            LogUtil.LogInfo("Smtp file loaded from installation", MethodBase.GetCurrentMethod.Name)
+                            LoadDataTableFromInstallation(oXmlFileName)
                         End If
+                        oSmtpTable.Clear()
+                        oSmtpTable.ReadXml(oXmlFileName)
                     Case "Settings"
                         oXmlFileName = Path.Combine(pFolder, oSettingsTable.TableName & DATA_EXT)
-                        If My.Computer.FileSystem.FileExists(oXmlFileName) Then
-                            oSettingsTable.Clear()
-                            oSettingsTable.ReadXml(oXmlFileName)
-                        Else
-                            Throw New ApplicationException("Settings data file missing.")
+                        If Not My.Computer.FileSystem.FileExists(oXmlFileName) Then
+                            LogUtil.LogInfo("Settings file loaded from installation", MethodBase.GetCurrentMethod.Name)
+                            LoadDataTableFromInstallation(oXmlFileName)
                         End If
+                        oSettingsTable.Clear()
+                        oSettingsTable.ReadXml(oXmlFileName)
                     Case Else
                         LogUtil.LogInfo("Unknown table " & otable & " cannot be loaded", MethodBase.GetCurrentMethod.Name)
                 End Select
@@ -193,6 +198,36 @@ Namespace Domain
                 Throw New ApplicationException("Restore folder missing.")
             End If
         End Sub
+        Private Sub LoadDataTableFromInstallation(oXmlFileName As String)
+            Dim oInstallDataPath As String = Path.Combine(My.Application.Info.DirectoryPath, "Data")
+            Dim oSourceFilename As String = Path.GetFileName(oXmlFileName)
+            Dim oFullSourceName As String = Path.Combine(oInstallDataPath, oSourceFilename)
+            Dim oTargetPath As String = Path.GetDirectoryName(oXmlFileName)
+            Dim oFullTargetName As String = Path.Combine(oTargetPath, oSourceFilename)
+            TryCopyFile(oFullSourceName, oFullTargetName, False)
+        End Sub
+        Public Function TryCopyFile(pFullname As String, pDestination As String, pOverwrite As Boolean) As Boolean
+            Return TryCopyFile(pFullname, pDestination, pOverwrite, False, False)
+        End Function
+        Public Function TryCopyFile(pFullname As String, pDestination As String, pOverwrite As Boolean, pIsDisplayException As Boolean) As Boolean
+            Return TryCopyFile(pFullname, pDestination, pOverwrite, pIsDisplayException, False)
+        End Function
+        Public Function TryCopyFile(pFullname As String, pDestination As String, pOverwrite As Boolean, pIsDisplayException As Boolean, pIsThrowException As Boolean) As Boolean
+            Dim isCopied As Boolean
+            Try
+                My.Computer.FileSystem.CopyFile(pFullname, pDestination, pOverwrite)
+                isCopied = True
+            Catch ex As Exception When (TypeOf ex Is ArgumentException _
+                        OrElse TypeOf ex Is IOException _
+                        OrElse TypeOf ex Is NotSupportedException _
+                        OrElse TypeOf ex Is UnauthorizedAccessException _
+                        OrElse TypeOf ex Is Security.SecurityException)
+                isCopied = False
+                If pIsDisplayException Then LogUtil.DisplayException(ex, "Copying file", MethodBase.GetCurrentMethod.Name)
+                If pIsThrowException Then Throw New ApplicationException("Copy file failed for " & pFullname, ex)
+            End Try
+            Return isCopied
+        End Function
         Private Function WriteXmlFromTable(pDataTable As DataTable) As String
             Dim sTableName As String = pDataTable.TableName
             LogUtil.Debug("Writing XML file", MethodBase.GetCurrentMethod.Name)
@@ -227,7 +262,6 @@ Namespace Domain
             End If
         End Sub
 #End Region
-
 #Region "backup"
         Public Function RestoreDataTable(tableType As String, datapath As String) As Integer
             Dim rowCount As Integer = 0
@@ -258,7 +292,6 @@ Namespace Domain
             End Try
             Return rowCount
         End Function
-
 #End Region
 #Region "buttons"
         Public Function GetButtonTable() As buttonDataTable
@@ -279,7 +312,6 @@ Namespace Domain
             End Try
             Return oButtonRow
         End Function
-
         Public Function GetButtonByGroupAndSeq(_buttonGrpId As Integer, _buttonSeq As Integer) As buttonRow
             LogUtil.Info("Getting Button row for Grp " & _buttonGrpId & " Seq " & _buttonSeq, MethodBase.GetCurrentMethod.Name)
             Dim oButtonRow As buttonRow = Nothing
@@ -296,7 +328,6 @@ Namespace Domain
             Return oButtonRow
 
         End Function
-
         Public Function GetButtonsByGroup(_buttonGrpId As Integer) As List(Of buttonRow)
             LogUtil.Info("Getting Button row list for Grp " & _buttonGrpId, MethodBase.GetCurrentMethod.Name)
             Dim oButtonList As New List(Of buttonRow)
@@ -328,7 +359,6 @@ Namespace Domain
             End Try
             Return isUpdated
         End Function
-
         Public Function InsertButton(_button As Nbutton) As Boolean
             LogUtil.Info("Inserting Button for Grp " & _button.Group & " Seq " & _button.Sequence, MethodBase.GetCurrentMethod.Name)
             Dim isinserted As Boolean = False
@@ -434,7 +464,6 @@ Namespace Domain
         Public Function GetButtonGroupsTable() As buttongroupsDataTable
             Return oButtonGroupsTable
         End Function
-
         Public Function GetButtonGroupById(pId As Integer) As ButtonGroup
             LogUtil.Info("Getting Button Group " & pId, MethodBase.GetCurrentMethod.Name)
             Dim oButtonGroup As New ButtonGroup
@@ -478,7 +507,6 @@ Namespace Domain
             End Try
             Return isOk
         End Function
-
         Public Function InsertButtonGroup(_groupname As String) As Boolean
             LogUtil.Info("Inserting Button Group " & _groupname, MethodBase.GetCurrentMethod.Name)
             Dim isinserted As Boolean = False
@@ -493,7 +521,6 @@ Namespace Domain
             End Try
             Return isinserted
         End Function
-
         Public Function UpdateButtonGroupName(_groupname As String, _groupId As Integer) As Boolean
             LogUtil.Info("Updating Button Group " & _groupId, MethodBase.GetCurrentMethod.Name)
             Dim isUpdated As Boolean = False
@@ -514,7 +541,6 @@ Namespace Domain
         Public Function GetSenderTable() As sendersDataTable
             Return oSendersTable
         End Function
-
         Public Function GetSenderById(pId As Integer) As Sender
             LogUtil.Info("Getting Sender " & pId, MethodBase.GetCurrentMethod.Name)
             Dim oSender As New Sender
@@ -523,7 +549,7 @@ Namespace Domain
                                   Select Sender
                                   Where Sender.SenderId = pId
                 If oSenderRows.Count > 0 Then
-                    oSender = SenderBuilder.aSender.StartingWith(oSenderRows.First).Build
+                    oSender = SenderBuilder.ASender.StartingWith(oSenderRows.First).Build
                 End If
             Catch ex As SqlException
                 LogUtil.DisplayException(ex, "dB", MethodBase.GetCurrentMethod.Name)
@@ -558,7 +584,6 @@ Namespace Domain
             End Try
             Return isOk
         End Function
-
         Public Function InsertSender(pSender As Sender) As Boolean
             LogUtil.Info("Inserting Sender", MethodBase.GetCurrentMethod.Name)
             Dim isinserted As Boolean = False
@@ -598,7 +623,6 @@ Namespace Domain
             End With
             Return oSenderRow
         End Function
-
         Public Function UpdateSender(pSender As Sender) As Boolean
             LogUtil.Info("Updating Sender", MethodBase.GetCurrentMethod.Name)
             Dim isUpdated As Boolean = False
@@ -619,7 +643,6 @@ Namespace Domain
         Public Function GetSenderButtonTable() As senderButtonDataTable
             Return oSenderButtonTable
         End Function
-
         Public Function GetSenderButton(pColumnName As String) As SenderButton
             LogUtil.Info("Getting SenderButton " & pColumnName, MethodBase.GetCurrentMethod.Name)
             Dim oSenderButton As New SenderButton
@@ -636,7 +659,7 @@ Namespace Domain
             Return oSenderButton
         End Function
         Public Function GetSenderButtonRowById(pColumnName As String) As senderButtonRow
-            LogUtil.Info("Getting Sender Button " & pColumnName, MethodBase.GetCurrentMethod.Name)
+            LogUtil.Debug("Getting Sender Button " & pColumnName, MethodBase.GetCurrentMethod.Name)
             Dim oSenderButtonRow As senderButtonRow = Nothing
             Try
                 Dim oSenderButtonRows = From SenderButton In oSenderButtonTable.AsEnumerable()
@@ -663,7 +686,6 @@ Namespace Domain
             End Try
             Return isOk
         End Function
-
         Public Function InsertSenderButton(pSenderButton As SenderButton) As Boolean
             LogUtil.Info("Inserting SenderButton", MethodBase.GetCurrentMethod.Name)
             Dim isinserted As Boolean = False
@@ -689,7 +711,6 @@ Namespace Domain
             End With
             Return oSenderButtonRow
         End Function
-
         Public Function UpdateSenderButton(pSenderButton As SenderButton) As Boolean
             LogUtil.Info("Updating SenderButton", MethodBase.GetCurrentMethod.Name)
             Dim isUpdated As Boolean = False
@@ -710,7 +731,6 @@ Namespace Domain
         Public Function GetSmtpTable() As smtpDataTable
             Return oSmtpTable
         End Function
-
         Public Function GetSmtpById(pId As Integer) As SmtpAccount
             LogUtil.Info("Getting Smtp Account", MethodBase.GetCurrentMethod.Name)
             Dim oSmtp As New SmtpAccount
@@ -754,7 +774,6 @@ Namespace Domain
             End Try
             Return isOk
         End Function
-
         Public Function InsertSmtp(pSmtp As SmtpAccount) As Boolean
             LogUtil.Info("Inserting Smtp", MethodBase.GetCurrentMethod.Name)
             Dim isinserted As Boolean = False
@@ -781,7 +800,6 @@ Namespace Domain
             End With
             Return oSmtpRow
         End Function
-
         Public Function UpdateSmtp(pSmtp As SmtpAccount) As Boolean
             LogUtil.Info("Updating Smtp", MethodBase.GetCurrentMethod.Name)
             Dim isUpdated As Boolean = False

@@ -133,12 +133,13 @@ Partial Class FrmDbUpdate
         '
         'BtnOk
         '
-        Me.BtnOk.Location = New System.Drawing.Point(673, 497)
+        Me.BtnOk.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.BtnOk.Location = New System.Drawing.Point(651, 489)
         Me.BtnOk.Name = "BtnOk"
         Me.BtnOk.Size = New System.Drawing.Size(91, 38)
         Me.BtnOk.TabIndex = 7
         Me.BtnOk.Text = "Done"
-        Me.BtnOk.UseVisualStyleBackColor = True
+        Me.BtnOk.UseVisualStyleBackColor = False
         '
         'TxtAge
         '
@@ -288,33 +289,39 @@ Partial Class FrmDbUpdate
         '
         'BtnDel
         '
+        Me.BtnDel.BackColor = System.Drawing.Color.SteelBlue
+        Me.BtnDel.ForeColor = System.Drawing.Color.White
         Me.BtnDel.Location = New System.Drawing.Point(22, 129)
         Me.BtnDel.Name = "BtnDel"
         Me.BtnDel.Size = New System.Drawing.Size(41, 34)
         Me.BtnDel.TabIndex = 2
         Me.BtnDel.Text = "Del"
         Me.ToolTip4.SetToolTip(Me.BtnDel, "Delete current sender")
-        Me.BtnDel.UseVisualStyleBackColor = True
+        Me.BtnDel.UseVisualStyleBackColor = False
         '
         'BtnAdd
         '
+        Me.BtnAdd.BackColor = System.Drawing.Color.SteelBlue
+        Me.BtnAdd.ForeColor = System.Drawing.Color.White
         Me.BtnAdd.Location = New System.Drawing.Point(22, 30)
         Me.BtnAdd.Name = "BtnAdd"
         Me.BtnAdd.Size = New System.Drawing.Size(41, 34)
         Me.BtnAdd.TabIndex = 0
         Me.BtnAdd.Text = "Add"
         Me.ToolTip4.SetToolTip(Me.BtnAdd, "Add a new sender")
-        Me.BtnAdd.UseVisualStyleBackColor = True
+        Me.BtnAdd.UseVisualStyleBackColor = False
         '
         'BtnUpd
         '
+        Me.BtnUpd.BackColor = System.Drawing.Color.SteelBlue
+        Me.BtnUpd.ForeColor = System.Drawing.Color.White
         Me.BtnUpd.Location = New System.Drawing.Point(22, 80)
         Me.BtnUpd.Name = "BtnUpd"
         Me.BtnUpd.Size = New System.Drawing.Size(41, 34)
         Me.BtnUpd.TabIndex = 1
         Me.BtnUpd.Text = "Upd"
         Me.ToolTip4.SetToolTip(Me.BtnUpd, "Update selected sender")
-        Me.BtnUpd.UseVisualStyleBackColor = True
+        Me.BtnUpd.UseVisualStyleBackColor = False
         '
         'StatusStrip1
         '

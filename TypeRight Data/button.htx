@@ -1,0 +1,160 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="button" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="button">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="buttonId" type="xs:int" />
+                <xs:element name="buttonGroup" type="xs:int" />
+                <xs:element name="buttonSeq" type="xs:int" />
+                <xs:element name="buttonHint" minOccurs="0">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:maxLength value="100" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element name="buttonValue">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:maxLength value="200" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element name="buttonFont">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:maxLength value="20" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element name="buttonBold" type="xs:unsignedByte" />
+                <xs:element name="buttonFontSize" type="xs:decimal" />
+                <xs:element name="buttonItalic" type="xs:unsignedByte" />
+                <xs:element name="buttonEncrypt" type="xs:unsignedByte" />
+                <xs:element name="buttonText">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:maxLength value="20" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//button" />
+        <xs:field xpath="buttonId" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <button>
+    <buttonId>1</buttonId>
+    <buttonGroup>1</buttonGroup>
+    <buttonSeq>1</buttonSeq>
+    <buttonHint>Email address</buttonHint>
+    <buttonValue>?=Email=?</buttonValue>
+    <buttonFont>Tahoma</buttonFont>
+    <buttonBold>255</buttonBold>
+    <buttonFontSize>10.00</buttonFontSize>
+    <buttonItalic>0</buttonItalic>
+    <buttonEncrypt>0</buttonEncrypt>
+    <buttonText>Email</buttonText>
+  </button>
+  <button>
+    <buttonId>4</buttonId>
+    <buttonGroup>1</buttonGroup>
+    <buttonSeq>2</buttonSeq>
+    <buttonHint>Address on a single line</buttonHint>
+    <buttonValue>?=Address1=?, ?=Address2=?, ?=Town=?, ?=County=?, ?=PostCode=?</buttonValue>
+    <buttonFont>Tahoma</buttonFont>
+    <buttonBold>0</buttonBold>
+    <buttonFontSize>10.00</buttonFontSize>
+    <buttonItalic>0</buttonItalic>
+    <buttonEncrypt>0</buttonEncrypt>
+    <buttonText>Addr on 1 line</buttonText>
+  </button>
+  <button>
+    <buttonId>8</buttonId>
+    <buttonGroup>1</buttonGroup>
+    <buttonSeq>3</buttonSeq>
+    <buttonHint>Day of birth</buttonHint>
+    <buttonValue>$=?=dob=?$$0,2=$</buttonValue>
+    <buttonFont>Tahoma</buttonFont>
+    <buttonBold>0</buttonBold>
+    <buttonFontSize>9.00</buttonFontSize>
+    <buttonItalic>0</buttonItalic>
+    <buttonEncrypt>0</buttonEncrypt>
+    <buttonText>DoB Day</buttonText>
+  </button>
+  <button>
+    <buttonId>9</buttonId>
+    <buttonGroup>1</buttonGroup>
+    <buttonSeq>4</buttonSeq>
+    <buttonHint>Month of birth</buttonHint>
+    <buttonValue>$=?=dob=?$$3,2=$</buttonValue>
+    <buttonFont>Tahoma</buttonFont>
+    <buttonBold>0</buttonBold>
+    <buttonFontSize>9.00</buttonFontSize>
+    <buttonItalic>0</buttonItalic>
+    <buttonEncrypt>0</buttonEncrypt>
+    <buttonText>DoB Month</buttonText>
+  </button>
+  <button>
+    <buttonId>10</buttonId>
+    <buttonGroup>1</buttonGroup>
+    <buttonSeq>5</buttonSeq>
+    <buttonHint>Year of birth</buttonHint>
+    <buttonValue>$=?=dob=?$$6,4=$</buttonValue>
+    <buttonFont>Tahoma</buttonFont>
+    <buttonBold>0</buttonBold>
+    <buttonFontSize>9.00</buttonFontSize>
+    <buttonItalic>0</buttonItalic>
+    <buttonEncrypt>0</buttonEncrypt>
+    <buttonText>DoB Year</buttonText>
+  </button>
+  <button>
+    <buttonId>14</buttonId>
+    <buttonGroup>1</buttonGroup>
+    <buttonSeq>7</buttonSeq>
+    <buttonHint>Mobile number without the leading 0</buttonHint>
+    <buttonValue>$=?=Mobile=?$$1=$</buttonValue>
+    <buttonFont>Arial</buttonFont>
+    <buttonBold>0</buttonBold>
+    <buttonFontSize>8.00</buttonFontSize>
+    <buttonItalic>0</buttonItalic>
+    <buttonEncrypt>0</buttonEncrypt>
+    <buttonText>Mobile +44</buttonText>
+  </button>
+  <button>
+    <buttonId>16</buttonId>
+    <buttonGroup>1</buttonGroup>
+    <buttonSeq>9</buttonSeq>
+    <buttonHint>Street Name</buttonHint>
+    <buttonValue>/=?=Address1=?//1, , 2=/</buttonValue>
+    <buttonFont>Arial</buttonFont>
+    <buttonBold>0</buttonBold>
+    <buttonFontSize>8.00</buttonFontSize>
+    <buttonItalic>0</buttonItalic>
+    <buttonEncrypt>0</buttonEncrypt>
+    <buttonText>Street</buttonText>
+  </button>
+  <button>
+    <buttonId>20</buttonId>
+    <buttonGroup>1</buttonGroup>
+    <buttonSeq>10</buttonSeq>
+    <buttonHint>House number</buttonHint>
+    <buttonValue>/=?=Address1=?//0, ,-1=/</buttonValue>
+    <buttonFont>Arial</buttonFont>
+    <buttonBold>0</buttonBold>
+    <buttonFontSize>8.00</buttonFontSize>
+    <buttonItalic>0</buttonItalic>
+    <buttonEncrypt>0</buttonEncrypt>
+    <buttonText>House #</buttonText>
+  </button>
+</NewDataSet>
